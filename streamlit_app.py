@@ -1,4 +1,4 @@
-<!-- Full code with animations and responsive layout -->
+#-- Full code with animations and responsive layout 
 import streamlit as st
 from openai import OpenAI
 import os

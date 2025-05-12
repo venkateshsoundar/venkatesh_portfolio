@@ -72,7 +72,7 @@ Projects:
 
     try:
         completion = client.chat.completions.create(
-            model="deepseek-chat",
+            model="deepseek/deepseek-r1:free",
             messages=[{"role": "user", "content": prompt}],
         )
         reply = completion.choices[0].message.content

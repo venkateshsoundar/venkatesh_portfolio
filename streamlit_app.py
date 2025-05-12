@@ -112,13 +112,12 @@ Bio: {profile['bio']}
 Skills: {', '.join(profile['skills'])}
 Projects:
 """
-        for proj in projects:
-            context += f"- {proj['title']}: {proj['url']}
-"
-        context += f"Achievements: {', '.join(profile['achievements'])}
-"
-        context += f"LinkedIn: {profile['linkedin']} | GitHub: {profile['github']} | Resume: {profile['resume']}
-"
+for proj in projects:
+    context += f"- {proj['title']}: {proj['url']}\n"
+
+context += f"Achievements: {', '.join(profile['achievements'])}\n"
+context += f"LinkedIn: {profile['linkedin']} | GitHub: {profile['github']} | Resume: {profile['resume']}\n"
+
 
         prompt = f"""{context}
 Now, answer the following user question naturally:

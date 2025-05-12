@@ -115,8 +115,7 @@ Projects:
         for proj in projects:
             context += f"- {proj['title']}: {proj['url']}
 "
-        context += f"
-Achievements: {', '.join(profile['achievements'])}
+        context += f"Achievements: {', '.join(profile['achievements'])}
 "
         context += f"LinkedIn: {profile['linkedin']} | GitHub: {profile['github']} | Resume: {profile['resume']}
 "

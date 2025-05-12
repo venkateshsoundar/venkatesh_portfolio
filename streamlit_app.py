@@ -35,7 +35,7 @@ body {
     border-radius: 10px;
     object-fit: cover;
 }
-.columns-container {
+.main-grid {
     display: grid;
     grid-template-columns: 1fr 2fr 1fr;
     gap: 20px;
@@ -46,7 +46,7 @@ body {
 .chat-wrapper {
     display: flex;
     flex-direction: column;
-    height: 500px;
+    height: 600px;
     border: 1px solid #ccc;
     border-radius: 10px;
     padding: 10px;
@@ -58,7 +58,7 @@ body {
     overflow-y: auto;
     display: flex;
     flex-direction: column;
-    padding-bottom: 60px; /* space for input */
+    padding-bottom: 60px;
 }
 .chat-input-wrapper {
     position: absolute;
@@ -92,7 +92,7 @@ body {
 </style>
 """, unsafe_allow_html=True)
 
-# --- Chatbot Typewriter Effect ---
+# --- Typewriter Welcome Message ---
 def typewriter_effect(text, delay=30):
     from time import sleep
     placeholder = st.empty()
@@ -103,7 +103,7 @@ def typewriter_effect(text, delay=30):
         sleep(delay / 1000.0)
     placeholder.markdown(full_text)
 
-# --- Portfolio Content ---
+# --- Profile Content ---
 profile = {
     "name": "Venkateshwaran Balu Soundararajan",
     "bio": "A data-driven professional with 8+ years in analytics, QA, and data science.",
@@ -125,9 +125,9 @@ projects = [
 ]
 
 # --- Layout ---
-st.markdown("<div class='columns-container'>", unsafe_allow_html=True)
+st.markdown("<div class='main-grid'>", unsafe_allow_html=True)
 
-# --- Profile (Tab) ---
+# Left Column: Profile
 st.markdown("<div class='column'>", unsafe_allow_html=True)
 st.subheader("👤 Profile")
 with st.expander("About Me", expanded=False):
@@ -138,11 +138,10 @@ with st.expander("About Me", expanded=False):
     st.markdown("**Achievements:**")
     for ach in profile["achievements"]:
         st.markdown(f"- {ach}")
-    st.markdown(f"📄 [Resume]({profile['resume']})")
-    st.markdown(f"🔗 [LinkedIn]({profile['linkedin']}) | [GitHub]({profile['github']})")
+    st.markdown(f"[Resume]({profile['resume']}) | [LinkedIn]({profile['linkedin']}) | [GitHub]({profile['github']})")
 st.markdown("</div>", unsafe_allow_html=True)
 
-# --- Chatbot ---
+# Center Column: Chatbot
 st.markdown("<div class='column'>", unsafe_allow_html=True)
 st.subheader("💬 Ask Me Anything")
 typewriter_effect("Hi, this is Venkatesh. Welcome to my Portfolio! Feel free to ask anything about me.")
@@ -154,12 +153,7 @@ st.markdown("<div class='chat-wrapper'>", unsafe_allow_html=True)
 st.markdown("<div class='chat-history'>", unsafe_allow_html=True)
 for role, msg in st.session_state.history:
     avatar = "V" if role == "user" else "AI"
-    st.markdown(f"""
-    <div class='chat-msg'>
-        <div class='chat-avatar'>{avatar}</div>
-        <div class='chat-text'>{msg}</div>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown(f"<div class='chat-msg'><div class='chat-avatar'>{avatar}</div><div class='chat-text'>{msg}</div></div>", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
 st.markdown("<div class='chat-input-wrapper'>", unsafe_allow_html=True)
@@ -168,19 +162,19 @@ st.markdown("</div>", unsafe_allow_html=True)
 
 if user_input:
     st.session_state.history.append(("user", user_input))
-    st.markdown(f"<div class='chat-msg'><div class='chat-avatar'>V</div><div class='chat-text'>{user_input}</div></div>", unsafe_allow_html=True)
-
-    context = f"""
-Name: {profile['name']}
+    context = f"Name: {profile['name']}
 Bio: {profile['bio']}
 Skills: {', '.join(profile['skills'])}
-Projects:
-"""
-    for proj in projects:
-        context += f"- {proj['title']}: {proj['url']}\n"
-    context += f"Achievements: {', '.join(profile['achievements'])}\n"
-
-    prompt = f"{context}\nQ: {user_input}\nA:"
+"
+    context += "Projects:
+" + "
+".join([f"- {p['title']}: {p['url']}" for p in projects]) + "
+"
+    context += f"Achievements: {', '.join(profile['achievements'])}
+"
+    prompt = f"{context}
+Q: {user_input}
+A:"
 
     try:
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
@@ -197,7 +191,7 @@ Projects:
 
 st.markdown("</div>", unsafe_allow_html=True)
 
-# --- Projects (Tab) ---
+# Right Column: Projects
 st.markdown("<div class='column'>", unsafe_allow_html=True)
 st.subheader("📊 Projects")
 with st.expander("Explore Projects", expanded=False):
@@ -212,4 +206,4 @@ with st.expander("Explore Projects", expanded=False):
             </div>
         """, unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
-st.markdown("</div></div></div>", unsafe_allow_html=True)
+st.markdown("</div></div>", unsafe_allow_html=True)

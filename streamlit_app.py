@@ -35,7 +35,14 @@ projects = [
 # --- Set up OpenRouter API ---
 api_key = st.secrets.get("DEEPSEEK_API_KEY") or os.getenv("DEEPSEEK_API_KEY")
 st.write("🔐 API Key Found?", api_key is not None)
-client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+client = OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=api_key,
+    extra_headers={
+        "HTTP-Referer": "https://venkateshbs.streamlit.app",  # your app URL
+        "X-Title": "venkatesh-portfolio-chatbot"
+    }
+)
 
 st.title("🤖 Venkatesh’s Portfolio Chatbot")
 st.write("Ask me about my projects, skills, or experience!")

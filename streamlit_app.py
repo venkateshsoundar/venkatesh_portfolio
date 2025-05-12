@@ -33,6 +33,7 @@ projects = [
 
 # --- Set up OpenRouter API ---
 api_key = st.secrets.get("DEEPSEEK_API_KEY")
+st.write("🔐 API Key Found?", api_key is not None)  # 👈 ADD THIS
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
 
 st.set_page_config(page_title="Venkatesh Portfolio Chatbot", page_icon="🤖")

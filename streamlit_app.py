@@ -3,9 +3,13 @@ import streamlit as st
 from openai import OpenAI
 import os
 
-# --- CSS for animations and responsiveness ---
+# --- CSS for animations and full-width layout ---
 st.markdown("""
 <style>
+body {
+    margin: 0;
+    padding: 0;
+}
 .scroll-section {
     max-height: 550px;
     overflow-y: auto;
@@ -34,6 +38,12 @@ a:hover img {
     border-radius: 10px;
     object-fit: cover;
     margin-bottom: 5px;
+}
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    gap: 20px;
+    padding: 10px;
 }
 @media screen and (max-width: 900px) {
     .element-container {
@@ -75,8 +85,8 @@ projects = [
     {"title": "Crime Drivers", "url": "https://github.com/...", "image": "https://github.com/.../Toronto_Crimes.jpeg"},
 ]
 
-# --- Layout ---
-col1, col2, col3 = st.columns([1, 1.2, 1.5])
+# --- Layout Full Screen ---
+col1, col2, col3 = st.columns([0.3, 0.4, 0.3])
 
 # --- Profile ---
 with col1:
@@ -132,7 +142,8 @@ Projects:
 # --- Projects ---
 with col3:
     st.subheader("📊 Projects")
-    for i, proj in enumerate(projects):
+    st.markdown("<div class='project-grid'>", unsafe_allow_html=True)
+    for proj in projects:
         st.markdown(f"""
             <div class='project-card'>
                 <a href='{proj['url']}' target='_blank'>
@@ -141,3 +152,4 @@ with col3:
                 </a>
             </div>
         """, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)

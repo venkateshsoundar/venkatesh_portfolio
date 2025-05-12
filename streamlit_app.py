@@ -143,12 +143,11 @@ st.markdown("</div>", unsafe_allow_html=True)
 user_input = st.chat_input("Type your question here...")
 if user_input:
     st.session_state.history.append(("user", user_input))
-    context = f"""Name: {profile['name']}
+context = f"""Name: {profile['name']}
 Bio: {profile['bio']}
 Skills: {', '.join(profile['skills'])}
 Projects:
-""" + "
-".join([f"- {p['title']}: {p['url']}" for p in projects]) + f"""
+""" + "\n".join([f"- {p['title']}: {p['url']}" for p in projects]) + f"""
 Achievements: {', '.join(profile['achievements'])}
 """
     prompt = f"{context}

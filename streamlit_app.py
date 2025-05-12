@@ -44,6 +44,21 @@ body {
     flex: 1;
     padding: 10px;
 }
+.chat-wrapper {
+    display: flex;
+    flex-direction: column;
+    height: 500px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    background-color: #fafafa;
+}
+.chat-history {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -74,9 +89,9 @@ profile = {
 }
 
 projects = [
-    {"title": "Canadian Quality of Life", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://github.com/venkateshsoundar/venkatesh_portfolio/blob/main/QualityofLife.jpeg"},
-    {"title": "Wildfire Analysis", "url": "https://github.com/...", "image": "https://github.com/.../Alberta_forestfire.jpeg"},
-    {"title": "Crime Drivers", "url": "https://github.com/...", "image": "https://github.com/.../Toronto_Crimes.jpeg"},
+    {"title": "Canadian Quality of Life", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
+    {"title": "Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
+    {"title": "Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
 ]
 
 # --- Layout ---
@@ -99,10 +114,16 @@ st.markdown("</div>", unsafe_allow_html=True)
 # --- Chatbot ---
 st.markdown("<div class='column'>", unsafe_allow_html=True)
 st.subheader("💬 Ask Me Anything")
+typewriter_effect("Hi, this is Venkatesh. Welcome to my Portfolio! Feel free to ask anything about me.")
+
 if "history" not in st.session_state:
     st.session_state.history = []
+
+st.markdown("<div class='chat-wrapper'>", unsafe_allow_html=True)
+st.markdown("<div class='chat-history'>", unsafe_allow_html=True)
 for role, msg in st.session_state.history:
     st.chat_message(role).write(msg)
+st.markdown("</div>", unsafe_allow_html=True)
 
 user_input = st.chat_input("Ask about skills, tools, or projects...")
 if user_input:

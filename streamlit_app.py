@@ -1,5 +1,6 @@
 import streamlit as st
 from openai import OpenAI
+import os
 
 # --- Profile Context ---
 profile = {
@@ -32,8 +33,8 @@ projects = [
 ]
 
 # --- Set up OpenRouter API ---
-api_key = st.secrets.get("DEEPSEEK_API_KEY")
-st.write("🔐 API Key Found?", api_key is not None)  # 👈 ADD THIS
+api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
+st.write("🔐 API Key Found?", api_key is not None)
 client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
 
 st.title("🤖 Venkatesh’s Portfolio Chatbot")

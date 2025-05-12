@@ -33,8 +33,9 @@ projects = [
 ]
 
 # --- Set up OpenRouter API ---
-api_key = st.secrets.get("DEEPSEEK_API_KEY") or os.getenv("DEEPSEEK_API_KEY")
+api_key = st.secrets.get("OPENAI_API_KEY") or os.getenv("OPENAI_API_KEY")
 st.write("🔐 API Key Found?", api_key is not None)
+
 client = OpenAI(
     base_url="https://openrouter.ai/api/v1",
     api_key=api_key
@@ -78,6 +79,10 @@ Projects:
         completion = client.chat.completions.create(
             model="deepseek/deepseek-r1:free",
             messages=[{"role": "user", "content": prompt}],
+            extra_headers={
+                "HTTP-Referer": "https://venkateshbs.streamlit.app",
+                "X-Title": "venkatesh-portfolio-chatbot"
+            }
         )
         reply = completion.choices[0].message.content
     except Exception as e:

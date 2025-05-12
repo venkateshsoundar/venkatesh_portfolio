@@ -3,6 +3,7 @@ from openai import OpenAI
 import requests
 import io
 import PyPDF2
+from time import sleep
 
 # Page config
 st.set_page_config(page_title="Portfolio Chatbot", layout="centered")
@@ -23,29 +24,14 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # Blinking heading
-st.markdown("## This is Venky.Welcome to my Portfolio<span class='blink-dots'>...</span>", unsafe_allow_html=True)
-
-# Project list
-projects = [
-    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers"},
-    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance"},
-    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation"},
-    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws"},
-    {"title": "California Wildfire Data Story", "url": "https://github.com/venkateshsoundar/california-wildfire-datastory"},
-    {"title": "Penguin Dataset Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot"},
-    {"title": "Uber Ride Duration Predictor", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp"}
-]
+st.markdown("## Welcome to my Portfolio<span class='blink-dots'>...</span>", unsafe_allow_html=True)
 
 # Load resume from GitHub raw
 @st.cache_data
 def load_resume_text(url):
-    resp = requests.get(url)
-    resp.raise_for_status()
-    reader = PyPDF2.PdfReader(io.BytesIO(resp.content))
+    r = requests.get(url)
+    r.raise_for_status()
+    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
     text = ""
     for p in reader.pages:
         text += p.extract_text() + "\n"
@@ -56,19 +42,42 @@ resume_text = load_resume_text(resume_url)
 
 # Fetch GitHub repos
 @st.cache_data
-def fetch_github_repos(username):
-    r = requests.get(f"https://api.github.com/users/{username}/repos")
-    if r.status_code == 200:
-        return [f"{repo['name']}: {repo['html_url']}" for repo in r.json()]
-    return []
+def fetch_github_repos(user):
+    r = requests.get(f"https://api.github.com/users/{user}/repos")
+    return r.json() if r.status_code == 200 else []
 
-github_repos = fetch_github_repos("venkateshsoundar")
+repos_data = fetch_github_repos("venkateshsoundar")
+repos = [r["name"] for r in repos_data]
+
+# Define projects
+projects = [
+    "canadian-qol-analysis",
+    "alberta-wildfire-analysis",
+    "toronto-crime-drivers",
+    "weight-change-regression-analysis",
+    "calgary-childcare-compliance",
+    "social-media-purchase-influence",
+    "obesity-level-estimation",
+    "weather-data-pipeline-aws",
+    "california-wildfire-datastory",
+    "penguin-dataset-chatbot",
+    "uber-ride-duration-predictorapp"
+]
+
+# Fetch READMEs
+@st.cache_data
+def fetch_readme(user, repo):
+    url = f"https://raw.githubusercontent.com/{user}/{repo}/main/README.md"
+    r = requests.get(url)
+    return r.text if r.status_code == 200 else ""
+
+readmes = {repo: fetch_readme("venkateshsoundar", repo) for repo in projects}
 
 # Initialize chat history
 if "messages" not in st.session_state:
     st.session_state.messages = []
 
-# Display chat history
+# Display history
 for role, msg in st.session_state.messages:
     st.chat_message(role).write(msg)
 
@@ -79,22 +88,28 @@ if user_input:
     st.session_state.messages.append(("user", user_input))
     st.chat_message("user").write(user_input)
 
-    # Build context
-    context = "Resume Text:\n" + resume_text[:2000] + "\n\n"
-    context += "GitHub Repos:\n" + "\n".join(github_repos) + "\n\n"
-    context += "Projects:\n" + "\n".join([f"- {p['title']}: {p['url']}" for p in projects]) + "\n\n"
+    # Build context messages
+    messages = [
+        {"role": "system", "content": "You are Venkatesh's portfolio assistant. Answer concisely and cite sources: [Resume], [Repos], [Projects]."},
+        {"role": "system", "content": "Resume extract: " + resume_text[:1500]}
+    ]
 
-    prompt = context + f"User: {user_input}\nAssistant:"
+    # Add repos list
+    messages.append({"role": "system", "content": "GitHub Repositories: " + ", ".join(repos)})
 
-    try:
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets.get("DEEPSEEK_API_KEY"))
-        response = client.chat.completions.create(
-            model="deepseek/deepseek-r1:free",
-            messages=[{"role": "user", "content": prompt}]
-        )
-        reply = response.choices[0].message.content
-    except Exception as e:
-        reply = f"❌ Error: {e}"
+    # Add project READMEs
+    for repo in projects:
+        readme_text = readmes.get(repo, "")
+        summary = readme_text[:1000]  # include first 1000 chars
+        messages.append({"role": "system", "content": f"Readme of {repo}:\n" + summary})
+
+    # User question
+    messages.append({"role": "user", "content": user_input})
+
+    # Call API
+    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets.get("DEEPSEEK_API_KEY"))
+    resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
+    reply = resp.choices[0].message.content
 
     st.session_state.messages.append(("assistant", reply))
     st.chat_message("assistant").write(reply)

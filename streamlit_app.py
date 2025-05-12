@@ -1,4 +1,4 @@
-#-- Full code with animations and responsive layout 
+# Full code with animations and responsive layout
 import streamlit as st
 from openai import OpenAI
 import os
@@ -15,6 +15,26 @@ a:hover img {
     box-shadow: 0 4px 20px rgba(0,0,0,0.2);
     transition: transform 0.3s ease-in-out;
 }
+.project-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #f9f9f9;
+    transition: box-shadow 0.3s ease-in-out;
+}
+.project-card:hover {
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+.project-card img {
+    width: 100%;
+    height: 140px;
+    border-radius: 10px;
+    object-fit: cover;
+    margin-bottom: 5px;
+}
 @media screen and (max-width: 900px) {
     .element-container {
         flex-direction: column !important;
@@ -22,18 +42,6 @@ a:hover img {
 }
 </style>
 """, unsafe_allow_html=True)
-
-# --- Dark Mode Toggle ---
-if "dark_mode" not in st.session_state:
-    st.session_state.dark_mode = False
-st.sidebar.checkbox("🌙 Dark Mode", value=st.session_state.dark_mode, key="dark_mode")
-if st.session_state.dark_mode:
-    st.markdown("""
-    <style>
-        .stApp { background-color: #121212; color: white; }
-        .block-container { color: white; }
-    </style>
-    """, unsafe_allow_html=True)
 
 # --- Chatbot Typewriter Effect ---
 def typewriter_effect(text, delay=30):
@@ -126,10 +134,10 @@ with col3:
     st.subheader("📊 Projects")
     for i, proj in enumerate(projects):
         st.markdown(f"""
-            <div style='text-align:center; margin-bottom: 10px;'>
+            <div class='project-card'>
                 <a href='{proj['url']}' target='_blank'>
-                    <img src='{proj['image']}' style='width:100%; height:150px; border-radius:10px;'>
-                    <div style='padding-top:5px; font-weight:bold;'>{proj['title']}</div>
+                    <img src='{proj['image']}' alt='{proj['title']}'/>
+                    <div style='font-weight:bold'>{proj['title']}</div>
                 </a>
             </div>
         """, unsafe_allow_html=True)

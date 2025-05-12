@@ -74,7 +74,7 @@ profile = {
 }
 
 projects = [
-    {"title": "Canadian Quality of Life", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://github.com/venkateshsoundar/venkatesh_portfolio/QualityofLife.jpeg"},
+    {"title": "Canadian Quality of Life", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://github.com/venkateshsoundar/venkatesh_portfolio/blob/main/QualityofLife.jpeg"},
     {"title": "Wildfire Analysis", "url": "https://github.com/...", "image": "https://github.com/.../Alberta_forestfire.jpeg"},
     {"title": "Crime Drivers", "url": "https://github.com/...", "image": "https://github.com/.../Toronto_Crimes.jpeg"},
 ]

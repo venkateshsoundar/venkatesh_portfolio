@@ -36,12 +36,11 @@ body {
     object-fit: cover;
 }
 .columns-container {
-    display: flex;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
     gap: 20px;
 }
 .column {
-    flex: 1;
     padding: 10px;
 }
 .chat-wrapper {
@@ -52,12 +51,43 @@ body {
     border-radius: 10px;
     padding: 10px;
     background-color: #fafafa;
+    position: relative;
 }
 .chat-history {
     flex-grow: 1;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
+    padding-bottom: 60px; /* space for input */
+}
+.chat-input-wrapper {
+    position: absolute;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+}
+.chat-msg {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+.chat-avatar {
+    flex-shrink: 0;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #ddd;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+}
+.chat-text {
+    background: #e8e8e8;
+    padding: 8px 12px;
+    border-radius: 10px;
+    max-width: 80%;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -97,18 +127,19 @@ projects = [
 # --- Layout ---
 st.markdown("<div class='columns-container'>", unsafe_allow_html=True)
 
-# --- Profile ---
+# --- Profile (Tab) ---
 st.markdown("<div class='column'>", unsafe_allow_html=True)
 st.subheader("👤 Profile")
-st.markdown(f"**Name:** {profile['name']}")
-st.markdown(profile['bio'])
-st.markdown("**Skills:**")
-st.markdown(", ".join(profile['skills']))
-st.markdown("**Achievements:**")
-for ach in profile["achievements"]:
-    st.markdown(f"- {ach}")
-st.markdown(f"📄 [Resume]({profile['resume']})")
-st.markdown(f"🔗 [LinkedIn]({profile['linkedin']}) | [GitHub]({profile['github']})")
+with st.expander("About Me", expanded=False):
+    st.markdown(f"**Name:** {profile['name']}")
+    st.markdown(profile['bio'])
+    st.markdown("**Skills:**")
+    st.markdown(", ".join(profile['skills']))
+    st.markdown("**Achievements:**")
+    for ach in profile["achievements"]:
+        st.markdown(f"- {ach}")
+    st.markdown(f"📄 [Resume]({profile['resume']})")
+    st.markdown(f"🔗 [LinkedIn]({profile['linkedin']}) | [GitHub]({profile['github']})")
 st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Chatbot ---
@@ -122,13 +153,22 @@ if "history" not in st.session_state:
 st.markdown("<div class='chat-wrapper'>", unsafe_allow_html=True)
 st.markdown("<div class='chat-history'>", unsafe_allow_html=True)
 for role, msg in st.session_state.history:
-    st.chat_message(role).write(msg)
+    avatar = "V" if role == "user" else "AI"
+    st.markdown(f"""
+    <div class='chat-msg'>
+        <div class='chat-avatar'>{avatar}</div>
+        <div class='chat-text'>{msg}</div>
+    </div>
+    """, unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
+st.markdown("<div class='chat-input-wrapper'>", unsafe_allow_html=True)
 user_input = st.chat_input("Ask about skills, tools, or projects...")
+st.markdown("</div>", unsafe_allow_html=True)
+
 if user_input:
     st.session_state.history.append(("user", user_input))
-    st.chat_message("user").write(user_input)
+    st.markdown(f"<div class='chat-msg'><div class='chat-avatar'>V</div><div class='chat-text'>{user_input}</div></div>", unsafe_allow_html=True)
 
     context = f"""
 Name: {profile['name']}
@@ -153,20 +193,23 @@ Projects:
         reply = f"❌ Error: {e}"
 
     st.session_state.history.append(("assistant", reply))
-    st.chat_message("assistant").write(reply)
+    st.markdown(f"<div class='chat-msg'><div class='chat-avatar'>AI</div><div class='chat-text'>{reply}</div></div>", unsafe_allow_html=True)
+
 st.markdown("</div>", unsafe_allow_html=True)
 
-# --- Projects ---
+# --- Projects (Tab) ---
 st.markdown("<div class='column'>", unsafe_allow_html=True)
 st.subheader("📊 Projects")
-st.markdown("<div class='project-grid'>", unsafe_allow_html=True)
-for proj in projects:
-    st.markdown(f"""
-        <div class='project-card'>
-            <a href='{proj['url']}' target='_blank'>
-                <img src='{proj['image']}' alt='{proj['title']}'/>
-                <div style='font-weight:bold'>{proj['title']}</div>
-            </a>
-        </div>
-    """, unsafe_allow_html=True)
+with st.expander("Explore Projects", expanded=False):
+    st.markdown("<div class='project-grid'>", unsafe_allow_html=True)
+    for proj in projects:
+        st.markdown(f"""
+            <div class='project-card'>
+                <a href='{proj['url']}' target='_blank'>
+                    <img src='{proj['image']}' alt='{proj['title']}'/>
+                    <div style='font-weight:bold'>{proj['title']}</div>
+                </a>
+            </div>
+        """, unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 st.markdown("</div></div></div>", unsafe_allow_html=True)

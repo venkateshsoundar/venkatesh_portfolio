@@ -122,8 +122,7 @@ st.markdown(", ".join(profile["skills"]))
 st.markdown("### Achievements")
 for a in profile["achievements"]:
     st.markdown(f"- {a}")
-st.markdown(f"[📄 Resume]({profile['resume']})  
-[🔗 LinkedIn]({profile['linkedin']}) | [GitHub]({profile['github']})", unsafe_allow_html=True)
+st.markdown(f"[📄 Resume]({profile['resume']})<br>[🔗 LinkedIn]({profile['linkedin']}) | [GitHub]({profile['github']})", unsafe_allow_html=True)
 st.markdown("</div>", unsafe_allow_html=True)
 
 # MIDDLE CHAT PANEL

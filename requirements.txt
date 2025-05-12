@@ -1,11 +1,11 @@
-streamlit>=1.26.0
-streamlit_extras
+streamlit>=1.45.0
+streamlit-extras
 numpy
 pandas
 scikit-learn
 langchain
-langchain_community
-langchain_experimental
+langchain-community
+langchain-experimental
 openai
 tabulate
-experimental_rerun
+rich

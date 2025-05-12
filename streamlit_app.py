@@ -33,7 +33,7 @@ projects = [
 ]
 
 # --- Set up OpenRouter API ---
-api_key = st.secrets.get("DEEPSEEK_API_KEY") or os.getenv("DEEPSEEK_API_KEY")
+api_key = st.secrets["DEEPSEEK_API_KEY"]
 st.write("🔐 API Key Found?", api_key is not None)
 
 client = OpenAI(

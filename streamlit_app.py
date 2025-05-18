@@ -74,7 +74,7 @@ left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 # --- Left pane ---
 with left_col:
     st.markdown(
-        '<div class="card hover-zoom" style="min-height:250px;">'
+        '<div class="card hover-zoom">'
         '<img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/>'
         '<h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>'
         '</div>',
@@ -129,7 +129,9 @@ with mid_col:
         ]
         client=OpenAI(base_url="https://openrouter.ai/api/v1",api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp=client.chat.completions.create(model="deepseek/deepseek-r1:free",messages=msgs)
-        st.session_state.history.append(('assistant',resp.choices[0].message.content))
+        st.session_state.history.append(('assistant', resp.choices[0].message.content))
+        # rerun to immediately display assistant response
+        st.experimental_rerun()
 
 # --- Right pane ---
 with right_col:

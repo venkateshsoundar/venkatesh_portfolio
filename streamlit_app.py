@@ -92,7 +92,7 @@ with col_main:
     st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
     for name, (desc, img, repo) in proj_map.items():
         st.markdown("<div class='project-item'>", unsafe_allow_html=True)
-        st.markdown(f"<a href='{repo}' target='_blank"><img src='{img}'><div class='overlay'>{name}</div></a>", unsafe_allow_html=True)
+        st.markdown(f"<a href='{repo}' target='_blank'><img src='{img}' class='card-img'><div class='overlay'>{name}</div></a>",unsafe_allow_html=True)
         st.markdown("</div>", unsafe_allow_html=True)
     st.markdown("</div>", unsafe_allow_html=True)
 

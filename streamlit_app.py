@@ -39,14 +39,12 @@ projects = [
 st.markdown(
     '''
 <style>
-/* Page background */
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
   background-attachment: fixed;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
-/* Card base style */
 .card {
   width: 100% !important;
   border-radius: 12px;
@@ -60,7 +58,6 @@ st.markdown(
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.7);
 }
-/* Section title style */
 .section-title {
   font-size: 1.6rem;
   font-weight: bold;
@@ -68,14 +65,12 @@ st.markdown(
   padding: 8px;
   border-radius: 6px;
 }
-/* Profile pic */
 .profile-pic {
   border-radius: 50%;
   width: 150px;
   display: block;
   margin: 0 auto 12px;
 }
-/* Contact icons */
 .contact-icon {
   width: 30px;
   height: 30px;
@@ -83,7 +78,6 @@ st.markdown(
   margin: 0 8px;
   vertical-align: middle;
 }
-/* Project item */
 .project-item {
   position: relative;
   aspect-ratio: 1/1;
@@ -114,7 +108,6 @@ st.markdown(
 .project-item:hover .overlay {
   opacity: 1;
 }
-/* Typewriter effect */
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -129,7 +122,6 @@ st.markdown(
 }
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
-/* Custom details expander styling */
 .details-summary {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
   color: #ffffff !important;
@@ -141,7 +133,6 @@ st.markdown(
   text-align: center;
   cursor: pointer;
 }
-/* Grid layout */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -178,7 +169,8 @@ with mid_col:
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Projects expander
+
+    # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'
     for proj in projects:
         grid_html += (
@@ -197,15 +189,11 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    # Chat section using custom details/summary
+    # --- Chat Section as Card ---
     st.markdown(
-        """
-<details>
-  <summary class="details-summary">Chat with Me</summary>
-""",
-        unsafe_allow_html=True,
+        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with Me</div>',
+        unsafe_allow_html=True
     )
-
     if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:
@@ -234,7 +222,7 @@ with mid_col:
         st.session_state.history.append(('assistant', reply))
         st.chat_message('assistant').write(reply)
 
-    st.markdown("</details>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)  # close card
 
 # --- Right Pane ---
 with right_col:

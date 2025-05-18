@@ -77,21 +77,31 @@ with left_col:
 
 # --- Center Pane ---
 with mid_col:
+    # Intro message
+    st.markdown(
+        '<div class="card"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        unsafe_allow_html=True
+    )
     st.markdown(
         '<div class="card"><div class="section-title">Projects Showcase</div></div>',
         unsafe_allow_html=True
     )
-    cols = st.columns(2, gap="medium")
-    for idx, proj in enumerate(projects):
-        with cols[idx % 2]:
-            st.markdown(
-                f'<div class="project-item"><a href="{proj["url"]}" target="_blank"><img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>',
-                unsafe_allow_html=True
-            )
-        if idx % 2 == 1:
-            st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
+    # Projects grid in 2 columns per row
+    num_cols = 2
+    for i in range(0, len(projects), num_cols):
+        row = projects[i:i+num_cols]
+        cols = st.columns(num_cols, gap="medium")
+        for j, proj in enumerate(row):
+            with cols[j]:
+                st.markdown(
+                    f'<div class="project-item"><a href="{proj["url"]}" target="_blank">'
+                    f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>',
+                    unsafe_allow_html=True
+                )
+        # vertical spacer after each row
+        st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
 
-    # No chat section (removed per request)
+    # No chat section (removed per request) (removed per request)
 
 # --- Right Pane ---
 with right_col:

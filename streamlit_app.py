@@ -102,17 +102,18 @@ left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
 
 # --- Left pane: Profile + Chat ---
 with left_col:
-    st.markdown("<img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg' class='profile-pic'>", unsafe_allow_html=True)
-    st.markdown("# Venkatesh Soundararajan")
-    st.markdown("**M.S. Data Science & Analytics**")
-    st.markdown("University of Calgary")
-    st.markdown("---")
-    st.markdown("## Contact")
-    st.markdown("- 📧 youremail@example.com")
-    st.markdown("- 🔗 [LinkedIn](https://www.linkedin.com/in/venkateshsoundar/)")
-    st.markdown("- 💻 [GitHub](https://github.com/venkateshsoundar)")
-    st.markdown("---")
-    st.markdown("### Chat with Me 📋")
+    # Profile card
+    st.markdown(
+        "<div class='card hover-zoom'><img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic'><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>",
+        unsafe_allow_html=True
+    )
+    # Contact card
+    st.markdown(
+        "<div class='card hover-zoom'><div class='section-title'>Contact</div><ul><li>📧 youremail@example.com</li><li>🔗 <a href='https://www.linkedin.com/in/venkateshsoundar/' target='_blank'>LinkedIn</a></li><li>💻 <a href='https://github.com/venkateshsoundar' target='_blank'>GitHub</a></li></ul></div>",
+        unsafe_allow_html=True
+    )
+    # Chat card
+    st.markdown("<div class='card'><div class='section-title'>Chat with Me 📋</div></div>", unsafe_allow_html=True)
     if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:
@@ -122,8 +123,12 @@ with left_col:
     if query:
         st.session_state.history.append(('user', query))
         system = [{"role":"system","content":"You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)
+        resume_ctx = "Resume:
+" + "
+".join(f"- {b}" for b in bullets)
+        proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)
         msgs = system + [{"role":"system","content":resume_ctx},{"role":"system","content":proj_ctx},{"role":"user","content":query}]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
@@ -136,7 +141,7 @@ with mid_col:
         "<div class='card'><div class='typewriter'><h1>Welcome to Venkatesh's Portfolio</h1></div><p style='margin-top:20px;'>Explore projects below and chat on the left!</p></div>",
         unsafe_allow_html=True
     )
-    st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
+    st.markdown("<h2 style='color:#1F2A44; border-bottom:2px solid #1F2A44; padding-bottom:4px;'>Projects Showcase</h2>", unsafe_allow_html=True), unsafe_allow_html=True)
     num_cols = 2
     for i in range(0, len(projects), num_cols):
         cols = st.columns(num_cols, gap="medium")

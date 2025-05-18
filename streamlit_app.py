@@ -13,9 +13,9 @@ def load_resume_bullets(url, max_bullets=5):
     r = requests.get(url)
     r.raise_for_status()
     reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    text = "\n".join(p.extract_text() or "" for p in reader.pages)
-    sents = [s.strip() for s in text.split('.') if len(s) > 50]
-    return sents[:max_bullets]
+    text = "\n".join(page.extract_text() or "" for page in reader.pages)
+    sentences = [s.strip() for s in text.split('.') if len(s) > 50]
+    return sentences[:max_bullets]
 
 resume_url = (
     "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/"
@@ -54,25 +54,9 @@ body {
   transition: transform .3s ease, box-shadow .3s ease;
   color: #f0f0f0;
 }
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.7);
-}
-.card * { color: #f0f0f0 !important; }
-.section-title {
-  font-size: 1.6rem;
-  border-bottom: 2px solid #5A84B4;
-  margin-bottom: 12px;
-  padding-bottom: 4px;
-  color: #AFCBE3;
-}
-.profile-pic {
-  border-radius: 50%;
-  width: 150px;
-  margin: 0 auto 12px;
-  display: block;
-  border: 2px solid #5A84B4;
-}
+.card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.7); }
+.section-title { font-size: 1.6rem; border-bottom: 2px solid #5A84B4; margin-bottom: 12px; padding-bottom: 4px; color: #AFCBE3; }
+.profile-pic { border-radius: 50%; width: 150px; margin: 0 auto 12px; display: block; border: 2px solid #5A84B4; }
 .chat-bubble { padding: 8px 12px; border-radius: 12px; margin: 4px 0; animation: fade-in .4s ease; }
 .user-msg { background: #324665; text-align: right; color: #f0f0f0; }
 .bot-msg  { background: #5A84B4; text-align: left; color: #1F2A44; }
@@ -84,14 +68,7 @@ body {
 .project-item:hover .overlay { opacity: 1; }
 a { color: #5A84B4; text-decoration: none; }
 a:hover { text-decoration: underline; }
-.typewriter h1 {
-  white-space: normal;
-  overflow: hidden;
-  border-right: .15em solid #5A84B4;
-  letter-spacing: .1em;
-  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
-  color: #AFCBE3;
-}
+.typewriter h1 { white-space: normal; overflow: hidden; border-right: .15em solid #5A84B4; letter-spacing: .1em; animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite; color: #AFCBE3; }
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from,to { border-color: transparent; } 50% { border-color: #5A84B4; } }
 </style>
@@ -104,7 +81,7 @@ left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
 with left_col:
     # Profile card
     st.markdown(
-        "<div class='card hover-zoom'><img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/Venkatesh.jpg' class='profile-pic'><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>",
+        f"<div class='card hover-zoom'><img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg' class='profile-pic'><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>",
         unsafe_allow_html=True
     )
     # Contact card
@@ -122,13 +99,9 @@ with left_col:
     query = st.chat_input("Ask me anything about my background or projects...")
     if query:
         st.session_state.history.append(('user', query))
-                system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:
-" + "
-".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:
-" + "
-".join(f"- {p['title']}" for p in projects)
+        system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
+        resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
+        proj_ctx = "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)
         msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
@@ -141,7 +114,7 @@ with mid_col:
         "<div class='card'><div class='typewriter'><h1>Welcome to Venkatesh's Portfolio</h1></div><p style='margin-top:20px;'>Explore projects below and chat on the left!</p></div>",
         unsafe_allow_html=True
     )
-    st.markdown("<h2 style='color:#1F2A44; border-bottom:2px solid #1F2A44; padding-bottom:4px;'>Projects Showcase</h2>", unsafe_allow_html=True), unsafe_allow_html=True)
+    st.markdown("<h2 style='color:#1F2A44; border-bottom:2px solid #1F2A44; padding-bottom:4px;'>Projects Showcase</h2>", unsafe_allow_html=True)
     num_cols = 2
     for i in range(0, len(projects), num_cols):
         cols = st.columns(num_cols, gap="medium")

@@ -175,6 +175,21 @@ st.markdown(
 }
 .row-user { width: 100%; display: flex; justify-content: flex-end; }
 .row-assistant { width: 100%; display: flex; justify-content: flex-start; }
+.send-icon-btn {
+  background: #5A84B4;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  width: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-top: 2px;
+}
+.send-icon-btn:hover {
+  background: #406496;
+}
 </style>
     ''', unsafe_allow_html=True
 )
@@ -200,37 +215,18 @@ with left_col:
 
 # --- Center Pane ---
 with mid_col:
-    # Intro
+    # Unified Welcome + Chat Card
     st.markdown(
-        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        '<div class="card hover-zoom">',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. '
+        'Explore my projects below—or ask me about my experience or any project!</p>',
         unsafe_allow_html=True
     )
 
-    # --- Projects Showcase ---
-    grid_html = '<div class="grid-container">'
-    for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
-        )
-    grid_html += '</div>'
-
-    st.markdown(
-        f"""
-<details open>
-  <summary class="details-summary">Projects Showcase</summary>
-  {grid_html}
-</details>
-""",
-        unsafe_allow_html=True
-    )
-
-    # --- Chat Section: Simple, Bug-Free ---
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with Me</div>',
-        unsafe_allow_html=True
-    )
-
+    # --- Chat History (inside the card, just below intro) ---
     if 'history' not in st.session_state:
         st.session_state.history = []
     if 'chat_input' not in st.session_state:
@@ -239,24 +235,35 @@ with mid_col:
     st.markdown('<div class="chat-area">', unsafe_allow_html=True)
     for role, msg in st.session_state.history:
         if role == "user":
-            st.markdown(f'<div class="row-user"><div class="bubble-user">{msg}</div></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="row-user"><div class="bubble-user"><b>You:</b> {msg}</div></div>', unsafe_allow_html=True)
         else:
-            st.markdown(f'<div class="row-assistant"><div class="bubble-assistant">{msg}</div></div>', unsafe_allow_html=True)
+            st.markdown(f'<div class="row-assistant"><div class="bubble-assistant"><b>Assistant:</b><br>{msg}</div></div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # Use a form for smooth input handling
+    # --- Chatbot Prompt (input + icon + clear) ---
     with st.form("chat_form", clear_on_submit=True):
         input_col, send_col, clear_col = st.columns([6, 1, 1])
         with input_col:
             user_input = st.text_input(
-                "Ask me anything about my background or projects…",
+                "Ask about my experience or projects...",
                 key="chat_input",
                 label_visibility="collapsed"
             )
-        send_clicked = send_col.form_submit_button("Send")
+        # Icon send button using HTML
+        send_icon_html = """
+        <button type="submit" class="send-icon-btn">
+          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+          </svg>
+        </button>
+        """
+        send_col.markdown(send_icon_html, unsafe_allow_html=True)
         clear_clicked = clear_col.form_submit_button("Clear")
 
-        if send_clicked and user_input.strip():
+        # Form submit logic: Streamlit form always submits when Enter or the send icon is clicked
+        submitted = st.form_submit_button("", use_container_width=False)
+        if submitted and user_input.strip():
             st.session_state.history.append(('user', user_input))
             messages = [
                 {"role": "system", "content": "You are Venkatesh’s assistant."},
@@ -275,12 +282,30 @@ with mid_col:
                 )
                 reply = resp.choices[0].message.content
             st.session_state.history.append(('assistant', reply))
-
         if clear_clicked:
             st.session_state.history = []
             st.session_state.chat_input = ""
 
-    st.markdown("</div>", unsafe_allow_html=True)  # close card
+    # End of card
+    st.markdown('</div>', unsafe_allow_html=True)
+
+    # --- Projects Showcase remains below ---
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        )
+    grid_html += '</div>'
+    st.markdown(
+        f"""
+<details open>
+  <summary class="details-summary">Projects Showcase</summary>
+  {grid_html}
+</details>
+""",
+        unsafe_allow_html=True
+    )
 
 # --- Right Pane ---
 with right_col:

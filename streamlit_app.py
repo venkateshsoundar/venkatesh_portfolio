@@ -101,11 +101,27 @@ with container:
     # Projects Showcase
     st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
     proj_map = {
-        "Quality of Life Analysis": ("City income vs crime trends.", "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif", "https://github.com/venkateshsoundar/canadian-qol-analysis"),
-        "Wildfire Analysis": ("Alberta wildfire pattern analysis.", "https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif", "https://github.com/venkateshsoundar/alberta-wildfire-analysis"),
-        "Crime Drivers": ("Mapping Toronto crime factors.", "https://media.giphy.com/media/26u4b45b8KlgAB7iM/giphy.gif", "https://github.com/venkateshsoundar/toronto-crime-drivers"),
-        "Regression Analysis": ("Predicting weight change.", "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif", "https://github.com/venkateshsoundar/weight-change-regression")
-    }
+    "Quality of Life Analysis": (
+        "City income vs crime trends.",
+        "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/qol_analysis.png",
+        "https://github.com/venkateshsoundar/canadian-qol-analysis"
+    ),
+    "Alberta Wildfire Analysis": (
+        "Alberta wildfire pattern analysis.",
+        "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/wildfire_analysis.png",
+        "https://github.com/venkateshsoundar/alberta-wildfire-analysis"
+    ),
+    "Toronto Crime Drivers": (
+        "Mapping Toronto crime factors.",
+        "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/crime_drivers.png",
+        "https://github.com/venkateshsoundar/toronto-crime-drivers"
+    ),
+    "Uber Ride Duration Predictor": (
+        "Machine learning model to predict ride durations.",
+        "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/uber_predictor.png",
+        "https://github.com/venkateshsoundar/uber-ride-duration-predictor"
+    )
+}
     st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
     for name, (desc, img, repo) in proj_map.items():
         st.markdown("<div class='project-item'>", unsafe_allow_html=True)

@@ -104,7 +104,7 @@ left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
 with left_col:
     # Profile card
     st.markdown(
-        "<div class='card hover-zoom'><img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic'><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>",
+        "<div class='card hover-zoom'><img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/Venkatesh.jpg' class='profile-pic'><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>",
         unsafe_allow_html=True
     )
     # Contact card
@@ -149,7 +149,7 @@ with mid_col:
             with cols[idx]:
                 st.markdown(
                     f"<div class='project-item hover-zoom'>"
-                    f"<a href='{proj['url']}' target='_blank'>
+                    f"<a href='{proj['url']}' target='_blank'>"
                     f"<img src='{proj['image']}' class='card-img' />"
                     f"<div class='overlay'>{proj['title']}</div>"
                     f"</a>"

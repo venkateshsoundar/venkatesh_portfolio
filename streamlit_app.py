@@ -89,6 +89,14 @@ a { text-decoration:none !important; color:inherit !important; }
 [data-testid="stExpander"] > div > button:hover,
 [data-testid="stExpander"] > div > button:focus {
     background: linear-gradient(135deg, #324665 0%, #1F2A44 100%) !important;
+}
+/* Style expander content area as card */
+[data-testid="stExpander"] > div > div {
+    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.7) !important;
+    margin-bottom: 20px !important;
 }</style>
     ''', unsafe_allow_html=True
 )
@@ -119,21 +127,42 @@ with mid_col:
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Projects Showcase as expander
-    expander = st.expander("Projects Showcase", expanded=False)
-    with expander:
-        num_cols = 3
-        for i in range(0, len(projects), num_cols):
-            cols = st.columns(num_cols, gap="medium")
-            for j, proj in enumerate(projects[i:i+num_cols]):
-                with cols[j]:
-                    st.markdown(
-                        f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-                        f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>',
-                        unsafe_allow_html=True
-                    )
-            st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
-    # end expander
+        # Projects Showcase using HTML details for full styling control
+    # build grid HTML
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        )
+    grid_html += '</div>'
+
+    st.markdown(
+        f"""
+<style>
+.details-summary {{
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: bold;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}}
+.grid-container {{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}}
+</style>
+<details>
+<summary class="details-summary">Projects Showcase</summary>
+{grid_html}
+</details>
+        """, unsafe_allow_html=True
+    )
 
 # --- Right Pane ---
 with right_col:

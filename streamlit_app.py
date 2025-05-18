@@ -44,36 +44,30 @@ st.markdown(
 <style>
 body {
   font-family: 'Poppins', sans-serif;
-  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat;
-  color: #ffffff; }
+  /* updated page background */
+  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
+  color: #ffffff;
+}
 .stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
-.card { display:block!important; width:100%!important; border-radius:12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); transition:transform .3s ease,box-shadow .3s ease; color:#ffffff; box-sizing:border-box; text-align:center; }
-.card * { color:#ffffff!important; }
+.card { width:100%; border-radius:12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); transition:transform .3s ease,box-shadow .3s ease; color:#ffffff; box-sizing:border-box; text-align:center; }
+.card:hover { transform:translateY(-5px); box-shadow:0 8px 16px rgba(0,0,0,0.7); }
 .hover-zoom { transition:transform .3s ease; }
-.hover-zoom:hover { transform:translateY(-5px); }
-.section-title { font-size:1.6rem; font-weight:bold; margin-bottom:12px; color:#ffffff!important; text-decoration:none!important; padding:8px; border-radius:6px; }
-a, a:hover { text-decoration:none!important; color:inherit!important; }
+.section-title { font-size:1.6rem; font-weight:bold; margin-bottom:12px; padding:8px; border-radius:6px; color:#ffffff !important; text-decoration:none !important; }
+a { text-decoration:none !important; color:inherit !important; }
 .profile-pic { border-radius:50%; width:150px; display:block; margin:0 auto 12px; }
 .contact-icon { width:30px; height:30px; filter:invert(100%); margin:0 8px; vertical-align:middle; }
 .project-item { position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:12px; }
 .card-img { width:100%; height:100%; object-fit:cover; transition:transform .3s ease; }
 .project-item:hover .card-img { transform:scale(1.05); }
-.overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s ease; color:#ffffff!important; font-size:1.2rem; padding:10px; text-align:center; }
+.overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s ease; font-size:1.2rem; color:#ffffff!important; padding:10px; text-align:center; }
 .project-item:hover .overlay { opacity:1; }
-.typewriter h1 {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
-  border-right: .15em solid #5A84B4;
-  color: #ffffff !important;
-  margin: 0 auto;
-}
-
+.typewriter { width:fit-content; margin:0 auto 20px; }
+.typewriter h1 { display:inline-block; white-space:nowrap; overflow:hidden; border-right:.15em solid #5A84B4; animation:typing 3.5s steps(40,end),blink-caret .75s step-end infinite; color:#ffffff!important; }
 @keyframes typing { from{width:0;} to{width:100%;} }
 @keyframes blink-caret { from,to{border-color:transparent;} 50%{border-color:#5A84B4;} }
 </style>
-    ''', unsafe_allow_html=True
+    ''',
+    unsafe_allow_html=True
 )
 
 # --- Layout ---
@@ -82,12 +76,12 @@ left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 # --- Left Pane ---
 with left_col:
     st.markdown(
-        f'<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
+        '<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title">Contact</div>' +
-        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">' +
+        '<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Contact</div>' +
+        '<div style="display:flex;justify-content:center;gap:16px;margin-top:10px;">' +
         '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
         '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
         '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
@@ -99,48 +93,47 @@ with left_col:
 with mid_col:
     # Intro message
     st.markdown(
-        '<div class=\"card hover-zoom\"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
+    # Projects Showcase header
     st.markdown(
-        '<div class=\"card hover-zoom\"><div class="section-title">Projects Showcase</div></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Projects Showcase</div></div>',
         unsafe_allow_html=True
     )
-    # Projects grid in 2 columns per row
+    # Projects grid
     num_cols = 2
     for i in range(0, len(projects), num_cols):
-        row = projects[i:i+num_cols]
         cols = st.columns(num_cols, gap="medium")
-        for j, proj in enumerate(row):
+        for j, proj in enumerate(projects[i:i+num_cols]):
             with cols[j]:
                 st.markdown(
                     f'<div class="project-item"><a href="{proj["url"]}" target="_blank">'
                     f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>',
                     unsafe_allow_html=True
                 )
-        # vertical spacer after each row
         st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
-
-    # No chat section (removed per request) (removed per request)
 
 # --- Right Pane ---
 with right_col:
-    # Skills as text without bullets
+    # Skills
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div>' +
         '<p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p>' +
         '</div>',
         unsafe_allow_html=True
     )
-    # Experience without bullets
+    # Experience
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div>' +
         '<p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p>' +
-        '</div>', unsafe_allow_html=True
+        '</div>',
+        unsafe_allow_html=True
     )
-    # Certifications without bullets
+    # Certifications
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div>' +
         '<p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p>' +
-        '</div>', unsafe_allow_html=True
+        '</div>',
+        unsafe_allow_html=True
     )

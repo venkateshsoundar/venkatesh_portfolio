@@ -56,19 +56,30 @@ body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venka
   box-sizing: border-box;
 }
 .card * { color:#ffffff!important; }
-.card-left { min-height: 260px; }
-.card-mid { min-height: 180px; }
-.card-right { min-height: 200px; }
-.card:hover { transform:translateY(-5px); box-shadow:0 8px 16px rgba(0,0,0,0.7); }
 .hover-zoom { display:inline-block; animation:zoom-in .3s ease forwards; }
 .hover-zoom:hover { animation:zoom-out .3s ease forwards; }
 @keyframes zoom-in { from{transform:scale(0.95);} to{transform:scale(1);} }
 @keyframes zoom-out { from{transform:scale(1);} to{transform:scale(1.05);} }
-.section-title { font-size:1.6rem; border-bottom:2px solid #5A84B4; margin-bottom:12px; padding-bottom:4px; }
-.profile-pic { border-radius:50%; width:150px; margin:0 auto 12px; display:block; border:2px solid #5A84B4; }
+.section-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding-bottom: 4px;
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+a:hover {
+  text-decoration: none !important;
+}
+.profile-pic { border-radius:50%; width:150px; margin:0 auto 12px; display:block; border:2px solid #5A84B4; animation:fade-in 1s ease; }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
 .contact-icon { width:30px; height:30px; filter:invert(100%); transition:transform .3s ease; }
 .contact-icon:hover { transform:scale(1.2); }
-.chat-bubble { padding:8px 12px; border-radius:12px; margin:4px 0; }
+.chat-bubble { padding:8px 12px; border-radius:12px; margin:4px 0; animation:fade-in .4s ease; }
 .user-msg { background:#324665; text-align:right; color:#ffffff; }
 .bot-msg { background:#5A84B4; text-align:left; color:#000000; }
 .project-item { position:relative; overflow:hidden; border-radius:12px; aspect-ratio:1/1; }

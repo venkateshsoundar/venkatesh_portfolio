@@ -23,10 +23,9 @@ bullets = load_resume_bullets(resume_url)
 # --- Global CSS ---
 st.markdown('''
 <style>
-[aria-label="Toggle sidebar"] { visibility: hidden !important; }
 body { background-color: #121212; color: #e0e0e0; }
 .stApp .sidebar-content { background-color: #1e1e1e; }
-.card { border-radius:12px; padding:20px; margin-bottom:20px; color:#ffffff; background:linear-gradient(135deg, #2E3B4E, #627D98); transition:transform .3s ease, box-shadow .3s ease; }
+.card { border-radius:12px; padding:20px; margin-bottom:20px; color:#ffffff; background:linear-gradient(135deg, #2E3B4E, #627D98); transition:transform .3s ease,box-shadow .3s ease; }
 .card:hover { transform:translateY(-5px); box-shadow:0 8px 16px rgba(0,0,0,0.6); }
 .section-title { font-size:1.6rem; border-bottom:3px solid #82A3C8; margin-bottom:12px; padding-bottom:4px; color:#82A3C8; }
 .profile-pic { border-radius:50%; width:150px; margin:0 auto 12px; display:block; }
@@ -34,19 +33,16 @@ body { background-color: #121212; color: #e0e0e0; }
 .user-msg { background:#627D98; text-align:right; color:#ffffff; }
 .bot-msg { background:#A3BFD9; text-align:left; color:#121212; }
 @keyframes fade-in { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
-.grid-container { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-.project-item { position:relative; overflow:hidden; border-radius:12px; }
-.project-item img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; transition:transform .3s ease, filter .3s ease; }
-.project-item:hover img { transform:scale(1.1); filter:brightness(1.1); }
-.overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(40,60,80,0.7); display:flex; align-items:center; justify-content:center; color:#ffffff; opacity:0; transition:opacity .3s ease; font-size:1.2rem; text-align:center; padding:10px; }
-.project-item:hover .overlay { opacity:1; }
-a { color:#627D98; text-decoration:none; }
-a:hover { text-decoration:underline; }
+.grid-3 { display:grid; grid-template-columns:1fr 2fr 1fr; gap:20px; }
+.grid-3 .column { padding:10px; background:#1e1e1e; border-radius:12px; }
 </style>
 ''', unsafe_allow_html=True)
 
-# --- Sidebar: Profile Only ---
-with st.sidebar:
+# --- Layout: three panes ---
+left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
+
+# --- Left pane: Profile + Chat ---
+with left_col:
     st.markdown("<img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic'>", unsafe_allow_html=True)
     st.markdown("# Venkatesh Soundararajan")
     st.markdown("**M.S. Data Science & Analytics**")
@@ -56,35 +52,37 @@ with st.sidebar:
     st.markdown("- 📧 youremail@example.com")
     st.markdown("- 🔗 [LinkedIn](https://www.linkedin.com/in/venkateshsoundar/)")
     st.markdown("- 💻 [GitHub](https://github.com/venkateshsoundar)")
-
-# --- Layout: Chat left, Info right ---
-col_chat, col_info = st.columns([1, 3], gap="large")
-
-# Chat pane
-with col_chat:
+    st.markdown("---")
     st.markdown("### Chat with Me 📋")
     if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:
-        css = 'user-msg' if role=='user' else 'bot-msg'
-        st.markdown(f"<div class='chat-bubble {css}'>{msg}</div>", unsafe_allow_html=True)
+        cls = 'user-msg' if role=='user' else 'bot-msg'
+        st.markdown(f"<div class='chat-bubble {cls}'>{msg}</div>", unsafe_allow_html=True)
     query = st.chat_input("Ask me anything about my background or projects...")
     if query:
         st.session_state.history.append(('user', query))
-        system = [{"role": "system", "content": "You are Venkatesh’s portfolio assistant. Cite [Resume] or [Projects]."}]
+        system = [{"role":"system","content":"You are Venkatesh’s portfolio assistant. Cite [Resume] or [Projects]."}]
         resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:\n" + "\n".join(["- Quality of Life Analysis","- Wildfire Analysis","- Crime Drivers","- Uber Predictor"])
+        proj_ctx = "Projects:\n" + "\n".join(["- Quality of Life Analysis","- Alberta Wildfire Analysis","- Toronto Crime Drivers","- Uber Ride Duration Predictor"])
         msgs = system + [{"role":"system","content":resume_ctx},{"role":"system","content":proj_ctx},{"role":"user","content":query}]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
         st.session_state.history.append(('assistant', resp.choices[0].message.content))
         st.experimental_rerun()
 
-# Info pane
-with col_info:
-    # Skills
-    st.markdown("<div class='card'><div class='section-title'>Skills</div><ul>" + "".join(f"<li>{s}</li>" for s in ["Python, SQL, R","AWS & SageMaker","Streamlit, Tableau","Scikit-learn, OpenCV","Git, Agile"]) + "</ul></div>", unsafe_allow_html=True)
-    # Experience
-    st.markdown("<div class='card'><div class='section-title'>Experience</div><ul>" + "".join(f"<li>{e}</li>" for e in ["Deloitte Quality Lead (8+ yrs)","AWS Data Pipelines","Agile Team Lead","Risk Analytics"]) + "</ul></div>", unsafe_allow_html=True)
-    # Certifications
-    st.markdown("<div class='card'><div class='section-title'>Certifications</div><ul>" + "".join(f"<li>{c}</li>" for c in ["AWS Solutions Architect","Tableau Specialist","Scrum Master"]) + "</ul></div>", unsafe_allow_html=True)
+# --- Center pane: Main Details ---
+with mid_col:
+    # Welcome Section
+    st.markdown("<div class='card column'><div class='section-title'>Welcome</div><p>Hello! I'm Venkatesh, a Data Science graduate student and analytics professional.</p></div>", unsafe_allow_html=True)
+    # Resume Highlights
+    highlights = "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"
+    st.markdown(f"<div class='card column'><div class='section-title'>Resume Highlights</div>{highlights}</div>", unsafe_allow_html=True)
+    # Projects Showcase
+    st.markdown("<div class='card column'><div class='section-title'>Projects Showcase</div><ul><li>Quality of Life Analysis</li><li>Alberta Wildfire Analysis</li><li>Toronto Crime Drivers</li><li>Uber Ride Predictor</li></ul></div>", unsafe_allow_html=True)
+
+# --- Right pane: Skills, Experience, Certifications ---
+with right_col:
+    st.markdown("<div class='card column'><div class='section-title'>Skills</div><ul><li>Python, SQL, R</li><li>AWS & SageMaker</li><li>Streamlit, Tableau</li><li>Scikit-learn, OpenCV</li><li>Git, Agile</li></ul></div>", unsafe_allow_html=True)
+    st.markdown("<div class='card column'><div class='section-title'>Experience</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>", unsafe_allow_html=True)
+    st.markdown("<div class='card column'><div class='section-title'>Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>", unsafe_allow_html=True)

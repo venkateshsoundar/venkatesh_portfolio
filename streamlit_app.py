@@ -192,29 +192,48 @@ with mid_col:
   <summary class="details-summary">Projects Showcase</summary>
   {grid_html}
 </details>
-""", unsafe_allow_html=True
+""",
+        unsafe_allow_html=True
     )
-    # Chat expander
-    with st.expander("Chat with Me", expanded=False):
-        if 'history' not in st.session_state:
-            st.session_state.history = []
-        for role, msg in st.session_state.history:
-            st.chat_message(role).write(msg)
-        user_query = st.chat_input("Ask me anything about my background or projects…")
-        if user_query:
-            st.session_state.history.append(('user', user_query))
-            st.chat_message('user').write(user_query)
-            messages = [
-                {"role": "system", "content": "You are Venkatesh’s assistant."},
-                {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
-                {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
-                {"role": "user", "content": user_query}
-            ]
-            client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
-            reply = resp.choices[0].message.content
-            st.session_state.history.append(('assistant', reply))
-            st.chat_message('assistant').write(reply)
+
+    # Chat section using custom details/summary
+    st.markdown(
+        """
+<details>
+  <summary class="details-summary">Chat with Me</summary>
+""",
+        unsafe_allow_html=True,
+    )
+
+    if 'history' not in st.session_state:
+        st.session_state.history = []
+    for role, msg in st.session_state.history:
+        st.chat_message(role).write(msg)
+
+    user_query = st.chat_input("Ask me anything about my background or projects…")
+    if user_query:
+        st.session_state.history.append(('user', user_query))
+        st.chat_message('user').write(user_query)
+
+        messages = [
+            {"role": "system", "content": "You are Venkatesh’s assistant."},
+            {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
+            {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
+            {"role": "user", "content": user_query}
+        ]
+        client = OpenAI(
+            base_url="https://openrouter.ai/api/v1",
+            api_key=st.secrets["DEEPSEEK_API_KEY"]
+        )
+        resp = client.chat.completions.create(
+            model="deepseek/deepseek-r1:free",
+            messages=messages
+        )
+        reply = resp.choices[0].message.content
+        st.session_state.history.append(('assistant', reply))
+        st.chat_message('assistant').write(reply)
+
+    st.markdown("</details>", unsafe_allow_html=True)
 
 # --- Right Pane ---
 with right_col:

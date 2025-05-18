@@ -74,7 +74,7 @@ a { text-decoration:none !important; color:inherit !important; }
 @keyframes typing { from{width:0;} to{width:100%;} }
 @keyframes blink-caret { from,to{border-color:transparent;} 50%{border-color:#5A84B4;} }
   /* Style expander header to match Welcome card */
-  [data-testid="stExpander"] > div > button {
+  [data-testid="stExpander"] button {
     background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
     color: #ffffff !important;
     font-size: 1.6rem !important;
@@ -83,7 +83,9 @@ a { text-decoration:none !important; color:inherit !important; }
     border-radius: 6px !important;
     text-align: left !important;
     width: 100% !important;
-  }
+    border: none !important;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2) !important;
+}
 </style>
     ''', unsafe_allow_html=True
 )

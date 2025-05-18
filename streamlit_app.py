@@ -1,5 +1,4 @@
 import streamlit as st
-from openai import OpenAI
 import requests
 import io
 import PyPDF2
@@ -7,7 +6,7 @@ import PyPDF2
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Load resume bullets ---
+# --- Load resume bullets (optional: you can comment out if not needed) ---
 @st.cache_data
 def load_resume_bullets(url, max_bullets=5):
     r = requests.get(url)
@@ -139,57 +138,6 @@ st.markdown(
   gap: 20px;
   margin-bottom: 20px;
 }
-/* --- Chat Styling --- */
-.chat-area {
-  max-height: 340px;
-  overflow-y: auto;
-  margin-bottom: 14px;
-  padding-right:8px;
-  padding-left:2px;
-  background: rgba(255,255,255,0.03);
-  border-radius: 10px;
-}
-.bubble-user {
-  background: #e8f0fe;
-  color: #222;
-  padding: 8px 16px;
-  border-radius: 18px 18px 2px 18px;
-  margin-bottom: 8px;
-  text-align: left;
-  display: inline-block;
-  max-width: 85%;
-  font-size: 1rem;
-  box-shadow: 0 2px 8px rgba(120,120,180,0.04);
-}
-.bubble-assistant {
-  background: #5A84B4;
-  color: #fff;
-  padding: 8px 16px;
-  border-radius: 18px 18px 18px 2px;
-  margin-bottom: 8px;
-  text-align: left;
-  display: inline-block;
-  max-width: 85%;
-  font-size: 1rem;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
-.row-user { width: 100%; display: flex; justify-content: flex-end; }
-.row-assistant { width: 100%; display: flex; justify-content: flex-start; }
-.send-icon-btn {
-  background: #5A84B4;
-  border: none;
-  border-radius: 8px;
-  height: 40px;
-  width: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  margin-top: 2px;
-}
-.send-icon-btn:hover {
-  background: #406496;
-}
 </style>
     ''', unsafe_allow_html=True
 )
@@ -215,81 +163,14 @@ with left_col:
 
 # --- Center Pane ---
 with mid_col:
-    # Unified Welcome + Chat Card
+    # Intro card only (no chat)
     st.markdown(
-        '<div class="card hover-zoom">',
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        '<div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. '
-        'Explore my projects below—or ask me about my experience or any project!</p>',
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div>'
+        '<p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
 
-    # --- Chat History (inside the card, just below intro) ---
-    if 'history' not in st.session_state:
-        st.session_state.history = []
-    if 'chat_input' not in st.session_state:
-        st.session_state.chat_input = ""
-
-    st.markdown('<div class="chat-area">', unsafe_allow_html=True)
-    for role, msg in st.session_state.history:
-        if role == "user":
-            st.markdown(f'<div class="row-user"><div class="bubble-user"><b>You:</b> {msg}</div></div>', unsafe_allow_html=True)
-        else:
-            st.markdown(f'<div class="row-assistant"><div class="bubble-assistant"><b>Assistant:</b><br>{msg}</div></div>', unsafe_allow_html=True)
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # --- Chatbot Prompt (input + icon + clear) ---
-    with st.form("chat_form", clear_on_submit=True):
-        input_col, send_col, clear_col = st.columns([6, 1, 1])
-        with input_col:
-            user_input = st.text_input(
-                "Ask about my experience or projects...",
-                key="chat_input",
-                label_visibility="collapsed"
-            )
-        # Icon send button using HTML
-        send_icon_html = """
-        <button type="submit" class="send-icon-btn">
-          <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <line x1="22" y1="2" x2="11" y2="13"></line>
-            <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-          </svg>
-        </button>
-        """
-        send_col.markdown(send_icon_html, unsafe_allow_html=True)
-        clear_clicked = clear_col.form_submit_button("Clear")
-
-        # Form submit logic: Streamlit form always submits when Enter or the send icon is clicked
-        submitted = st.form_submit_button("", use_container_width=False)
-        if submitted and user_input.strip():
-            st.session_state.history.append(('user', user_input))
-            messages = [
-                {"role": "system", "content": "You are Venkatesh’s assistant."},
-                {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
-                {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
-                {"role": "user", "content": user_input}
-            ]
-            with st.spinner("Assistant is typing..."):
-                client = OpenAI(
-                    base_url="https://openrouter.ai/api/v1",
-                    api_key=st.secrets["DEEPSEEK_API_KEY"]
-                )
-                resp = client.chat.completions.create(
-                    model="deepseek/deepseek-r1:free",
-                    messages=messages
-                )
-                reply = resp.choices[0].message.content
-            st.session_state.history.append(('assistant', reply))
-        if clear_clicked:
-            st.session_state.history = []
-            st.session_state.chat_input = ""
-
-    # End of card
-    st.markdown('</div>', unsafe_allow_html=True)
-
-    # --- Projects Showcase remains below ---
+    # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'
     for proj in projects:
         grid_html += (
@@ -297,6 +178,7 @@ with mid_col:
             f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
         )
     grid_html += '</div>'
+
     st.markdown(
         f"""
 <details open>

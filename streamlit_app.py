@@ -35,17 +35,18 @@ projects = [
     {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"}
 ]
 
-# --- Global CSS & Scrollable Chat Expander ---
+# --- Global CSS & Background ---
 st.markdown(
     '''
 <style>
-/* Global Page Styles */
+/* Page background */
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
   background-attachment: fixed;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
+/* Card base style */
 .card {
   width: 100% !important;
   border-radius: 12px;
@@ -59,6 +60,7 @@ st.markdown(
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.7);
 }
+/* Section title style */
 .section-title {
   font-size: 1.6rem;
   font-weight: bold;
@@ -66,12 +68,14 @@ st.markdown(
   padding: 8px;
   border-radius: 6px;
 }
+/* Profile pic */
 .profile-pic {
   border-radius: 50%;
   width: 150px;
   display: block;
   margin: 0 auto 12px;
 }
+/* Contact icons */
 .contact-icon {
   width: 30px;
   height: 30px;
@@ -79,6 +83,7 @@ st.markdown(
   margin: 0 8px;
   vertical-align: middle;
 }
+/* Project item */
 .project-item {
   position: relative;
   aspect-ratio: 1/1;
@@ -109,6 +114,7 @@ st.markdown(
 .project-item:hover .overlay {
   opacity: 1;
 }
+/* Typewriter effect */
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -123,25 +129,7 @@ st.markdown(
 }
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
-/* Projects Showcase expander */
-.details-summary {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
-  color: #ffffff !important;
-  font-size: 1.6rem !important;
-  font-weight: bold !important;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  text-align: center;
-  cursor: pointer;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
-}
-/* Chat expander styling with scrollbar */
+/* Custom expander header styling */
 section[data-testid="stExpander"] > div > div[role="button"] {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
   color: #ffffff !important;
@@ -149,55 +137,67 @@ section[data-testid="stExpander"] > div > div[role="button"] {
   font-weight: bold !important;
   padding: 20px !important;
   border-radius: 12px !important;
-  margin-bottom: 10px !important;
+  margin-bottom: 0px !important;
   text-align: center !important;
   cursor: pointer !important;
 }
+/* Scrollable expander content */
 section[data-testid="stExpander"] div[role="group"] {
   max-height: 300px;
   overflow-y: auto;
   padding-right: 10px;
 }
+/* Scrollbar styling */
 section[data-testid="stExpander"] div[role="group"]::-webkit-scrollbar {
-  width: 8px;
+    width: 8px;
 }
 section[data-testid="stExpander"] div[role="group"]::-webkit-scrollbar-track {
-  background: rgba(255,255,255,0.1);
-  border-radius: 4px;
+    background: rgba(255,255,255,0.1);
+    border-radius: 4px;
 }
 section[data-testid="stExpander"] div[role="group"]::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.3);
-  border-radius: 4px;
+    background: rgba(255,255,255,0.3);
+    border-radius: 4px;
+}
+/* Layout grid */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
 }
 </style>
-    ''', unsafe_allow_html=True)
+    ''', unsafe_allow_html=True
+)
 
-# --- Layout Columns ---
+# --- Layout ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 
-# --- Left Pane: Profile & Contact ---
+# Left pane: Profile & Contact
 with left_col:
     st.markdown(
-        '<div class="card"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
+        '<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title" style="background:#2C3E50;">Contact</div><div style="display:flex; justify-content:center; gap:16px; margin-top:10px;"><a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a><a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a><a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a></div></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Contact</div><div style="display:flex; justify-content:center; gap:16px; margin-top:10px;"><a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a><a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a><a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a></div></div>',
         unsafe_allow_html=True
     )
 
-# --- Center Pane: Intro, Projects, Chat ---
+# Center pane: Intro, Projects, Chat
 with mid_col:
-    # Introduction Card
+    # Intro
     st.markdown(
-        '<div class="card"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-
     # Projects Showcase
     grid_html = '<div class="grid-container">'
     for proj in projects:
-        grid_html += f'<div class="project-item"><a href="{proj["url"]}" target="_blank"><img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj['url']}" target="_blank">'
+            f'<img src="{proj['image']}" class="card-img"/><div class="overlay">{proj['title']}</div></a></div>'
+        )
     grid_html += '</div>'
     st.markdown(
         f"""
@@ -208,44 +208,37 @@ with mid_col:
 """,
         unsafe_allow_html=True
     )
+    # Chat section
+    with st.expander("Chat with Me", expanded=False):
+        if 'history' not in st.session_state:
+            st.session_state.history = []
+        # Render chat history above input
+        for role, msg in st.session_state.history:
+            st.chat_message(role).write(msg)
+        user_query = st.chat_input("Ask me anything about my background or projects…")
+        if user_query:
+            st.session_state.history.append(('user', user_query))
+            messages = [
+                {"role": "system", "content": "You are Venkatesh’s assistant."},
+                {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
+                {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
+                {"role": "user", "content": user_query}
+            ]
+            client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
+            st.session_state.history.append(('assistant', resp.choices[0].message.content))
 
-    # Chat Section (matches Projects Showcase)
-    st.markdown(
-        """
-<details>
-  <summary class="details-summary">Chat with Me</summary>
-""",
-        unsafe_allow_html=True,
-    )
-    if 'history' not in st.session_state:
-        st.session_state.history = []
-    for role, msg in st.session_state.history:
-        st.chat_message(role).write(msg)
-    user_query = st.chat_input("Ask me anything about my background or projects…")
-    if user_query:
-        st.session_state.history.append(('user', user_query))
-        messages = [
-            {"role": "system", "content": "You are Venkatesh's assistant."},
-            {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
-            {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
-            {"role": "user", "content": user_query}
-        ]
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
-        st.session_state.history.append(('assistant', resp.choices[0].message.content))
-    st.markdown("</details>", unsafe_allow_html=True)
-
-# --- Right Pane: Skills, Experience, Certifications ---
+# Right pane: Skills, Experience, Certifications
 with right_col:
     st.markdown(
-        '<div class="card"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
         unsafe_allow_html=True
     )

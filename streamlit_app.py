@@ -69,6 +69,7 @@ with left_col:
     )
 
 # --- Center Pane ---
+with mid_col:
     st.markdown(
         '<div class="card"><div class="section-title">Projects Showcase</div></div>',
         unsafe_allow_html=True
@@ -96,8 +97,12 @@ with left_col:
         st.session_state.history.append(('user', query))
         messages = [
             {"role":"system","content":"You are Venkatesh’s assistant."},
-            {"role":"system","content":"Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
-            {"role":"system","content":"Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
+            {"role":"system","content":"Resume:
+" + "
+".join(f"- {b}" for b in bullets)},
+            {"role":"system","content":"Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)},
             {"role":"user","content":query}
         ]
         client = OpenAI(api_key=st.secrets["DEEPSEEK_API_KEY"])

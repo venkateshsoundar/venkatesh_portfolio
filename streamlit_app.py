@@ -52,11 +52,13 @@ body {
   margin-bottom: 20px;
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   transition: transform .3s ease, box-shadow .3s ease;
+  color: #f0f0f0;
 }
 .card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.7);
 }
+.card * { color: #f0f0f0 !important; }
 .section-title {
   font-size: 1.6rem;
   border-bottom: 2px solid #5A84B4;
@@ -71,63 +73,21 @@ body {
   display: block;
   border: 2px solid #5A84B4;
 }
-.chat-bubble {
-  padding: 8px 12px;
-  border-radius: 12px;
-  margin: 4px 0;
-  animation: fade-in .4s ease;
-}
-.user-msg {
-  background: #324665;
-  text-align: right;
-  color: #f0f0f0;
-}
-.bot-msg  {
-  background: #5A84B4;
-  text-align: left;
-  color: #1F2A44;
-}
+.chat-bubble { padding: 8px 12px; border-radius: 12px; margin: 4px 0; animation: fade-in .4s ease; }
+.user-msg { background: #324665; text-align: right; color: #f0f0f0; }
+.bot-msg  { background: #5A84B4; text-align: left; color: #1F2A44; }
 @keyframes fade-in { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:translateY(0);} }
-.project-item {
-  position: relative;
-  overflow: hidden;
-  border-radius: 12px;
-  height: 200px;
-}
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .3s ease, filter .3s ease;
-}
-.project-item:hover .card-img {
-  transform: scale(1.05);
-  filter: brightness(1.1);
-}
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #f0f0f0;
-  opacity: 0;
-  transition: opacity .3s ease;
-  font-size: 1.2rem;
-  text-align: center;
-  padding: 10px;
-}
+.project-item { position: relative; overflow: hidden; border-radius: 12px; height: 200px; }
+.card-img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease, filter .3s ease; }
+.project-item:hover .card-img { transform: scale(1.05); filter: brightness(1.1); }
+.overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; color: #f0f0f0; opacity: 0; transition: opacity .3s ease; font-size: 1.2rem; text-align: center; padding: 10px; }
 .project-item:hover .overlay { opacity: 1; }
 a { color: #5A84B4; text-decoration: none; }
 a:hover { text-decoration: underline; }
 .typewriter h1 {
+  white-space: normal;
   overflow: hidden;
   border-right: .15em solid #5A84B4;
-  white-space: nowrap;
   letter-spacing: .1em;
   animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
   color: #AFCBE3;

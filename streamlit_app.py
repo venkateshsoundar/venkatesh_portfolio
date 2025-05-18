@@ -1,3 +1,6 @@
+# Streamlit Portfolio Chatbot
+# Source: https://github.com/venkateshsoundar/venkatesh_portfolio/blob/main/streamlit_app.py
+
 import streamlit as st
 from openai import OpenAI
 import requests
@@ -6,9 +9,23 @@ import PyPDF2
 from time import sleep
 
 # 1) Page config
-st.set_page_config(page_title="Portfolio Chatbot", layout="centered")
+st.set_page_config(page_title="Portfolio Chatbot", layout="wide")
 
-# 2) Blinking dots CSS
+# 2) Sidebar profile section
+with st.sidebar:
+    # Profile picture (replace with your image URL or local file)
+    st.image("https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg", width=150)
+    st.markdown("# Venkatesh Soundararajan")
+    st.markdown("**M.S. in Data Science & Analytics**")
+    st.markdown("University of Calgary")
+    st.markdown("---")
+    st.markdown("**Contact**")
+    st.markdown("- Email: youremail@example.com")
+    st.markdown("- LinkedIn: [venkateshsoundar](https://www.linkedin.com/in/venkateshsoundar/)")
+    st.markdown("- GitHub: [venkateshsoundar](https://github.com/venkateshsoundar)")
+    st.markdown("---")
+
+# 3) Blinking dots CSS
 st.markdown("""
 <style>
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
@@ -17,7 +34,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 st.markdown("## Welcome to my Portfolio<span class='blink-dots'>...</span>", unsafe_allow_html=True)
 
-# 3) Preload & summarize resume once
+# 4) Preload & summarize resume once
 @st.cache_data
 def load_resume_bullets(url, max_bullets=5):
     r = requests.get(url); r.raise_for_status()
@@ -29,7 +46,7 @@ def load_resume_bullets(url, max_bullets=5):
 resume_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 resume_bullets = load_resume_bullets(resume_url)
 
-# 4) Predefine your project list
+# 5) Predefine your project list
 projects = [
     "Canadian Quality of Life Analysis",
     "Alberta Wildfire Analysis",
@@ -44,7 +61,7 @@ projects = [
     "Uber Ride Duration Predictor"
 ]
 
-# 5) Build base messages once
+# 6) Build base messages once
 system_messages = [
     {"role":"system","content":"You are Venkatesh’s portfolio assistant. Answer concisely and cite your source: [Resume] or [Projects]."}
 ]
@@ -55,21 +72,21 @@ base_messages = system_messages + [
     {"role":"system","content": projects_ctx},
 ]
 
-# 6) Chat history
+# 7) Chat history
 if "history" not in st.session_state:
     st.session_state.history = []
 
-# 7) Render history
+# 8) Render history
 for r, m in st.session_state.history:
     st.chat_message(r).write(m)
 
-# 8) Get input
+# 9) Get input
 user_q = st.chat_input("Ask me anything about my background or projects…")
 if user_q:
     st.session_state.history.append(("user", user_q))
     st.chat_message("user").write(user_q)
 
-    # 9) Call API with minimal context
+    # 10) Call API with minimal context
     msgs = base_messages + [{"role":"user","content": user_q}]
     client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
     resp = client.chat.completions.create(

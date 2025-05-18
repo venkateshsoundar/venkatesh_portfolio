@@ -96,13 +96,15 @@ with mid_col:
     if query:
         st.session_state.history.append(('user', query))
         messages = [
-            {"role":"system","content":"You are Venkatesh’s assistant."},
-            {"role":"system","content":"Resume:
+            {"role": "system", "content": "You are Venkatesh’s assistant."},
+            {"role": "system", "content": "Resume:
 " + "
 ".join(f"- {b}" for b in bullets)},
-            {"role":"system","content":"Projects:
+            {"role": "system", "content": "Projects:
 " + "
 ".join(f"- {p['title']}" for p in projects)},
+            {"role": "user", "content": query}
+        ]}" for p in projects)},
             {"role":"user","content":query}
         ]
         client = OpenAI(api_key=st.secrets["DEEPSEEK_API_KEY"])

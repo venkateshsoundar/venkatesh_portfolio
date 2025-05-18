@@ -139,6 +139,74 @@ st.markdown(
   gap: 20px;
   margin-bottom: 20px;
 }
+
+/* Chat UI */
+.chat-area {
+  max-height: 340px;
+  overflow-y: auto;
+  margin-bottom: 14px;
+  padding-right:8px;
+  padding-left:2px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
+}
+.bubble-user {
+  background: #e8f0fe;
+  color: #222;
+  padding: 8px 16px;
+  border-radius: 18px 18px 2px 18px;
+  margin-bottom: 8px;
+  text-align: left;
+  display: inline-block;
+  max-width: 85%;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(120,120,180,0.04);
+}
+.bubble-assistant {
+  background: #5A84B4;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 18px 18px 18px 2px;
+  margin-bottom: 8px;
+  text-align: left;
+  display: inline-block;
+  max-width: 85%;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+.row-user { width: 100%; display: flex; justify-content: flex-end; }
+.row-assistant { width: 100%; display: flex; justify-content: flex-start; }
+.send-btn {
+  background: #5A84B4;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  height: 40px;
+  width: 100%;
+  margin-top: 0;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background .15s;
+}
+.send-btn:hover {
+  background: #406496;
+}
+.clear-btn {
+  background: #e84d4d;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  height: 36px;
+  width: 100%;
+  font-size: 0.97rem;
+  margin-top: 4px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background .15s;
+}
+.clear-btn:hover {
+  background: #be2b2b;
+}
 </style>
     ''', unsafe_allow_html=True
 )
@@ -189,7 +257,7 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    # --- Chat Section as Card with Input ---
+    # --- Chat Section as Card with Polished UI ---
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with Me</div>',
         unsafe_allow_html=True
@@ -200,37 +268,67 @@ with mid_col:
     if 'chat_input' not in st.session_state:
         st.session_state.chat_input = ""
 
-    # Display chat history
+    # Chat bubbles in a scrollable area
+    st.markdown('<div class="chat-area">', unsafe_allow_html=True)
     for role, msg in st.session_state.history:
-        st.chat_message(role).write(msg)
+        if role == "user":
+            st.markdown(f'<div class="row-user"><div class="bubble-user">{msg}</div></div>', unsafe_allow_html=True)
+        else:
+            st.markdown(f'<div class="row-assistant"><div class="bubble-assistant">{msg}</div></div>', unsafe_allow_html=True)
+    st.markdown('</div>', unsafe_allow_html=True)
 
-    # Input inside the card (with Send button)
-    user_input = st.text_input("Ask me anything about my background or projects…", key="chat_input")
-    send_clicked = st.button("Send", key="send_btn")
+    # Input and send in one row, Enter sends
+    input_col, send_col, clear_col = st.columns([6,1,1])
+    with input_col:
+        user_input = st.text_input(
+            "Ask me anything about my background or projects…",
+            key="chat_input",
+            label_visibility="collapsed",
+            value=st.session_state.chat_input,
+            on_change=None  # We'll handle Enter manually
+        )
+    send_clicked = send_col.button("Send", key="send_btn", use_container_width=True)
+    clear_clicked = clear_col.button("Clear", key="clear_btn", use_container_width=True)
 
-    if send_clicked and user_input.strip():
+    # --- Enter sends ---
+    # Only process if the Send button was clicked or user hit Enter (input changed and not empty)
+    # This mimics Enter-to-send, since Streamlit doesn't have a true on_enter callback
+    send_message = False
+    if send_clicked:
+        send_message = True
+    elif user_input and user_input != st.session_state.get("last_user_input", ""):
+        # Enter pressed (input changed)
+        if st.session_state.get("last_action") == "input":
+            send_message = True
+    st.session_state["last_user_input"] = user_input
+    st.session_state["last_action"] = "input" if not send_clicked else "button"
+
+    if send_message and user_input.strip():
         st.session_state.history.append(('user', user_input))
-        st.chat_message('user').write(user_input)
-
         messages = [
             {"role": "system", "content": "You are Venkatesh’s assistant."},
             {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
             {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
             {"role": "user", "content": user_input}
         ]
-        client = OpenAI(
-            base_url="https://openrouter.ai/api/v1",
-            api_key=st.secrets["DEEPSEEK_API_KEY"]
-        )
-        resp = client.chat.completions.create(
-            model="deepseek/deepseek-r1:free",
-            messages=messages
-        )
-        reply = resp.choices[0].message.content
+        with st.spinner("Assistant is typing..."):
+            client = OpenAI(
+                base_url="https://openrouter.ai/api/v1",
+                api_key=st.secrets["DEEPSEEK_API_KEY"]
+            )
+            resp = client.chat.completions.create(
+                model="deepseek/deepseek-r1:free",
+                messages=messages
+            )
+            reply = resp.choices[0].message.content
         st.session_state.history.append(('assistant', reply))
-        st.chat_message('assistant').write(reply)
+        st.session_state.chat_input = ""
+    elif not send_message:
+        st.session_state.chat_input = user_input
 
-        # Clear input after sending
+    # --- Clear chat button ---
+    if clear_clicked:
+        st.session_state.history = []
         st.session_state.chat_input = ""
 
     st.markdown("</div>", unsafe_allow_html=True)  # close card

@@ -43,15 +43,23 @@ st.markdown(
     '''
 <style>
 body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat; color: #ffffff; }
-.card { width:100%; border-radius:12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); color:#ffffff; box-sizing:border-box; }
-.section-title { font-size:1.6rem; font-weight:bold; margin-bottom:12px; color:#ffffff; }
+.stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
+.card { display:block!important; width:100%!important; border-radius:12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); transition:transform .3s ease,box-shadow .3s ease; color:#ffffff; box-sizing:border-box; text-align:center; }
+.card * { color:#ffffff!important; }
+.hover-zoom { transition:transform .3s ease; }
+.hover-zoom:hover { transform:translateY(-5px); }
+.section-title { font-size:1.6rem; font-weight:bold; margin-bottom:12px; color:#ffffff!important; text-decoration:none!important; padding:8px; border-radius:6px; }
+a, a:hover { text-decoration:none!important; color:inherit!important; }
 .profile-pic { border-radius:50%; width:150px; display:block; margin:0 auto 12px; }
+.contact-icon { width:30px; height:30px; filter:invert(100%); margin:0 8px; vertical-align:middle; }
 .project-item { position:relative; aspect-ratio:1/1; overflow:hidden; border-radius:12px; }
 .card-img { width:100%; height:100%; object-fit:cover; transition:transform .3s ease; }
 .project-item:hover .card-img { transform:scale(1.05); }
-.overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s ease; color:#ffffff; }
+.overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s ease; color:#ffffff!important; font-size:1.2rem; padding:10px; text-align:center; }
 .project-item:hover .overlay { opacity:1; }
-.chat-frame { width:100%; }
+.typewriter h1 { border-right:.15em solid #5A84B4; animation:typing 3.5s steps(40,end),blink-caret .75s step-end infinite; color:#ffffff!important; margin:0; }
+@keyframes typing { from{width:0;} to{width:100%;} }
+@keyframes blink-caret { from,to{border-color:transparent;} 50%{border-color:#5A84B4;} }
 </style>
     ''', unsafe_allow_html=True
 )
@@ -79,11 +87,11 @@ with left_col:
 with mid_col:
     # Intro message
     st.markdown(
-        '<div class="card"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        '<div class=\"card hover-zoom\"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title">Projects Showcase</div></div>',
+        '<div class=\"card hover-zoom\"><div class="section-title">Projects Showcase</div></div>',
         unsafe_allow_html=True
     )
     # Projects grid in 2 columns per row
@@ -106,14 +114,14 @@ with mid_col:
 # --- Right Pane ---
 with right_col:
     st.markdown(
-        '<div class="card"><div class="section-title">Skills</div><ul><li>Python, SQL, R</li><li>AWS & SageMaker</li><li>Streamlit, Tableau</li><li>Scikit-learn, OpenCV</li><li>Git, Agile</li></ul></div>',
+        '<div class=\"card hover-zoom\"><div class="section-title">Skills</div><ul><li>Python, SQL, R</li><li>AWS & SageMaker</li><li>Streamlit, Tableau</li><li>Scikit-learn, OpenCV</li><li>Git, Agile</li></ul></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title">Experience</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>',
+        '<div class=\"card hover-zoom\"><div class="section-title">Experience</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title">Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>',
+        '<div class=\"card hover-zoom\"><div class="section-title">Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>',
         unsafe_allow_html=True
     )

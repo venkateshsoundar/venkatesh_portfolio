@@ -42,12 +42,14 @@ projects = [
 st.markdown(
     '''
 <style>
-body {
-  font-family: 'Poppins', sans-serif;
-  /* updated page background */
+/* Apply background to the main Streamlit container */
+.stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
+  background-attachment: fixed;
   color: #ffffff;
+  font-family: 'Poppins', sans-serif;
 }
+
 .stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
 .card { width:100%; border-radius:12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); transition:transform .3s ease,box-shadow .3s ease; color:#ffffff; box-sizing:border-box; text-align:center; }
 .card:hover { transform:translateY(-5px); box-shadow:0 8px 16px rgba(0,0,0,0.7); }

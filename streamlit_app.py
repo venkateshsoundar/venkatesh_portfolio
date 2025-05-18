@@ -51,13 +51,9 @@ body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venka
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   transition: transform .3s ease, box-shadow .3s ease;
   color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: stretch;
-  height: 250px;
-  /* ensure uniform card height */
-  box-sizing: border-box;
+  /* default flow; no fixed height */
+}
+
 }
 
 .card * {

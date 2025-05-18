@@ -120,7 +120,7 @@ with mid_col:
                 st.chat_message('user').write(msg)
             else:
                 st.chat_message('assistant').write(msg)
-    # user input
+        # user input
     query = st.chat_input("Ask me anything about my background or projects…")
     if query:
         # display user message immediately
@@ -129,20 +129,18 @@ with mid_col:
         st.session_state.history.append(('user', query))
         # prepare messages
         system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-                resume_ctx = "Resume:
+        # correctly escape newlines
+        resume_ctx = "Resume:
 " + "
 ".join(f"- {b}" for b in bullets)
         proj_ctx = "Projects:
 " + "
 ".join(f"- {p['title']}" for p in projects)
-        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
-        assistant_reply = resp.choices[0].message.content
-        proj_ctx = "Projects:
-" + "
-".join(f"- {p['title']}" for p in projects)
-        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
+        msgs = system + [
+            {"role": "system", "content": resume_ctx},
+            {"role": "system", "content": proj_ctx},
+            {"role": "user", "content": query}
+        ]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
         assistant_reply = resp.choices[0].message.content
@@ -151,7 +149,7 @@ with mid_col:
         with chat_frame:
             st.chat_message('assistant').write(assistant_reply)
 
-# --- Right pane--- ---
+# --- Right pane------ ---
 with right_col:
     # Skills as text
     st.markdown(

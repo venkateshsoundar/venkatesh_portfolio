@@ -74,6 +74,9 @@ a:hover { text-decoration: underline; }
 @keyframes blink-caret { from,to { border-color: transparent; } 50% { border-color: #5A84B4; } }
 </style>
 ''', unsafe_allow_html=True)
+        # spacer between project rows (only after last in row)
+        if (idx+1) % num_cols == 0:
+            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 # --- Layout: three panes ---
 left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
@@ -123,31 +126,32 @@ with mid_col:
 
 # --- Right pane: Skills, Experience, Certifications ---
 with right_col:
-    # Skills icons card
+    # Skills icons card (expanded)
     st.markdown(
         "<div class='card hover-zoom'><div class='section-title'>Skills</div>"
-        "<div style='display:flex; justify-content: space-around; align-items: center; margin-top: 10px;'>"
+        "<div style='display:flex; flex-wrap:wrap; justify-content: space-around; align-items: center; margin-top: 10px; gap: 12px;'>"
         "<a href='https://www.python.org' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' class='contact-icon' alt='Python'></a>"
         "<a href='https://numpy.org/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/numpy/numpy-original.svg' class='contact-icon' alt='NumPy'></a>"
-        "<a href='https://pandas.pydata.org/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/2ae2a900d2f041da66e950e4d48052658d850630/icons/pandas/pandas-original.svg' class='contact-icon' alt='Pandas'></a>"
-        "<a href='https://scikit-learn.org/' target='_blank'><img src='https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg' class='contact-icon' alt='Scikit-learn'></a>"
-        "</div></div>",
-        unsafe_allow_html=True
+        "<a href='https://pandas.pydata.org/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/pandas/pandas-original.svg' class='contact-icon' alt='Pandas'></a>"
+        "<a href='https://scikit-learn.org/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/scikit-learn/scikit-learn-original.svg' class='contact-icon' alt='Scikit-Learn'></a>"
+        "<a href='https://www.r-project.org/' target='_blank'><img src='https://www.vectorlogo.zone/logos/r-project/r-project-icon.svg' class='contact-icon' alt='R'></a>"
+        "<a href='https://www.mysql.com/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg' class='contact-icon' alt='MySQL'></a>"
+        "<a href='https://www.oracle.com/database/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg' class='contact-icon' alt='Oracle'></a>"
+        "<a href='https://www.java.com/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg' class='contact-icon' alt='Java'></a>"
+        "<a href='https://powerbi.microsoft.com/' target='_blank'><img src='https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg' class='contact-icon' alt='Power BI'></a>"
+        "<a href='https://azure.microsoft.com/' target='_blank'><img src='https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg' class='contact-icon' alt='Azure'></a>"
+        "<a href='https://aws.amazon.com/' target='_blank'><img src='https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg' class='contact-icon' alt='AWS'></a>"
+        "</div></div>", unsafe_allow_html=True
     )
     # Experience card
     st.markdown(
-        "<div class='card'><div class='section-title'>Experience</div>"
+        "<div class='card hover-zoom'><div class='section-title'>Experience</div>"
         "<ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul>"
-        "</div>",
-        unsafe_allow_html=True
+        "</div>", unsafe_allow_html=True
     )
     # Certifications card
     st.markdown(
-        "<div class='card'><div class='section-title'>Certifications</div>"
+        "<div class='card hover-zoom'><div class='section-title'>Certifications</div>"
         "<ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul>"
-        "</div>",
-        unsafe_allow_html=True
+        "</div>", unsafe_allow_html=True
     )
-    st.markdown("<div class='card'><div class='section-title'>Skills</div><ul><li>Python, SQL, R</li><li>AWS & SageMaker</li><li>Streamlit, Tableau</li><li>Scikit-learn, OpenCV</li><li>Git, Agile</li></ul></div>", unsafe_allow_html=True)
-    st.markdown("<div class='card'><div class='section-title'>Experience</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>", unsafe_allow_html=True)
-    st.markdown("<div class='card'><div class='section-title'>Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>", unsafe_allow_html=True)

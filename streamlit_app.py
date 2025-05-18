@@ -84,44 +84,7 @@ with mid_col:
         if idx % 2 == 1:
             st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
 
-    # Chat Frame
-    chat_frame = st.container()
-    with chat_frame:
-        st.markdown('<div class="card"><div class="section-title">Chat with Me</div></div>', unsafe_allow_html=True)
-        if 'history' not in st.session_state:
-            st.session_state.history = []
-        for role, msg in st.session_state.history:
-            st.chat_message(role).write(msg)
-    query = st.chat_input("Ask me anything...")
-    if query:
-        st.session_state.history.append(('user', query))
-        messages = [
-            {"role": "system", "content": "You are Venkatesh’s assistant."},
-            {"role": "system", "content": "Resume:
-" + "
-".join(f"- {b}" for b in bullets)},
-            {"role": "system", "content": "Projects:
-" + "
-".join(f"- {p['title']}" for p in projects)},
-            {"role": "user", "content": query}
-        ]}" for p in projects)},
-            {"role": "user", "content": query}
-        ]}" for p in projects)},
-            {"role": "user", "content": query}
-        ]}" for p in projects)},
-            {"role": "user", "content": query}
-        ]}" for p in projects)},
-            {"role": "user", "content": query}
-        ]}" for p in projects)},
-            {"role": "user", "content": query}
-        ]}" for p in projects)},
-            {"role":"user","content":query}
-        ]
-        client = OpenAI(api_key=st.secrets["DEEPSEEK_API_KEY"])
-        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
-        st.session_state.history.append(('assistant', resp.choices[0].message.content))
-        with chat_frame:
-            st.chat_message('assistant').write(resp.choices[0].message.content)
+    # No chat section (removed per request)
 
 # --- Right Pane ---
 with right_col:

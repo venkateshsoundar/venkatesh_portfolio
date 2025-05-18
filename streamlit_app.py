@@ -39,33 +39,26 @@ projects = [
 ]
 
 # --- Global CSS & Background ---
-st.markdown(
-    '''
-<style>
-.details-summary {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  color: #ffffff;
-  font-size: 1.6rem;
-  font-weight: bold;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  cursor: pointer;
-  text-align: center !important;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
-}
-</style>
-<details>
-<summary class="details-summary">Projects Showcase</summary>
-{grid_html}
-</details>
-        """, unsafe_allow_html=True
+# (CSS already injected above; now define project details)
+# Projects Showcase Details
+# Generate HTML grid for projects
+grid_html = '<div class="grid-container">'
+for proj in projects:
+    grid_html += (
+        f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+        f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
     )
+grid_html += '</div>'
+
+# Render details element
+st.markdown(
+    f'''
+<details>
+  <summary class="details-summary">Projects Showcase</summary>
+  {grid_html}
+</details>
+''', unsafe_allow_html=True
+)
 
 # --- Right Pane ---
 with right_col:

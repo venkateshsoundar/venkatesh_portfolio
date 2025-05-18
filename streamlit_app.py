@@ -1,271 +1,232 @@
 import streamlit as st
-import requests, io
+from openai import OpenAI
+import requests
+import io
 import PyPDF2
 
-# --- Page config ---
+# --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
 # --- Load resume bullets ---
 @st.cache_data
 def load_resume_bullets(url, max_bullets=5):
-    r = requests.get(url); r.raise_for_status()
+    r = requests.get(url)
+    r.raise_for_status()
     reader = PyPDF2.PdfReader(io.BytesIO(r.content))
     text = "\n".join(page.extract_text() or "" for page in reader.pages)
-    sents = [s.strip() for s in text.split(".") if len(s) > 50]
-    return sents[:max_bullets]
+    sentences = [s.strip() for s in text.split('.') if len(s) > 50]
+    return sentences[:max_bullets]
 
 resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/"
-    "main/Venkateshwaran_Resume.pdf"
+    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/"
+    "Venkateshwaran_Resume.pdf"
 )
 bullets = load_resume_bullets(resume_url)
 
 # --- Projects list ---
 projects = [
-    {
-      "title": "Canadian Quality of Life Analysis",
-      "url":   "https://github.com/venkateshsoundar/canadian-qol-analysis",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/QualityofLife.jpeg"
-    },
-    {
-      "title": "Alberta Wildfire Analysis",
-      "url":   "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/Alberta_forestfire.jpeg"
-    },
-    {
-      "title": "Toronto Crime Drivers",
-      "url":   "https://github.com/venkateshsoundar/toronto-crime-drivers",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/Toronto_Crimes.jpeg"
-    },
-    {
-      "title": "Weight Change Regression Analysis",
-      "url":   "https://github.com/venkateshsoundar/weight-change-regression-analysis",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/Weight_Change.jpeg"
-    },
-    {
-      "title": "Calgary Childcare Compliance",
-      "url":   "https://github.com/venkateshsoundar/calgary-childcare-compliance",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/CalgaryChildcare.jpeg"
-    },
-    {
-      "title": "Social Media Purchase Influence",
-      "url":   "https://github.com/venkateshsoundar/social-media-purchase-influence",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"
-    },
-    {
-      "title": "Obesity Level Estimation",
-      "url":   "https://github.com/venkateshsoundar/obesity-level-estimation",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/ObeseLevels.jpeg"
-    },
-    {
-      "title": "Weather Data Pipeline (AWS)",
-      "url":   "https://github.com/venkateshsoundar/weather-data-pipeline-aws",
-      "image": "https://raw.githubusercontent.com/venkateshsoundar/"
-               "venkatesh_portfolio/main/weatherprediction.jpeg"
-    }
+    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
+    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
+    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
+    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
+    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
+    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
+    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"}
 ]
 
-# --- Global CSS & background ---
+# --- Global CSS & Background ---
 st.markdown(
-    """
+    '''
 <style>
-/* Full-page background */
+/* Page background */
 .stApp {
-  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg')
-              center/cover no-repeat fixed;
+  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
+  background-attachment: fixed;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
-
-/* Card styling and hover lift */
+/* Card base style */
 .card {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  width: 100% !important;
   border-radius: 12px;
   padding: 20px;
   margin-bottom: 20px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   transition: transform .3s ease, box-shadow .3s ease;
-  color: #ffffff !important;
-  width: 100%;
+  text-align: center;
 }
 .card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.4);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.7);
 }
-
-/* Profile pic */
-.profile-pic {
-  width: 150px; height: 150px;
-  border-radius: 50%;
-  display: block; margin: 0 auto 12px;
-  border: 2px solid #5A84B4;
-}
-
-/* Contact icons */
-.contact-icon {
-  width: 30px; height: 30px;
-  filter: invert(100%);
-  transition: transform .3s ease;
-}
-.contact-icon:hover {
-  transform: scale(1.2);
-}
-
-/* Section titles */
+/* Section title style */
 .section-title {
-  font-size: 1.5rem;
+  font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 12px;
-  text-align: center;
+  padding: 8px;
+  border-radius: 6px;
 }
-
-/* Typewriter */
-.typewriter h1 {
-  overflow: hidden;
-  white-space: nowrap;
-  display: inline-block;
-  border-right: .15em solid #5A84B4;
-  animation:
-    typing 2.5s steps(30, end),
-    blink-caret .75s step-end infinite;
+/* Profile pic */
+.profile-pic {
+  border-radius: 50%;
+  width: 150px;
+  display: block;
+  margin: 0 auto 12px;
 }
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
-
-/* Projects <details> expander */
-.details-container {
-  margin-bottom: 20px;
-  color: #ffffff;
+/* Contact icons */
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+  margin: 0 8px;
+  vertical-align: middle;
 }
-.details-container summary {
-  cursor: pointer;
-  list-style: none;
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  padding: 12px;
-  border-radius: 12px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: #ffffff;
-  text-align: center;
-}
-.details-container summary::-webkit-details-marker { display: none; }
-
-/* Grid inside details */
-.proj-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-top: 12px;
-}
-
 /* Project item */
 .project-item {
-  position: relative; overflow: hidden;
-  border-radius: 12px;
+  position: relative;
   aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   transition: transform .3s ease;
 }
-.project-item:hover {
-  transform: scale(1.03);
+.project-item:hover .card-img {
+  transform: scale(1.05);
 }
-.project-item img {
-  width: 100%; height: 100%;
-  object-fit: cover;
-}
-.project-item .overlay {
-  position: absolute; inset: 0;
+.overlay {
+  position: absolute;
+  inset: 0;
   background: rgba(0,0,0,0.6);
-  display: flex; align-items: center; justify-content: center;
-  opacity: 0; transition: opacity .3s ease;
-  color: #ffffff; text-align: center; padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .3s ease;
+  font-size: 1.2rem;
+  color: #ffffff;
 }
 .project-item:hover .overlay {
   opacity: 1;
 }
+/* Typewriter effect */
+.typewriter {
+  width: fit-content;
+  margin: 0 auto 20px;
+}
+.typewriter h1 {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .15em solid #5A84B4;
+  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
+  color: #ffffff;
+}
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
+/* Custom details expander styling */
+.details-summary {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+  color: #ffffff !important;
+  font-size: 1.6rem !important;
+  font-weight: bold !important;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+/* Grid layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
 </style>
-""",
-    unsafe_allow_html=True,
+    ''', unsafe_allow_html=True
 )
 
-# --- Three-column layout ---
-left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
+# --- Layout ---
+left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 
-# --- Left pane: Profile & Contact ---
+# --- Left Pane ---
 with left_col:
     st.markdown(
-        '<div class="card"><img src="https://raw.githubusercontent.com/venkateshsoundar/'
-        'venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/>'
-        '<h2 style="text-align:center;">Venkatesh Soundararajan</h2>'
-        '<p style="text-align:center;"><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>'
-        '</div>',
-        unsafe_allow_html=True,
+        '<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
+        unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title">Contact</div>'
-        '<div style="display:flex;justify-content:center;gap:20px;">'
-        '<a href="mailto:venkatesh.balusoundar@gmail.com">'
-        '<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/>'
-        '</a>'
-        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank">'
-        '<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/>'
-        '</a>'
-        '<a href="https://github.com/venkateshsoundar" target="_blank">'
-        '<img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/>'
-        '</a>'
+        '<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Contact</div>' +
+        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">' +
+        '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
+        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
+        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
         '</div></div>',
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
-# --- Center pane: Welcome & Projects ---
+# --- Center Pane ---
 with mid_col:
-    # Welcome
+    # Intro
     st.markdown(
-        '<div class="card"><div class="typewriter"><h1>Welcome to My Portfolio</h1></div>'
-        '<p style="margin-top:12px; text-align:center;">Discover my work below!</p>'
-        '</div>',
-        unsafe_allow_html=True,
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        unsafe_allow_html=True
     )
-    # Projects Showcase
-    grid_html = '<div class="details-container"><details open>' \
-                '<summary>Projects Showcase</summary>' \
-                '<div class="proj-grid">'
-    for p in projects:
+    # Projects expander
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
         grid_html += (
-            f'<div class="project-item">'
-            f'<a href="{p["url"]}" target="_blank">'
-            f'<img src="{p["image"]}"/>'
-            f'<div class="overlay">{p["title"]}</div>'
-            f'</a></div>'
+            f'<div class="project-item hover-zoom"><a href="{proj['url']}" target="_blank">'
+            f'<img src="{proj['image']}" class="card-img"/><div class="overlay">{proj['title']}</div></a></div>'
         )
-    grid_html += '</div></details></div>'
-    st.markdown(grid_html, unsafe_allow_html=True)
+    grid_html += '</div>'
+    st.markdown(
+        f"""
+<details open>
+  <summary class="details-summary">Projects Showcase</summary>
+  {grid_html}
+</details>
+""", unsafe_allow_html=True
+    )
+    # Chat expander
+    with st.expander("Chat with Me", expanded=False):
+        if 'history' not in st.session_state:
+            st.session_state.history = []
+        for role, msg in st.session_state.history:
+            st.chat_message(role).write(msg)
+        user_query = st.chat_input("Ask me anything about my background or projects…")
+        if user_query:
+            st.session_state.history.append(('user', user_query))
+            st.chat_message('user').write(user_query)
+            messages = [
+                {"role": "system", "content": "You are Venkatesh’s assistant."},
+                {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
+                {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
+                {"role": "user", "content": user_query}
+            ]
+            client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
+            reply = resp.choices[0].message.content
+            st.session_state.history.append(('assistant', reply))
+            st.chat_message('assistant').write(reply)
 
-# --- Right pane: Skills, Experience, Certifications ---
+# --- Right Pane ---
 with right_col:
     st.markdown(
-        '<div class="card"><div class="section-title">Skills</div>'
-        '<p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>'
-        'Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p>'
-        '</div>',
-        unsafe_allow_html=True,
+        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
+        unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title">Experience</div>'
-        '<p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>'
-        'AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p>'
-        '</div>',
-        unsafe_allow_html=True,
+        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
+        unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title">Certifications</div>'
-        '<p style="text-align:center;">AWS Solutions Architect<br>'
-        'Tableau Specialist<br>Scrum Master</p>'
-        '</div>',
-        unsafe_allow_html=True,
+        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
+        unsafe_allow_html=True
     )

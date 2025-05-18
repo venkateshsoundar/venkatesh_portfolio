@@ -39,6 +39,7 @@ st.markdown(
     .card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
     .section-title { font-size: 1.8em; border-bottom: 3px solid #4a90e2; padding-bottom: 4px; margin-bottom: 12px; }
     .profile-pic { border-radius: 50%; width: 150px; margin-bottom: 12px; }
+    .card-img { width: 100%; border-radius: 8px; }
     .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .hover-zoom:hover { transform: scale(1.05); }
     </style>
@@ -48,9 +49,9 @@ st.markdown(
 
 # --- Sidebar: Profile + Chat ---
 with st.sidebar:
-    st.image(
-        "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg",
-        width=150, use_column_width=False, output_format='JPEG', cls="profile-pic"
+    st.markdown(
+        "<img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic' />",
+        unsafe_allow_html=True
     )
     st.markdown("# Venkatesh Soundararajan")
     st.markdown("**M.S. Data Science & Analytics**")
@@ -149,33 +150,15 @@ with st.container():
 
     # Projects Showcase
     st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
-    # Define projects with description, image, and GitHub URL
     proj_map = {
-        "Quality of Life Analysis": (
-            "City income vs crime trends.",
-            "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif",
-            "https://github.com/venkateshsoundar/canadian-qol-analysis"
-        ),
-        "Wildfire Analysis": (
-            "Alberta wildfire pattern analysis.",
-            "https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif",
-            "https://github.com/venkateshsoundar/alberta-wildfire-analysis"
-        ),
-        "Crime Drivers": (
-            "Mapping Toronto crime factors.",
-            "https://media.giphy.com/media/26u4b45b8KlgAB7iM/giphy.gif",
-            "https://github.com/venkateshsoundar/toronto-crime-drivers"
-        ),
-        "Regression Analysis": (
-            "Predicting weight change.",
-            "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif",
-            "https://github.com/venkateshsoundar/weight-change-regression"
-        )
+        "Quality of Life Analysis": ("City income vs crime trends.", "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif", "https://github.com/venkateshsoundar/canadian-qol-analysis"),
+        "Wildfire Analysis": ("Alberta wildfire pattern analysis.", "https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif", "https://github.com/venkateshsoundar/alberta-wildfire-analysis"),
+        "Crime Drivers": ("Mapping Toronto crime factors.", "https://media.giphy.com/media/26u4b45b8KlgAB7iM/giphy.gif", "https://github.com/venkateshsoundar/toronto-crime-drivers"),
+        "Regression Analysis": ("Predicting weight change.", "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif", "https://github.com/venkateshsoundar/weight-change-regression")
     }
     st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
     for name, (desc, img, repo_url) in proj_map.items():
         st.markdown("<div class='card hover-zoom'>", unsafe_allow_html=True)
-        # Clickable image linking to repository
         st.markdown(
             f"<a href='{repo_url}' target='_blank'><img src='{img}' class='card-img' title='{desc}' /></a>",
             unsafe_allow_html=True

@@ -189,26 +189,34 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    # --- Chat Section as Card ---
+    # --- Chat Section as Card with Input ---
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with Me</div>',
         unsafe_allow_html=True
     )
+
     if 'history' not in st.session_state:
         st.session_state.history = []
+    if 'chat_input' not in st.session_state:
+        st.session_state.chat_input = ""
+
+    # Display chat history
     for role, msg in st.session_state.history:
         st.chat_message(role).write(msg)
 
-    user_query = st.chat_input("Ask me anything about my background or projects…")
-    if user_query:
-        st.session_state.history.append(('user', user_query))
-        st.chat_message('user').write(user_query)
+    # Input inside the card (with Send button)
+    user_input = st.text_input("Ask me anything about my background or projects…", key="chat_input")
+    send_clicked = st.button("Send", key="send_btn")
+
+    if send_clicked and user_input.strip():
+        st.session_state.history.append(('user', user_input))
+        st.chat_message('user').write(user_input)
 
         messages = [
             {"role": "system", "content": "You are Venkatesh’s assistant."},
             {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
             {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
-            {"role": "user", "content": user_query}
+            {"role": "user", "content": user_input}
         ]
         client = OpenAI(
             base_url="https://openrouter.ai/api/v1",
@@ -221,6 +229,9 @@ with mid_col:
         reply = resp.choices[0].message.content
         st.session_state.history.append(('assistant', reply))
         st.chat_message('assistant').write(reply)
+
+        # Clear input after sending
+        st.session_state.chat_input = ""
 
     st.markdown("</div>", unsafe_allow_html=True)  # close card
 

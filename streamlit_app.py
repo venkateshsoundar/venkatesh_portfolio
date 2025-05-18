@@ -39,14 +39,14 @@ projects = [
 st.markdown(
     '''
 <style>
-/* Main app background */
+/* Page background */
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
   background-attachment: fixed;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
-/* Card styles */
+/* Card base style */
 .card {
   width: 100% !important;
   border-radius: 12px;
@@ -60,7 +60,7 @@ st.markdown(
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.7);
 }
-.hover-zoom { transition: transform .3s ease; }
+/* Section title style */
 .section-title {
   font-size: 1.6rem;
   font-weight: bold;
@@ -68,13 +68,14 @@ st.markdown(
   padding: 8px;
   border-radius: 6px;
 }
-a, a:hover { text-decoration: none !important; color: inherit !important; }
+/* Profile pic */
 .profile-pic {
   border-radius: 50%;
   width: 150px;
   display: block;
   margin: 0 auto 12px;
 }
+/* Contact icons */
 .contact-icon {
   width: 30px;
   height: 30px;
@@ -82,6 +83,7 @@ a, a:hover { text-decoration: none !important; color: inherit !important; }
   margin: 0 8px;
   vertical-align: middle;
 }
+/* Project item */
 .project-item {
   position: relative;
   aspect-ratio: 1/1;
@@ -107,10 +109,12 @@ a, a:hover { text-decoration: none !important; color: inherit !important; }
   opacity: 0;
   transition: opacity .3s ease;
   font-size: 1.2rem;
+  color: #ffffff;
 }
 .project-item:hover .overlay {
   opacity: 1;
 }
+/* Typewriter effect */
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -125,9 +129,9 @@ a, a:hover { text-decoration: none !important; color: inherit !important; }
 }
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
-/* Expander styling */
+/* Custom details expander styling */
 .details-summary {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
   color: #ffffff !important;
   font-size: 1.6rem !important;
   font-weight: bold !important;
@@ -137,39 +141,13 @@ a, a:hover { text-decoration: none !important; color: inherit !important; }
   text-align: center;
   cursor: pointer;
 }
-details > div {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
-  border-radius: 12px !important;
-  padding: 20px !important;
-  box-shadow: 0 8px 16px rgba(0,0,0,0.7) !important;
-  margin-bottom: 20px !important;
-}
+/* Grid layout */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
   margin-bottom: 20px;
 }
-  /* Expander header styling */
-  [data-testid="stExpander"] > div > button {
-    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
-    color: #ffffff !important;
-    font-size: 1.6rem !important;
-    font-weight: bold !important;
-    padding: 20px !important;
-    border-radius: 12px !important;
-    text-align: center !important;
-    width: 100% !important;
-    margin-bottom: 10px !important;
-    border: none !important;
-  }
-  [data-testid="stExpander"] > div > div {
-    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
-    border-radius: 12px !important;
-    padding: 20px !important;
-    box-shadow: 0 8px 16px rgba(0,0,0,0.7) !important;
-    margin-bottom: 20px !important;
-  }
 </style>
     ''', unsafe_allow_html=True
 )
@@ -185,7 +163,7 @@ with left_col:
     )
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Contact</div>' +
-        '<div style="display:flex;justify-content:center;gap:16px;margin-top:10px;">' +
+        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">' +
         '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
         '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
         '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
@@ -195,74 +173,60 @@ with left_col:
 
 # --- Center Pane ---
 with mid_col:
-    # Intro message
+    # Intro
     st.markdown(
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Projects Showcase using custom HTML <details open> for precise styling
+    # Projects expander
     grid_html = '<div class="grid-container">'
     for proj in projects:
         grid_html += (
-            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+            f'<div class="project-item hover-zoom"><a href="{proj['url']}" target="_blank">'
+            f'<img src="{proj['image']}" class="card-img"/><div class="overlay">{proj['title']}</div></a></div>'
         )
     grid_html += '</div>'
     st.markdown(
         f"""
-<details>
+<details open>
   <summary class="details-summary">Projects Showcase</summary>
   {grid_html}
 </details>
-
-    # Chat section in expander matching card style
-    chat_html = ''
-    if 'history' not in st.session_state:
-        st.session_state.history = []
+""", unsafe_allow_html=True
+    )
+    # Chat expander
     with st.expander("Chat with Me", expanded=False):
+        if 'history' not in st.session_state:
+            st.session_state.history = []
         for role, msg in st.session_state.history:
             st.chat_message(role).write(msg)
         user_query = st.chat_input("Ask me anything about my background or projects…")
         if user_query:
             st.session_state.history.append(('user', user_query))
             st.chat_message('user').write(user_query)
-            # prepare messages and call API
-            system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-            resume_ctx = "Resume:
-" + "
-".join(f"- {b}" for b in bullets)
-            proj_ctx = "Projects:
-" + "
-".join(f"- {p['title']}" for p in projects)
-            msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": user_query}]
+            messages = [
+                {"role": "system", "content": "You are Venkatesh’s assistant."},
+                {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
+                {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
+                {"role": "user", "content": user_query}
+            ]
             client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
-            assistant_reply = resp.choices[0].message.content
-            st.session_state.history.append(('assistant', assistant_reply))
-            st.chat_message('assistant').write(assistant_reply)
-""", unsafe_allow_html=True
-    )
+            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
+            reply = resp.choices[0].message.content
+            st.session_state.history.append(('assistant', reply))
+            st.chat_message('assistant').write(reply)
 
 # --- Right Pane ---
 with right_col:
-    # Skills
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div>' +
-        '<p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p>' +
-        '</div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
         unsafe_allow_html=True
     )
-    # Experience
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div>' +
-        '<p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p>' +
-        '</div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
         unsafe_allow_html=True
     )
-    # Certifications
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div>' +
-        '<p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p>' +
-        '</div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
         unsafe_allow_html=True
     )

@@ -38,12 +38,13 @@ projects = [
     {"title": "Uber Ride Duration Predictor", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictor", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uber_Ride_Duration_Predictor.jpeg"}
 ]
 
-# --- Global CSS & Background ---
-st.markdown('''
+# --- CSS & Background ---
+st.markdown(
+    '''
 <style>
 body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat; color: #f0f0f0; }
 .stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
-.card { border-radius: 12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); transition:transform .3s ease,box-shadow .3s ease; }
+.card { border-radius:12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); transition:transform .3s ease,box-shadow .3s ease; }
 .card:hover { transform:translateY(-5px); box-shadow:0 8px 16px rgba(0,0,0,0.7); }
 .hover-zoom { transition:transform .3s ease; }
 .hover-zoom:hover { transform:translateY(-5px); }
@@ -64,59 +65,84 @@ body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venka
 @keyframes typing { from{width:0;} to{width:100%;} }
 @keyframes blink-caret { from,to{border-color:transparent;} 50%{border-color:#5A84B4;} }
 </style>
-''', unsafe_allow_html=True)
+    ''', unsafe_allow_html=True
+)
 
-# --- Layout: three panes ---
+# --- Three-column layout ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 
-# --- Left pane: Profile only ---
+# --- Left pane ---
 with left_col:
     st.markdown(
-        "<div class='card hover-zoom'><img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg' class='profile-pic'><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>",
+        '<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title">Contact</div>' +
-        '<div style="display:flex;justify-content:center;gap:20px;margin-top:10px;">' +
-        '<a href="mailto:venkatesh.balusoundar@gmail.com"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"></a>' +
-        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"></a>' +
-        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"></a>' +
+        '<div class="card hover-zoom"><div class="section-title">Contact</div><div style="display:flex;justify-content:center;gap:20px;margin-top:10px;">'
+        '<a href="mailto:venkatesh.balusoundar@gmail.com"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>'
+        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>'
+        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>'
         '</div></div>',
         unsafe_allow_html=True
     )
 
-# --- Center pane: Main Details + Chat ---
+# --- Center pane ---
 with mid_col:
     st.markdown(
-        '<div class="card"><div class="typewriter"><h1>Welcome to my Profile</h1></div><p style="margin-top:20px;">Explore projects below and chat at the end of this column!</p></div>',
+        '<div class="card"><div class="typewriter"><h1>Welcome to my Profile</h1></div><p style="margin-top:20px;">Explore projects and chat below!</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title">Projects Showcase</div></div>',
         unsafe_allow_html=True
     )
-    num_cols = 2
-    for i in range(0, len(projects), num_cols):
-        cols = st.columns(num_cols, gap="medium")
-        for idx, proj in enumerate(projects[i:i+num_cols]):
+    num_cols=2
+    for i in range(0,len(projects),num_cols):
+        cols=st.columns(num_cols,gap="medium")
+        for idx,proj in enumerate(projects[i:i+num_cols]):
             with cols[idx]:
                 st.markdown(
                     f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank"><img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>',
                     unsafe_allow_html=True
                 )
-        st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
-    st.markdown('<div class="card"><div class="section-title">Chat with Me 📋</div></div>', unsafe_allow_html=True)
-    if 'history' not in st.session_state:
-        st.session_state.history = []
+        st.markdown('<div style="height:20px;"></div>',unsafe_allow_html=True)
+    # Chat
+    st.markdown('<div class="card hover-zoom"><div class="section-title">Chat with Me 📋</div></div>',unsafe_allow_html=True)
+    if 'history' not in st.session_state: st.session_state.history=[]
     for role, msg in st.session_state.history:
-        cls = 'user-msg' if role == 'user' else 'bot-msg'
-        st.markdown(f'<div class="chat-bubble {cls}">{msg}</div>', unsafe_allow_html=True)
-    query = st.chat_input("Ask me anything about my background or projects…")
+        cls='user-msg' if role=='user' else 'bot-msg'
+        st.markdown(f'<div class="chat-bubble {cls}">{msg}</div>',unsafe_allow_html=True)
+    query=st.chat_input("Ask me anything...")
     if query:
-        st.session_state.history.append(('user', query))
-        system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)
-        msgs = system + [
-            {"role": "system", "content": resume_ctx},
-            {"role": "system", "content": proj
+        st.session_state.history.append(('user',query))
+        system=[{"role":"system","content":"You are Venkatesh’s assistant."}]
+        resume_ctx="Resume:\n"+"\n".join(f"- {b}"for b in bullets)
+        proj_ctx="Projects:\n"+"\n".join(f"- {p['title']}"for p in projects)
+        msgs=system+[
+            {"role":"system","content":resume_ctx},
+            {"role":"system","content":proj_ctx},
+            {"role":"user","content":query}
+        ]
+        client=OpenAI(base_url="https://openrouter.ai/api/v1",api_key=st.secrets["DEEPSEEK_API_KEY"])
+        resp=client.chat.completions.create(model="deepseek/deepseek-r1:free",messages=msgs)
+        st.session_state.history.append(('assistant',resp.choices[0].message.content))
+
+# --- Right pane ---
+with right_col:
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title">Skills</div><div style="display:flex;flex-wrap:wrap;justify-content:space-around;gap:12px;">'
+        '<a href="https://www.python.org" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" class="contact-icon"/></a>'
+        '<a href="https://numpy.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/numpy/numpy-original.svg" class="contact-icon"/></a>'
+        '<a href="https://pandas.pydata.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/pandas/pandas-original.svg" class="contact-icon"/></a>'
+        '<a href="https://scikit-learn.org/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/scikit-learn/scikit-learn-original.svg" class="contact-icon"/></a>'
+        '<a href="https://www.r-project.org/" target="_blank"><img src="https://www.vectorlogo.zone/logos/r-project/r-project-icon.svg" class="contact-icon"/></a>'
+        '<a href="https://www.mysql.com/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mysql/mysql-original.svg" class="contact-icon"/></a>'
+        '<a href="https://www.oracle.com/database/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/oracle/oracle-original.svg" class="contact-icon"/></a>'
+        '<a href="https://www.java.com/" target="_blank"><img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" class="contact-icon"/></a>'
+        '<a href="https://powerbi.microsoft.com/" target="_blank"><img src="https://www.vectorlogo.zone/logos/microsoft_powerbi/microsoft_powerbi-icon.svg" class="contact-icon"/></a>'
+        '<a href="https://azure.microsoft.com/" target="_blank"><img src="https://www.vectorlogo.zone/logos/microsoft_azure/microsoft_azure-icon.svg" class="contact-icon"/></a>'
+        '<a href="https://aws.amazon.com/" target="_blank"><img src="https://www.vectorlogo.zone/logos/amazon_aws/amazon_aws-icon.svg" class="contact-icon"/></a>'
+        '</div></div>',unsafe_allow_html=True
+    )
+    st.markdown('<div class="card hover-zoom"><div class="section-title">Experience</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>',unsafe_allow_html=True)
+    st.markdown('<div class="card hover-zoom"><div class="section-title">Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>',unsafe_allow_html=True)

@@ -64,11 +64,26 @@ st.markdown(
   padding: 8px;
   border-radius: 6px;
 }
-.profile-pic {
+.profile-pic-popout {
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
   border-radius: 50%;
-  width: 150px;
-  display: block;
-  margin: 0 auto 12px;
+  border: 4px solid #fff;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: -60px;
+  z-index: 10;
+}
+.profile-card-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.profile-card-content {
+  padding-top: 70px;
 }
 .contact-icon {
   width: 30px;
@@ -76,6 +91,36 @@ st.markdown(
   filter: invert(100%);
   margin: 0 8px;
   vertical-align: middle;
+}
+.project-item {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.project-item:hover .card-img {
+  transform: scale(1.05);
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .3s ease;
+  font-size: 1.2rem;
+  color: #ffffff;
+}
+.project-item:hover .overlay {
+  opacity: 1;
 }
 .typewriter {
   width: fit-content;
@@ -108,107 +153,38 @@ st.markdown(
   gap: 20px;
   margin-bottom: 20px;
 }
-/* ---- Flippable side card CSS ---- */
-.flip-side-card {
-  background: none;
-  border: none;
-  padding: 0;
-  width: 100%;
-  perspective: 1200px;
-  margin-bottom: 22px;
-}
-.flip-card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.7s cubic-bezier(.4,2,.45,.8);
-  transform-style: preserve-3d;
-}
-.flip-side-card.flipped .flip-card-inner {
-  transform: rotateY(180deg);
-}
-.flip-card-front, .flip-card-back {
-  position: absolute;
-  width: 100%;
-  min-height: 220px;
-  height: 100%;
-  border-radius: 12px;
-  box-shadow: 0 5px 22px rgba(30,40,80,0.14);
-  backface-visibility: hidden;
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  color: #fff;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-}
-.flip-card-front { z-index: 2; }
-.flip-card-back {
-  transform: rotateY(180deg);
-  background: linear-gradient(135deg, #1ABC9C 0%, #324665 100%);
-  color: #fff;
-  z-index: 1;
-}
-.flip-card-back .back-content {
-  padding: 18px 10px;
-  font-size: 1.07rem;
-}
 </style>
-<script>
-window.addEventListener("DOMContentLoaded", function() {
-  document.querySelectorAll('.flip-side-card').forEach(card => {
-    card.addEventListener('click', function(e) {
-      e.currentTarget.classList.toggle('flipped');
-    });
-  });
-});
-</script>
     ''', unsafe_allow_html=True
 )
 
 # --- Layout ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 
-# --- Left Pane (All flippable) ---
+# --- Left Pane (profile pic pops out of card) ---
 with left_col:
-    # Profile Card
     st.markdown('''
-<div class="flip-side-card" title="Click to flip!">
-  <div class="flip-card-inner">
-    <div class="flip-card-front card hover-zoom">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/>
-      <h2>Venkatesh Soundararajan</h2>
-      <p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>
-    </div>
-    <div class="flip-card-back card hover-zoom">
-      <div class="back-content">👋 Hi, I’m Venkatesh!<br>I love data, building solutions, and collaborating with teams.<br>Click to flip back.</div>
-    </div>
-  </div>
-</div>
-''', unsafe_allow_html=True)
-
-    # Contact Card
-    st.markdown('''
-<div class="flip-side-card" title="Click to flip!">
-  <div class="flip-card-inner">
-    <div class="flip-card-front card hover-zoom">
-      <div class="section-title" style="background:#2C3E50;">Contact</div>
-      <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">
-        <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>
-        <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>
-        <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>
+    <div class="profile-card-container">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
+           class="profile-pic-popout" />
+      <div class="card profile-card-content hover-zoom">
+        <h2>Venkatesh Soundararajan</h2>
+        <p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>
       </div>
     </div>
-    <div class="flip-card-back card hover-zoom">
-      <div class="back-content">Let’s connect!<br>Email or DM me on LinkedIn.<br>Click to flip back.</div>
-    </div>
-  </div>
-</div>
-''', unsafe_allow_html=True)
+    ''', unsafe_allow_html=True)
 
-# --- Center Pane (NOT flippable) ---
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Contact</div>' +
+        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">' +
+        '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
+        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
+        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
+        '</div></div>',
+        unsafe_allow_html=True
+    )
+
+# --- Center Pane ---
 with mid_col:
-    # Intro card only (no chat)
     st.markdown(
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div>'
         '<p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
@@ -234,49 +210,17 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-# --- Right Pane (All flippable) ---
+# --- Right Pane ---
 with right_col:
-    # Skills Card
-    st.markdown('''
-<div class="flip-side-card" title="Click to flip!">
-  <div class="flip-card-inner">
-    <div class="flip-card-front card hover-zoom">
-      <div class="section-title" style="background:#1ABC9C;">Skills</div>
-      <p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p>
-    </div>
-    <div class="flip-card-back card hover-zoom">
-      <div class="back-content">Proficient in Data Science, ML, AWS, and BI.<br>Always eager to learn new tools.<br>Click to flip back.</div>
-    </div>
-  </div>
-</div>
-''', unsafe_allow_html=True)
-
-    # Experience Card
-    st.markdown('''
-<div class="flip-side-card" title="Click to flip!">
-  <div class="flip-card-inner">
-    <div class="flip-card-front card hover-zoom">
-      <div class="section-title" style="background:#8E44AD;">Experience</div>
-      <p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p>
-    </div>
-    <div class="flip-card-back card hover-zoom">
-      <div class="back-content">Hands-on with project management, process optimization, and risk analytics in top firms.<br>Click to flip back.</div>
-    </div>
-  </div>
-</div>
-''', unsafe_allow_html=True)
-
-    # Certifications Card
-    st.markdown('''
-<div class="flip-side-card" title="Click to flip!">
-  <div class="flip-card-inner">
-    <div class="flip-card-front card hover-zoom">
-      <div class="section-title" style="background:#D35400;">Certifications</div>
-      <p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p>
-    </div>
-    <div class="flip-card-back card hover-zoom">
-      <div class="back-content">Certified in cloud architecture, BI, and agile.<br>Always upskilling.<br>Click to flip back.</div>
-    </div>
-  </div>
-</div>
-''', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
+        unsafe_allow_html=True
+    )

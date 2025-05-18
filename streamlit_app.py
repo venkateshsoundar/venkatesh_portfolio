@@ -37,15 +37,16 @@ projects = [
 
 # --- Global CSS & Background ---
 st.markdown(
-    """
+    '''
 <style>
+/* Main app background */
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
   background-attachment: fixed;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
-/* Card styling */
+/* Card styles */
 .card {
   width: 100% !important;
   border-radius: 12px;
@@ -59,27 +60,28 @@ st.markdown(
   transform: translateY(-5px);
   box-shadow: 0 8px 16px rgba(0,0,0,0.7);
 }
-/* Section title */
+.hover-zoom { transition: transform .3s ease; }
 .section-title {
   font-size: 1.6rem;
   font-weight: bold;
   margin-bottom: 12px;
-  color: #ffffff;
+  padding: 8px;
+  border-radius: 6px;
 }
-/* Profile pic */
+a, a:hover { text-decoration: none !important; color: inherit !important; }
 .profile-pic {
   border-radius: 50%;
   width: 150px;
-  margin-bottom: 12px;
+  display: block;
+  margin: 0 auto 12px;
 }
-/* Contact icons */
 .contact-icon {
   width: 30px;
   height: 30px;
   filter: invert(100%);
   margin: 0 8px;
+  vertical-align: middle;
 }
-/* Project items */
 .project-item {
   position: relative;
   aspect-ratio: 1/1;
@@ -95,7 +97,6 @@ st.markdown(
 .project-item:hover .card-img {
   transform: scale(1.05);
 }
-/* Overlay */
 .overlay {
   position: absolute;
   inset: 0;
@@ -106,12 +107,10 @@ st.markdown(
   opacity: 0;
   transition: opacity .3s ease;
   font-size: 1.2rem;
-  color: #ffffff;
 }
 .project-item:hover .overlay {
   opacity: 1;
 }
-/* Typewriter effect */
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -121,80 +120,149 @@ st.markdown(
   white-space: nowrap;
   overflow: hidden;
   border-right: .15em solid #5A84B4;
-  animation: typing 3.5s steps(30,end), blink-caret .75s step-end infinite;
+  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
   color: #ffffff;
 }
-@keyframes typing {
-  from { width: 0; }
-  to { width: 100%; }
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
+/* Expander styling */
+.details-summary {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  color: #ffffff !important;
+  font-size: 1.6rem !important;
+  font-weight: bold !important;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
 }
-@keyframes blink-caret {
-  from, to { border-color: transparent; }
-  50% { border-color: #5A84B4; }
+details > div {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.7) !important;
+  margin-bottom: 20px !important;
 }
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+  /* Expander header styling */
+  [data-testid="stExpander"] > div > button {
+    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+    color: #ffffff !important;
+    font-size: 1.6rem !important;
+    font-weight: bold !important;
+    padding: 20px !important;
+    border-radius: 12px !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 10px !important;
+    border: none !important;
+  }
+  [data-testid="stExpander"] > div > div {
+    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.7) !important;
+    margin-bottom: 20px !important;
+  }
 </style>
-    """, unsafe_allow_html=True
+    ''', unsafe_allow_html=True
 )
 
-# --- Layout columns ---
+# --- Layout ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 
-# --- Left pane: Profile & Contact ---
+# --- Left Pane ---
 with left_col:
-    st.markdown(f"""
-<div class="card hover-zoom">
-  <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic">
-  <h2>Venkatesh Soundararajan</h2>
-  <p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>
-</div>
-<div class="card hover-zoom">
-  <div class="section-title">Contact</div>
-  <div>
-    <a href="mailto:venkatesh.balusoundar@gmail.com"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"></a>
-    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"></a>
-    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"></a>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+    st.markdown(
+        '<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Contact</div>' +
+        '<div style="display:flex;justify-content:center;gap:16px;margin-top:10px;">' +
+        '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
+        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
+        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
+        '</div></div>',
+        unsafe_allow_html=True
+    )
 
-# --- Center pane: Welcome & Projects ---
+# --- Center Pane ---
 with mid_col:
-    st.markdown('''
-<div class="card">
-  <div class="typewriter"><h1>Hello!</h1></div>
-  <p>Welcome to my portfolio. Explore my projects below!</p>
-</div>
-<div class="card"><div class="section-title">Projects Showcase</div></div>
-''', unsafe_allow_html=True)
+    # Intro message
+    st.markdown(
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        unsafe_allow_html=True
+    )
+    # Projects Showcase using custom HTML <details open> for precise styling
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        )
+    grid_html += '</div>'
+    st.markdown(
+        f"""
+<details>
+  <summary class="details-summary">Projects Showcase</summary>
+  {grid_html}
+</details>
 
-    num_cols = 2
-    for i in range(0, len(projects), num_cols):
-        cols = st.columns(num_cols, gap="medium")
-        for idx, proj in enumerate(projects[i:i+num_cols]):
-            with cols[idx]:
-                st.markdown(f"""
-<div class="project-item hover-zoom">
-  <a href="{proj['url']}" target="_blank">
-    <img src="{proj['image']}" class="card-img">
-    <div class="overlay">{proj['title']}</div>
-  </a>
-</div>
-""", unsafe_allow_html=True)
-        st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
+    # Chat section in expander matching card style
+    chat_html = ''
+    if 'history' not in st.session_state:
+        st.session_state.history = []
+    with st.expander("Chat with Me", expanded=False):
+        for role, msg in st.session_state.history:
+            st.chat_message(role).write(msg)
+        user_query = st.chat_input("Ask me anything about my background or projects…")
+        if user_query:
+            st.session_state.history.append(('user', user_query))
+            st.chat_message('user').write(user_query)
+            # prepare messages and call API
+            system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
+            resume_ctx = "Resume:
+" + "
+".join(f"- {b}" for b in bullets)
+            proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)
+            msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": user_query}]
+            client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
+            assistant_reply = resp.choices[0].message.content
+            st.session_state.history.append(('assistant', assistant_reply))
+            st.chat_message('assistant').write(assistant_reply)
+""", unsafe_allow_html=True
+    )
 
-# --- Right pane: Skills, Experience, Certifications ---
+# --- Right Pane ---
 with right_col:
-    st.markdown('''
-<div class="card hover-zoom">
-  <div class="section-title">Skills</div>
-  <p>Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p>
-</div>
-<div class="card hover-zoom">
-  <div class="section-title">Experience</div>
-  <p>Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p>
-</div>
-<div class="card hover-zoom">
-  <div class="section-title">Certifications</div>
-  <p>AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p>
-</div>
-''', unsafe_allow_html=True)
+    # Skills
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div>' +
+        '<p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p>' +
+        '</div>',
+        unsafe_allow_html=True
+    )
+    # Experience
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div>' +
+        '<p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p>' +
+        '</div>',
+        unsafe_allow_html=True
+    )
+    # Certifications
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div>' +
+        '<p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p>' +
+        '</div>',
+        unsafe_allow_html=True
+    )

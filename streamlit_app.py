@@ -150,6 +150,26 @@ details > div {
   gap: 20px;
   margin-bottom: 20px;
 }
+  /* Expander header styling */
+  [data-testid="stExpander"] > div > button {
+    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+    color: #ffffff !important;
+    font-size: 1.6rem !important;
+    font-weight: bold !important;
+    padding: 20px !important;
+    border-radius: 12px !important;
+    text-align: center !important;
+    width: 100% !important;
+    margin-bottom: 10px !important;
+    border: none !important;
+  }
+  [data-testid="stExpander"] > div > div {
+    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+    border-radius: 12px !important;
+    padding: 20px !important;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.7) !important;
+    margin-bottom: 20px !important;
+  }
 </style>
     ''', unsafe_allow_html=True
 )

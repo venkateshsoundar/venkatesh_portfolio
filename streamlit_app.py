@@ -42,7 +42,10 @@ projects = [
 st.markdown(
     '''
 <style>
-body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat; color: #ffffff; }
+body {
+  font-family: 'Poppins', sans-serif;
+  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat;
+  color: #ffffff; }
 .stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
 .card { display:block!important; width:100%!important; border-radius:12px; padding:20px; margin-bottom:20px; background:linear-gradient(135deg,#1F2A44 0%,#324665 100%); transition:transform .3s ease,box-shadow .3s ease; color:#ffffff; box-sizing:border-box; text-align:center; }
 .card * { color:#ffffff!important; }
@@ -57,7 +60,16 @@ a, a:hover { text-decoration:none!important; color:inherit!important; }
 .project-item:hover .card-img { transform:scale(1.05); }
 .overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s ease; color:#ffffff!important; font-size:1.2rem; padding:10px; text-align:center; }
 .project-item:hover .overlay { opacity:1; }
-.typewriter h1 { border-right:.15em solid #5A84B4; animation:typing 3.5s steps(40,end),blink-caret .75s step-end infinite; color:#ffffff!important; margin:0; }
+.typewriter h1 {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
+  border-right: .15em solid #5A84B4;
+  color: #ffffff !important;
+  margin: 0 auto;
+}
+
 @keyframes typing { from{width:0;} to{width:100%;} }
 @keyframes blink-caret { from,to{border-color:transparent;} 50%{border-color:#5A84B4;} }
 </style>
@@ -113,15 +125,22 @@ with mid_col:
 
 # --- Right Pane ---
 with right_col:
+    # Skills as text without bullets
     st.markdown(
-        '<div class=\"card hover-zoom\"><div class="section-title">Skills</div><ul><li>Python, SQL, R</li><li>AWS & SageMaker</li><li>Streamlit, Tableau</li><li>Scikit-learn, OpenCV</li><li>Git, Agile</li></ul></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div>' +
+        '<p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p>' +
+        '</div>',
         unsafe_allow_html=True
     )
+    # Experience without bullets
     st.markdown(
-        '<div class=\"card hover-zoom\"><div class="section-title">Experience</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>',
-        unsafe_allow_html=True
+        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div>' +
+        '<p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p>' +
+        '</div>', unsafe_allow_html=True
     )
+    # Certifications without bullets
     st.markdown(
-        '<div class=\"card hover-zoom\"><div class="section-title">Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>',
-        unsafe_allow_html=True
+        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div>' +
+        '<p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p>' +
+        '</div>', unsafe_allow_html=True
     )

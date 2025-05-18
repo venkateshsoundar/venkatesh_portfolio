@@ -99,16 +99,19 @@ with left_col:
 
 # --- Center pane: Main Details ---
 with mid_col:
+    # Welcome card
     st.markdown(
-        "<div class='card'><div class='typewriter'><h1>Welcome to my Profile</h1></div><p style='margin-top:20px;'>Explore projects below and chat on the left!</p></div>",
+        "<div class='card'><div class='typewriter'><h1>Welcome to my Profile</h1></div>"
+        "<p style='margin-top:20px;'>Explore projects below and chat at the end of this column!</p></div>",
         unsafe_allow_html=True
     )
+    # Projects Showcase header card
     st.markdown(
         "<div class='card hover-zoom'><div class='section-title'>Projects Showcase</div></div>",
         unsafe_allow_html=True
     )
+    # Projects grid
     num_cols = 2
-    # render projects in rows of num_cols with spacer after each row
     for i in range(0, len(projects), num_cols):
         cols = st.columns(num_cols, gap="medium")
         for idx, proj in enumerate(projects[i:i+num_cols]):
@@ -123,7 +126,8 @@ with mid_col:
                 )
         # spacer after each project row
         st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True)
-    # chat section moved here
+    
+    # Chat section moved here
     st.markdown("<div class='card'><div class='section-title'>Chat with Me 📋</div></div>", unsafe_allow_html=True)
     if 'history' not in st.session_state:
         st.session_state.history = []
@@ -131,8 +135,22 @@ with mid_col:
         cls = 'user-msg' if role=='user' else 'bot-msg'
         st.markdown(f"<div class='chat-bubble {cls}'>{msg}</div>", unsafe_allow_html=True)
     query = st.chat_input("Ask me anything about my background or projects...")
-    
-with right_col:
+    if query:
+        # append user message
+        st.session_state.history.append(('user', query))
+        # prepare and call assistant
+        system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
+        resume_ctx = "Resume:
+" + "
+".join(f"- {b}" for b in bullets)
+        proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)
+        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
+        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
+        # append assistant response
+        st.session_state.history.append(('assistant', resp.choices[0].message.content))with right_col:
     # Skills icons card (expanded)
     st.markdown(
         "<div class='card hover-zoom'><div class='section-title'>Skills</div>"

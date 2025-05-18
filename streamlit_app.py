@@ -72,14 +72,38 @@ with left_col:
         st.experimental_rerun()
 
 # --- Center pane: Main Details ---
+# Define projects list
+projects = [
+    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/qol_analysis.jpeg"},
+    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/wildfire_analysis.jpeg"},
+    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/crime_drivers.jpeg"},
+    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/weight_regression.jpeg"},
+    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/calchildcare.jpeg"},
+    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/social_media_influence.jpeg"},
+    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/obesity_estimation.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/weather_pipeline.jpeg"},
+    {"title": "California Wildfire Data Story", "url": "https://github.com/venkateshsoundar/california-wildfire-datastory", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/california_wildfire.jpeg"},
+    {"title": "Penguin Dataset Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/penguin_chatbot.jpeg"},
+    {"title": "Uber Ride Duration Predictor", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictor", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/uber_predictor.jpeg"}
+]
+
 with mid_col:
     # Welcome Section
     st.markdown("<div class='card column'><div class='section-title'>Welcome</div><p>Hello! I'm Venkatesh, a Data Science graduate student and analytics professional.</p></div>", unsafe_allow_html=True)
     # Resume Highlights
     highlights = "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"
     st.markdown(f"<div class='card column'><div class='section-title'>Resume Highlights</div>{highlights}</div>", unsafe_allow_html=True)
-    # Projects Showcase
-    st.markdown("<div class='card column'><div class='section-title'>Projects Showcase</div><ul><li>Quality of Life Analysis</li><li>Alberta Wildfire Analysis</li><li>Toronto Crime Drivers</li><li>Uber Ride Predictor</li></ul></div>", unsafe_allow_html=True)
+    # Projects Showcase Grid
+    st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
+    st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
+    for proj in projects:
+        st.markdown("<div class='project-item'>", unsafe_allow_html=True)
+        st.markdown(
+            f"<a href='{proj['url']}' target='_blank'><img src='{proj['image']}' /><div class='overlay'>{proj['title']}</div></a>",
+            unsafe_allow_html=True
+        )
+        st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 # --- Right pane: Skills, Experience, Certifications ---
 with right_col:

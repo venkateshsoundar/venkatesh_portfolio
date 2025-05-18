@@ -77,7 +77,7 @@ with left_col:
     highlights = "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"
     st.markdown(f"<div class='card'><div class='section-title'>Resume Highlights</div>{highlights}</div>", unsafe_allow_html=True)
     st.markdown("---")
-    st.markdown("### Chat with Me 📋") 📋")
+    st.markdown("### Chat with Me 📋")
     if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:

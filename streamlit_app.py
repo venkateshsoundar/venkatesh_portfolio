@@ -10,7 +10,8 @@ from time import sleep
 
 # --- Page configuration ---
 st.set_page_config(
-    page_title="Venkatesh Portfolio", layout="wide",
+    page_title="Venkatesh Portfolio",
+    layout="wide",
     initial_sidebar_state="expanded"
 )
 
@@ -40,7 +41,7 @@ st.markdown(
     .section-title { font-size: 1.8em; border-bottom: 3px solid #4a90e2; padding-bottom: 4px; margin-bottom: 12px; }
     .profile-pic { border-radius: 50%; width: 150px; margin-bottom: 12px; }
     .card-img { width: 100%; border-radius: 8px; }
-    .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; }
+    .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
     .hover-zoom:hover { transform: scale(1.05); }
     </style>
     """,
@@ -63,7 +64,7 @@ with st.sidebar:
     st.markdown("- 💻 [GitHub](https://github.com/venkateshsoundar)")
     st.markdown("---")
     st.markdown("## Chat with Me 📋")
-    if "history" not in st.session_state:
+    if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:
         st.chat_message(role).write(msg)
@@ -72,66 +73,68 @@ with st.sidebar:
         st.session_state.history.append(("user", query))
         st.chat_message("user").write(query)
         # Build AI context
-        system = [{"role":"system","content":"You are Venkatesh’s portfolio assistant. Cite [Resume] or [Projects]."}]
+        system = [{"role": "system", "content": "You are Venkatesh’s portfolio assistant. Cite [Resume] or [Projects]."}]
         resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_list = ["Quality of Life Analysis","Wildfire Analysis","Crime Drivers","Regression Analysis"]
+        proj_list = ["Quality of Life Analysis", "Wildfire Analysis", "Crime Drivers", "Regression Analysis"]
         proj_ctx = "Projects:\n" + "\n".join(f"- {p}" for p in proj_list)
         msgs = system + [
-            {"role":"system","content": resume_ctx},
-            {"role":"system","content": proj_ctx},
-            {"role":"user","content": query}
+            {"role": "system", "content": resume_ctx},
+            {"role": "system", "content": proj_ctx},
+            {"role": "user", "content": query}
         ]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
+        resp = client.chat.completions.create(
+            model="deepseek/deepseek-r1:free",
+            messages=msgs
+        )
         reply = resp.choices[0].message.content
         st.session_state.history.append(("assistant", reply))
         st.chat_message("assistant").write(reply)
 
 # --- Main content ---
 with st.container():
-    # Combine section title and content inside coloured cards
+    # Define sections: title and HTML content
     sections = [
         ("Welcome", "Hello! I'm Venkatesh, a Data Science graduate student and analytics professional."),
-        ("Resume Highlights", "
-".join(f"- {b}" for b in bullets)),
-        ("Experience", "
-".join(f"- {e}" for e in [
+        ("Resume Highlights", "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"),
+        ("Experience", "<ul>" + "".join(f"<li>{e}</li>" for e in [
             "Quality Lead at Deloitte Consulting (8+ yrs)",
             "AWS ETL Pipeline Architect",
             "Agile Team Lead",
             "Insurance & Healthcare Risk Analytics"
-        ])),
-        ("Skills", "
-".join(f"- {s}" for s in [
+        ]) + "</ul>"),
+        ("Skills", "<ul>" + "".join(f"<li>{s}</li>" for s in [
             "Python, SQL, R",
             "AWS (S3, EC2, Lambda, SageMaker)",
             "Streamlit, Tableau, Power BI",
             "Scikit-learn, OpenCV, Flask",
             "Git, Jira, Agile"
-        ])),
-        ("Education", "**M.S. Data Science & Analytics**, University of Calgary, 2024-present
-**B.S. Computer Science**, University of Mumbai, 2014-2018"),
-        ("Certifications", "
-".join(f"- {c}" for c in [
+        ]) + "</ul>"),
+        ("Education", "<p><strong>M.S. Data Science & Analytics</strong>, University of Calgary, 2024-present</p>" +
+                       "<p><strong>B.S. Computer Science</strong>, University of Mumbai, 2014-2018</p>"),
+        ("Certifications", "<ul>" + "".join(f"<li>{c}</li>" for c in [
             "AWS Certified Solutions Architect – Associate",
             "Tableau Desktop Specialist",
             "Certified Scrum Master"
-        ]))
+        ]) + "</ul>")
     ]
-    for title, content in sections:
-        st.markdown(f"<div class='card'><div class='section-title'>{title}</div><div>{content.replace(chr(10), '<br>')}</div></div>", unsafe_allow_html=True)
+
+    # Render each section inside a card
+    for title, html_content in sections:
+        st.markdown(
+            f"<div class='card'><div class='section-title'>{title}</div>{html_content}</div>",
+            unsafe_allow_html=True
+        )
 
     # Projects Showcase in a 3-column grid
     st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
-    # Update grid to 3 columns
-    st.markdown("<style>.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }</style>", unsafe_allow_html=True)
     proj_map = {
         "Quality of Life Analysis": ("City income vs crime trends.", "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif", "https://github.com/venkateshsoundar/canadian-qol-analysis"),
         "Wildfire Analysis": ("Alberta wildfire pattern analysis.", "https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif", "https://github.com/venkateshsoundar/alberta-wildfire-analysis"),
         "Crime Drivers": ("Mapping Toronto crime factors.", "https://media.giphy.com/media/26u4b45b8KlgAB7iM/giphy.gif", "https://github.com/venkateshsoundar/toronto-crime-drivers"),
-        "Regression Analysis": ("Predicting weight change.", "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif", "https://github.com/venkateshsoundar/weight-change-regression"),
-        # add more projects here if needed
+        "Regression Analysis": ("Predicting weight change.", "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif", "https://github.com/venkateshsoundar/weight-change-regression")
     }
+    # Inject grid container
     st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
     for name, (desc, img, repo_url) in proj_map.items():
         st.markdown("<div class='card hover-zoom' style='background:#e8f4fd;'>", unsafe_allow_html=True)

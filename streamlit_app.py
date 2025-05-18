@@ -123,6 +123,8 @@ with mid_col:
                     f"</div>",
                     unsafe_allow_html=True
                 )
+            # spacer after each project row item
+            pass
 
 # --- Right pane: Skills, Experience, Certifications ---
 with right_col:

@@ -129,6 +129,25 @@ st.markdown(
 }
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
+/* Custom details expander styling */
+.details-summary {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+  color: #ffffff !important;
+  font-size: 1.6rem !important;
+  font-weight: bold !important;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+/* Grid layout */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
 </style>
     ''', unsafe_allow_html=True
 )
@@ -159,29 +178,34 @@ with mid_col:
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Projects Showcase
+    # Projects expander
     grid_html = '<div class="grid-container">'
     for proj in projects:
         grid_html += (
-            f"<div class='project-item hover-zoom'><a href='{proj['url']}' target='_blank'>"
-            f"<img src='{proj['image']}' class='card-img'/><div class='overlay'>{proj['title']}</div></a></div>"
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
         )
     grid_html += '</div>'
+
     st.markdown(
         f"""
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#324665;">Projects Showcase</div>
+<details open>
+  <summary class="details-summary">Projects Showcase</summary>
   {grid_html}
-</div>
+</details>
 """,
         unsafe_allow_html=True
     )
 
-    # Chat With Me Card
+    # Chat section using custom details/summary
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with Me</div>',
-        unsafe_allow_html=True
+        """
+<details>
+  <summary class="details-summary">Chat with Me</summary>
+""",
+        unsafe_allow_html=True,
     )
+
     if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:
@@ -194,12 +218,8 @@ with mid_col:
 
         messages = [
             {"role": "system", "content": "You are Venkatesh’s assistant."},
-            {"role": "system", "content": "Resume:
-" + "
-".join(f"- {b}" for b in bullets)},
-            {"role": "system", "content": "Projects:
-" + "
-".join(f"- {p['title']}" for p in projects)},
+            {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
+            {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
             {"role": "user", "content": user_query}
         ]
         client = OpenAI(
@@ -214,19 +234,19 @@ with mid_col:
         st.session_state.history.append(('assistant', reply))
         st.chat_message('assistant').write(reply)
 
-    st.markdown('</div>', unsafe_allow_html=True)
+    st.markdown("</details>", unsafe_allow_html=True)
 
 # --- Right Pane ---
 with right_col:
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
         unsafe_allow_html=True
     )

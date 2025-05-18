@@ -204,9 +204,7 @@ with mid_col:
   <summary class="details-summary">Chat with Me</summary>
 """,
         unsafe_allow_html=True,
-    )
-
-    if 'history' not in st.session_state:
+        if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:
         st.chat_message(role).write(msg)
@@ -233,6 +231,9 @@ with mid_col:
         reply = resp.choices[0].message.content
         st.session_state.history.append(('assistant', reply))
         st.chat_message('assistant').write(reply)
+    )
+
+
 
     st.markdown("</details>", unsafe_allow_html=True)
 

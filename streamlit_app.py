@@ -78,7 +78,7 @@ a:hover { text-decoration: underline; }
 # --- Layout: three panes ---
 left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
 
-# --- Left pane: Profile + Chat ---
+# --- Left pane: Profile only ---
 with left_col:
     # Profile card
     st.markdown(
@@ -95,32 +95,11 @@ with left_col:
         "</div></div>",
         unsafe_allow_html=True
     )
-    # Chat card
-    st.markdown(
-        "<div class='card'><div class='section-title'>Chat with Me 📋</div></div>",
-        unsafe_allow_html=True
-    )
-    if 'history' not in st.session_state:
-        st.session_state.history = []
-    for role, msg in st.session_state.history:
-        cls = 'user-msg' if role=='user' else 'bot-msg'
-        st.markdown(f"<div class='chat-bubble {cls}'>{msg}</div>", unsafe_allow_html=True)
-    query = st.chat_input("Ask me anything about my background or projects...")
-    if query:
-        st.session_state.history.append(('user', query))
-        system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)
-        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
-        st.session_state.history.append(('assistant', resp.choices[0].message.content))
-        
 
 # --- Center pane: Main Details ---
 with mid_col:
     st.markdown(
-        "<div class='card'><div class='typewriter'><h1>Welcome to Venkatesh's Portfolio</h1></div><p style='margin-top:20px;'>Explore projects below and chat on the left!</p></div>",
+        "<div class='card'><div class='typewriter'><h1>Welcome to my Profile</h1></div><p style='margin-top:20px;'>Explore projects below and chat on the left!</p></div>",
         unsafe_allow_html=True
     )
     st.markdown(
@@ -144,6 +123,31 @@ with mid_col:
 
 # --- Right pane: Skills, Experience, Certifications ---
 with right_col:
+    # Skills icons card
+    st.markdown(
+        "<div class='card hover-zoom'><div class='section-title'>Skills</div>"
+        "<div style='display:flex; justify-content: space-around; align-items: center; margin-top: 10px;'>"
+        "<a href='https://www.python.org' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' class='contact-icon' alt='Python'></a>"
+        "<a href='https://numpy.org/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/numpy/numpy-original.svg' class='contact-icon' alt='NumPy'></a>"
+        "<a href='https://pandas.pydata.org/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/2ae2a900d2f041da66e950e4d48052658d850630/icons/pandas/pandas-original.svg' class='contact-icon' alt='Pandas'></a>"
+        "<a href='https://scikit-learn.org/' target='_blank'><img src='https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg' class='contact-icon' alt='Scikit-learn'></a>"
+        "</div></div>",
+        unsafe_allow_html=True
+    )
+    # Experience card
+    st.markdown(
+        "<div class='card'><div class='section-title'>Experience</div>"
+        "<ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul>"
+        "</div>",
+        unsafe_allow_html=True
+    )
+    # Certifications card
+    st.markdown(
+        "<div class='card'><div class='section-title'>Certifications</div>"
+        "<ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul>"
+        "</div>",
+        unsafe_allow_html=True
+    )
     st.markdown("<div class='card'><div class='section-title'>Skills</div><ul><li>Python, SQL, R</li><li>AWS & SageMaker</li><li>Streamlit, Tableau</li><li>Scikit-learn, OpenCV</li><li>Git, Agile</li></ul></div>", unsafe_allow_html=True)
     st.markdown("<div class='card'><div class='section-title'>Experience</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>", unsafe_allow_html=True)
     st.markdown("<div class='card'><div class='section-title'>Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>", unsafe_allow_html=True)

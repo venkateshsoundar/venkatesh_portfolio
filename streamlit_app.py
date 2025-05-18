@@ -45,10 +45,16 @@ st.markdown(
 body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat; color: #ffffff; }
 .stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
 .card {
-  border-radius:12px; padding:20px; margin-bottom:20px;
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
   background:linear-gradient(135deg,#1F2A44 0%,#324665 100%);
   transition:transform .3s ease,box-shadow .3s ease;
   color: #ffffff;
+  min-height: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .card * {
   color: #ffffff !important;
@@ -66,7 +72,17 @@ body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venka
 .chat-bubble { padding:8px 12px; border-radius:12px; margin:4px 0; animation:fade-in .4s ease; }
 .user-msg { background:#324665; text-align:right; color:#ffffff; }
 .bot-msg { background:#5A84B4; text-align:left; color:#000000; }
-.project-item { position:relative; overflow:hidden; border-radius:12px; height:200px; animation:fade-in .6s ease; }
+.project-item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  aspect-ratio: 1 / 1;
+  animation: fade-in .6s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .card-img { width:100%; height:100%; object-fit:cover; transition:transform .3s ease, filter .3s ease; }
 .project-item:hover .card-img { transform: scale(1.05); filter:brightness(1.1); animation:pop 0.3s ease; }
 @keyframes pop { 0% { transform: scale(1.05); } 50% { transform: scale(1.08); } 100% { transform: scale(1.05); } }

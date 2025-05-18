@@ -98,12 +98,11 @@ with mid_col:
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Projects Showcase header
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Projects Showcase</div></div>',
-        unsafe_allow_html=True
-    )
-    # Projects grid
+        # Projects Showcase in an expander
+    with st.expander("Projects Showcase", expanded=False):
+        num_cols = 3
+        # Projects grid
+
     num_cols = 2
     for i in range(0, len(projects), num_cols):
         cols = st.columns(num_cols, gap="medium")

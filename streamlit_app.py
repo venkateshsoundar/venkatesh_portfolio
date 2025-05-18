@@ -1,5 +1,5 @@
-# Streamlit Portfolio Chatbot with Digital Resume Template Enhancements
-# Adapted from Sven-Bo/digital-resume-template-streamlit and customized with all sections
+# Streamlit Portfolio Chatbot with Dark Theme
+# Adapted from Sven-Bo/digital-resume-template-streamlit and customized
 
 import streamlit as st
 from openai import OpenAI
@@ -31,18 +31,27 @@ resume_url = (
 )
 bullets = load_resume_bullets(resume_url)
 
-# --- Global CSS ---
+# --- Global Dark Theme CSS ---
 st.markdown(
     """
     <style>
+    /* Overall background and text */
+    .css-1d391kg {background-color: #121212; color: #e0e0e0;}
+    .css-ffhzg2 {background-color: #121212;}
     /* Cards and sections */
-    .card { border: 1px solid #ddd; border-radius: 12px; padding: 20px; margin-bottom: 20px; background: #fff; transition: transform .2s; }
-    .card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
-    .section-title { font-size: 1.8em; border-bottom: 3px solid #4a90e2; padding-bottom: 4px; margin-bottom: 12px; }
+    .card { border: 1px solid #333; border-radius: 12px; padding: 20px; margin-bottom: 20px; background: #1e1e1e; transition: transform .2s; }
+    .card:hover { transform: translateY(-5px); box-shadow: 0 4px 12px rgba(0,0,0,0.5); }
+    .section-title { font-size: 1.8em; border-bottom: 3px solid #bb86fc; padding-bottom: 4px; margin-bottom: 12px; color: #bb86fc; }
     .profile-pic { border-radius: 50%; width: 150px; margin-bottom: 12px; }
     .card-img { width: 100%; border-radius: 8px; }
     .grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
-    .hover-zoom:hover { transform: scale(1.05); }
+    .hover-zoom img { transition: transform 0.3s ease; }
+    .hover-zoom:hover img { transform: scale(1.05); }
+    .project-item { position: relative; overflow: hidden; border-radius: 12px; }
+    .overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; color: #fff; opacity: 0; transition: opacity 0.3s ease; }
+    .project-item:hover .overlay { opacity: 1; }
+    a { color: #bb86fc; text-decoration: none; }
+    a:hover { text-decoration: underline; }
     </style>
     """,
     unsafe_allow_html=True
@@ -93,9 +102,8 @@ with st.sidebar:
 
 # --- Main content ---
 with st.container():
-    # Define sections: title and HTML content
     sections = [
-        ("Welcome", "Hello! I'm Venkatesh, a Data Science graduate student and analytics professional."),
+        ("Welcome", "<p style='color:#e0e0e0;'>Hello! I'm Venkatesh, a Data Science graduate student and analytics professional.</p>"),
         ("Resume Highlights", "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"),
         ("Experience", "<ul>" + "".join(f"<li>{e}</li>" for e in [
             "Quality Lead at Deloitte Consulting (8+ yrs)",
@@ -118,33 +126,28 @@ with st.container():
             "Certified Scrum Master"
         ]) + "</ul>")
     ]
-
-    # Render each section inside a card
     for title, html_content in sections:
         st.markdown(
             f"<div class='card'><div class='section-title'>{title}</div>{html_content}</div>",
             unsafe_allow_html=True
         )
 
-    # Projects Showcase in a 3-column grid
     st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
+    # Render projects grid
+    st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
     proj_map = {
         "Quality of Life Analysis": ("City income vs crime trends.", "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif", "https://github.com/venkateshsoundar/canadian-qol-analysis"),
         "Wildfire Analysis": ("Alberta wildfire pattern analysis.", "https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif", "https://github.com/venkateshsoundar/alberta-wildfire-analysis"),
         "Crime Drivers": ("Mapping Toronto crime factors.", "https://media.giphy.com/media/26u4b45b8KlgAB7iM/giphy.gif", "https://github.com/venkateshsoundar/toronto-crime-drivers"),
         "Regression Analysis": ("Predicting weight change.", "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif", "https://github.com/venkateshsoundar/weight-change-regression")
     }
-    # Inject grid container
-    st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
     for name, (desc, img, repo_url) in proj_map.items():
-        st.markdown("<div class='card hover-zoom' style='background:#e8f4fd;'>", unsafe_allow_html=True)
+        st.markdown("<div class='project-item hover-zoom'>", unsafe_allow_html=True)
         st.markdown(
-            f"<a href='{repo_url}' target='_blank'><img src='{img}' class='card-img' title='{desc}' /></a>",
-            unsafe_allow_html=True
-        )
-        st.markdown(
-            f"<div class='card-title'><a href='{repo_url}' target='_blank' style='text-decoration:none;color:inherit'>{name}</a></div>"
-            f"<p>{desc}</p>",
+            f"<a href='{repo_url}' target='_blank'>"
+            f"<img src='{img}' class='card-img' />"
+            f"<div class='overlay'><div>{name}</div></div>"
+            f"</a>",
             unsafe_allow_html=True
         )
         st.markdown("</div>", unsafe_allow_html=True)

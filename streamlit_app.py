@@ -39,26 +39,166 @@ projects = [
 ]
 
 # --- Global CSS & Background ---
-# (CSS already injected above; now define project details)
-# Projects Showcase Details
-# Generate HTML grid for projects
-grid_html = '<div class="grid-container">'
-for proj in projects:
-    grid_html += (
-        f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-        f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
-    )
-grid_html += '</div>'
-
-# Render details element
 st.markdown(
-    f'''
+    '''
+<style>
+/* Main app background */
+.stApp {
+  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
+  background-attachment: fixed;
+  color: #ffffff;
+  font-family: 'Poppins', sans-serif;
+}
+/* Card styles */
+.card {
+  width: 100% !important;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  transition: transform .3s ease, box-shadow .3s ease;
+  text-align: center;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+}
+.hover-zoom { transition: transform .3s ease; }
+.section-title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  margin-bottom: 12px;
+  padding: 8px;
+  border-radius: 6px;
+}
+a, a:hover { text-decoration: none !important; color: inherit !important; }
+.profile-pic {
+  border-radius: 50%;
+  width: 150px;
+  display: block;
+  margin: 0 auto 12px;
+}
+.contact-icon {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+  margin: 0 8px;
+  vertical-align: middle;
+}
+.project-item {
+  position: relative;
+  aspect-ratio: 1/1;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.project-item:hover .card-img {
+  transform: scale(1.05);
+}
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity .3s ease;
+  font-size: 1.2rem;
+}
+.project-item:hover .overlay {
+  opacity: 1;
+}
+.typewriter {
+  width: fit-content;
+  margin: 0 auto 20px;
+}
+.typewriter h1 {
+  display: inline-block;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: .15em solid #5A84B4;
+  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
+  color: #ffffff;
+}
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
+/* Expander styling */
+.details-summary {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  color: #ffffff !important;
+  font-size: 1.6rem !important;
+  font-weight: bold !important;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+}
+details > div {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+  border-radius: 12px !important;
+  padding: 20px !important;
+  box-shadow: 0 8px 16px rgba(0,0,0,0.7) !important;
+  margin-bottom: 20px !important;
+}
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 20px;
+}
+</style>
+    ''', unsafe_allow_html=True
+)
+
+# --- Layout ---
+left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
+
+# --- Left Pane ---
+with left_col:
+    st.markdown(
+        '<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
+        unsafe_allow_html=True
+    )
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Contact</div>' +
+        '<div style="display:flex;justify-content:center;gap:16px;margin-top:10px;">' +
+        '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
+        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
+        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
+        '</div></div>',
+        unsafe_allow_html=True
+    )
+
+# --- Center Pane ---
+with mid_col:
+    # Intro message
+    st.markdown(
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        unsafe_allow_html=True
+    )
+    # Projects Showcase as details expander
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        )
+    grid_html += '</div>'
+    st.markdown(
+        f'''
 <details>
   <summary class="details-summary">Projects Showcase</summary>
   {grid_html}
 </details>
 ''', unsafe_allow_html=True
-)
+    )
 
 # --- Right Pane ---
 with right_col:

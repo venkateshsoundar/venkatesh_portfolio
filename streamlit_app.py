@@ -13,7 +13,7 @@ def load_resume_bullets(url, max_bullets=5):
     r = requests.get(url)
     r.raise_for_status()
     reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    text = "\n".join(page.extract_text() or "" for page in reader.pages)
+    text = "\n".join((page.extract_text() or "") for page in reader.pages)
     sentences = [s.strip() for s in text.split('.') if len(s) > 50]
     return sentences[:max_bullets]
 
@@ -39,7 +39,8 @@ projects = [
 ]
 
 # --- Global CSS & Background ---
-st.markdown('''
+st.markdown(
+    '''
 <style>
 body {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat;
@@ -74,7 +75,9 @@ body {
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from,to { border-color: transparent; } 50% { border-color: #5A84B4; } }
 </style>
-''', unsafe_allow_html=True)
+    ''',
+    unsafe_allow_html=True
+)
 
 # --- Layout: three panes ---
 left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
@@ -88,86 +91,4 @@ with left_col:
     )
     # Contact card with icons
     st.markdown(
-        "<div class='card hover-zoom'><div class='section-title'>Contact</div>"
-        "<div style='display:flex; justify-content:center; gap:20px; margin-top: 10px;'>"
-        "<a href='mailto:venkatesh.balusoundar@gmail.com'><img src='https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg' class='contact-icon'></a>"
-        "<a href='https://www.linkedin.com/in/venkateshbalus/' target='_blank'><img src='https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg' class='contact-icon'></a>"
-        "<a href='https://github.com/venkateshsoundar' target='_blank'><img src='https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg' class='contact-icon'></a>"
-        "</div></div>",
-        unsafe_allow_html=True
-    )
-
-# --- Center pane: Main Details + Chat ---
-with mid_col:
-    # Welcome card
-    st.markdown(
-        "<div class='card'><div class='typewriter'><h1>Welcome to my Profile</h1></div>"
-        "<p style='margin-top:20px;'>Explore projects below and chat at the end of this column!</p></div>",
-        unsafe_allow_html=True
-    )
-    # Projects Showcase header card
-    st.markdown(
-        "<div class='card hover-zoom'><div class='section-title'>Projects Showcase</div></div>",
-        unsafe_allow_html=True
-    )
-    # Projects grid
-    num_cols = 2
-    for i in range(0, len(projects), num_cols):
-        cols = st.columns(num_cols, gap="medium")
-        for idx, proj in enumerate(projects[i:i+num_cols]):
-            with cols[idx]:
-                st.markdown(
-                    f"<div class='project-item hover-zoom'>"
-                    f"<a href='{proj['url']}' target='_blank'>"
-                    f"<img src='{proj['image']}' class='card-img' />"
-                    f"<div class='overlay'>{proj['title']}</div>"
-                    f"</a></div>",
-                    unsafe_allow_html=True
-                )
-        # spacer after each project row
-        st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True) 
-    # Chat section moved here
-    st.markdown("<div class='card'><div class='section-title'>Chat with Me 📋</div></div>", unsafe_allow_html=True)
-    if 'history' not in st.session_state:
-        st.session_state.history = []
-    for role, msg in st.session_state.history:
-        cls = 'user-msg' if role=='user' else 'bot-msg'
-        st.markdown(f"<div class='chat-bubble {cls}'>{msg}</div>", unsafe_allow_html=True)
-    query = st.chat_input("Ask me anything about my background or projects...")
-    if query:
-        st.session_state.history.append(('user', query))
-        system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)
-        msgs = system + [
-            {"role": "system", "content": resume_ctx},
-            {"role": "system", "content": proj_ctx},
-            {"role": "user", "content": query}
-        ]
-        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
-        st.session_state.history.append(('assistant', resp.choices[0].message.content))
-
-# --- Right pane: Skills, Experience, Certifications ---
-with right_col:
-    # Skills icons card (expanded)
-    st.markdown(
-        "<div class='card hover-zoom'><div class='section-title'>Skills</div>" +
-        "<div style='display:flex; flex-wrap:wrap; justify-content: space-around; align-items: center; margin-top: 10px; gap: 12px;'>" +
-        "<a href='https://www.python.org' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg' class='contact-icon' alt='Python'></a>" +
-        "<a href='https://numpy.org/' target='_blank'><img src='https://raw.githubusercontent.com/devicons/devicon/master/icons/numpy/numpy-original.svg' class='contact-icon' alt='NumPy'></a>" +
-        "... (other icons truncated for brevity) ..." +
-        "</div></div>", unsafe_allow_html=True
-    )
-    # Experience card
-    st.markdown(
-        "<div class='card hover-zoom'><div class='section-title'>Experience</div>" +
-        "<ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul>" +
-        "</div>", unsafe_allow_html=True
-    )
-    # Certifications card
-    st.markdown(
-        "<div class='card hover-zoom'><div class='section-title'>Certifications</div>" +
-        "<ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul>" +
-        "</div>", unsafe_allow_html=True
-    )
+        "<div class='card hover-zoom'><div class='section

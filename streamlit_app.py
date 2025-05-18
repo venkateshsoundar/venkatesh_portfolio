@@ -24,7 +24,7 @@ bullets = load_resume_bullets(resume_url)
 st.markdown("""
 <style>
 /* Always expand sidebar */
-[aria-label="Toggle sidebar"] { visibility: hidden !important; }
+[aria-label=\"Toggle sidebar\"] { visibility: hidden !important; }
 /* Dark background and light text */
 body { background-color: #121212; color: #e0e0e0; }
 .stApp .sidebar-content { background-color: #1e1e1e; }
@@ -70,6 +70,7 @@ body { background-color: #121212; color: #e0e0e0; }
 a { color: #FF6B6B; text-decoration: none; }
 a:hover { text-decoration: underline; }
 </style>
+""", unsafe_allow_html=True)
 """, unsafe_allow_html=True)
 """, unsafe_allow_html=True)
 """, unsafe_allow_html=True)

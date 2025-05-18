@@ -21,38 +21,33 @@ resume_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portf
 bullets = load_resume_bullets(resume_url)
 
 # --- Global CSS ---
-st.markdown(
-    '''
+st.markdown('''
 <style>
 [aria-label="Toggle sidebar"] { visibility: hidden !important; }
 body { background-color: #121212; color: #e0e0e0; }
 .stApp .sidebar-content { background-color: #1e1e1e; }
-.card { border-radius:12px; padding:20px; margin-bottom:20px; color:#fff; background:linear-gradient(135deg, #2E3B4E, #627D98); transition:transform .3s ease,box-shadow .3s ease; }
+.card { border-radius:12px; padding:20px; margin-bottom:20px; color:#ffffff; background:linear-gradient(135deg, #2E3B4E, #627D98); transition:transform .3s ease, box-shadow .3s ease; }
 .card:hover { transform:translateY(-5px); box-shadow:0 8px 16px rgba(0,0,0,0.6); }
 .section-title { font-size:1.6rem; border-bottom:3px solid #82A3C8; margin-bottom:12px; padding-bottom:4px; color:#82A3C8; }
 .profile-pic { border-radius:50%; width:150px; margin:0 auto 12px; display:block; }
 .chat-bubble { padding:8px 12px; border-radius:12px; margin:4px 0; animation:fade-in .4s ease; }
-.user-msg { background:#627D98; text-align:right; color:#fff; }
+.user-msg { background:#627D98; text-align:right; color:#ffffff; }
 .bot-msg { background:#A3BFD9; text-align:left; color:#121212; }
 @keyframes fade-in { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
 .grid-container { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
 .project-item { position:relative; overflow:hidden; border-radius:12px; }
-.project-item img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; transition:transform .3s ease,filter .3s ease; }
+.project-item img { width:100%; aspect-ratio:1/1; object-fit:cover; border-radius:8px; transition:transform .3s ease, filter .3s ease; }
 .project-item:hover img { transform:scale(1.1); filter:brightness(1.1); }
-.overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(40,60,80,0.7); display:flex; align-items:center; justify-content:center; color:#fff; opacity:0; transition:opacity .3s ease; font-size:1.2rem; text-align:center; padding:10px; }
+.overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(40,60,80,0.7); display:flex; align-items:center; justify-content:center; color:#ffffff; opacity:0; transition:opacity .3s ease; font-size:1.2rem; text-align:center; padding:10px; }
 .project-item:hover .overlay { opacity:1; }
 a { color:#627D98; text-decoration:none; }
 a:hover { text-decoration:underline; }
 </style>
-    ''', unsafe_allow_html=True
-)
+''', unsafe_allow_html=True)
 
 # --- Sidebar: Profile Only ---
 with st.sidebar:
-    st.markdown(
-        "<img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic'>",
-        unsafe_allow_html=True
-    )
+    st.markdown("<img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic'>", unsafe_allow_html=True)
     st.markdown("# Venkatesh Soundararajan")
     st.markdown("**M.S. Data Science & Analytics**")
     st.markdown("University of Calgary")
@@ -62,40 +57,10 @@ with st.sidebar:
     st.markdown("- 🔗 [LinkedIn](https://www.linkedin.com/in/venkateshsoundar/)")
     st.markdown("- 💻 [GitHub](https://github.com/venkateshsoundar)")
 
-# --- Main content with Right Chat Column ---
-col_main, col_chat = st.columns([3, 1])
-with col_main:
-    sections = [
-        ("Welcome", "<p>Hello! I'm Venkatesh, a Data Science graduate student and analytics professional.</p>"),
-        ("Resume Highlights", "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"),
-        ("Experience", "<ul>" + "".join(f"<li>{e}</li>" for e in [
-            "Quality Lead at Deloitte Consulting (8+ yrs)", "AWS ETL Pipeline Architect",
-            "Agile Team Lead", "Insurance & Healthcare Risk Analytics" ]) + "</ul>"),
-        ("Skills", "<ul>" + "".join(f"<li>{s}</li>" for s in [
-            "Python, SQL, R", "AWS (S3, EC2, Lambda, SageMaker)",
-            "Streamlit, Tableau, Power BI", "Scikit-learn, OpenCV, Flask", "Git, Jira, Agile" ]) + "</ul>"),
-        ("Education", "<p><strong>M.S. Data Science & Analytics</strong>, University of Calgary, 2024-present</p><p><strong>B.S. Computer Science</strong>, University of Mumbai, 2014-2018</p>"),
-        ("Certifications", "<ul>" + "".join(f"<li>{c}</li>" for c in [
-            "AWS Certified Solutions Architect – Associate", "Tableau Desktop Specialist",
-            "Certified Scrum Master" ]) + "</ul>")
-    ]
-    for title, content in sections:
-        st.markdown(f"<div class='card'><div class='section-title'>{title}</div>{content}</div>", unsafe_allow_html=True)
+# --- Layout: Chat left, Info right ---
+col_chat, col_info = st.columns([1, 3], gap="large")
 
-    proj_map = {
-        "Quality of Life Analysis": ("City income vs crime trends.", "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/qol_analysis.png", "https://github.com/venkateshsoundar/canadian-qol-analysis"),
-        "Alberta Wildfire Analysis": ("Alberta wildfire pattern analysis.", "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/wildfire_analysis.png", "https://github.com/venkateshsoundar/alberta-wildfire-analysis"),
-        "Toronto Crime Drivers": ("Mapping Toronto crime factors.", "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/crime_drivers.png", "https://github.com/venkateshsoundar/toronto-crime-drivers"),
-        "Uber Ride Duration Predictor": ("Machine learning model to predict ride durations.", "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/uber_predictor.png", "https://github.com/venkateshsoundar/uber-ride-duration-predictor")
-    }
-    st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
-    st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
-    for name, (desc, img, repo) in proj_map.items():
-        st.markdown("<div class='project-item'>", unsafe_allow_html=True)
-        st.markdown(f"<a href='{repo}' target='_blank'><img src='{img}' class='card-img'><div class='overlay'>{name}</div></a>",unsafe_allow_html=True)
-        st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
-
+# Chat pane
 with col_chat:
     st.markdown("### Chat with Me 📋")
     if 'history' not in st.session_state:
@@ -108,8 +73,18 @@ with col_chat:
         st.session_state.history.append(('user', query))
         system = [{"role": "system", "content": "You are Venkatesh’s portfolio assistant. Cite [Resume] or [Projects]."}]
         resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:\n" + "\n".join(f"- {p}" for p in proj_map.keys())
-        msgs = system + [{"role":"system","content":resume_ctx}, {"role":"system","content":proj_ctx}, {"role":"user","content":query}]
+        proj_ctx = "Projects:\n" + "\n".join(["- Quality of Life Analysis","- Wildfire Analysis","- Crime Drivers","- Uber Predictor"])
+        msgs = system + [{"role":"system","content":resume_ctx},{"role":"system","content":proj_ctx},{"role":"user","content":query}]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
         st.session_state.history.append(('assistant', resp.choices[0].message.content))
+        st.experimental_rerun()
+
+# Info pane
+with col_info:
+    # Skills
+    st.markdown("<div class='card'><div class='section-title'>Skills</div><ul>" + "".join(f"<li>{s}</li>" for s in ["Python, SQL, R","AWS & SageMaker","Streamlit, Tableau","Scikit-learn, OpenCV","Git, Agile"]) + "</ul></div>", unsafe_allow_html=True)
+    # Experience
+    st.markdown("<div class='card'><div class='section-title'>Experience</div><ul>" + "".join(f"<li>{e}</li>" for e in ["Deloitte Quality Lead (8+ yrs)","AWS Data Pipelines","Agile Team Lead","Risk Analytics"]) + "</ul></div>", unsafe_allow_html=True)
+    # Certifications
+    st.markdown("<div class='card'><div class='section-title'>Certifications</div><ul>" + "".join(f"<li>{c}</li>" for c in ["AWS Solutions Architect","Tableau Specialist","Scrum Master"]) + "</ul></div>", unsafe_allow_html=True)

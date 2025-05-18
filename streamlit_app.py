@@ -42,54 +42,24 @@ projects = [
 st.markdown(
     '''
 <style>
-body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat; color: #ffffff; }
-.stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
-.card {
-  display: block !important;
-  width: 100% !important;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  transition: transform .3s ease, box-shadow .3s ease;
-  color: #ffffff;
-  box-sizing: border-box;
+/* existing styles above... */
+.overlay {
+  position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6);
+  display: flex; align-items: center; justify-content: center; opacity: 0;
+  transition: opacity .3s ease; font-size: 1.2rem; text-align: center; padding: 10px;
+  color: #ffffff !important;
 }
-.card * { color:#ffffff!important; }
-.hover-zoom { display:inline-block; animation:zoom-in .3s ease forwards; }
-.hover-zoom:hover { animation:zoom-out .3s ease forwards; }
-@keyframes zoom-in { from{transform:scale(0.95);} to{transform:scale(1);} }
-@keyframes zoom-out { from{transform:scale(1);} to{transform:scale(1.05);} }
-.section-title {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 12px;
-  padding-bottom: 4px;
+.project-item:hover .overlay { opacity: 1; }
+/* Force overlay text and links white on hover */
+.project-item a, .project-item a:hover, .project-item a:visited {
   color: #ffffff !important;
   text-decoration: none !important;
 }
-a {
-  text-decoration: none !important;
-  color: inherit;
-}
-a:hover {
-  text-decoration: none !important;
-}
-.profile-pic { border-radius:50%; width:150px; margin:0 auto 12px; display:block; border:2px solid #5A84B4; animation:fade-in 1s ease; }
-@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
-.contact-icon { width:30px; height:30px; filter:invert(100%); transition:transform .3s ease; }
-.contact-icon:hover { transform:scale(1.2); }
-.chat-bubble { padding:8px 12px; border-radius:12px; margin:4px 0; animation:fade-in .4s ease; }
-.user-msg { background:#324665; text-align:right; color:#ffffff; }
-.bot-msg { background:#5A84B4; text-align:left; color:#000000; }
-.project-item { position:relative; overflow:hidden; border-radius:12px; aspect-ratio:1/1; }
-.card-img { width:100%; height:100%; object-fit:cover; transition:transform .3s ease,filter .3s ease; }
-.project-item:hover .card-img { transform:scale(1.05); filter:brightness(1.1); }
-.overlay { position:absolute; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity .3s ease; font-size:1.2rem; padding:10px; }
-.project-item:hover .overlay { opacity:1; }
-.typewriter h1 { border-right:.15em solid #5A84B4; animation:typing 3.5s steps(40,end),blink-caret .75s step-end infinite; }
-@keyframes typing { from{width:0;} to{width:100%;} }
-@keyframes blink-caret { from,to{border-color:transparent;} 50%{border-color:#5A84B4;} }
+/* rest of style continues... */.project-item:hover .overlay { opacity: 1; }
+.overlay a { color: #ffffff !important; text-decoration: none !important; }
+.typewriter h1 { border-right: .15em solid #5A84B4; animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite; color:#ffffff; }
+@keyframes typing { from { width: 0; } to { width: 100%; } }
+@keyframes blink-caret { from,to { border-color: transparent; } 50% { border-color: #5A84B4; } }
 </style>
     ''', unsafe_allow_html=True
 )

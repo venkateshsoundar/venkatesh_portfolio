@@ -115,7 +115,7 @@ with left_col:
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
         st.session_state.history.append(('assistant', resp.choices[0].message.content))
-        st.experimental_rerun()
+        
 
 # --- Center pane: Main Details ---
 with mid_col:

@@ -41,42 +41,9 @@ projects = [
 # --- Global CSS & Background ---
 st.markdown('''
 <style>
-body {
-  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat;
-  color: #f0f0f0;
-}
-.stApp .sidebar-content { background-color: rgba(31, 42, 68, 0.9); }
-.card {
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  transition: transform .3s ease, box-shadow .3s ease;
-  color: #f0f0f0;
-}
-.card:hover { transform: translateY(-5px); box-shadow: 0 8px 16px rgba(0,0,0,0.7); }
-.section-title { font-size: 1.6rem; border-bottom: 2px solid #5A84B4; margin-bottom: 12px; padding-bottom: 4px; color: #AFCBE3; }
-.profile-pic { border-radius: 50%; width: 150px; margin: 0 auto 12px; display: block; border: 2px solid #5A84B4; }
-.contact-icon { width: 30px; height: 30px; filter: invert(100%); }
-.chat-bubble { padding: 8px 12px; border-radius: 12px; margin: 4px 0; animation: fade-in .4s ease; }
-.user-msg { background: #324665; text-align: right; color: #f0f0f0; }
-.bot-msg  { background: #5A84B4; text-align: left; color: #1F2A44; }
-@keyframes fade-in { from { opacity:0; transform:translateY(10px);} to { opacity:1; transform:translateY(0);} }
-.project-item { position: relative; overflow: hidden; border-radius: 12px; height: 200px; }
-.card-img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s ease, filter .3s ease; }
-.project-item:hover .card-img { transform: scale(1.05); filter: brightness(1.1); }
-.overlay { position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.6); display: flex; align-items: center; justify-content: center; color: #f0f0f0; opacity: 0; transition: opacity .3s ease; font-size: 1.2rem; text-align: center; padding: 10px; }
-.project-item:hover .overlay { opacity: 1; }
-a { color: #5A84B4; text-decoration: none; }
-a:hover { text-decoration: underline; }
-.typewriter h1 { white-space: normal; overflow: hidden; border-right: .15em solid #5A84B4; letter-spacing: .1em; animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite; color: #AFCBE3; }
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-@keyframes blink-caret { from,to { border-color: transparent; } 50% { border-color: #5A84B4; } }
+...CSS...
 </style>
 ''', unsafe_allow_html=True)
-        # spacer between project rows (only after last in row)
-        if (idx+1) % num_cols == 0:
-            st.markdown("<div style='height: 20px;'></div>", unsafe_allow_html=True)
 
 # --- Layout: three panes ---
 left_col, mid_col, right_col = st.columns([1, 2, 1], gap="large")
@@ -110,6 +77,7 @@ with mid_col:
         unsafe_allow_html=True
     )
     num_cols = 2
+    # render projects in rows of num_cols with spacer after each row
     for i in range(0, len(projects), num_cols):
         cols = st.columns(num_cols, gap="medium")
         for idx, proj in enumerate(projects[i:i+num_cols]):
@@ -119,14 +87,35 @@ with mid_col:
                     f"<a href='{proj['url']}' target='_blank'>"
                     f"<img src='{proj['image']}' class='card-img' />"
                     f"<div class='overlay'>{proj['title']}</div>"
-                    f"</a>"
-                    f"</div>",
+                    f"</a></div>",
                     unsafe_allow_html=True
                 )
         # spacer after each project row
         st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True)
+    # chat section moved here
+    st.markdown("<div class='card'><div class='section-title'>Chat with Me 📋</div></div>", unsafe_allow_html=True)
+    if 'history' not in st.session_state:
+        st.session_state.history = []
+    for role, msg in st.session_state.history:
+        cls = 'user-msg' if role=='user' else 'bot-msg'
+        st.markdown(f"<div class='chat-bubble {cls}'>{msg}</div>", unsafe_allow_html=True)
+    query = st.chat_input("Ask me anything about my background or projects...")
+    if query:
+        st.session_state.history.append(('user', query))
+        system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
+        resume_ctx = "Resume:
+" + "
+".join(f"- {b}" for b in bullets)
+        proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)
+        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
+        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
+        st.session_state.history.append(('assistant', resp.choices[0].message.content))
+        # no rerun here
 
-# --- Right pane: Skills, Experience, Certifications ---
+# --- Right pane: Skills, Experience, Certifications ---: Skills, Experience, Certifications ---
 with right_col:
     # Skills icons card (expanded)
     st.markdown(

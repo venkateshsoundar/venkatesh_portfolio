@@ -61,7 +61,7 @@ a:hover { text-decoration:underline; }
 # --- Layout: three panes ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 
-# --- Left pane: Profile + Chat ---
+# --- Left pane: Profile + Highlights + Chat ---
 with left_col:
     st.markdown("<img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic'>", unsafe_allow_html=True)
     st.markdown("# Venkatesh Soundararajan")
@@ -73,7 +73,11 @@ with left_col:
     st.markdown("- 🔗 [LinkedIn](https://www.linkedin.com/in/venkateshsoundar/)")
     st.markdown("- 💻 [GitHub](https://github.com/venkateshsoundar)")
     st.markdown("---")
-    st.markdown("### Chat with Me 📋")
+    # Resume Highlights in left pane
+    highlights = "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"
+    st.markdown(f"<div class='card'><div class='section-title'>Resume Highlights</div>{highlights}</div>", unsafe_allow_html=True)
+    st.markdown("---")
+    st.markdown("### Chat with Me 📋") 📋")
     if 'history' not in st.session_state:
         st.session_state.history = []
     for role, msg in st.session_state.history:

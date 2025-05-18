@@ -123,8 +123,8 @@ with mid_col:
                     f"</div>",
                     unsafe_allow_html=True
                 )
-            # spacer after each project row item
-            pass
+        # spacer after each project row
+        st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True)
 
 # --- Right pane: Skills, Experience, Certifications ---
 with right_col:

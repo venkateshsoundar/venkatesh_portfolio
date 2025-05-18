@@ -129,9 +129,16 @@ with mid_col:
         st.session_state.history.append(('user', query))
         # prepare messages
         system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:
+                resume_ctx = "Resume:
 " + "
 ".join(f"- {b}" for b in bullets)
+        proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)
+        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
+        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
+        assistant_reply = resp.choices[0].message.content
         proj_ctx = "Projects:
 " + "
 ".join(f"- {p['title']}" for p in projects)

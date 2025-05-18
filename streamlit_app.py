@@ -200,19 +200,22 @@ with mid_col:
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Projects Showcase as expander in center pane
-    with st.expander("Projects Showcase", expanded=False):
-        num_cols = 2
-        for i in range(0, len(projects), num_cols):
-            cols = st.columns(num_cols, gap="medium")
-            for j, proj in enumerate(projects[i:i+num_cols]):
-                with cols[j]:
-                    st.markdown(
-                        f"<div class='project-item hover-zoom'><img src='{proj['image']}' class='card-img'/><div class='overlay'>{proj['title']}</div></div>",
-                        unsafe_allow_html=True
-                    )
-            # spacer after row
-            st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True)
+    # Projects Showcase using custom HTML <details> for precise styling
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        )
+    grid_html += '</div>'
+    st.markdown(
+        f"""
+<details>
+  <summary class="details-summary">Projects Showcase</summary>
+  {grid_html}
+</details>
+""", unsafe_allow_html=True
+    )
 
 # --- Right Pane ---
 with right_col:

@@ -200,7 +200,7 @@ with mid_col:
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Projects Showcase using custom HTML <details> for precise styling
+    # Projects Showcase using custom HTML <details open> for precise styling
     grid_html = '<div class="grid-container">'
     for proj in projects:
         grid_html += (
@@ -214,6 +214,32 @@ with mid_col:
   <summary class="details-summary">Projects Showcase</summary>
   {grid_html}
 </details>
+
+    # Chat section in expander matching card style
+    chat_html = ''
+    if 'history' not in st.session_state:
+        st.session_state.history = []
+    with st.expander("Chat with Me", expanded=False):
+        for role, msg in st.session_state.history:
+            st.chat_message(role).write(msg)
+        user_query = st.chat_input("Ask me anything about my background or projects…")
+        if user_query:
+            st.session_state.history.append(('user', user_query))
+            st.chat_message('user').write(user_query)
+            # prepare messages and call API
+            system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
+            resume_ctx = "Resume:
+" + "
+".join(f"- {b}" for b in bullets)
+            proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)
+            msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": user_query}]
+            client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
+            assistant_reply = resp.choices[0].message.content
+            st.session_state.history.append(('assistant', assistant_reply))
+            st.chat_message('assistant').write(assistant_reply)
 """, unsafe_allow_html=True
     )
 

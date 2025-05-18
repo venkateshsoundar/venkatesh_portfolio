@@ -89,76 +89,52 @@ with st.sidebar:
 
 # --- Main content ---
 with st.container():
-    # Welcome
-    st.markdown("<div class='section-title'>Welcome</div>", unsafe_allow_html=True)
-    st.markdown("Hello! I'm Venkatesh, a Data Science graduate student and analytics professional.")
-
-    # Resume Highlights
-    st.markdown("<div class='section-title'>Resume Highlights</div>", unsafe_allow_html=True)
-    st.markdown("<div class='card'>", unsafe_allow_html=True)
-    for b in bullets:
-        st.markdown(f"- {b}")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Experience
-    st.markdown("<div class='section-title'>Experience</div>", unsafe_allow_html=True)
-    st.markdown("<div class='card'>", unsafe_allow_html=True)
-    experiences = [
-        "Quality Lead at Deloitte Consulting (8+ yrs)",
-        "AWS ETL Pipeline Architect",
-        "Agile Team Lead",
-        "Insurance & Healthcare Risk Analytics"
+    # Combine section title and content inside coloured cards
+    sections = [
+        ("Welcome", "Hello! I'm Venkatesh, a Data Science graduate student and analytics professional."),
+        ("Resume Highlights", "
+".join(f"- {b}" for b in bullets)),
+        ("Experience", "
+".join(f"- {e}" for e in [
+            "Quality Lead at Deloitte Consulting (8+ yrs)",
+            "AWS ETL Pipeline Architect",
+            "Agile Team Lead",
+            "Insurance & Healthcare Risk Analytics"
+        ])),
+        ("Skills", "
+".join(f"- {s}" for s in [
+            "Python, SQL, R",
+            "AWS (S3, EC2, Lambda, SageMaker)",
+            "Streamlit, Tableau, Power BI",
+            "Scikit-learn, OpenCV, Flask",
+            "Git, Jira, Agile"
+        ])),
+        ("Education", "**M.S. Data Science & Analytics**, University of Calgary, 2024-present
+**B.S. Computer Science**, University of Mumbai, 2014-2018"),
+        ("Certifications", "
+".join(f"- {c}" for c in [
+            "AWS Certified Solutions Architect – Associate",
+            "Tableau Desktop Specialist",
+            "Certified Scrum Master"
+        ]))
     ]
-    for exp in experiences:
-        st.markdown(f"- {exp}")
-    st.markdown("</div>", unsafe_allow_html=True)
+    for title, content in sections:
+        st.markdown(f"<div class='card'><div class='section-title'>{title}</div><div>{content.replace(chr(10), '<br>')}</div></div>", unsafe_allow_html=True)
 
-    # Skills
-    st.markdown("<div class='section-title'>Skills</div>", unsafe_allow_html=True)
-    st.markdown("<div class='card'>", unsafe_allow_html=True)
-    skills = [
-        "Python, SQL, R",
-        "AWS (S3, EC2, Lambda, SageMaker)",
-        "Streamlit, Tableau, Power BI",
-        "Scikit-learn, OpenCV, Flask",
-        "Git, Jira, Agile"
-    ]
-    cols = st.columns(2)
-    for i, skill in enumerate(skills):
-        with cols[i % 2]:
-            st.markdown(f"- {skill}")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Education
-    st.markdown("<div class='section-title'>Education</div>", unsafe_allow_html=True)
-    st.markdown("<div class='card'>", unsafe_allow_html=True)
-    st.markdown("**M.S. Data Science & Analytics**, University of Calgary, 2024-present")
-    st.markdown("**B.S. Computer Science**, University of Mumbai, 2014-2018")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Certifications
-    st.markdown("<div class='section-title'>Certifications</div>", unsafe_allow_html=True)
-    st.markdown("<div class='card'>", unsafe_allow_html=True)
-    certs = [
-        "AWS Certified Solutions Architect – Associate",
-        "Tableau Desktop Specialist",
-        "Certified Scrum Master"
-    ]
-    for cert in certs:
-        st.markdown(f"- {cert}")
-    st.markdown("</div>", unsafe_allow_html=True)
-
-    # Projects Showcase
+    # Projects Showcase in a 3-column grid
     st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
+    # Update grid to 3 columns
+    st.markdown("<style>.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }</style>", unsafe_allow_html=True)
     proj_map = {
         "Quality of Life Analysis": ("City income vs crime trends.", "https://media.giphy.com/media/3o7aD2saalBwwftBIY/giphy.gif", "https://github.com/venkateshsoundar/canadian-qol-analysis"),
         "Wildfire Analysis": ("Alberta wildfire pattern analysis.", "https://media.giphy.com/media/l0HlOvJ7yaacpuSas/giphy.gif", "https://github.com/venkateshsoundar/alberta-wildfire-analysis"),
         "Crime Drivers": ("Mapping Toronto crime factors.", "https://media.giphy.com/media/26u4b45b8KlgAB7iM/giphy.gif", "https://github.com/venkateshsoundar/toronto-crime-drivers"),
-        "Regression Analysis": ("Predicting weight change.", "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif", "https://github.com/venkateshsoundar/weight-change-regression")
+        "Regression Analysis": ("Predicting weight change.", "https://media.giphy.com/media/xT0xezQGU5xCDJuCPe/giphy.gif", "https://github.com/venkateshsoundar/weight-change-regression"),
+        # add more projects here if needed
     }
     st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
     for name, (desc, img, repo_url) in proj_map.items():
-        st.markdown("<div class='card hover-zoom'>", unsafe_allow_html=True)
+        st.markdown("<div class='card hover-zoom' style='background:#e8f4fd;'>", unsafe_allow_html=True)
         st.markdown(
             f"<a href='{repo_url}' target='_blank'><img src='{img}' class='card-img' title='{desc}' /></a>",
             unsafe_allow_html=True

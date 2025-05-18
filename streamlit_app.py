@@ -139,75 +139,42 @@ st.markdown(
   gap: 20px;
   margin-bottom: 20px;
 }
-/* --- Chat Card Full Styling --- */
-#chat-card {
-    background: linear-gradient(135deg, #36537a 0%, #4b6699 100%);
-    border-radius: 18px;
-    padding: 30px 18px 18px 18px;
-    margin-bottom: 18px;
-    margin-top: 0;
-    box-shadow: 0 8px 16px rgba(30,40,80,0.15);
-    max-width: 760px;
-    margin-left: auto;
-    margin-right: auto;
-}
+/* --- Chat Styling --- */
 .chat-area {
-    max-height: 340px;
-    overflow-y: auto;
-    margin-bottom: 14px;
-    padding-right: 8px;
-    padding-left: 2px;
-    background: rgba(255,255,255,0.02);
-    border-radius: 10px;
+  max-height: 340px;
+  overflow-y: auto;
+  margin-bottom: 14px;
+  padding-right:8px;
+  padding-left:2px;
+  background: rgba(255,255,255,0.03);
+  border-radius: 10px;
 }
 .bubble-user {
-    background: #e8f0fe;
-    color: #222;
-    padding: 8px 16px;
-    border-radius: 18px 18px 2px 18px;
-    margin-bottom: 8px;
-    text-align: left;
-    display: inline-block;
-    max-width: 75%;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(120,120,180,0.06);
+  background: #e8f0fe;
+  color: #222;
+  padding: 8px 16px;
+  border-radius: 18px 18px 2px 18px;
+  margin-bottom: 8px;
+  text-align: left;
+  display: inline-block;
+  max-width: 85%;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(120,120,180,0.04);
 }
 .bubble-assistant {
-    background: #5A84B4;
-    color: #fff;
-    padding: 10px 18px;
-    border-radius: 18px 18px 18px 2px;
-    margin-bottom: 8px;
-    text-align: left;
-    display: inline-block;
-    max-width: 85%;
-    font-size: 1rem;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+  background: #5A84B4;
+  color: #fff;
+  padding: 8px 16px;
+  border-radius: 18px 18px 18px 2px;
+  margin-bottom: 8px;
+  text-align: left;
+  display: inline-block;
+  max-width: 85%;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 .row-user { width: 100%; display: flex; justify-content: flex-end; }
 .row-assistant { width: 100%; display: flex; justify-content: flex-start; }
-div.stButton > button {
-    font-weight: 600;
-    color: #fff !important;
-    background-color: #406496 !important;
-    border-radius: 8px;
-    min-width: 68px;
-}
-div.stButton > button:hover {
-    background-color: #203050 !important;
-}
-div.stButton > button.clear-btn {
-    background-color: #e84d4d !important;
-}
-div.stButton > button.clear-btn:hover {
-    background-color: #be2b2b !important;
-}
-input[type="text"] {
-    background: #f7faff !important;
-    color: #203050 !important;
-    border-radius: 7px;
-    font-size: 1rem;
-}
 </style>
     ''', unsafe_allow_html=True
 )
@@ -258,10 +225,9 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    # --- Chat Section: Full Card and all chat content inside ---
-    st.markdown('<div id="chat-card">', unsafe_allow_html=True)
+    # --- Chat Section: Simple, Bug-Free ---
     st.markdown(
-        '<div class="section-title" style="background:#5A84B4;margin-bottom:22px;">Chat with Me</div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with Me</div>',
         unsafe_allow_html=True
     )
 
@@ -270,7 +236,6 @@ with mid_col:
     if 'chat_input' not in st.session_state:
         st.session_state.chat_input = ""
 
-    # Chat bubbles in a scrollable area
     st.markdown('<div class="chat-area">', unsafe_allow_html=True)
     for role, msg in st.session_state.history:
         if role == "user":
@@ -279,21 +244,20 @@ with mid_col:
             st.markdown(f'<div class="row-assistant"><div class="bubble-assistant">{msg}</div></div>', unsafe_allow_html=True)
     st.markdown('</div>', unsafe_allow_html=True)
 
-    # Input/Send/Clear in a form to handle Enter + button smoothly
-    with st.form(key="chat_form", clear_on_submit=True):
-        input_col, send_col, clear_col = st.columns([5, 2, 2])
+    # Use a form for smooth input handling
+    with st.form("chat_form", clear_on_submit=True):
+        input_col, send_col, clear_col = st.columns([6, 1, 1])
         with input_col:
             user_input = st.text_input(
                 "Ask me anything about my background or projects…",
                 key="chat_input",
                 label_visibility="collapsed"
             )
-        send_clicked = send_col.form_submit_button("Send", use_container_width=True)
-        clear_clicked = clear_col.form_submit_button("Clear", use_container_width=True)
+        send_clicked = send_col.form_submit_button("Send")
+        clear_clicked = clear_col.form_submit_button("Clear")
 
         if send_clicked and user_input.strip():
             st.session_state.history.append(('user', user_input))
-
             messages = [
                 {"role": "system", "content": "You are Venkatesh’s assistant."},
                 {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
@@ -316,7 +280,7 @@ with mid_col:
             st.session_state.history = []
             st.session_state.chat_input = ""
 
-    st.markdown("</div>", unsafe_allow_html=True)  # close #chat-card
+    st.markdown("</div>", unsafe_allow_html=True)  # close card
 
 # --- Right Pane ---
 with right_col:

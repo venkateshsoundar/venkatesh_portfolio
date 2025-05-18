@@ -55,16 +55,20 @@ left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
 # --- Left Pane ---
 with left_col:
     st.markdown(
-        f'<div class="card"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
+        f'<div class="card hover-zoom"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic"/><h2>Venkatesh Soundararajan</h2><p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p></div>',
         unsafe_allow_html=True
     )
     st.markdown(
-        '<div class="card"><div class="section-title">Contact</div><p>Email: venkatesh.balusoundar@gmail.com</p><p>LinkedIn: <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank">venkateshbalus</a></p><p>GitHub: <a href="https://github.com/venkateshsoundar" target="_blank">venkateshsoundar</a></p></div>',
+        '<div class="card hover-zoom"><div class="section-title">Contact</div>' +
+        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">' +
+        '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
+        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
+        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
+        '</div></div>',
         unsafe_allow_html=True
     )
 
 # --- Center Pane ---
-with mid_col:
     st.markdown(
         '<div class="card"><div class="section-title">Projects Showcase</div></div>',
         unsafe_allow_html=True

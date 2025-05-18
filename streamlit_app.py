@@ -140,7 +140,7 @@ with mid_col:
     st.markdown(
         f"""
 <style>
-.details-summary {{
+.details-summary {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   color: #ffffff;
   font-size: 1.6rem;
@@ -149,6 +149,7 @@ with mid_col:
   border-radius: 12px;
   margin-bottom: 10px;
   cursor: pointer;
+  text-align: center !important;
 }}
 .grid-container {{
   display: grid;

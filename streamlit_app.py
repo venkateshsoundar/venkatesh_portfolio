@@ -33,8 +33,6 @@ body { background-color: #121212; color: #e0e0e0; }
 .user-msg { background:#627D98; text-align:right; color:#ffffff; }
 .bot-msg { background:#A3BFD9; text-align:left; color:#121212; }
 @keyframes fade-in { from{opacity:0;transform:translateY(10px);} to{opacity:1;transform:translateY(0);} }
-.grid-3 { display:grid; grid-template-columns:1fr 2fr 1fr; gap:20px; }
-.grid-3 .column { padding:10px; background:#1e1e1e; border-radius:12px; }
 </style>
 ''', unsafe_allow_html=True)
 
@@ -64,7 +62,19 @@ with left_col:
         st.session_state.history.append(('user', query))
         system = [{"role":"system","content":"You are Venkatesh’s portfolio assistant. Cite [Resume] or [Projects]."}]
         resume_ctx = "Resume:\n" + "\n".join(f"- {b}" for b in bullets)
-        proj_ctx = "Projects:\n" + "\n".join(["- Quality of Life Analysis","- Alberta Wildfire Analysis","- Toronto Crime Drivers","- Uber Ride Duration Predictor"])
+        proj_ctx = "Projects:\n" + "\n".join([
+            "- Canadian Quality of Life Analysis",
+            "- Alberta Wildfire Analysis",
+            "- Toronto Crime Drivers",
+            "- Weight Change Regression Analysis",
+            "- Calgary Childcare Compliance",
+            "- Social Media Purchase Influence",
+            "- Obesity Level Estimation",
+            "- Weather Data Pipeline (AWS)",
+            "- California Wildfire Data Story",
+            "- Penguin Dataset Chatbot",
+            "- Uber Ride Duration Predictor"
+        ])
         msgs = system + [{"role":"system","content":resume_ctx},{"role":"system","content":proj_ctx},{"role":"user","content":query}]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
@@ -72,38 +82,23 @@ with left_col:
         st.experimental_rerun()
 
 # --- Center pane: Main Details ---
-# Define projects list
-projects = [
-    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Canadian_Quality_of_Life_Analysis.jpeg"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crime_Drivers.jpeg"},
-    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change_Regression_Analysis.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Calgary_Childcare_Compliance.jpeg"},
-    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Social_Media_Purchase_Influence.jpeg"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Obesity_Level_Estimation.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weather_Data_Pipeline_AWS.jpeg"},
-    {"title": "California Wildfire Data Story", "url": "https://github.com/venkateshsoundar/california-wildfire-datastory", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/California_Wildfire_Data_Story.jpeg"},
-    {"title": "Penguin Dataset Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Dataset_Chatbot.jpeg"},
-    {"title": "Uber Ride Duration Predictor", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictor", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uber_Ride_Duration_Predictor.jpeg"}
-]
-
 with mid_col:
-    # Welcome Section
     st.markdown("<div class='card column'><div class='section-title'>Welcome</div><p>Hello! I'm Venkatesh, a Data Science graduate student and analytics professional.</p></div>", unsafe_allow_html=True)
-    # Resume Highlights
     highlights = "<ul>" + "".join(f"<li>{b}</li>" for b in bullets) + "</ul>"
     st.markdown(f"<div class='card column'><div class='section-title'>Resume Highlights</div>{highlights}</div>", unsafe_allow_html=True)
-    # Projects Showcase Grid
+    # Projects Showcase as grid
     st.markdown("<div class='section-title'>Projects Showcase</div>", unsafe_allow_html=True)
-    st.markdown("<div class='grid-container'>", unsafe_allow_html=True)
-    for proj in projects:
-        st.markdown("<div class='project-item'>", unsafe_allow_html=True)
-        st.markdown(
-            f"<a href='{proj['url']}' target='_blank'><img src='{proj['image']}' /><div class='overlay'>{proj['title']}</div></a>",
-            unsafe_allow_html=True
-        )
-        st.markdown("</div>", unsafe_allow_html=True)
-    st.markdown("</div>", unsafe_allow_html=True)
+    num_cols = 3
+    for i in range(0, len(projects), num_cols):
+        cols = st.columns(num_cols, gap="medium")
+        for idx, proj in enumerate(projects[i:i+num_cols]):
+            with cols[idx]:
+                st.markdown(
+                    f"<a href='{proj['url']}' target='_blank'>"
+                    f"<img src='{proj['image']}' class='card-img' />"
+                    f"</a>"
+                    , unsafe_allow_html=True)
+                st.markdown(f"**{proj['title']}**", unsafe_allow_html=True)
 
 # --- Right pane: Skills, Experience, Certifications ---
 with right_col:

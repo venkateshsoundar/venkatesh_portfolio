@@ -6,7 +6,7 @@ import PyPDF2
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Load resume bullets (optional: you can comment out if not needed) ---
+# --- Load resume bullets (optional) ---
 @st.cache_data
 def load_resume_bullets(url, max_bullets=5):
     r = requests.get(url)
@@ -77,36 +77,6 @@ st.markdown(
   margin: 0 8px;
   vertical-align: middle;
 }
-.project-item {
-  position: relative;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-  border-radius: 12px;
-}
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .3s ease;
-}
-.project-item:hover .card-img {
-  transform: scale(1.05);
-}
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity .3s ease;
-  font-size: 1.2rem;
-  color: #ffffff;
-}
-.project-item:hover .overlay {
-  opacity: 1;
-}
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -132,13 +102,88 @@ st.markdown(
   text-align: center;
   cursor: pointer;
 }
-.grid-container {
+/* --- Flippable Card Styling --- */
+.flip-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 22px;
+  margin-bottom: 22px;
+}
+.flip-card {
+  background-color: transparent;
+  width: 100%;
+  height: 320px;
+  perspective: 1100px;
+  cursor: pointer;
+  margin: 0 auto;
+}
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.7s cubic-bezier(.4,2,.45,.8);
+  transform-style: preserve-3d;
+}
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(360deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  border-radius: 14px;
+  box-shadow: 0 5px 22px rgba(30,40,80,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flip-card-front {
+  background: linear-gradient(135deg, #20344a 0%, #31486b 100%);
+  color: #fff;
+}
+.flip-card-front img {
+  width: 80%;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 12px;
+  margin-top: 18px;
+}
+.flip-card-front .proj-title {
+  font-size: 1.1rem;
+  font-weight: bold;
+  margin-bottom: 7px;
+}
+.flip-card-back {
+  background: linear-gradient(135deg, #2f5c79 0%, #3e83aa 100%);
+  color: #fff;
+  transform: rotateY(180deg);
+  padding: 18px;
+  font-size: 1.02rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.flip-card-back a {
+  color: #ffe57a;
+  text-decoration: underline;
+  font-weight: 500;
 }
 </style>
+<script>
+window.addEventListener("DOMContentLoaded", function() {
+  document.querySelectorAll('.flip-card').forEach(card => {
+    card.addEventListener('click', function(e) {
+      e.currentTarget.classList.toggle('flipped');
+    });
+  });
+});
+</script>
     ''', unsafe_allow_html=True
 )
 
@@ -170,20 +215,32 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    # --- Projects Showcase ---
-    grid_html = '<div class="grid-container">'
+    # --- Flippable Projects Showcase ---
+    flip_grid_html = '<div class="flip-grid">'
     for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
-        )
-    grid_html += '</div>'
+        summary = f"Project: <b>{proj['title']}</b><br>Click below to view code & details."
+        flip_grid_html += f"""
+        <div class="flip-card">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <img src="{proj['image']}" alt="Project image"/>
+              <div class="proj-title">{proj['title']}</div>
+            </div>
+            <div class="flip-card-back">
+              <div>{summary}</div>
+              <br>
+              <a href="{proj['url']}" target="_blank">🔗 GitHub Link</a>
+            </div>
+          </div>
+        </div>
+        """
+    flip_grid_html += '</div>'
 
     st.markdown(
         f"""
 <details open>
   <summary class="details-summary">Projects Showcase</summary>
-  {grid_html}
+  {flip_grid_html}
 </details>
 """,
         unsafe_allow_html=True

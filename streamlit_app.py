@@ -116,20 +116,23 @@ with mid_col:
         '<div class="card hover-zoom"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-    # Collapsible Projects Showcase
-    exp = st.expander("Projects Showcase", expanded=False)
-    with exp:
-        num_cols = 3
-        for i in range(0, len(projects), num_cols):
-            cols = st.columns(num_cols, gap="medium")
-            for j, proj in enumerate(projects[i:i+num_cols]):
-                with cols[j]:
-                    st.markdown(
-                        f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-                        f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>',
-                        unsafe_allow_html=True
-                    )
-            st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
+        # Projects Showcase as card header
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Projects Showcase</div></div>',
+        unsafe_allow_html=True
+    )
+    # Projects grid inside card-like layout
+    num_cols = 3
+    for i in range(0, len(projects), num_cols):
+        cols = st.columns(num_cols, gap="medium")
+        for j, proj in enumerate(projects[i:i+num_cols]):
+            with cols[j]:
+                st.markdown(
+                    f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+                    f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>',
+                    unsafe_allow_html=True
+                )
+        st.markdown('<div style="height:20px;"></div>', unsafe_allow_html=True)
 
 # --- Right Pane ---
 with right_col:

@@ -107,6 +107,8 @@ with mid_col:
         ]}" for p in projects)},
             {"role": "user", "content": query}
         ]}" for p in projects)},
+            {"role": "user", "content": query}
+        ]}" for p in projects)},
             {"role":"user","content":query}
         ]
         client = OpenAI(api_key=st.secrets["DEEPSEEK_API_KEY"])

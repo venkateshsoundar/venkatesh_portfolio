@@ -45,13 +45,14 @@ st.markdown(
 body { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DS.jpg') center/cover no-repeat; color: #ffffff; }
 .stApp .sidebar-content { background-color: rgba(31,42,68,0.9); }
 .card {
-  width: 100%;
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:20px;
-  background:linear-gradient(135deg,#1F2A44 0%,#324665 100%);
-  transition:transform .3s ease,box-shadow .3s ease;
-  color:#ffffff;
+  display: block !important;
+  width: 100% !important;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 20px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  transition: transform .3s ease, box-shadow .3s ease;
+  color: #ffffff;
   box-sizing: border-box;
 }
 .card * { color:#ffffff!important; }

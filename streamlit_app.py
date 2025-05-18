@@ -49,20 +49,21 @@ st.markdown(
     .section-title { font-size: 1.8em; margin-bottom: 12px;
                      border-bottom: 3px solid #bb86fc; padding-bottom: 4px;
                      color: #bb86fc; }
-    .profile-pic { border-radius: 50%; width: 150px; margin-bottom: 12px; }
+    .profile-pic { border-radius: 50%; width: 150px; margin: 0 auto 12px; display: block; }
     .grid-container { display: grid; grid-template-columns: repeat(3, 1fr);
                       gap: 20px; }
     .project-item { position: relative; overflow: hidden;
-                    border-radius: 12px; }
-    .project-item img { width: 100%; border-radius: 8px;
-                         transition: transform 0.3s ease; }
+                    border-radius: 12px; width: 100%; }
+    .project-item img { width: 100%; height: 200px; object-fit: cover;
+                         border-radius: 8px; transition: transform 0.3s ease; }
     .project-item:hover img { transform: scale(1.1); }
     .overlay { position: absolute; top: 0; left: 0;
                width: 100%; height: 100%;
                background: rgba(0,0,0,0.7);
                display: flex; align-items: center;
                justify-content: center; color: #fff;
-               opacity: 0; transition: opacity 0.3s ease; }
+               opacity: 0; transition: opacity 0.3s ease;
+               font-size: 1.2em; text-align: center; padding: 10px; }
     .project-item:hover .overlay { opacity: 1; }
     .typing-indicator span { display: inline-block;
         width: 8px; height: 8px; margin: 0 2px;
@@ -81,8 +82,7 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-# --- Sidebar: Profile + Chat ---
+# --- Sidebar: Profile + Chat --- + Chat ---
 with st.sidebar:
     st.markdown(
         "<img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/assets/profile.jpg' class='profile-pic' />",

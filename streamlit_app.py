@@ -1,40 +1,4 @@
-# Streamlit Portfolio Chatbot with Dark Theme
-# Adapted from Sven-Bo/digital-resume-template-streamlit and customized with all sections
-
-import streamlit as st
-from openai import OpenAI
-import requests
-import io
-import PyPDF2
-from time import sleep
-
-# --- Page configuration ---
-st.set_page_config(
-    page_title="Venkatesh Portfolio",
-    layout="wide",
-    initial_sidebar_state="expanded"
-)
-
-# --- Load resume bullets once ---
-@st.cache_data
-def load_resume_bullets(url, max_bullets=5):
-    r = requests.get(url)
-    r.raise_for_status()
-    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    text = "\n".join(p.extract_text() or "" for p in reader.pages)
-    sents = [s.strip() for s in text.split('.') if len(s) > 50]
-    return sents[:max_bullets]
-
-resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/"
-    "venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
-)
-bullets = load_resume_bullets(resume_url)
-
-# --- Global Dark Theme and custom CSS ---
-st.markdown(
-    """
-    <style>
+<style>
     /* Keep sidebar expanded */
     [aria-label="Toggle sidebar"] { visibility: hidden !important; }
     /* Overall background and text */
@@ -50,11 +14,13 @@ st.markdown(
                      border-bottom: 3px solid #bb86fc; padding-bottom: 4px;
                      color: #bb86fc; }
     .profile-pic { border-radius: 50%; width: 150px; margin: 0 auto 12px; display: block; }
+    /* Projects grid: 3 columns */
     .grid-container { display: grid; grid-template-columns: repeat(3, 1fr);
                       gap: 20px; }
     .project-item { position: relative; overflow: hidden;
-                    border-radius: 12px; width: 100%; }
-    .project-item img { width: 100%; height: 200px; object-fit: cover;
+                    border-radius: 12px; }
+    /* Uniform square images */
+    .project-item img { width: 100%; aspect-ratio: 1 / 1; object-fit: cover;
                          border-radius: 8px; transition: transform 0.3s ease; }
     .project-item:hover img { transform: scale(1.1); }
     .overlay { position: absolute; top: 0; left: 0;
@@ -65,6 +31,7 @@ st.markdown(
                opacity: 0; transition: opacity 0.3s ease;
                font-size: 1.2em; text-align: center; padding: 10px; }
     .project-item:hover .overlay { opacity: 1; }
+    /* Chat animations */
     .typing-indicator span { display: inline-block;
         width: 8px; height: 8px; margin: 0 2px;
         background: #bb86fc; border-radius: 50%;
@@ -78,7 +45,7 @@ st.markdown(
                          to { opacity: 1; transform: translateY(0); } }
     a { color: #bb86fc; text-decoration: none; }
     a:hover { text-decoration: underline; }
-    </style>
+</style>
     """,
     unsafe_allow_html=True
 )

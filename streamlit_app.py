@@ -176,5 +176,4 @@ with right_col:
         '<div class="card hover-zoom"><div class="section-title">Certifications</div>' +
         '<ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul>' +
         '</div>', unsafe_allow_html=True
-    )</div><ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul></div>',unsafe_allow_html=True)
-    st.markdown('<div class="card hover-zoom"><div class="section-title">Certifications</div><ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul></div>',unsafe_allow_html=True)
+    )

@@ -100,7 +100,7 @@ with mid_col:
         cls = 'user-msg' if role=='user' else 'bot-msg'
         st.markdown(f"<div class='chat-bubble {cls}'>{msg}</div>", unsafe_allow_html=True)
     query = st.chat_input("Ask me anything about my background or projects...")
-    : Skills, Experience, Certifications ---: Skills, Experience, Certifications ---
+    
 with right_col:
     # Skills icons card (expanded)
     st.markdown(

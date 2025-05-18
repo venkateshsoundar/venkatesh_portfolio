@@ -123,7 +123,7 @@ with left_col:
     if query:
         st.session_state.history.append(('user', query))
         system = [{"role":"system","content":"You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:
+                resume_ctx = "Resume:
 " + "
 ".join(f"- {b}" for b in bullets)
         proj_ctx = "Projects:
@@ -149,7 +149,7 @@ with mid_col:
             with cols[idx]:
                 st.markdown(
                     f"<div class='project-item hover-zoom'>"
-                    f"<a href='{proj['url']}' target='_blank'>"
+                    f"<a href='{proj['url']}' target='_blank'>
                     f"<img src='{proj['image']}' class='card-img' />"
                     f"<div class='overlay'>{proj['title']}</div>"
                     f"</a>"

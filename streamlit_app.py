@@ -110,30 +110,41 @@ with mid_col:
                     unsafe_allow_html=True
                 )
         st.markdown('<div style="height:20px;"></div>',unsafe_allow_html=True)
-    # Chat
-    st.markdown('<div class="card hover-zoom"><div class="section-title">Chat with Me 📋</div></div>',unsafe_allow_html=True)
-    if 'history' not in st.session_state: st.session_state.history=[]
-    for role, msg in st.session_state.history:
-        cls='user-msg' if role=='user' else 'bot-msg'
-        st.markdown(f'<div class="chat-bubble {cls}">{msg}</div>',unsafe_allow_html=True)
-    query=st.chat_input("Ask me anything...")
+        # Chat section in separate frame
+    chat_frame = st.container()
+    with chat_frame:
+        st.markdown("<div class='card hover-zoom'><div class='section-title'>Chat with Me 📋</div></div>", unsafe_allow_html=True)
+        # display history using Streamlit chat messages
+        for role, msg in st.session_state.history:
+            if role == 'user':
+                st.chat_message('user').write(msg)
+            else:
+                st.chat_message('assistant').write(msg)
+    # user input
+    query = st.chat_input("Ask me anything about my background or projects…")
     if query:
-        st.session_state.history.append(('user',query))
-        system=[{"role":"system","content":"You are Venkatesh’s assistant."}]
-        resume_ctx="Resume:\n"+"\n".join(f"- {b}"for b in bullets)
-        proj_ctx="Projects:\n"+"\n".join(f"- {p['title']}"for p in projects)
-        msgs=system+[
-            {"role":"system","content":resume_ctx},
-            {"role":"system","content":proj_ctx},
-            {"role":"user","content":query}
-        ]
-        client=OpenAI(base_url="https://openrouter.ai/api/v1",api_key=st.secrets["DEEPSEEK_API_KEY"])
-        resp=client.chat.completions.create(model="deepseek/deepseek-r1:free",messages=msgs)
-        st.session_state.history.append(('assistant', resp.choices[0].message.content))
-        # rerun to immediately display assistant response
-        st.experimental_rerun()
+        # display user message immediately
+        with chat_frame:
+            st.chat_message('user').write(query)
+        st.session_state.history.append(('user', query))
+        # prepare messages
+        system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
+        resume_ctx = "Resume:
+" + "
+".join(f"- {b}" for b in bullets)
+        proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)
+        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
+        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
+        assistant_reply = resp.choices[0].message.content
+        st.session_state.history.append(('assistant', assistant_reply))
+        # display assistant reply immediately
+        with chat_frame:
+            st.chat_message('assistant').write(assistant_reply)
 
-# --- Right pane ---
+# --- Right pane--- ---
 with right_col:
     # Skills as text
     st.markdown(

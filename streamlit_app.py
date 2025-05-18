@@ -179,7 +179,7 @@ with mid_col:
 
     # Chat With Me Card
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#324665;">Chat with Me</div>',
+        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with Me</div>',
         unsafe_allow_html=True
     )
     if 'history' not in st.session_state:
@@ -194,8 +194,12 @@ with mid_col:
 
         messages = [
             {"role": "system", "content": "You are Venkatesh’s assistant."},
-            {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
-            {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
+            {"role": "system", "content": "Resume:
+" + "
+".join(f"- {b}" for b in bullets)},
+            {"role": "system", "content": "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects)},
             {"role": "user", "content": user_query}
         ]
         client = OpenAI(

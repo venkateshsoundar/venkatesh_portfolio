@@ -149,7 +149,7 @@ section[data-testid="stExpander"] > div > div[role="button"] {
   font-weight: bold !important;
   padding: 20px !important;
   border-radius: 12px !important;
-  margin-bottom: 0px !important;
+  margin-bottom: 10px !important;
   text-align: center !important;
   cursor: pointer !important;
 }
@@ -170,7 +170,7 @@ section[data-testid="stExpander"] div[role="group"]::-webkit-scrollbar-thumb {
   border-radius: 4px;
 }
 </style>
-    ''' , unsafe_allow_html=True)
+    ''', unsafe_allow_html=True)
 
 # --- Layout Columns ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
@@ -193,6 +193,7 @@ with mid_col:
         '<div class="card"><div class="typewriter"><h1>Hello!</h1></div><p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
+
     # Projects Showcase
     grid_html = '<div class="grid-container">'
     for proj in projects:
@@ -207,26 +208,32 @@ with mid_col:
 """,
         unsafe_allow_html=True
     )
-    # Chat Section
-    with st.expander("Chat with Me", expanded=False):
-        if 'history' not in st.session_state:
-            st.session_state.history = []
-        # Display chat history above input
-        for role, msg in st.session_state.history:
-            st.chat_message(role).write(msg)
-        # Input box
-        user_query = st.chat_input("Ask me anything about my background or projects…")
-        if user_query:
-            st.session_state.history.append(('user', user_query))
-            messages = [
-                {"role": "system", "content": "You are Venkatesh's assistant."},
-                {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
-                {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
-                {"role": "user", "content": user_query}
-            ]
-            client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
-            resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
-            st.session_state.history.append(('assistant', resp.choices[0].message.content))
+
+    # Chat Section (matches Projects Showcase)
+    st.markdown(
+        """
+<details>
+  <summary class="details-summary">Chat with Me</summary>
+""",
+        unsafe_allow_html=True,
+    )
+    if 'history' not in st.session_state:
+        st.session_state.history = []
+    for role, msg in st.session_state.history:
+        st.chat_message(role).write(msg)
+    user_query = st.chat_input("Ask me anything about my background or projects…")
+    if user_query:
+        st.session_state.history.append(('user', user_query))
+        messages = [
+            {"role": "system", "content": "You are Venkatesh's assistant."},
+            {"role": "system", "content": "Resume:\n" + "\n".join(f"- {b}" for b in bullets)},
+            {"role": "system", "content": "Projects:\n" + "\n".join(f"- {p['title']}" for p in projects)},
+            {"role": "user", "content": user_query}
+        ]
+        client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+        resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=messages)
+        st.session_state.history.append(('assistant', resp.choices[0].message.content))
+    st.markdown("</details>", unsafe_allow_html=True)
 
 # --- Right Pane: Skills, Experience, Certifications ---
 with right_col:

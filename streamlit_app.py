@@ -13,7 +13,8 @@ def load_resume_bullets(url, max_bullets=5):
     r = requests.get(url)
     r.raise_for_status()
     reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    text = "\n".join(page.extract_text() or "" for page in reader.pages)
+    text = "
+".join(page.extract_text() or "" for page in reader.pages)
     sentences = [s.strip() for s in text.split('.') if len(s) > 50]
     return sentences[:max_bullets]
 
@@ -97,7 +98,7 @@ with left_col:
         unsafe_allow_html=True
     )
 
-# --- Center pane: Main Details ---
+# --- Center pane: Main Details + Chat ---
 with mid_col:
     # Welcome card
     st.markdown(
@@ -125,8 +126,7 @@ with mid_col:
                     unsafe_allow_html=True
                 )
         # spacer after each project row
-        st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True)
-    
+        st.markdown("<div style='height:20px;'></div>", unsafe_allow_html=True) 
     # Chat section moved here
     st.markdown("<div class='card'><div class='section-title'>Chat with Me 📋</div></div>", unsafe_allow_html=True)
     if 'history' not in st.session_state:
@@ -136,9 +136,7 @@ with mid_col:
         st.markdown(f"<div class='chat-bubble {cls}'>{msg}</div>", unsafe_allow_html=True)
     query = st.chat_input("Ask me anything about my background or projects...")
     if query:
-        # append user message
         st.session_state.history.append(('user', query))
-        # prepare and call assistant
         system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
         resume_ctx = "Resume:
 " + "
@@ -146,11 +144,17 @@ with mid_col:
         proj_ctx = "Projects:
 " + "
 ".join(f"- {p['title']}" for p in projects)
-        msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]
+        msgs = system + [
+            {"role": "system", "content": resume_ctx},
+            {"role": "system", "content": proj_ctx},
+            {"role": "user", "content": query}
+        ]
         client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
         resp = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=msgs)
-        # append assistant response
-        st.session_state.history.append(('assistant', resp.choices[0].message.content))with right_col:
+        st.session_state.history.append(('assistant', resp.choices[0].message.content))
+
+# --- Right pane: Skills, Experience, Certifications ---
+with right_col:
     # Skills icons card (expanded)
     st.markdown(
         "<div class='card hover-zoom'><div class='section-title'>Skills</div>"
@@ -170,13 +174,13 @@ with mid_col:
     )
     # Experience card
     st.markdown(
-        "<div class='card hover-zoom'><div class='section-title'>Experience</div>"
-        "<ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul>"
+        "<div class='card hover-zoom'><div class='section-title'>Experience</div>" +
+        "<ul><li>Deloitte Quality Lead (8+ yrs)</li><li>AWS Data Pipelines</li><li>Agile Team Lead</li><li>Risk Analytics</li></ul>" +
         "</div>", unsafe_allow_html=True
     )
     # Certifications card
     st.markdown(
-        "<div class='card hover-zoom'><div class='section-title'>Certifications</div>"
-        "<ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul>"
+        "<div class='card hover-zoom'><div class='section-title'>Certifications</div>" +
+        "<ul><li>AWS Solutions Architect</li><li>Tableau Specialist</li><li>Scrum Master</li></ul>" +
         "</div>", unsafe_allow_html=True
     )

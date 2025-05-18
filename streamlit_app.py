@@ -103,10 +103,12 @@ with mid_col:
     if query:
         st.session_state.history.append(('user', query))
         system = [{"role": "system", "content": "You are Venkatesh’s assistant."}]
-        resume_ctx = "Resume:
+                resume_ctx = "Resume:
 " + "
 ".join(f"- {b}" for b in bullets)
         proj_ctx = "Projects:
+" + "
+".join(f"- {p['title']}" for p in projects) "Projects:
 " + "
 ".join(f"- {p['title']}" for p in projects)
         msgs = system + [{"role": "system", "content": resume_ctx}, {"role": "system", "content": proj_ctx}, {"role": "user", "content": query}]

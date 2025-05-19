@@ -434,6 +434,104 @@ with left_col:
     unsafe_allow_html=True
 )
 
+    st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>
+      <div class="timeline-vertical">
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="date">2024</div>
+            <div class="title">Insurance &amp; Guidewire Suite Analyst 10.0</div>
+            <div class="sub">Jasper – Guidewire Education</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="date">2023</div>
+            <div class="title">Karate DSL</div>
+            <div class="sub">Udemy</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="date">2023</div>
+            <div class="title">Rest API Automation</div>
+            <div class="sub">TestLeaf Software Solutions Pvt. Ltd.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="date">2022</div>
+            <div class="title">Selenium WebDriver</div>
+            <div class="sub">TestLeaf Software Solutions Pvt. Ltd.</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="date">2020</div>
+            <div class="title">SQL for Data Science</div>
+            <div class="sub">Coursera</div>
+          </div>
+        </div>
+        <div class="timeline-item">
+          <div class="dot"></div>
+          <div class="content">
+            <div class="date">2020</div>
+            <div class="title">SDET</div>
+            <div class="sub">Capgemini</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .timeline-vertical {
+        border-left: 2px solid rgba(255,255,255,0.3);
+        margin: 12px 0 0 12px;
+        padding-left: 12px;
+      }
+      .timeline-item {
+        position: relative;
+        margin-bottom: 16px;
+      }
+      .timeline-item .dot {
+        position: absolute;
+        left: -8px;
+        top: 4px;
+        width: 12px;
+        height: 12px;
+        background: #E67E22;
+        border-radius: 50%;
+      }
+      .timeline-item .content {
+        color: #ffffff;
+        margin-left: 8px;
+      }
+      .timeline-item .date {
+        font-size: 0.85rem;
+        color: #F1C40F;
+        margin-bottom: 4px;
+      }
+      .timeline-item .title {
+        font-weight: bold;
+        font-size: 0.95rem;
+      }
+      .timeline-item .sub {
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+    </style>
+    ''',
+    unsafe_allow_html=True
+)
+
+
 
 
 

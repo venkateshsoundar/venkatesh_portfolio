@@ -2,7 +2,7 @@ import streamlit as st
 import requests
 import io
 import PyPDF2
-import OpenAI
+import openai
 
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")

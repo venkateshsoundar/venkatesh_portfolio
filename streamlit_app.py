@@ -448,10 +448,10 @@ with mid_col:
 )
 
     
-    st.markdown(
-        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
-        unsafe_allow_html=True
-    )
+  #  st.markdown(
+  #      '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
+  #      unsafe_allow_html=True
+  #  )
 
     # --- AI Chatbot Section ---
     st.markdown("""

@@ -74,10 +74,10 @@ st.markdown(
   border-radius: 6px;
 }
 .profile-pic-popout {
-  width: 180px;
-  height: 180px;
+  width: 160px;
+  height: 160px;
   object-fit: cover;
-  border-radius: 75%;
+  border-radius: 25%;
   border: 4px solid #fff;
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
   position: absolute;
@@ -85,17 +85,6 @@ st.markdown(
   transform: translateX(-50%);
   top: -90px;
   z-index: 10;
-}
-.profile-pic-blend {
-  width: 100%;
-  height: 140px; /* Or any preferred height */
-  object-fit: cover;
-  border-radius: 12px 12px 0 0; /* Rounded top corners only */
-  display: block;
-  position: static;
-  margin: 0;
-  box-shadow: none;
-  border: none;
 }
 .profile-card-container {
   position: relative;
@@ -208,7 +197,7 @@ with left_col:
     st.markdown('''
     <div class="profile-card-container">
       <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
-           class="profile-pic-blend" />
+           class="profile-pic-popout" />
       <div class="card profile-card-content hover-zoom">
         <h2>Venkatesh Soundararajan</h2>
         <p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>

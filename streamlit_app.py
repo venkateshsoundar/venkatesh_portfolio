@@ -218,29 +218,10 @@ with left_col:
 # --- Center Pane ---
 with mid_col:
     st.markdown(
-        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello! Welcome to my Portfolio</h1></div>'
-        '<p>Explore my projects below.</p></div>',
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello! Welcome to my Portfolio</h1></div>',
         unsafe_allow_html=True
     )
 
-    # --- Projects Showcase ---
-    grid_html = '<div class="grid-container">'
-    for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
-        )
-    grid_html += '</div>'
-
-    st.markdown(
-        f"""
-<details >
-  <summary class="details-summary">Projects Showcase</summary>
-  {grid_html}
-</details>
-""",
-        unsafe_allow_html=True
-    )
     # --- AI Chatbot Section ---
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with My Bot!</div>'
@@ -271,6 +252,26 @@ with mid_col:
             )
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
+
+    # --- Projects Showcase ---
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        )
+    grid_html += '</div>'
+
+    st.markdown(
+        f"""
+<details >
+  <summary class="details-summary">Click her to view Projects Showcase</summary>
+  {grid_html}
+</details>
+""",
+        unsafe_allow_html=True
+    )
+    
 
 # --- Right Pane ---
 with right_col:

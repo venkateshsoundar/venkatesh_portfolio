@@ -508,13 +508,11 @@ input[data-baseweb="input"]:focus {
         src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
         alt="AI Background"
       />
-      <div class="content">
-        <div class="section-title"">
-          Chat with My Buddy Bot! 🤖
-        </div>
-        <p style="color:#ADD8E6; margin-top:4px; margin-bottom:0;">
-          Ask anything about my professional projects and skills!
-        </p>
+      <div style="text-align: center; margin: 24px 0;">
+      <h2 style="color: #ffffff; margin: 0;">Chat with My Buddy Bot! 🤖</h2>
+      <p style="color: #ADD8E6; margin: 4px 0 0;">
+        Ask anything about my professional projects and skills!
+      </p>
       </div>
     </div>
     """,

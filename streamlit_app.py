@@ -92,7 +92,7 @@ st.markdown(
   margin-bottom: 20px;
 }
 .profile-card-content {
-  padding-top: 70px;
+  padding-top: 100px;
 }
 .contact-icon {
   width: 30px;

@@ -229,8 +229,8 @@ with mid_col:
 
 
     # Persist chat history
-    #if "history" not in st.session_state:
-    #    st.session_state.history = []
+    if "history" not in st.session_state:
+        st.session_state.history = []
 
     # Display past chat
     #for role, msg in st.session_state.history:

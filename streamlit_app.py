@@ -381,30 +381,39 @@ with right_col:
 }
 .exp-item {
   position: relative;
-  margin-bottom: 30px;
+  margin-bottom: 38px;
+  min-height: 48px;
+  padding-left: 40px;
 }
 .exp-dot {
   position: absolute;
-  left: -30px;
-  top: 7px;
-  width: 16px;
-  height: 16px;
-  background: #406496;
+  left: -32px;
+  top: 0;
+  width: 34px;
+  height: 34px;
+  background: #fff;
   border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px #b3c6e2;
+  box-shadow: 0 0 0 2px #b3c6e2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.exp-logo {
+  width: 28px; height: 28px; object-fit: contain;
+  background: #fff; border-radius: 50%; padding: 2px;
 }
 .exp-item:not(:last-child)::after {
   content: '';
   position: absolute;
-  left: -22px;
-  top: 24px;
+  left: -15px;
+  top: 34px;
   width: 2px;
-  height: 35px;
+  height: 48px;
   background: #b3c6e2;
   z-index: 0;
 }
-.exp-title { font-weight: bold; font-size: 1.1rem; }
+.exp-title { font-weight: bold; font-size: 1.08rem; }
 .exp-company { color: #34495E; font-size: 1rem; }
 .exp-date { color: #406496; font-size: 0.97rem; }
 </style>
@@ -412,37 +421,49 @@ with right_col:
   <div class="section-title" style="background:#8E44AD;">Experience</div>
   <div class="exp-timeline">
     <div class="exp-item">
-      <div class="exp-dot"></div>
+      <div class="exp-dot">
+        <img src="https://cdn-icons-png.flaticon.com/512/295/295128.png" class="exp-logo" />
+      </div>
       <div class="exp-title">Software Developer Intern</div>
       <div class="exp-company">Tech Insights Inc, Canada</div>
       <div class="exp-date">May 2025 – Present</div>
     </div>
     <div class="exp-item">
-      <div class="exp-dot"></div>
+      <div class="exp-dot">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Deloitte_Logo.png" class="exp-logo" />
+      </div>
       <div class="exp-title">Senior Consultant</div>
       <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
       <div class="exp-date">June 2024 – August 2024</div>
     </div>
     <div class="exp-item">
-      <div class="exp-dot"></div>
+      <div class="exp-dot">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/4/4c/Deloitte_Logo.png" class="exp-logo" />
+      </div>
       <div class="exp-title">Consultant</div>
       <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
       <div class="exp-date">October 2021 – June 2024</div>
     </div>
     <div class="exp-item">
-      <div class="exp-dot"></div>
+      <div class="exp-dot">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Capgemini_201x_logo.svg/512px-Capgemini_201x_logo.svg.png" class="exp-logo" />
+      </div>
       <div class="exp-title">Consultant</div>
       <div class="exp-company">Capgemini Technology Services India Private Limited, India</div>
       <div class="exp-date">May 2018 – October 2021</div>
     </div>
     <div class="exp-item">
-      <div class="exp-dot"></div>
+      <div class="exp-dot">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Cognizant%27s_logo.png" class="exp-logo" />
+      </div>
       <div class="exp-title">Associate</div>
       <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
       <div class="exp-date">May 2016 – May 2018</div>
     </div>
     <div class="exp-item">
-      <div class="exp-dot"></div>
+      <div class="exp-dot">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/1/1e/Cognizant%27s_logo.png" class="exp-logo" />
+      </div>
       <div class="exp-title">Programmer Analyst</div>
       <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
       <div class="exp-date">May 2016 – May 2018</div>
@@ -450,57 +471,9 @@ with right_col:
   </div>
 </div>
 """, unsafe_allow_html=True)
-    st.markdown("""
-<style>
-.exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-.exp-card {
-  background: #fff;
-  color: #22314B;
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(30,40,80,0.07);
-  padding: 14px 16px;
-  margin-bottom: 8px;
-}
-.exp-job-title { font-weight: bold; color: #8E44AD; font-size: 1.09rem;}
-.exp-job-date { font-size: 0.96rem; color: #406496;}
-.exp-job-company { font-size: 0.99rem; margin-bottom: 0;}
-</style>
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#8E44AD;">Experience</div>
-  <div class="exp-grid">
-    <div class="exp-card">
-      <div class="exp-job-title">Software Developer Intern</div>
-      <div class="exp-job-company">Tech Insights Inc, Canada</div>
-      <div class="exp-job-date">May 2025 – Present</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-job-title">Senior Consultant</div>
-      <div class="exp-job-company">Deloitte Consulting India Pvt Ltd, India</div>
-      <div class="exp-job-date">June 2024 – August 2024</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-job-title">Consultant</div>
-      <div class="exp-job-company">Deloitte Consulting India Pvt Ltd, India</div>
-      <div class="exp-job-date">Oct 2021 – June 2024</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-job-title">Consultant</div>
-      <div class="exp-job-company">Capgemini Technology Services, India</div>
-      <div class="exp-job-date">May 2018 – Oct 2021</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-job-title">Associate</div>
-      <div class="exp-job-company">Cognizant Technology Solutions, India</div>
-      <div class="exp-job-date">May 2016 – May 2018</div>
-    </div>
-    <div class="exp-card">
-      <div class="exp-job-title">Programmer Analyst</div>
-      <div class="exp-job-company">Cognizant Technology Solutions, India</div>
-      <div class="exp-job-date">May 2016 – May 2018</div>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+
+
+
 
 
 

@@ -455,39 +455,49 @@ with mid_col:
   #      unsafe_allow_html=True
   #  )
 
-    ai_url="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+
     st.markdown(
     f"""
     <style>
       .welcome-card2 {{
         background: url("{ai_url}") center/cover no-repeat;
         border-radius: 16px;
-        padding: 3rem;
-        color: white;              /* or pick a contrasting color */
-        min-height: 180;         /* adjust height as needed */
-        display: flex;
-        align-items: center;
-        justify-content: center;
+        padding: 0;                   /* remove internal padding */
+        color: white;
+        height: 200px;                /* fixed banner height */
+        position: relative;
+        overflow: hidden;
+      }}
+      .welcome-card2 .text-container {{
+        position: absolute;
+        top: 60%;                     /* drop text lower */
+        right: 1rem;                  /* align text to the right edge */
+        transform: translateY(-50%);  /* center vertically at 60% point */
         text-align: right;
       }}
-      /* If you need to override Streamlit container padding: */
-      .stApp .welcome-card {{
-        margin: 0 auto 1rem auto;
+      .welcome-card2 h2 {{
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
       }}
     </style>
     """,
     unsafe_allow_html=True,
 )
-    st.markdown(  
+
+    st.markdown(
     """
-    <div class="welcome-card2";>
-      <div >
-        <h2>Chat with My Buddy Bot🤖</h2>
+    <div class="welcome-card2">
+      <div class="text-container">
+        <h2>Chat with My Buddy Bot 🤖</h2>
       </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
+
 
 
 

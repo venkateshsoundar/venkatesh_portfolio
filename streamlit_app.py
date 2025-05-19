@@ -210,6 +210,38 @@ with mid_col:
         unsafe_allow_html=True
     )
 
+    st.header("💬 Venkatesh AI ChatBot")
+    api_key = st.secrets["DEEPSEEK_API_KEY"]
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+    )
+
+    # Persist history
+    if "history" not in st.session_state:
+        st.session_state.history = []
+
+    # Display past chat
+    for role, msg in st.session_state.history:
+        st.chat_message(role).write(msg)
+    
+    # New user input
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.session_state.history.append(("user", user_input))
+        st.chat_message("user").write(user_input)
+
+        # Build prompt with dataset context
+        prompt = f"""
+You are a data assistant. Here are some highlights from Venkatesh's resume:
+{chr(10).join('- ' + b for b in bullets)}
+
+Answer the user’s question based only on this data:
+{user_input}
+
+If irrelevant, say: "Sorry, I can't answer that based on the dataset."
+"""
+
 # --- Right Pane ---
 with right_col:
     st.markdown(

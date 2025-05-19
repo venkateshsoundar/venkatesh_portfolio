@@ -531,6 +531,56 @@ with left_col:
     unsafe_allow_html=True
 )
 
+    st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>
+      <table style="width:100%; border-collapse: collapse; margin-top:12px;">
+        <thead>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.3);">
+            <th style="text-align:left; padding:8px; color:#F1C40F;">Year</th>
+            <th style="text-align:left; padding:8px;">Certification</th>
+            <th style="text-align:left; padding:8px;">Organization</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;">2024</td>
+            <td style="padding:8px;">Insurance & Guidewire Suite Analyst 10.0</td>
+            <td style="padding:8px;">Jasper – Guidewire Education</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;">2023</td>
+            <td style="padding:8px;">Karate DSL</td>
+            <td style="padding:8px;">Udemy</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;">2023</td>
+            <td style="padding:8px;">Rest API Automation</td>
+            <td style="padding:8px;">TestLeaf Software Solutions Pvt. Ltd.</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;">2022</td>
+            <td style="padding:8px;">Selenium WebDriver</td>
+            <td style="padding:8px;">TestLeaf Software Solutions Pvt. Ltd.</td>
+          </tr>
+          <tr style="border-bottom:1px solid rgba(255,255,255,0.1);">
+            <td style="padding:8px;">2020</td>
+            <td style="padding:8px;">SQL for Data Science</td>
+            <td style="padding:8px;">Coursera</td>
+          </tr>
+          <tr>
+            <td style="padding:8px;">2020</td>
+            <td style="padding:8px;">SDET</td>
+            <td style="padding:8px;">Capgemini</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
+
 
 
 

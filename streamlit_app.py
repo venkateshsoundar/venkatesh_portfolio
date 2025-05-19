@@ -493,7 +493,7 @@ with mid_col:
     """
     <div class="welcome-card2">
       <div class="text-container">
-        <h2>Chat with My Buddy Bot 🤖</h2>
+        <h2>I am Buddy Bot </h2>
       </div>
     </div>
     """,

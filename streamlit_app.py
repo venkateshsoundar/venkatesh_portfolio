@@ -111,6 +111,7 @@ input[data-baseweb="input"] {
   width: 30px;
   height: 30px;
   filter: invert(100%);
+  color:#ADD8E6;
   margin: 0 8px;
   vertical-align: middle;
 }

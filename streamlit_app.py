@@ -474,7 +474,7 @@ with mid_col:
       .welcome-card2 .text-container {{
         position: absolute;
         top: 70%;                     /* drop text lower */
-        right: 0rem;                  /* align text to the right edge */
+        right: 1rem;                  /* align text to the right edge */
         transform: translateY(-50%);  /* center vertically at 60% point */
         text-align: right;
       }}
@@ -493,7 +493,7 @@ with mid_col:
     """
     <div class="welcome-card2">
       <div class="text-container">
-        <h2>I am Buddy Bot </h2>
+        <h2>I am Buddy Bot 🤖new</h2>
       </div>
     </div>
     """,

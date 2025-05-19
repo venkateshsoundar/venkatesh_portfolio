@@ -281,7 +281,7 @@ with left_col:
     st.markdown(
     '''
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
+      <div class="section-title" style="background:#34495E;">Certifications</div>
       <ul style="text-align:left; margin:0; padding-left:5px; color:#ffffff;">
         <li><strong>Insurance &amp; Guidewire Suite Analyst 10.0</strong> &ndash; Jasper &ndash; Guidewire Education (2024)</li>
         <li><strong>Karate DSL</strong> &ndash; Udemy (2023)</li>

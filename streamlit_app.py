@@ -421,7 +421,7 @@ with mid_col:
         border-radius: 16px;
         padding: 3rem;
         color: white;              /* or pick a contrasting color */
-        min-height: 300px;         /* adjust height as needed */
+        min-height: 180px;         /* adjust height as needed */
         display: flex;
         align-items: center;
         justify-content: center;

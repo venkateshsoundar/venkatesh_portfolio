@@ -604,6 +604,64 @@ with right_col:
     unsafe_allow_html=True
 )
 
+    st.markdown('''<div class="card hover-zoom">
+  <div class="section-title" style="background:#3498DB;">Core Skills</div>
+  <div class="skills-group-grid">
+    <div class="group-card">
+      <h4>Programming Languages</h4>
+      <ul><li>Python</li><li>R</li><li>SQL</li><li>Java</li><li>VBA Macro</li></ul>
+    </div>
+    <div class="group-card">
+      <h4>Data Analysis</h4>
+      <ul><li>Pandas</li><li>NumPy</li><li>Matplotlib</li></ul>
+    </div>
+    <div class="group-card">
+      <h4>Visualization</h4>
+      <ul><li>Power BI</li><li>Excel</li></ul>
+    </div>
+    <div class="group-card">
+      <h4>Statistics</h4>
+      <ul><li>Hypothesis Tests</li><li>Regression</li></ul>
+    </div>
+    <div class="group-card">
+      <h4>Databases</h4>
+      <ul><li>MySQL</li><li>Oracle</li><li>NoSQL</li></ul>
+    </div>
+    <div class="group-card">
+      <h4>Tools & Others</h4>
+      <ul><li>Git</li><li>JIRA</li><li>ALM</li><li>Rally</li><li>Selenium</li><li>Guidewire</li></ul>
+    </div>
+  </div>
+</div>
+
+<style>
+  .skills-group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    gap: 12px;
+    margin-top: 12px;
+  }
+  .group-card {
+    background: rgba(255,255,255,0.1);
+    padding: 12px;
+    border-radius: 8px;
+    color: #fff;
+  }
+  .group-card h4 {
+    margin: 0 0 8px;
+    font-size: 1rem;
+    color: #ADD8E6;
+  }
+  .group-card ul {
+    padding-left: 16px;
+    margin: 0;
+  }
+  .group-card li {
+    margin-bottom: 4px;
+    font-size: 0.9rem;
+  }
+</style>''',unsafe_allow_html=True
+)
 
 
 

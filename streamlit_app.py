@@ -86,6 +86,17 @@ st.markdown(
   top: -90px;
   z-index: 10;
 }
+.profile-pic-blend {
+  width: 100%;
+  height: 140px; /* Or any preferred height */
+  object-fit: cover;
+  border-radius: 12px 12px 0 0; /* Rounded top corners only */
+  display: block;
+  position: static;
+  margin: 0;
+  box-shadow: none;
+  border: none;
+}
 .profile-card-container {
   position: relative;
   width: 100%;
@@ -197,7 +208,7 @@ with left_col:
     st.markdown('''
     <div class="profile-card-container">
       <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
-           class="profile-pic-popout" />
+           class="profile-pic-blend" />
       <div class="card profile-card-content hover-zoom">
         <h2>Venkatesh Soundararajan</h2>
         <p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>

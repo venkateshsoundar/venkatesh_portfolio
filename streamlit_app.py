@@ -385,22 +385,23 @@ input[data-baseweb="input"]:focus {
 
     # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'
-    for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
-        )
+for proj in projects:
+    grid_html += (
+        f'<div class="project-item hover-zoom">'
+        f'  <a href="{proj["url"]}" target="_blank">'
+        f'    <img src="{proj["image"]}" class="card-img"/>'
+        f'  </a>'
+        f'  <div class="project-title">{proj["title"]}</div>'
+        f'</div>'
+    )
     grid_html += '</div>'
 
     st.markdown(
-        f"""
-<details >
-  <summary class="details-summary">Click here to view the projects</summary>
-  {grid_html}
-</details>
+    f"""
+{grid_html}
 """,
-        unsafe_allow_html=True
-    )
+    unsafe_allow_html=True
+)
     
 
 # --- Right Pane ---

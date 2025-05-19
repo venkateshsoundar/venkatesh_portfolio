@@ -483,68 +483,11 @@ with right_col:
   </div>
 </div>
 """, unsafe_allow_html=True)
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
-        unsafe_allow_html=True
-    )
-    
-    st.markdown(
-    '''
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#3498DB;">Core Skills</div>
-      <div class="skill-container">
-        <span class="skill-pill">Python</span>
-        <span class="skill-pill">R</span>
-        <span class="skill-pill">SQL</span>
-        <span class="skill-pill">Java</span>
-        <span class="skill-pill">VBA Macro</span>
-        <span class="skill-pill">Pandas</span>
-        <span class="skill-pill">NumPy</span>
-        <span class="skill-pill">Matplotlib</span>
-        <span class="skill-pill">Power BI</span>
-        <span class="skill-pill">Excel</span>
-        <span class="skill-pill">Hypothesis Tests</span>
-        <span class="skill-pill">Regression</span>
-        <span class="skill-pill">MySQL</span>
-        <span class="skill-pill">Oracle</span>
-        <span class="skill-pill">NoSQL</span>
-        <span class="skill-pill">Git</span>
-        <span class="skill-pill">JIRA</span>
-        <span class="skill-pill">ALM</span>
-        <span class="skill-pill">Rally</span>
-        <span class="skill-pill">Selenium</span>
-        <span class="skill-pill">Guidewire</span>
-      </div>
-    </div>
-
-    <style>
-      .skill-container {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 8px;
-        margin-top: 12px;
-      }
-      .skill-pill {
-        background: rgba(255,255,255,0.2);
-        padding: 6px 12px;
-        border-radius: 12px;
-        font-size: 0.9rem;
-        color: #ffffff;
-      }
-    </style>
-    ''',
-    unsafe_allow_html=True
-)
 
     st.markdown(
     '''
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#3498DB;">Core Skills</div>
+      <div class="section-title" style="background:#3498DB;">Core Skills & Tools</div>
       
       <!-- Programming Languages -->
       <details open>
@@ -649,65 +592,4 @@ with right_col:
     unsafe_allow_html=True
 )
 
-    st.markdown('''<div class="card hover-zoom">
-  <div class="section-title" style="background:#3498DB;">Core Skills</div>
-  <div class="skills-group-grid">
-    <div class="group-card">
-      <h4>Programming Languages</h4>
-      <ul><li>Python</li><li>R</li><li>SQL</li><li>Java</li><li>VBA Macro</li></ul>
-    </div>
-    <div class="group-card">
-      <h4>Data Analysis</h4>
-      <ul><li>Pandas</li><li>NumPy</li><li>Matplotlib</li></ul>
-    </div>
-    <div class="group-card">
-      <h4>Visualization</h4>
-      <ul><li>Power BI</li><li>Excel</li></ul>
-    </div>
-    <div class="group-card">
-      <h4>Statistics</h4>
-      <ul><li>Hypothesis Tests</li><li>Regression</li></ul>
-    </div>
-    <div class="group-card">
-      <h4>Databases</h4>
-      <ul><li>MySQL</li><li>Oracle</li><li>NoSQL</li></ul>
-    </div>
-    <div class="group-card">
-      <h4>Tools & Others</h4>
-      <ul><li>Git</li><li>JIRA</li><li>ALM</li><li>Rally</li><li>Selenium</li><li>Guidewire</li></ul>
-    </div>
-  </div>
-</div>
-
-<style>
-  .skills-group-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-    gap: 12px;
-    margin-top: 12px;
-  }
-  .group-card {
-    background: rgba(255,255,255,0.1);
-    padding: 12px;
-    border-radius: 8px;
-    color: #fff;
-  }
-  .group-card h4 {
-    margin: 0 0 8px;
-    font-size: 1rem;
-    color: #ADD8E6;
-  }
-  .group-card ul {
-    padding-left: 16px;
-    margin: 0;
-  }
-  .group-card li {
-    margin-bottom: 4px;
-    font-size: 0.9rem;
-  }
-</style>''',unsafe_allow_html=True
-)
-
-
-
-
+    

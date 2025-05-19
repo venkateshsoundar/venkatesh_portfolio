@@ -473,6 +473,7 @@ with mid_col:
         font-family: 'Poppins', sans-serif;
         color: #ffffff;
         margin: 0;
+        align-items: Top;
       ">
         Chat with My Buddy Bot! 🤖
       </h2>

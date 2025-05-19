@@ -219,6 +219,10 @@ input[data-baseweb="input"] {
   border: 2px solid #FFD166 !important; /* gold on focus */
   box-shadow: 0 0 0 2px #ffd16633;
 }
+div[data-testid="stSpinner"] > div {
+    color: #111 !important;    /* black text */
+    font-weight: 600;
+}
 
 </style>
     ''', unsafe_allow_html=True

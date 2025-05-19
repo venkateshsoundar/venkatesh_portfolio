@@ -468,6 +468,7 @@ with mid_col:
         height: 200px;                /* fixed banner height */
         position: relative;
         overflow: hidden;
+        margin-bottom: 24px;
       }}
       .welcome-card2 .text-container {{
         position: absolute;

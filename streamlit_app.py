@@ -509,7 +509,7 @@ input[data-baseweb="input"]:focus {
         alt="AI Background"
       />
       <div class="content">
-        <div class="section-title" style="background:#34495E;">
+        <div class="section-title"">
           Chat with My Buddy Bot! 🤖
         </div>
         <p style="color:#ADD8E6; margin-top:4px; margin-bottom:0;">

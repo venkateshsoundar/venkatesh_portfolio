@@ -464,28 +464,19 @@ with mid_col:
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 20px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
 }
-
-/* Full-width header image */
 .chat-card img.header-img {
   width: 100%;
-  height: 120px;        /* tweak as needed */
+  height: 120px;    /* adjust as needed */
   object-fit: cover;
-  opacity: 1;           /* fully opaque */
+  opacity: 1;      /* so text stands out */
 }
-
-/* Centered overlay text */
 .chat-card .content {
-  position: absolute;
-  top: 50%;             /* vertically center */
-  left: 50%;            /* horizontally center */
-  transform: translate(-50%, -50%);
-  text-align: center;
+  position: relative;
   z-index: 1;
-  color: #ffffff;
+  padding: 16px;
 }
-
-/* Chat input styling unchanged */
 [data-testid="stChatInput"] input,
 .stChatInput input,
 input[data-baseweb="input"] {
@@ -506,7 +497,6 @@ input[data-baseweb="input"]:focus {
   box-shadow: 0 0 0 2px #ffd16633;
 }
 </style>
-
 """, unsafe_allow_html=True)
 
     st.markdown(

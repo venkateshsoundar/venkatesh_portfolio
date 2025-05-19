@@ -458,22 +458,49 @@ with mid_col:
     st.markdown(
     """
     <div style="
-      background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
-      padding: 60px 20px;
-      text-align: Top;
+      max-width: 100%;                /* full width of column */
+      border-radius: 12px;            /* rounded corners */
+      overflow: hidden;               /* clip the GIF inside the radius */
+      margin: 24px 0;                 /* spacing from other sections */
+      background: #1F2A44;            /* fallback color while GIF loads */
+      position: relative;
     ">
-      <h2 style="
-        font-family: 'Poppins', sans-serif;
+      <div style="
+        background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
+        width: 100%;
+        padding-top: 40%;              /* aspect ratio trick: 40% of width = banner height */
+      "></div>
+      <div style="
+        position: absolute;
+        top: 50%;                       /* vertically center inside the container */
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        width: 100%;
         color: #ffffff;
-        margin: 0;
+        font-family: 'Poppins', sans-serif;
       ">
-        Chat with My Buddy Bot! 🤖
-      </h2>
-      
+        <h2 style="
+          margin: 0;
+          font-weight: 700;
+          font-size: 2rem;
+        ">
+          Chat with My Buddy Bot! 🤖
+        </h2>
+        <p style="
+          margin: 8px 0 0;
+          font-weight: 500;
+          font-size: 1.1rem;
+          color: #ADD8E6;
+        ">
+          Ask anything about my professional projects and skills!
+        </p>
+      </div>
     </div>
     """,
     unsafe_allow_html=True
 )
+
 
 
 

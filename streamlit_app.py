@@ -198,6 +198,28 @@ input[data-baseweb="input"]:focus {
   box-shadow: 0 0 0 2px #ffd16666;
 }
 
+/* Try to target the chat input's container for border */
+[data-testid="stChatInput"] {
+  border: 2px solid #406496 !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 10px rgba(30,50,100,0.09);
+  padding: 0 !important;
+}
+[data-testid="stChatInput"] input,
+.stChatInput input,
+input[data-baseweb="input"] {
+  border: none !important; /* Let the outer border show! */
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #222 !important;
+  font-size: 1.08rem !important;
+}
+[data-testid="stChatInput"]:focus-within {
+  border: 2px solid #FFD166 !important; /* gold on focus */
+  box-shadow: 0 0 0 2px #ffd16633;
+}
+
 </style>
     ''', unsafe_allow_html=True
 )

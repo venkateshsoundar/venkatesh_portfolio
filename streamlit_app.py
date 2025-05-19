@@ -429,7 +429,7 @@ with mid_col:
       }}
       /* If you need to override Streamlit container padding: */
       .stApp .welcome-card {{
-        margin: 0 auto 2rem auto;
+        margin: 0 auto 1rem auto;
       }}
     </style>
     """,
@@ -472,7 +472,7 @@ with mid_col:
       }}
       /* If you need to override Streamlit container padding: */
       .stApp .welcome-card {{
-        margin: 0 auto 2rem auto;
+        margin: 0 auto 1rem auto;
       }}
     </style>
     """,

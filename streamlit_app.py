@@ -320,6 +320,72 @@ with left_col:
 )
 
 
+st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#16A085;">Awards & Recognitions</div>
+      <div class="awards-grid">
+        <div class="award-badge">
+          <div class="award-year">2022 & 2023</div>
+          <div class="award-title">Spot Award</div>
+          <div class="award-sub">InsurCloud – Deloitte, Canada</div>
+        </div>
+        <div class="award-badge">
+          <div class="award-year">2018</div>
+          <div class="award-title">Best Contributor</div>
+          <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
+        </div>
+        <div class="award-badge">
+          <div class="award-year">2017</div>
+          <div class="award-title">QE & A Maestro</div>
+          <div class="award-sub">Centene by Cognizant QE&A, USA</div>
+        </div>
+        <div class="award-badge">
+          <div class="award-year">Q1 2017</div>
+          <div class="award-title">Pride of the Quarter</div>
+          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+        </div>
+        <div class="award-badge">
+          <div class="award-year">May 2014 & Aug 2015</div>
+          <div class="award-title">Pillar of the Month</div>
+          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .awards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .award-badge {
+        background: rgba(255,255,255,0.1);
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .award-year {
+        font-size: 0.85rem;
+        color: #ffd166;
+        margin-bottom: 4px;
+      }
+      .award-title {
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+      .award-sub {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+    </style>
+    ''',
+    unsafe_allow_html=True
+)
+
+
     
 # --- Center Pane ---
 with mid_col:

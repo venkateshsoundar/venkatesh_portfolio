@@ -255,6 +255,26 @@ with left_col:
         unsafe_allow_html=True
     )
 
+    st.markdown(
+    """
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#3282b8;">Education</div>
+      <div style="text-align:left; margin-left:10px;">
+        <p>
+          <b>Masters in Data Science and Analytics</b><br>
+          <span style="color:#555;">September 2024 – Present</span><br>
+          University of Calgary, Alberta, Canada
+        </p>
+        <p>
+          <b>Bachelor of Engineering</b><br>
+          <span style="color:#555;">August 2009 – May 2013</span><br>
+          Anna University, Chennai, India
+        </p>
+      </div>
+    </div>
+    """, unsafe_allow_html=True
+)
+
 # --- Center Pane ---
 with mid_col:
     st.markdown(

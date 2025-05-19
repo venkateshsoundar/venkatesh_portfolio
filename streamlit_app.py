@@ -320,7 +320,7 @@ with left_col:
 )
 
 
-st.markdown(
+    st.markdown(
     '''
     <div class="card hover-zoom">
       <div class="section-title" style="background:#16A085;">Awards & Recognitions</div>

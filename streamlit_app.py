@@ -445,7 +445,7 @@ with right_col:
       <div class="exp-dot"></div>
       <div class="exp-title">Programmer Analyst</div>
       <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-date">May 2016 – May 2018</div>
+      <div class="exp-date">Sep 2013 – May 2018</div>
     </div>
   </div>
 </div>

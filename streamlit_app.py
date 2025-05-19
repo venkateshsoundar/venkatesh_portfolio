@@ -460,28 +460,34 @@ with mid_col:
     <div style="
       background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
       border-radius: 16px;
-      padding: 3rem;
-      color: white;              /* or pick a contrasting color */
-      min-height: 300px;         /* adjust height as needed */
+      padding: 6rem 1rem 2rem;   /* 6rem top, 1rem sides, 2rem bottom */
+      color: white;
+      min-height: 300px;
       display: flex;
-      flex-direction: column;    /* stack children vertically */
-      justify-content: flex-start;  /* align items at top */
-      align-items: center;       /* center horizontally */
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
       text-align: center;
     ">
       <h2 style="
         font-family: 'Poppins', sans-serif;
         color: #ffffff;
         margin: 0;
-        align-items: Top;
       ">
         Chat with My Buddy Bot! 🤖
       </h2>
-      
+      <p style="
+        margin: 0.5rem 0 0;
+        font-family: 'Poppins', sans-serif;
+        color: #ADD8E6;
+      ">
+        Ask anything about my professional projects and skills!
+      </p>
     </div>
     """,
     unsafe_allow_html=True
 )
+
 
 
 

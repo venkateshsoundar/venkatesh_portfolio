@@ -459,14 +459,14 @@ with mid_col:
     """
     <div style="
       background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
-      text-align: Top;
       border-radius: 16px;
       padding: 3rem;
       color: white;              /* or pick a contrasting color */
       min-height: 300px;         /* adjust height as needed */
       display: flex;
-      align-items: center;
-      justify-content: center;
+      flex-direction: column;    /* stack children vertically */
+      justify-content: flex-start;  /* align items at top */
+      align-items: center;       /* center horizontally */
       text-align: center;
     ">
       <h2 style="

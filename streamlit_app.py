@@ -393,6 +393,48 @@ with left_col:
     unsafe_allow_html=True
 )
 
+    st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>
+      <ul style="text-align:left; margin:0; padding:0 20px; color:#ffffff; list-style:none;">
+        <li style="margin-bottom:12px;">
+          Insurance &amp; Guidewire Suite Analyst 10.0<br>
+          Jasper – Guidewire Education<br>
+          2024
+        </li>
+        <li style="margin-bottom:12px;">
+          Karate DSL<br>
+          Udemy<br>
+          2023
+        </li>
+        <li style="margin-bottom:12px;">
+          Rest API Automation<br>
+          TestLeaf Software Solutions Pvt. Ltd.<br>
+          2023
+        </li>
+        <li style="margin-bottom:12px;">
+          Selenium WebDriver<br>
+          TestLeaf Software Solutions Pvt. Ltd.<br>
+          2022
+        </li>
+        <li style="margin-bottom:12px;">
+          SQL for Data Science<br>
+          Coursera<br>
+          2020
+        </li>
+        <li style="margin-bottom:12px;">
+          SDET<br>
+          Capgemini<br>
+          2020
+        </li>
+      </ul>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
+
+
 
 
 # --- Center Pane ---

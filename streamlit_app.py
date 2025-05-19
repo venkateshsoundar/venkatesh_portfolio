@@ -198,12 +198,12 @@ with left_col:
     )
 
     # Persist chat history
-    if "history" not in st.session_state:
-        st.session_state.history = []
+    #if "history" not in st.session_state:
+    #    st.session_state.history = []
 
     # Display past chat
-    for role, msg in st.session_state.history:
-        st.chat_message(role).write(msg)
+    #for role, msg in st.session_state.history:
+    #    st.chat_message(role).write(msg)
 
     # New user input
     user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")

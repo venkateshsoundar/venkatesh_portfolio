@@ -371,3 +371,83 @@ with right_col:
         '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
         unsafe_allow_html=True
     )
+
+    st.markdown("""
+<style>
+.exp-timeline {
+  position: relative;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+.exp-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+.exp-dot {
+  position: absolute;
+  left: -30px;
+  top: 7px;
+  width: 16px;
+  height: 16px;
+  background: #406496;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px #b3c6e2;
+}
+.exp-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 24px;
+  width: 2px;
+  height: 35px;
+  background: #b3c6e2;
+  z-index: 0;
+}
+.exp-title { font-weight: bold; font-size: 1.1rem; }
+.exp-company { color: #34495E; font-size: 1rem; }
+.exp-date { color: #406496; font-size: 0.97rem; }
+</style>
+<div class="card hover-zoom">
+  <div class="section-title" style="background:#8E44AD;">Experience</div>
+  <div class="exp-timeline">
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-title">Software Developer Intern</div>
+      <div class="exp-company">Tech Insights Inc, Canada</div>
+      <div class="exp-date">May 2025 – Present</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-title">Senior Consultant</div>
+      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
+      <div class="exp-date">June 2024 – August 2024</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-title">Consultant</div>
+      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
+      <div class="exp-date">October 2021 – June 2024</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-title">Consultant</div>
+      <div class="exp-company">Capgemini Technology Services India Private Limited, India</div>
+      <div class="exp-date">May 2018 – October 2021</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-title">Associate</div>
+      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
+      <div class="exp-date">May 2016 – May 2018</div>
+    </div>
+    <div class="exp-item">
+      <div class="exp-dot"></div>
+      <div class="exp-title">Programmer Analyst</div>
+      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
+      <div class="exp-date">May 2016 – May 2018</div>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+

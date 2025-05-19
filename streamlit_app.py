@@ -260,9 +260,6 @@ input[data-baseweb="input"]:focus {
 }
 </style>
 """, unsafe_allow_html=True)
-
-
-
     
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Bot!</div>'

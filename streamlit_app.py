@@ -110,7 +110,7 @@ input[data-baseweb="input"] {
 .contact-icon {
   width: 30px;
   height: 30px;
-  filter: invert(100%);
+  #filter: invert(100%);
   margin: 0 8px;
   vertical-align: middle;
 }

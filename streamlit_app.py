@@ -222,36 +222,34 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    # --- AI Chatbot Section ---
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">Chat with My Bot!</div>'
-        '<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>',
-        unsafe_allow_html=True
-    )
-    api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = openai.OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-    )
+        # Chat header card opens and includes history + input
+    st.markdown('<div class="card hover-zoom">', unsafe_allow_html=True)
+    st.markdown('<div class="section-title" style="background:#5A84B4;">Chat with My Bot!</div>', unsafe_allow_html=True)
+    st.markdown('<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>', unsafe_allow_html=True)
 
-    # Stateless chat - no history
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    # Display chat history inside card
+    if "history" not in st.session_state:
+        st.session_state.history = []
+    for role, msg in st.session_state.history:
+        st.chat_message(role).write(msg)
+
+    # Place chat input inside the card
+    user_input = st.chat_input("Type your message…")
     if user_input:
+        st.session_state.history.append(("user", user_input))
         st.chat_message("user").write(user_input)
+
         prompt = (
-            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-            + user_input
+            "You are Venkatesh's professional assistant. Here is resume JSON data:\n" + resume_json +
+            "\n\nAnswer based only on this data. If unsure, say so.\nQuestion: " + user_input
         )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
+        client = openai.OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+        response = client.chat.completions.create(model="deepseek/deepseek-r1:free", messages=[{"role":"system","content":prompt}])
+        reply = response.choices[0].message.content
+        st.session_state.history.append(("assistant", reply))
         st.chat_message("assistant").write(reply)
+
+    st.markdown('</div>', unsafe_allow_html=True)
 
     # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'

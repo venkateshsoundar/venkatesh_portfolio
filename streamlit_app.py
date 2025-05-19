@@ -213,7 +213,7 @@ with mid_col:
 
     st.markdown(
         f"""
-<details open>
+<details >
   <summary class="details-summary">Projects Showcase</summary>
   {grid_html}
 </details>

@@ -237,6 +237,33 @@ with mid_col:
     )
 
     # --- AI Chatbot Section ---
+    st.markdown("""
+<style>
+[data-testid="stChatInput"] input,
+.stChatInput input,
+input[data-baseweb="input"] {
+  border: 2px solid #406496 !important;     /* blue border */
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: #222 !important;
+  font-size: 1.08rem !important;
+  box-shadow: 0 2px 10px rgba(30,50,100,0.08);
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+[data-testid="stChatInput"] input:focus,
+.stChatInput input:focus,
+input[data-baseweb="input"]:focus {
+  border: 2px solid #FFD166 !important;   /* gold border on focus */
+  outline: none !important;
+  box-shadow: 0 0 0 2px #ffd16633;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
+
+    
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Bot!</div>'
         '<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>',

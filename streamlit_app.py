@@ -465,21 +465,11 @@ with mid_col:
       <h2 style="
         font-family: 'Poppins', sans-serif;
         color: #ffffff;
-        font-weight: 700;    /* heavier weight */
-        font-size: 2rem;     /* adjust size to taste */
         margin: 0;
       ">
         Chat with My Buddy Bot! 🤖
       </h2>
-      <p style="
-        font-family: 'Poppins', sans-serif;
-        color: #ADD8E6;
-        font-weight: 500;    /* medium weight */
-        font-size: 1.1rem;
-        margin: 8px 0 0;
-      ">
-        Ask anything about my professional projects and skills!
-      </p>
+      
     </div>
     """,
     unsafe_allow_html=True

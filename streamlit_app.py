@@ -265,7 +265,7 @@ with mid_col:
     st.markdown(
         f"""
 <details >
-  <summary class="details-summary">Click her to view Projects Showcase</summary>
+  <summary class="details-summary">Click here to view the projects</summary>
   {grid_html}
 </details>
 """,

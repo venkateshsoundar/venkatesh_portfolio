@@ -488,16 +488,16 @@ with mid_col:
     unsafe_allow_html=True,
 )
 
-#     st.markdown(
-#     """
-#     <div class="welcome-card2">
-#       <div class="text-container">
-#         <h2>Chat with My Buddy Bot 🤖</h2>
-#       </div>
-#     </div>
-#     """,
-#     unsafe_allow_html=True,
-# )
+    st.markdown(
+    """
+    <div class="welcome-card2">
+      <div class="text-container">
+        <h2>Chat with My Buddy Bot 🤖</h2>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 
 

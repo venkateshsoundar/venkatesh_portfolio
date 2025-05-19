@@ -558,9 +558,9 @@ with right_col:
     '''
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-      
-      <!-- Programming Languages -->
       <details open>
+      <!-- Programming Languages -->
+      
         <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
         <div class="skills-grid">
           <div class="skill-card">Python</div>

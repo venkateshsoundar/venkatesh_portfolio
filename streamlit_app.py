@@ -460,7 +460,7 @@ with mid_col:
     <div style="
       background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
       border-radius: 16px;
-      padding: 0rem 3rem 8rem;   /* 6rem top, 1rem sides, 2rem bottom */
+      padding: 0rem 6rem 8rem;   /* 6rem top, 1rem sides, 2rem bottom */
       color: white;
       min-height: 300px;
       display: flex;

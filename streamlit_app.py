@@ -462,7 +462,7 @@ with mid_col:
       .welcome-card2 {{
         background: url("{ai_url}") center/cover no-repeat;
         border-radius: 16px;
-        padding: 3rem;
+        padding: 2rem;
         color: white;              /* or pick a contrasting color */
         min-height: 180;         /* adjust height as needed */
         display: flex;
@@ -478,7 +478,7 @@ with mid_col:
     """,
     unsafe_allow_html=True,
 )
-    st.markdown(
+    st.markdown(  
     """
     <div class="welcome-card2">
       <div>

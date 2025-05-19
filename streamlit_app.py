@@ -278,22 +278,47 @@ with left_col:
 
 
     # Certifications & Courses as simple list
-    st.markdown(
-    '''
+st.markdown(
+    """
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Certifications</div>
-      <ul style="text-align:left; margin:0; padding-left:5px; color:#ffffff;">
-        <li><strong>Insurance &amp; Guidewire Suite Analyst 10.0</strong> &ndash; Jasper &ndash; Guidewire Education (2024)</li>
-        <li><strong>Karate DSL</strong> &ndash; Udemy (2023)</li>
-        <li><strong>Rest API Automation</strong> &ndash; TestLeaf Software Solutions Pvt. Ltd. (2023)</li>
-        <li><strong>Selenium WebDriver</strong> &ndash; TestLeaf Software Solutions Pvt. Ltd. (2022)</li>
-        <li><strong>SQL for Data Science</strong> &ndash; Coursera (2020)</li>
-        <li><strong>SDET</strong> &ndash; Capgemini (2020)</li>
-      </ul>
+      <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>
+      <div style="text-align:left; margin-left:10px;">
+        <p>
+          <b>Insurance &amp; Guidewire Suite Analyst 10.0</b><br>
+          <span style="color:#ADD8E6;">Jasper – Guidewire Education</span><br>
+          <span style="color:#ffd166;">2024</span>
+        </p>
+        <p>
+          <b>Karate DSL</b><br>
+          <span style="color:#ADD8E6;">Udemy</span><br>
+          <span style="color:#ffd166;">2023</span>
+        </p>
+        <p>
+          <b>Rest API Automation</b><br>
+          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
+          <span style="color:#ffd166;">2023</span>
+        </p>
+        <p>
+          <b>Selenium WebDriver</b><br>
+          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
+          <span style="color:#ffd166;">2022</span>
+        </p>
+        <p>
+          <b>SQL for Data Science</b><br>
+          <span style="color:#ADD8E6;">Coursera</span><br>
+          <span style="color:#ffd166;">2020</span>
+        </p>
+        <p>
+          <b>SDET</b><br>
+          <span style="color:#ADD8E6;">Capgemini</span><br>
+          <span style="color:#ffd166;">2020</span>
+        </p>
+      </div>
     </div>
-    ''',
+    """,
     unsafe_allow_html=True
 )
+
 
     
 # --- Center Pane ---

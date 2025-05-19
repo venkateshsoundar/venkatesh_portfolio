@@ -26,13 +26,13 @@ bullets = load_resume_bullets(resume_url)
 # --- Projects list ---
 projects = [
     {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
+    {"title": "Alberta Wildfire Analysis",      "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
+    {"title": "Toronto Crime Drivers",         "url": "https://github.com/venkateshsoundar/toronto-crime-drivers",      "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
     {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
+    {"title": "Calgary Childcare Compliance",   "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
     {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"}
+    {"title": "Obesity Level Estimation",       "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"}
 ]
 
 # --- Global CSS & Background ---
@@ -140,19 +140,31 @@ st.markdown(
 .details-summary {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
   color: #ffffff !important;
-  font-size: 1.6rem !important;
-  font-weight: bold !important;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  text-align: center;
-  cursor: pointer;
+  font-size: 1.6rem !importanat;
+  font-weight:bold!important;
+  padding:20px;
+  border-radius:12px;
+  margin-bottom:10px;
+  text-align:center;
+  cursor:pointer;
 }
 .grid-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  margin-bottom:20px;
+}
+.chat-container {
+  height:300px;
+  overflow-y:auto;
+  display:flex;
+  flex-direction:column-reverse;
+  background:rgba(255,255,255,0.1);
+  padding:10px;
+  border-radius:8px;
+}
+.input-wrapper {
+  margin-top:10px;
 }
 </style>
     ''', unsafe_allow_html=True
@@ -180,99 +192,45 @@ with left_col:
         '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
         '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
         '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
-        '</div></div>',
-        unsafe_allow_html=True
-    )
+        '</div></div>'
+    , unsafe_allow_html=True)
 
-    # --- AI Chatbot Section ---
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">💬 Venkatesh AI ChatBot</div>'
-        '<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">💬 Venkatesh AI ChatBot</div><p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p></div>', unsafe_allow_html=True)
 
-    api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = openai.OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-    )
-
-    # Persist chat history
     if "history" not in st.session_state:
         st.session_state.history = []
 
-    # Display past chat
-    for role, msg in st.session_state.history:
-        st.chat_message(role).write(msg)
+    chat_html = '<div class="chat-container">'
+    for role, msg in reversed(st.session_state.history):
+        speaker = "You" if role == "user" else "Bot"
+        chat_html += f"<p><strong>{speaker}:</strong> {msg}</p>"
+    chat_html += '</div>'
+    st.markdown(chat_html, unsafe_allow_html=True)
 
-    # New user input
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    st.markdown('<div class="input-wrapper">', unsafe_allow_html=True)
+    user_input = st.text_input("", key="chat_input", placeholder="Type your message...")
+    st.markdown('</div>', unsafe_allow_html=True)
+
     if user_input:
         st.session_state.history.append(("user", user_input))
-        st.chat_message("user").write(user_input)
-
-        # Prompt context with resume bullets
-        prompt = (
-            "You are Venkatesh's professional AI assistant. Here are some highlights from his resume:\n"
-            + "\n".join(f"- {b}" for b in bullets)
-            + "\n\n"
-            + "Answer the user’s question based only on this data:\n"
-            + user_input
-            + "\n\nIf irrelevant, say: \"Sorry, I can't answer that based on the resume.\""
-        )
-
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-
+        client = openai.OpenAI(base_url="https://openrouter.ai/api/v1", api_key=st.secrets["DEEPSEEK_API_KEY"])
+        prompt = "You are Venkatesh's assistant: " + user_input
+        response = client.chat.completions.create(model="deepseek/deepseek-chat", messages=[{"role":"system","content":prompt}])
+        reply = response.choices[0].message.content
         st.session_state.history.append(("assistant", reply))
-        st.chat_message("assistant").write(reply)
+        st.session_state.chat_input = ""
 
-
-# --- Center Pane ---
+# --- Center Pane: Projects ---
 with mid_col:
-    st.markdown(
-        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello! This is Venkatesh </h1></div>'
-        '<p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
-        unsafe_allow_html=True
-    )
-
-
-    # --- Projects Showcase ---
+    st.markdown('<div class="card hover-zoom"><h2>Projects Showcase</h2></div>', unsafe_allow_html=True)
     grid_html = '<div class="grid-container">'
-    for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
-        )
+    for p in projects:
+        grid_html += f'<div class="project-item hover-zoom"><a href="{p["url"]}" target="_blank"><img src="{p["image"]}" class="card-img"/><div class="overlay">{p["title"]}</div></a></div>'
     grid_html += '</div>'
+    st.markdown(grid_html, unsafe_allow_html=True)
 
-    st.markdown(
-        f"""
-<details open>
-  <summary class="details-summary">Projects Showcase</summary>
-  {grid_html}
-</details>
-""",
-        unsafe_allow_html=True
-    )
-
-# --- Right Pane ---
+# --- Right Pane: Skills & Experience ---
 with right_col:
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#1ABC9C;">Skills</div><p style="text-align:center;">Python, SQL, R<br>AWS & SageMaker<br>Streamlit, Tableau<br>Scikit-learn, OpenCV<br>Git, Agile</p></div>',
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#8E44AD;">Experience</div><p style="text-align:center;">Deloitte Quality Lead (8+ yrs)<br>AWS Data Pipelines<br>Agile Team Lead<br>Risk Analytics</p></div>',
-        unsafe_allow_html=True
-    )
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#D35400;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="card hover-zoom"><h2>Skills</h2><p>Python, SQL, R, AWS, Streamlit</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="card hover-zoom"><h2>Experience</h2><p>Deloitte Quality Lead</p></div>', unsafe_allow_html=True)
+    st.markdown('<div class="card hover-zoom"><h2>Certifications</h2><p>AWS Solutions Architect</p></div>', unsafe_allow_html=True)

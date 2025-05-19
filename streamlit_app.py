@@ -454,38 +454,43 @@ with mid_col:
   #      '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
   #      unsafe_allow_html=True
   #  )
-
+    ai_url="https://github.com/venkateshsoundar/venkatesh_portfolio/blob/main/DeepSeekAI.gif"
 
     # --- AI Chatbot Section ---
-    st.markdown("""
-<style>
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  border: 2px solid #406496 !important;     /* blue border */
-  border-radius: 10px !important;
-  background: #fff !important;
-  color: #222 !important;
-  font-size: 1.08rem !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.08);
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-}
-[data-testid="stChatInput"] input:focus,
-.stChatInput input:focus,
-input[data-baseweb="input"]:focus {
-  border: 2px solid #FFD166 !important;   /* gold border on focus */
-  outline: none !important;
-  box-shadow: 0 0 0 2px #ffd16633;
-}
-</style>
-""", unsafe_allow_html=True)
-    
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Buddy Bot!🤖 </div>'
-        '<p style="color:#ADD8E6;margin-top:0;">Ask anything about my professional projects and skills!</p>',
-        unsafe_allow_html=True
-    )
+    f"""
+    <style>
+      .welcome-card {{
+        background: url("{ai_url}") center/cover no-repeat;
+        border-radius: 16px;
+        padding: 3rem;
+        color: white;              /* or pick a contrasting color */
+        min-height: 300px;         /* adjust height as needed */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }}
+      /* If you need to override Streamlit container padding: */
+      .stApp .welcome-card {{
+        margin: 0 auto 2rem auto;
+      }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+    st.markdown(
+    """
+    <div class="welcome-card">
+      <div>
+        Chat with My Buddy Bot!🤖 
+        <p>Ask anything about my professional projects and skills!</p>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+    
     api_key = st.secrets["DEEPSEEK_API_KEY"]
     client = openai.OpenAI(
         base_url="https://openrouter.ai/api/v1",

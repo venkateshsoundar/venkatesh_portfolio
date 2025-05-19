@@ -406,10 +406,10 @@ with right_col:
 }
 .exp-title { font-weight: bold; font-size: 1.1rem; }
 .exp-company { color: #34495E; font-size: 1rem; }
-.exp-date { color: #406496; font-size: 0.97rem; }
+.exp-date { color: #ffd166; font-size: 0.97rem; }
 </style>
 <div class="card hover-zoom">
-  <div class="section-title" style="background:#8E44AD;">Experience</div>
+  <div class="section-title" style="background:#34495E;">Professional Experience</div>
   <div class="exp-timeline">
     <div class="exp-item">
       <div class="exp-dot"></div>

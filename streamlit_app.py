@@ -375,6 +375,25 @@ with left_col:
     unsafe_allow_html=True
 )
 
+    # Certifications & Courses as simple list
+st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>
+      <ul style="text-align:left; margin:0; padding-left:20px; color:#ffffff;">
+        <li><strong>Insurance &amp; Guidewire Suite Analyst 10.0</strong> &ndash; Jasper &ndash; Guidewire Education (2024)</li>
+        <li><strong>Karate DSL</strong> &ndash; Udemy (2023)</li>
+        <li><strong>Rest API Automation</strong> &ndash; TestLeaf Software Solutions Pvt. Ltd. (2023)</li>
+        <li><strong>Selenium WebDriver</strong> &ndash; TestLeaf Software Solutions Pvt. Ltd. (2022)</li>
+        <li><strong>SQL for Data Science</strong> &ndash; Coursera (2020)</li>
+        <li><strong>SDET</strong> &ndash; Capgemini (2020)</li>
+      </ul>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
+
+
 
 # --- Center Pane ---
 with mid_col:

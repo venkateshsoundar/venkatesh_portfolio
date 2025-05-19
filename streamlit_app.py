@@ -433,7 +433,17 @@ with mid_col:
     """,
     unsafe_allow_html=True,
 )
-
+    st.markdown(
+    """
+    <div class="welcome-card">
+      <div>
+        <h1>Welcome to My Portfolio</h1>
+        <p>Hi, I’m Venkatesh — Data Scientist & Engineer</p>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
     # --- AI Chatbot Section ---
     st.markdown("""

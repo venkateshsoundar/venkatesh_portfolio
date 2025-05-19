@@ -163,19 +163,28 @@ st.markdown(
   margin-bottom: 20px;
 }
 
-/* --- Make chat_input box visible and stylish --- */
+/* --- Make chat_input box dark and bold --- */
 [data-testid="stChatInput"] input,
 .stChatInput input,
 input[data-baseweb="input"] {
-  background: #fff !important;
-  color: #2C3E50 !important;
-  border: 2px solid #5A84B4 !important;
-  border-radius: 10px !important;
+  background: #26334d !important;        /* deep blue-gray */
+  color: #fff !important;                /* white text */
+  border: 2px solid #5A84B4 !important;  /* blue border */
+  border-radius: 12px !important;
   font-size: 1.08rem !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.07);
+  box-shadow: 0 2px 10px rgba(30,50,100,0.14);
   margin-top: 10px !important;
   margin-bottom: 10px !important;
+  transition: box-shadow 0.2s, border 0.2s;
 }
+[data-testid="stChatInput"] input:focus,
+.stChatInput input:focus,
+input[data-baseweb="input"]:focus {
+  border: 2px solid #ffd166 !important;  /* gold highlight on focus */
+  outline: none !important;
+  box-shadow: 0 0 0 2px #ffd16666;
+}
+
 </style>
     ''', unsafe_allow_html=True
 )

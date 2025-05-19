@@ -7,7 +7,7 @@ import openai
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Load resume bullets (optional) ---
+# --- Load resume bullets ---
 @st.cache_data
 def load_resume_bullets(url, max_bullets=5):
     r = requests.get(url)
@@ -192,6 +192,55 @@ with mid_col:
         unsafe_allow_html=True
     )
 
+    # --- AI Chatbot Section ---
+    st.markdown(
+        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">💬 Venkatesh AI ChatBot</div>'
+        '<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>',
+        unsafe_allow_html=True
+    )
+
+    api_key = st.secrets["DEEPSEEK_API_KEY"]
+    client = openai.OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+    )
+
+    # Persist chat history
+    if "history" not in st.session_state:
+        st.session_state.history = []
+
+    # Display past chat
+    for role, msg in st.session_state.history:
+        st.chat_message(role).write(msg)
+
+    # New user input
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.session_state.history.append(("user", user_input))
+        st.chat_message("user").write(user_input)
+
+        # Prompt context with resume bullets
+        prompt = (
+            "You are Venkatesh's professional AI assistant. Here are some highlights from his resume:\n"
+            + "\n".join(f"- {b}" for b in bullets)
+            + "\n\n"
+            + "Answer the user’s question based only on this data:\n"
+            + user_input
+            + "\n\nIf irrelevant, say: \"Sorry, I can't answer that based on the resume.\""
+        )
+
+        with st.spinner("Assistant is typing..."):
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat",
+                messages=[
+                    {"role": "system", "content": prompt}
+                ]
+            )
+            reply = response.choices[0].message.content
+
+        st.session_state.history.append(("assistant", reply))
+        st.chat_message("assistant").write(reply)
+
     # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'
     for proj in projects:
@@ -210,38 +259,6 @@ with mid_col:
 """,
         unsafe_allow_html=True
     )
-
-    st.header("💬 Venkatesh AI ChatBot")
-    api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-    )
-
-    # Persist history
-    if "history" not in st.session_state:
-        st.session_state.history = []
-
-    # Display past chat
-    for role, msg in st.session_state.history:
-        st.chat_message(role).write(msg)
-    
-    # New user input
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.session_state.history.append(("user", user_input))
-        st.chat_message("user").write(user_input)
-
-        # Build prompt with dataset context
-        prompt = f"""
-You are a data assistant. Here are some highlights from Venkatesh's resume:
-{chr(10).join('- ' + b for b in bullets)}
-
-Answer the user’s question based only on this data:
-{user_input}
-
-If irrelevant, say: "Sorry, I can't answer that based on the dataset."
-"""
 
 # --- Right Pane ---
 with right_col:

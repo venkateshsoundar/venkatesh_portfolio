@@ -394,10 +394,7 @@ input[data-baseweb="input"]:focus {
 
     st.markdown(
         f"""
-<details >
-  <summary class="details-summary">Projects Gallery</summary>
-  {grid_html}
-</details>
+{grid_html}
 """,
         unsafe_allow_html=True
     )

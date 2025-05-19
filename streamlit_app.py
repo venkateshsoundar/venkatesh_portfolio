@@ -184,14 +184,6 @@ with left_col:
         unsafe_allow_html=True
     )
 
-# --- Center Pane ---
-with mid_col:
-    st.markdown(
-        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello! This is Venkatesh </h1></div>'
-        '<p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
-        unsafe_allow_html=True
-    )
-
     # --- AI Chatbot Section ---
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">💬 Venkatesh AI ChatBot</div>'
@@ -240,6 +232,16 @@ with mid_col:
 
         st.session_state.history.append(("assistant", reply))
         st.chat_message("assistant").write(reply)
+
+
+# --- Center Pane ---
+with mid_col:
+    st.markdown(
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello! This is Venkatesh </h1></div>'
+        '<p>Welcome to my data science portfolio. Explore my projects below.</p></div>',
+        unsafe_allow_html=True
+    )
+
 
     # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'

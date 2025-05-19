@@ -83,7 +83,7 @@ st.markdown(
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: -60px;
+  top: -90px;
   z-index: 10;
 }
 .profile-card-container {
@@ -162,6 +162,20 @@ st.markdown(
   gap: 20px;
   margin-bottom: 20px;
 }
+
+/* --- Make chat_input box visible and stylish --- */
+[data-testid="stChatInput"] input,
+.stChatInput input,
+input[data-baseweb="input"] {
+  background: #fff !important;
+  color: #2C3E50 !important;
+  border: 2px solid #5A84B4 !important;
+  border-radius: 10px !important;
+  font-size: 1.08rem !important;
+  box-shadow: 0 2px 10px rgba(30,50,100,0.07);
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
 </style>
     ''', unsafe_allow_html=True
 )
@@ -192,7 +206,6 @@ with left_col:
         unsafe_allow_html=True
     )
 
-
 # --- Center Pane ---
 with mid_col:
     st.markdown(
@@ -200,7 +213,6 @@ with mid_col:
         '<p>Explore my projects below.</p></div>',
         unsafe_allow_html=True
     )
-
 
     # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'
@@ -232,28 +244,15 @@ with mid_col:
         api_key=api_key,
     )
 
-
-    # Persist chat history
-    if "history" not in st.session_state:
-        st.session_state.history = []
-
-    # Display past chat
-    #for role, msg in st.session_state.history:
-    #    st.chat_message(role).write(msg)
-
-    # New user input
+    # Stateless chat - no history
     user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
     if user_input:
-        st.session_state.history.append(("user", user_input))
         st.chat_message("user").write(user_input)
-
-        # Prompt context with resume bullets
         prompt = (
             "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
             "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
             + user_input
         )
-
         with st.spinner("Assistant is typing..."):
             response = client.chat.completions.create(
                 model="deepseek/deepseek-chat",
@@ -262,10 +261,7 @@ with mid_col:
                 ]
             )
             reply = response.choices[0].message.content
-
-        st.session_state.history.append(("assistant", reply))
         st.chat_message("assistant").write(reply)
-
 
 # --- Right Pane ---
 with right_col:

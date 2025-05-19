@@ -83,7 +83,7 @@ st.markdown(
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: -90px;
+  top: -40px;
   z-index: 10;
 }
 .profile-card-container {

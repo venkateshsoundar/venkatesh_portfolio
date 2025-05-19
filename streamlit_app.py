@@ -462,7 +462,7 @@ with mid_col:
       .welcome-card2 {{
         background: url("{ai_url}") center/cover no-repeat;
         border-radius: 16px;
-        padding: 2rem;
+        padding: 1rem;
         color: white;              /* or pick a contrasting color */
         min-height: 180;         /* adjust height as needed */
         display: flex;

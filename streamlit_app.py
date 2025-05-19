@@ -247,7 +247,7 @@ with left_col:
 
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Contact</div>' +
-        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">' +
+        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">' +
         '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
         '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
         '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
@@ -310,7 +310,7 @@ input[data-baseweb="input"]:focus {
     
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Bot!</div>'
-        '<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>',
+        '<p style="color:#ADD8E6;margin-top:0;">Ask anything about my professional projects and skills!</p>',
         unsafe_allow_html=True
     )
     api_key = st.secrets["DEEPSEEK_API_KEY"]

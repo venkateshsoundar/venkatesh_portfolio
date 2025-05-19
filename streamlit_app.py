@@ -186,7 +186,7 @@ with left_col:
 
     # --- AI Chatbot Section ---
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">💬 Venkatesh AI ChatBot</div>'
+        '<div class="card hover-zoom"><div class="section-title" style="background:#5A84B4;">💬Chat with Me!</div>'
         '<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>',
         unsafe_allow_html=True
     )

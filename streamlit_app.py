@@ -440,6 +440,7 @@ with mid_col:
     st.markdown(
     """
     <div class="welcome-card">
+    <div class="card hover-zoom"><div class="typewriter">
       <div>
         <h1>Welcome to My Portfolio</h1>
         <p>Hi, I’m Venkatesh — Data Scientist & Engineer</p>

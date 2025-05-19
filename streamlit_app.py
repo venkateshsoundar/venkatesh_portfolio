@@ -239,7 +239,7 @@ with left_col:
            class="profile-pic-popout" />
       <div class="card profile-card-content hover-zoom">
         <h2>Venkatesh Soundararajan</h2>
-        <p><strong>M.S. Data Science & Analytics</strong><br>University of Calgary</p>
+        <p><strong>Software Development Intern</strong><br>Data Engineering</p>
       </div>
     </div>
     ''', unsafe_allow_html=True)

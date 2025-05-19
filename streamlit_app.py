@@ -224,6 +224,29 @@ div[data-testid="stSpinner"] > div {
     color: #111 !important;    /* black text */
     font-weight: 600;
 }
+.grid-container {
+  display: grid;
+  /* three equal columns, or auto-fit up to three */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+
+.project-item {
+  /* ensure the overlay/title container is centered */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.project-title {
+  /* style for the title under each image */
+  margin-top: 8px;
+  font-weight: bold;
+  color: #ffffff;
+}
+
 
 </style>
     ''', unsafe_allow_html=True
@@ -420,7 +443,7 @@ input[data-baseweb="input"]:focus {
 """, unsafe_allow_html=True)
     
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Bot!</div>'
+        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Buddy Bot! </div>'
         '<p style="color:#ADD8E6;margin-top:0;">Ask anything about my professional projects and skills!</p>',
         unsafe_allow_html=True
     )

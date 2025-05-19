@@ -56,8 +56,8 @@ st.markdown(
 .card {
   width: 100% !important;
   border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
+  padding: 10px;
+  margin-bottom: 10px;
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   transition: transform .3s ease, box-shadow .3s ease;
   text-align: center;

@@ -190,12 +190,12 @@ with left_col:
         '<p style="color:#e0e6ed;margin-top:0;">Ask anything about my professional projects and skills!</p>',
         unsafe_allow_html=True
     )
-
     api_key = st.secrets["DEEPSEEK_API_KEY"]
     client = openai.OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=api_key,
     )
+
 
     # Persist chat history
     #if "history" not in st.session_state:

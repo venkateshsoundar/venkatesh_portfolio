@@ -455,69 +455,24 @@ with mid_col:
   #      unsafe_allow_html=True
   #  )
 
-    # --- AI Chatbot Section ---
-    # --- AI Chatbot Section ---
-    st.markdown("""
-<style>
-.chat-card {
-  position: relative;
-  border-radius: 12px;
-  overflow: hidden;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-}
-.chat-card img.header-img {
-  width: 100%;
-  height: 120px;    /* adjust as needed */
-  object-fit: cover;
-  opacity: 1;      /* so text stands out */
-}
-.chat-card .content {
-  position: relative;
-  z-index: 1;
-  padding: 16px;
-}
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  border: 2px solid #406496 !important;
-  border-radius: 10px !important;
-  background: #fff !important;
-  color: #222 !important;
-  font-size: 1.08rem !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.08);
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-}
-[data-testid="stChatInput"] input:focus,
-.stChatInput input:focus,
-input[data-baseweb="input"]:focus {
-  border: 2px solid #FFD166 !important;
-  outline: none !important;
-  box-shadow: 0 0 0 2px #ffd16633;
-}
-</style>
-""", unsafe_allow_html=True)
-
     st.markdown(
     """
-    <div class="chat-card">
-      <!-- Header image -->
-      <img
-        class="header-img"
-        src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-        alt="AI Background"
-      />
-      <div style="text-align: center; margin: 24px 0;">
-      <h2 style="color: #ffffff; margin: 0;">Chat with My Buddy Bot! 🤖</h2>
-      <p style="color: #ADD8E6; margin: 4px 0 0;">
+    <div style="
+      background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
+      padding: 60px 20px;          /* vertical padding to size the banner */
+      text-align: center;
+    ">
+      <h2 style="color:#ffffff; font-family:Poppins; margin:0;">
+        Chat with My Buddy Bot! 🤖
+      </h2>
+      <p style="color:#ADD8E6; font-family:Poppins; margin:8px 0 0;">
         Ask anything about my professional projects and skills!
       </p>
-      </div>
     </div>
     """,
     unsafe_allow_html=True
 )
+
 
 
     api_key = st.secrets["DEEPSEEK_API_KEY"]

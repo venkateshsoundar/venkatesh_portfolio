@@ -258,7 +258,7 @@ with left_col:
     st.markdown(
     """
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#3282b8;">Education</div>
+      <div class="section-title" style="background:#34495E;">Education</div>
       <div style="text-align:left; margin-left:10px;">
         <p>
           <b>Masters in Data Science and Analytics</b><br>

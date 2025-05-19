@@ -8,20 +8,24 @@ import openai
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
 # --- Load resume bullets ---
-@st.cache_data
-def load_resume_bullets(url, max_bullets=5):
+def load_resume_df(url):
     r = requests.get(url)
     r.raise_for_status()
     reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    text = "\n".join(page.extract_text() or "" for page in reader.pages)
-    sentences = [s.strip() for s in text.split('.') if len(s) > 50]
-    return sentences[:max_bullets]
+    records = []
+    for i, page in enumerate(reader.pages):
+        text = page.extract_text() or ""
+        sentences = [s.strip() for s in text.split('.') if s.strip()]
+        for sent in sentences:
+            records.append({"page": i+1, "sentence": sent})
+    return pd.DataFrame(records)
 
 resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/"
-    "Venkateshwaran_Resume.pdf"
+    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 )
-bullets = load_resume_bullets(resume_url)
+resume_df = load_resume_df(resume_url)
+# Serialize DataFrame to JSON for direct prompt
+resume_json = resume_df.to_json(orient='records')
 
 # --- Projects list ---
 projects = [
@@ -244,12 +248,9 @@ with mid_col:
 
         # Prompt context with resume bullets
         prompt = (
-            "You are Venkatesh's professional AI assistant. Here are some highlights from his resume:\n"
-            + "\n".join(f"- {b}" for b in bullets)
-            + "\n\n"
-            + "Answer the user’s question based only on this data:\n"
+            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
             + user_input
-            + "\n\nIf irrelevant, say: \"Sorry, I can't answer that based on the resume.\""
         )
 
         with st.spinner("Assistant is typing..."):

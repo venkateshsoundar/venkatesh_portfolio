@@ -262,12 +262,12 @@ with left_col:
       <div style="text-align:left; margin-left:10px;">
         <p>
           <b>Masters in Data Science and Analytics</b><br>
-          <span style="color:#555;">September 2024 – Present</span><br>
+          <span style="color:#ffd166;">September 2024 – Present</span><br>
           University of Calgary, Alberta, Canada
         </p>
         <p>
           <b>Bachelor of Engineering</b><br>
-          <span style="color:#555;">August 2009 – May 2013</span><br>
+          <span style="color:#ffd166;">August 2009 – May 2013</span><br>
           Anna University, Chennai, India
         </p>
       </div>

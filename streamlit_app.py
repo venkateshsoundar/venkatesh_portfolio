@@ -474,7 +474,7 @@ with mid_col:
       .welcome-card2 .text-container {{
         position: absolute;
         top: 70%;                     /* drop text lower */
-        right: 1rem;                  /* align text to the right edge */
+        right: 2rem;                  /* align text to the right edge */
         transform: translateY(-50%);  /* center vertically at 60% point */
         text-align: right;
       }}

@@ -410,7 +410,7 @@ with left_col:
 # --- Center Pane ---
 with mid_col:
     st.markdown(
-        '<div class="card hover-zoom"><div class="typewriter"><h2>Hello....</h2></div>',
+        '<div class="card hover-zoom"><div class="typewriter"><h2>Hello....👋👋👋</h2></div>',
         unsafe_allow_html=True
     )
 
@@ -440,7 +440,7 @@ input[data-baseweb="input"]:focus {
 """, unsafe_allow_html=True)
     
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Buddy Bot! </div>'
+        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Buddy Bot!🤖 </div>'
         '<p style="color:#ADD8E6;margin-top:0;">Ask anything about my professional projects and skills!</p>',
         unsafe_allow_html=True
     )

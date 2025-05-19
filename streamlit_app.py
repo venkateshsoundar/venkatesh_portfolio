@@ -410,7 +410,7 @@ with left_col:
 # --- Center Pane ---
 with mid_col:
     st.markdown(
-        '<div class="card hover-zoom"><div class="typewriter"><h2>Hello....👋👋👋</h2></div>',
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
         unsafe_allow_html=True
     )
 

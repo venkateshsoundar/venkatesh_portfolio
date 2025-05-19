@@ -224,29 +224,12 @@ div[data-testid="stSpinner"] > div {
     color: #111 !important;    /* black text */
     font-weight: 600;
 }
-.grid-container {
-  display: grid;
-  /* three equal columns, or auto-fit up to three */
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 20px;
-  margin-bottom: 20px;
-}
-
-.project-item {
-  /* ensure the overlay/title container is centered */
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-}
-
 .project-title {
-  /* style for the title under each image */
-  margin-top: 8px;
+  text-align: center;
+  margin-top: 8px;       /* space above the title */
   font-weight: bold;
   color: #ffffff;
 }
-
 
 </style>
     ''', unsafe_allow_html=True

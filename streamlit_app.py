@@ -323,7 +323,7 @@ with left_col:
     st.markdown(
     '''
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#16A085;">Awards & Recognitions</div>
+      <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
       <div class="awards-grid">
         <div class="award-badge">
           <div class="award-year">2022 & 2023</div>

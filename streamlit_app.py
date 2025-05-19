@@ -446,6 +446,55 @@ with right_col:
         '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Certifications</div><p style="text-align:center;">AWS Solutions Architect<br>Tableau Specialist<br>Scrum Master</p></div>',
         unsafe_allow_html=True
     )
+    
+    st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#3498DB;">Core Skills</div>
+      <div class="skill-container">
+        <span class="skill-pill">Python</span>
+        <span class="skill-pill">R</span>
+        <span class="skill-pill">SQL</span>
+        <span class="skill-pill">Java</span>
+        <span class="skill-pill">VBA Macro</span>
+        <span class="skill-pill">Pandas</span>
+        <span class="skill-pill">NumPy</span>
+        <span class="skill-pill">Matplotlib</span>
+        <span class="skill-pill">Power BI</span>
+        <span class="skill-pill">Excel</span>
+        <span class="skill-pill">Hypothesis Tests</span>
+        <span class="skill-pill">Regression</span>
+        <span class="skill-pill">MySQL</span>
+        <span class="skill-pill">Oracle</span>
+        <span class="skill-pill">NoSQL</span>
+        <span class="skill-pill">Git</span>
+        <span class="skill-pill">JIRA</span>
+        <span class="skill-pill">ALM</span>
+        <span class="skill-pill">Rally</span>
+        <span class="skill-pill">Selenium</span>
+        <span class="skill-pill">Guidewire</span>
+      </div>
+    </div>
+
+    <style>
+      .skill-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 8px;
+        margin-top: 12px;
+      }
+      .skill-pill {
+        background: rgba(255,255,255,0.2);
+        padding: 6px 12px;
+        border-radius: 12px;
+        font-size: 0.9rem;
+        color: #ffffff;
+      }
+    </style>
+    ''',
+    unsafe_allow_html=True
+)
 
 
 

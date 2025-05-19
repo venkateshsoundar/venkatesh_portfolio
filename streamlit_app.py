@@ -192,32 +192,32 @@ with mid_col:
     )
 
     # --- AI Chatbot Section (center pane) ---
-st.markdown(
+    st.markdown(
     '<div class="card hover-zoom" style="margin-bottom:32px;"><div class="section-title" style="background:#5A84B4;">Chat with My AI Assistant</div>'
     '<p style="color:#e0e6ed;margin-top:0;">Ask me anything about my background, projects, or skills!</p>',
     unsafe_allow_html=True
-)
+    )
 
-if 'chat_history' not in st.session_state:
-    st.session_state.chat_history = []
+    if 'chat_history' not in st.session_state:
+      st.session_state.chat_history = []
 
 # Display chat messages (user/assistant)
-for role, msg in st.session_state.chat_history:
-    align = "flex-end" if role == "user" else "flex-start"
-    bgcolor = "#e8f0fe" if role == "user" else "#5A84B4"
-    color = "#222" if role == "user" else "#fff"
-    st.markdown(
+    for role, msg in st.session_state.chat_history:
+      align = "flex-end" if role == "user" else "flex-start"
+      bgcolor = "#e8f0fe" if role == "user" else "#5A84B4"
+      color = "#222" if role == "user" else "#fff"
+      st.markdown(
         f"<div style='display:flex;justify-content:{align};'>"
         f"<div style='background:{bgcolor};color:{color};padding:10px 18px;border-radius:18px;margin:6px 0;max-width:85%;'>{msg}</div>"
         "</div>",
         unsafe_allow_html=True
     )
 
-user_input = st.text_input("Type your question here...", key="ai_chat_input", label_visibility="collapsed")
+    user_input = st.text_input("Type your question here...", key="ai_chat_input", label_visibility="collapsed")
 
-send = st.button("Send", key="ai_send_btn")
-if send and user_input.strip():
-    st.session_state.chat_history.append(("user", user_input))
+    send = st.button("Send", key="ai_send_btn")
+    if send and user_input.strip():
+      st.session_state.chat_history.append(("user", user_input))
     # Prepare AI prompt with context
     system_prompt = (
         "You are Venkatesh's AI portfolio assistant. "
@@ -247,7 +247,7 @@ if send and user_input.strip():
     st.session_state.chat_history.append(("assistant", reply))
     st.experimental_rerun()
 
-st.markdown("</div>", unsafe_allow_html=True)
+    st.markdown("</div>", unsafe_allow_html=True)
 
 
     # --- Projects Showcase ---

@@ -481,9 +481,7 @@ with mid_col:
     st.markdown(  
     """
     <div class="welcome-card2";>
-      <div style="       
-        top: 60%;                              /* move text down */
-        left: 50%;">
+      <div >
         <h2>Chat with My Buddy Bot🤖</h2>
       </div>
     </div>

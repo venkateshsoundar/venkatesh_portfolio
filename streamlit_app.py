@@ -77,7 +77,7 @@ st.markdown(
   width: 180px;
   height: 180px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 75%;
   border: 4px solid #fff;
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
   position: absolute;

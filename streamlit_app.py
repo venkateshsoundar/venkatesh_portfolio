@@ -24,7 +24,6 @@ resume_url = (
     "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 )
 resume_df = load_resume_df(resume_url)
-resume_df.to_json(orient='records')
 # Serialize DataFrame to JSON for direct prompt
 resume_json = resume_df.to_json(orient='records')
 

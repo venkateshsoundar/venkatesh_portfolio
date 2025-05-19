@@ -92,8 +92,9 @@ st.markdown(
   margin-bottom: 20px;
 }
 .profile-card-content {
-  padding-top: 120px;
+  padding-top: 80px;
 }
+
 .contact-icon {
   width: 30px;
   height: 30px;

@@ -393,6 +393,13 @@ input[data-baseweb="input"]:focus {
     grid_html += '</div>'
 
     st.markdown(
+        '<div class="card hover-zoom">'
+        '<div class="section-title" style="background:#2C3E50;">Projects Showcase</div>'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+    st.markdown(
         f"""
 {grid_html}
 """,

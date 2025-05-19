@@ -558,9 +558,9 @@ with right_col:
     '''
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-      <details open>
-      <!-- Programming Languages -->
       
+      <!-- Programming Languages -->
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
         <div class="skills-grid">
           <div class="skill-card">Python</div>
@@ -572,7 +572,7 @@ with right_col:
       </details>
 
       <!-- Data Analysis Tools -->
-      <details>
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Analysis Tools</summary>
         <div class="skills-grid">
           <div class="skill-card">Pandas</div>
@@ -581,8 +581,8 @@ with right_col:
         </div>
       </details>
 
-      <!-- Visualization -->
-      <details>
+      <!-- Visualization Tools -->
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Visualization</summary>
         <div class="skills-grid">
           <div class="skill-card">Power BI</div>
@@ -591,7 +591,7 @@ with right_col:
       </details>
 
       <!-- Statistical Analysis -->
-      <details>
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Statistical Analysis</summary>
         <div class="skills-grid">
           <div class="skill-card">Hypothesis Tests</div>
@@ -599,8 +599,8 @@ with right_col:
         </div>
       </details>
 
-      <!-- Database Management -->
-      <details>
+      <!-- Database Management Tools -->
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Database Management</summary>
         <div class="skills-grid">
           <div class="skill-card">MySQL</div>
@@ -610,15 +610,15 @@ with right_col:
       </details>
 
       <!-- Version Control -->
-      <details>
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Version Control</summary>
         <div class="skills-grid">
           <div class="skill-card">Git</div>
         </div>
       </details>
 
-      <!-- Project Management -->
-      <details>
+      <!-- Project Management Tools-->
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Project Management Tools</summary>
         <div class="skills-grid">
           <div class="skill-card">JIRA</div>
@@ -627,8 +627,8 @@ with right_col:
         </div>
       </details>
 
-      <!-- Automation & Insurance -->
-      <details>
+      <!-- QA Automation & Insurance -->
+      <details open>
         <summary style="font-weight:bold; cursor:pointer;">Automation & Insurance Suite</summary>
         <div class="skills-grid">
           <div class="skill-card">Selenium WebDriver</div>

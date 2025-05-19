@@ -409,6 +409,8 @@ with left_col:
     
 # --- Center Pane ---
 with mid_col:
+    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+
 
     # Inject CSS for a .welcome-card class
     st.markdown(

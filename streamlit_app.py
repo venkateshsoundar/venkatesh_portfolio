@@ -470,7 +470,7 @@ with mid_col:
   width: 100%;
   height: 120px;    /* adjust as needed */
   object-fit: cover;
-  opacity: 0.6;      /* so text stands out */
+  opacity: 1;      /* so text stands out */
 }
 .chat-card .content {
   position: relative;

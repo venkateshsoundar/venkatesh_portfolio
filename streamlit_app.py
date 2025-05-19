@@ -206,7 +206,7 @@ with left_col:
     ''', unsafe_allow_html=True)
 
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#FFD166;">Contact</div>' +
+        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Contact</div>' +
         '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;">' +
         '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
         '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +

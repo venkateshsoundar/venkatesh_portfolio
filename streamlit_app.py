@@ -276,6 +276,106 @@ with left_col:
     """, unsafe_allow_html=True
 )
 
+    st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>
+      <div class="timeline-horizontal">
+        <div class="item">
+          <div class="dot"></div>
+          <div class="label">
+            <div class="date">2024</div>
+            <div class="title">Insurance & Guidewire Suite Analyst 10.0</div>
+            <div class="sub">Jasper – Guidewire Education</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="dot"></div>
+          <div class="label">
+            <div class="date">2023</div>
+            <div class="title">Karate DSL</div>
+            <div class="sub">Udemy</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="dot"></div>
+          <div class="label">
+            <div class="date">2023</div>
+            <div class="title">Rest API Automation</div>
+            <div class="sub">TestLeaf</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="dot"></div>
+          <div class="label">
+            <div class="date">2022</div>
+            <div class="title">Selenium WebDriver</div>
+            <div class="sub">TestLeaf</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="dot"></div>
+          <div class="label">
+            <div class="date">2020</div>
+            <div class="title">SQL for Data Science</div>
+            <div class="sub">Coursera</div>
+          </div>
+        </div>
+        <div class="item">
+          <div class="dot"></div>
+          <div class="label">
+            <div class="date">2020</div>
+            <div class="title">SDET</div>
+            <div class="sub">Capgemini</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <style>
+      .timeline-horizontal {
+        display: flex;
+        overflow-x: auto;
+        padding: 12px 0;
+      }
+      .timeline-horizontal .item {
+        flex: 0 0 auto;
+        display: flex;
+        align-items: center;
+        margin-right: 32px;
+      }
+      .timeline-horizontal .dot {
+        width: 12px;
+        height: 12px;
+        background: #E67E22;
+        border-radius: 50%;
+        margin-right: 8px;
+      }
+      .timeline-horizontal .label {
+        color: #ffffff;
+        text-align: left;
+      }
+      .timeline-horizontal .date {
+        font-size: 0.8rem;
+        color: #F1C40F;
+      }
+      .timeline-horizontal .title {
+        font-weight: bold;
+        font-size: 0.95rem;
+      }
+      .timeline-horizontal .sub {
+        font-size: 0.85rem;
+        opacity: 0.8;
+      }
+      /* hide scrollbar on WebKit */
+      .timeline-horizontal::-webkit-scrollbar { display: none; }
+      .timeline-horizontal { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+    ''',
+    unsafe_allow_html=True
+)
+
+
 # --- Center Pane ---
 with mid_col:
     st.markdown(

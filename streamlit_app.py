@@ -74,8 +74,8 @@ st.markdown(
   border-radius: 6px;
 }
 .profile-pic-popout {
-  width: 120px;
-  height: 120px;
+  width: 180px;
+  height: 180px;
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid #fff;

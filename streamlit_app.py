@@ -464,7 +464,7 @@ with mid_col:
       color: white;              /* or pick a contrasting color */
       min-height: 300px;         /* adjust height as needed */
       display: flex;
-      align-items: center;
+      align-items: Top;
       justify-content: center;
       text-align: center;
     ">

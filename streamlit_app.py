@@ -468,7 +468,7 @@ with mid_col:
         display: flex;
         align-items: center;
         justify-content: center;
-        text-align: center;
+        text-align: right;
       }}
       /* If you need to override Streamlit container padding: */
       .stApp .welcome-card {{

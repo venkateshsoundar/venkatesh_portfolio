@@ -409,41 +409,11 @@ with left_col:
     
 # --- Center Pane ---
 with mid_col:
-    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
-
+    
     st.markdown(
-    f"""
-    <style>
-      .welcome-card {{
-        background: url("{gif_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 3rem;
-        color: white;              /* or pick a contrasting color */
-        min-height: 300px;         /* adjust height as needed */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }}
-      /* If you need to override Streamlit container padding: */
-      .stApp .welcome-card {{
-        margin: 0 auto 2rem auto;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-    st.markdown(
-    """
-    <div class="welcome-card">
-      <div>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Hi, I’m Venkatesh — Data Scientist & Engineer</p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+        '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
+        unsafe_allow_html=True
+    )
 
     # --- AI Chatbot Section ---
     st.markdown("""

@@ -229,7 +229,7 @@ div[data-testid="stSpinner"] > div {
 )
 
 # --- Layout ---
-left_col, mid_col, right_col = st.columns([1,2,1], gap="large")
+left_col, mid_col, right_col = st.columns([1,2,1], gap="small")
 
 # --- Left Pane (profile pic pops out of card) ---
 with left_col:

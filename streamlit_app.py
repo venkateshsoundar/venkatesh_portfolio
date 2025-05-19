@@ -230,6 +230,20 @@ div[data-testid="stSpinner"] > div {
   font-weight: bold;
   color: #ffffff;
 }
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;       /* ← ensure multi-line is centered */
+  opacity: 0;
+  transition: opacity .3s ease;
+  font-size: 1.2rem;
+  color: #ffffff;
+  padding: 0 8px;           /* optional: add horizontal padding */
+}
 
 </style>
     ''', unsafe_allow_html=True

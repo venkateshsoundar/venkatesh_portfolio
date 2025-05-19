@@ -168,7 +168,7 @@ st.markdown(
 .stChatInput input,
 input[data-baseweb="input"] {
   background: #26334d !important;        /* deep blue-gray */
-  color: #fff !important;                /* white text */
+  color: #222 !important;                /* white text */
   border: 2px solid #5A84B4 !important;  /* blue border */
   border-radius: 12px !important;
   font-size: 1.08rem !important;

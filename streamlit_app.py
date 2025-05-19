@@ -278,7 +278,7 @@ with left_col:
 
 
     # Certifications & Courses as simple list
-st.markdown(
+    st.markdown(
     """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>

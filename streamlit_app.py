@@ -281,7 +281,7 @@ with left_col:
     st.markdown(
     """
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#E67E22;">Certifications & Courses</div>
+      <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
       <div style="text-align:left; margin-left:10px;">
         <p>
           <b>Insurance &amp; Guidewire Suite Analyst 10.0</b><br>
@@ -487,7 +487,7 @@ with right_col:
     st.markdown(
     '''
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#3498DB;">Core Skills & Tools</div>
+      <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
       
       <!-- Programming Languages -->
       <details open>

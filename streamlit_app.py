@@ -83,7 +83,7 @@ st.markdown(
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
-  top: -40px;
+  top: 20px;
   z-index: 10;
 }
 .profile-card-container {
@@ -92,7 +92,7 @@ st.markdown(
   margin-bottom: 20px;
 }
 .profile-card-content {
-  padding-top: 50px;
+  padding-top: 90px;
 }
 
 .contact-icon {

@@ -450,4 +450,57 @@ with right_col:
   </div>
 </div>
 """, unsafe_allow_html=True)
+    st.markdown("""
+<style>
+.exp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.exp-card {
+  background: #fff;
+  color: #22314B;
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(30,40,80,0.07);
+  padding: 14px 16px;
+  margin-bottom: 8px;
+}
+.exp-job-title { font-weight: bold; color: #8E44AD; font-size: 1.09rem;}
+.exp-job-date { font-size: 0.96rem; color: #406496;}
+.exp-job-company { font-size: 0.99rem; margin-bottom: 0;}
+</style>
+<div class="card hover-zoom">
+  <div class="section-title" style="background:#8E44AD;">Experience</div>
+  <div class="exp-grid">
+    <div class="exp-card">
+      <div class="exp-job-title">Software Developer Intern</div>
+      <div class="exp-job-company">Tech Insights Inc, Canada</div>
+      <div class="exp-job-date">May 2025 – Present</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-job-title">Senior Consultant</div>
+      <div class="exp-job-company">Deloitte Consulting India Pvt Ltd, India</div>
+      <div class="exp-job-date">June 2024 – August 2024</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-job-title">Consultant</div>
+      <div class="exp-job-company">Deloitte Consulting India Pvt Ltd, India</div>
+      <div class="exp-job-date">Oct 2021 – June 2024</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-job-title">Consultant</div>
+      <div class="exp-job-company">Capgemini Technology Services, India</div>
+      <div class="exp-job-date">May 2018 – Oct 2021</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-job-title">Associate</div>
+      <div class="exp-job-company">Cognizant Technology Solutions, India</div>
+      <div class="exp-job-date">May 2016 – May 2018</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-job-title">Programmer Analyst</div>
+      <div class="exp-job-company">Cognizant Technology Solutions, India</div>
+      <div class="exp-job-date">May 2016 – May 2018</div>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+
 

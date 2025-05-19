@@ -456,6 +456,7 @@ with mid_col:
   #  )
 
     # --- AI Chatbot Section ---
+    # --- AI Chatbot Section ---
     st.markdown("""
 <style>
 .chat-card {
@@ -463,21 +464,18 @@ with mid_col:
   border-radius: 12px;
   overflow: hidden;
   margin-bottom: 20px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
 }
-.chat-card .background {
-  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
-  opacity: 0.3;            /* adjust opacity so text is readable */
+.chat-card img.header-img {
   width: 100%;
-  height: 120px;          /* adjust height as needed */
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 0;
+  height: 120px;    /* adjust as needed */
+  object-fit: cover;
+  opacity: 0.6;      /* so text stands out */
 }
 .chat-card .content {
   position: relative;
   z-index: 1;
-  padding: 20px;
+  padding: 16px;
 }
 [data-testid="stChatInput"] input,
 .stChatInput input,
@@ -504,12 +502,17 @@ input[data-baseweb="input"]:focus {
     st.markdown(
     """
     <div class="chat-card">
-      <div class="background"></div>
-      <div class="content card hover-zoom">
+      <!-- Header image -->
+      <img
+        class="header-img"
+        src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+        alt="AI Background"
+      />
+      <div class="content">
         <div class="section-title" style="background:#34495E;">
           Chat with My Buddy Bot! 🤖
         </div>
-        <p style="color:#ADD8E6; margin:0;">
+        <p style="color:#ADD8E6; margin-top:4px; margin-bottom:0;">
           Ask anything about my professional projects and skills!
         </p>
       </div>
@@ -517,6 +520,7 @@ input[data-baseweb="input"]:focus {
     """,
     unsafe_allow_html=True
 )
+
 
     api_key = st.secrets["DEEPSEEK_API_KEY"]
     client = openai.OpenAI(

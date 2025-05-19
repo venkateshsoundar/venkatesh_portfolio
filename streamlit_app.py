@@ -191,65 +191,6 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    # --- AI Chatbot Section (center pane) ---
-    st.markdown(
-    '<div class="card hover-zoom" style="margin-bottom:32px;"><div class="section-title" style="background:#5A84B4;">Chat with My AI Assistant</div>'
-    '<p style="color:#e0e6ed;margin-top:0;">Ask me anything about my background, projects, or skills!</p>',
-    unsafe_allow_html=True
-    )
-
-    if 'chat_history' not in st.session_state:
-      st.session_state.chat_history = []
-
-# Display chat messages (user/assistant)
-    for role, msg in st.session_state.chat_history:
-      align = "flex-end" if role == "user" else "flex-start"
-      bgcolor = "#e8f0fe" if role == "user" else "#5A84B4"
-      color = "#222" if role == "user" else "#fff"
-      st.markdown(
-        f"<div style='display:flex;justify-content:{align};'>"
-        f"<div style='background:{bgcolor};color:{color};padding:10px 18px;border-radius:18px;margin:6px 0;max-width:85%;'>{msg}</div>"
-        "</div>",
-        unsafe_allow_html=True
-    )
-
-    user_input = st.text_input("Type your question here...", key="ai_chat_input", label_visibility="collapsed")
-
-    send = st.button("Send", key="ai_send_btn")
-    if send and user_input.strip():
-      st.session_state.chat_history.append(("user", user_input))
-    # Prepare AI prompt with context
-    system_prompt = (
-        "You are Venkatesh's AI portfolio assistant. "
-        "Be concise and professional. You know about his experience, skills, and all projects. "
-        "If asked for a project, give a brief and friendly summary with a GitHub link if relevant."
-    )
-    bullets_str = "\n".join(f"- {b}" for b in bullets)
-    projects_str = "\n".join(f"- {p['title']}" for p in projects)
-    messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "system", "content": "Resume Highlights:\n" + bullets_str},
-        {"role": "system", "content": "Projects:\n" + projects_str},
-        {"role": "user", "content": user_input}
-    ]
-    # Replace with your API key management!
-    import openai
-    client = openai.OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=st.secrets["DEEPSEEK_API_KEY"]
-    )
-    with st.spinner("Assistant is typing..."):
-        resp = client.chat.completions.create(
-            model="deepseek/deepseek-r1:free",
-            messages=messages
-        )
-        reply = resp.choices[0].message.content
-    st.session_state.chat_history.append(("assistant", reply))
-    st.experimental_rerun()
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
-
     # --- Projects Showcase ---
     grid_html = '<div class="grid-container">'
     for proj in projects:

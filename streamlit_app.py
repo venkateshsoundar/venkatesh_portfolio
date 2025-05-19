@@ -442,8 +442,8 @@ with mid_col:
     <div class="welcome-card">
       <div class="typewriter">
       <div>
-        <h1>Welcome to My Portfolio</h1>
-        <p>Hi, I’m Venkatesh — Data Scientist & Engineer</p>
+        <h1>Hello and Welcome</h1>
+        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
       </div>
     </div>
     """,

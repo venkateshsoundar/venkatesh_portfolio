@@ -521,7 +521,7 @@ input[data-baseweb="input"]:focus {
 
     st.markdown(
         '<div class="card hover-zoom">'
-        '<div class="section-title" style="background:#2C3E50;">Projects Showcase</div>'
+        '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
         '</div>',
         unsafe_allow_html=True
     )

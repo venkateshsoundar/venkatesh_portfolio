@@ -458,10 +458,31 @@ with mid_col:
     # --- AI Chatbot Section ---
     st.markdown("""
 <style>
+.chat-card {
+  position: relative;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 20px;
+}
+.chat-card .background {
+  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
+  opacity: 0.3;            /* adjust opacity so text is readable */
+  width: 100%;
+  height: 120px;          /* adjust height as needed */
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+}
+.chat-card .content {
+  position: relative;
+  z-index: 1;
+  padding: 20px;
+}
 [data-testid="stChatInput"] input,
 .stChatInput input,
 input[data-baseweb="input"] {
-  border: 2px solid #406496 !important;     /* blue border */
+  border: 2px solid #406496 !important;
   border-radius: 10px !important;
   background: #fff !important;
   color: #222 !important;
@@ -473,18 +494,30 @@ input[data-baseweb="input"] {
 [data-testid="stChatInput"] input:focus,
 .stChatInput input:focus,
 input[data-baseweb="input"]:focus {
-  border: 2px solid #FFD166 !important;   /* gold border on focus */
+  border: 2px solid #FFD166 !important;
   outline: none !important;
   box-shadow: 0 0 0 2px #ffd16633;
 }
 </style>
 """, unsafe_allow_html=True)
-    
+
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Chat with My Buddy Bot!🤖 </div>'
-        '<p style="color:#ADD8E6;margin-top:0;">Ask anything about my professional projects and skills!</p>',
-        unsafe_allow_html=True
-    )
+    """
+    <div class="chat-card">
+      <div class="background"></div>
+      <div class="content card hover-zoom">
+        <div class="section-title" style="background:#34495E;">
+          Chat with My Buddy Bot! 🤖
+        </div>
+        <p style="color:#ADD8E6; margin:0;">
+          Ask anything about my professional projects and skills!
+        </p>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
+
     api_key = st.secrets["DEEPSEEK_API_KEY"]
     client = openai.OpenAI(
         base_url="https://openrouter.ai/api/v1",

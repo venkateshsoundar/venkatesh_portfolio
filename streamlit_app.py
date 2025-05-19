@@ -460,7 +460,7 @@ with mid_col:
     <div style="
       background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
       padding: 60px 20px;
-      text-align: center;
+      text-align: Top;
     ">
       <h2 style="
         font-family: 'Poppins', sans-serif;

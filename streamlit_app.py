@@ -496,6 +496,113 @@ with right_col:
     unsafe_allow_html=True
 )
 
+    st.markdown(
+    '''
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#3498DB;">Core Skills</div>
+      
+      <!-- Programming Languages -->
+      <details open>
+        <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
+        <div class="skills-grid">
+          <div class="skill-card">Python</div>
+          <div class="skill-card">R</div>
+          <div class="skill-card">SQL</div>
+          <div class="skill-card">Java</div>
+          <div class="skill-card">VBA Macro</div>
+        </div>
+      </details>
+
+      <!-- Data Analysis Tools -->
+      <details>
+        <summary style="font-weight:bold; cursor:pointer;">Data Analysis Tools</summary>
+        <div class="skills-grid">
+          <div class="skill-card">Pandas</div>
+          <div class="skill-card">NumPy</div>
+          <div class="skill-card">Matplotlib</div>
+        </div>
+      </details>
+
+      <!-- Visualization -->
+      <details>
+        <summary style="font-weight:bold; cursor:pointer;">Data Visualization</summary>
+        <div class="skills-grid">
+          <div class="skill-card">Power BI</div>
+          <div class="skill-card">Excel</div>
+        </div>
+      </details>
+
+      <!-- Statistical Analysis -->
+      <details>
+        <summary style="font-weight:bold; cursor:pointer;">Statistical Analysis</summary>
+        <div class="skills-grid">
+          <div class="skill-card">Hypothesis Tests</div>
+          <div class="skill-card">Regression</div>
+        </div>
+      </details>
+
+      <!-- Database Management -->
+      <details>
+        <summary style="font-weight:bold; cursor:pointer;">Database Management</summary>
+        <div class="skills-grid">
+          <div class="skill-card">MySQL</div>
+          <div class="skill-card">Oracle</div>
+          <div class="skill-card">NoSQL</div>
+        </div>
+      </details>
+
+      <!-- Version Control -->
+      <details>
+        <summary style="font-weight:bold; cursor:pointer;">Version Control</summary>
+        <div class="skills-grid">
+          <div class="skill-card">Git</div>
+        </div>
+      </details>
+
+      <!-- Project Management -->
+      <details>
+        <summary style="font-weight:bold; cursor:pointer;">Project Management Tools</summary>
+        <div class="skills-grid">
+          <div class="skill-card">JIRA</div>
+          <div class="skill-card">ALM</div>
+          <div class="skill-card">Rally</div>
+        </div>
+      </details>
+
+      <!-- Automation & Insurance -->
+      <details>
+        <summary style="font-weight:bold; cursor:pointer;">Automation & Insurance Suite</summary>
+        <div class="skills-grid">
+          <div class="skill-card">Selenium WebDriver</div>
+          <div class="skill-card">Guidewire</div>
+        </div>
+      </details>
+    </div>
+
+    <style>
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 8px;
+        margin: 8px 0 12px;
+      }
+      .skill-card {
+        background: rgba(255,255,255,0.15);
+        padding: 6px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      details summary {
+        list-style: none;
+      }
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
+    ''',
+    unsafe_allow_html=True
+)
 
 
 

@@ -496,7 +496,7 @@ with right_col:
       <!-- Programming Languages -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ADD8E6;">
           <div class="skill-card">Python</div>
           <div class="skill-card">R</div>
           <div class="skill-card">SQL</div>

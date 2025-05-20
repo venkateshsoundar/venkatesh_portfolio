@@ -723,7 +723,6 @@ with mid_col:
     # --- Projects Showcase ---
     with project_container:
         st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-        grid_html = '<div class="grid-container">'
         cols_proj = st.columns(3, gap="medium")
         for idx, proj in enumerate(projects):
             col = cols_proj[idx % 3]
@@ -732,8 +731,6 @@ with mid_col:
                 if st.button("Details", key=f"details-{idx}"):
                     with st.expander(f"About {proj['title']}", expanded=True):
                         st.markdown(proj["details"])
-        grid_html += '</div>'
-        st.markdown(grid_html, unsafe_allow_html=True)
 
   
 

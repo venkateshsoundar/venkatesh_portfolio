@@ -547,7 +547,7 @@ with mid_col:
     st.markdown(
     f'''
     <div style="
-        background: url('https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/ProjectShowcase.jpg') center/cover no-repeat;
+        background: url('https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/ProjectShowcase.gif') center/cover no-repeat;
         border-radius: 18px;
         min-height: 110px;           /* Reduced height */
         display: flex;
@@ -563,7 +563,7 @@ with mid_col:
             letter-spacing: 1px;
             text-align: center;
             padding: 0.5rem 2rem;
-            border-radius: 10px;
+            border-radius: 20px;
             background: transparent;
             box-shadow: none;
             width: 100%;

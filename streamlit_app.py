@@ -496,7 +496,7 @@ with right_col:
       <!-- Programming Languages -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
-        <div class="skills-grid" style="color:#ADD8E6;">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">Python</div>
           <div class="skill-card">R</div>
           <div class="skill-card">SQL</div>
@@ -508,7 +508,7 @@ with right_col:
       <!-- Data Analysis Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Analysis Tools</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">Pandas</div>
           <div class="skill-card">NumPy</div>
           <div class="skill-card">Matplotlib</div>
@@ -518,7 +518,7 @@ with right_col:
       <!-- Visualization Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Visualization</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">Power BI</div>
           <div class="skill-card">Excel</div>
         </div>
@@ -527,7 +527,7 @@ with right_col:
       <!-- Statistical Analysis -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Statistical Analysis</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">Hypothesis Tests</div>
           <div class="skill-card">Regression</div>
         </div>
@@ -536,7 +536,7 @@ with right_col:
       <!-- Database Management Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Database Management</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">MySQL</div>
           <div class="skill-card">Oracle</div>
           <div class="skill-card">NoSQL</div>
@@ -546,7 +546,7 @@ with right_col:
       <!-- Version Control -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Version Control</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">Git</div>
         </div>
       </details>
@@ -554,7 +554,7 @@ with right_col:
       <!-- Project Management Tools-->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Project Management Tools</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">JIRA</div>
           <div class="skill-card">ALM</div>
           <div class="skill-card">Rally</div>
@@ -564,7 +564,7 @@ with right_col:
       <!-- QA Automation & Insurance -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Automation & Insurance Suite</summary>
-        <div class="skills-grid">
+        <div class="skills-grid" style="color:#ffd166;">
           <div class="skill-card">Selenium WebDriver</div>
           <div class="skill-card">Guidewire</div>
         </div>

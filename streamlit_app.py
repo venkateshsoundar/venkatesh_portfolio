@@ -727,7 +727,7 @@ with mid_col:
         for idx, proj in enumerate(projects):
             col = cols_proj[idx % 3]
             with col:
-                st.image(proj["image"], use_column_width=True, caption=proj["title"])
+                st.image(proj["image"], use_container_width=True, caption=proj["title"])
                 if st.button("Details", key=f"details-{idx}"):
                     with st.expander(f"About {proj['title']}", expanded=True):
                         st.markdown(proj["details"])

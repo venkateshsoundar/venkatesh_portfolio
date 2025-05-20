@@ -549,7 +549,7 @@ with mid_col:
     <div style="
         background: url('https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/ProjectShowcase.jpg') center/cover no-repeat;
         border-radius: 18px;
-        min-height: 110px;           /* Reduced height */
+        min-height: 80px;           /* Reduced height */
         display: flex;
         align-items: center;
         justify-content: center;

@@ -521,7 +521,7 @@ with mid_col:
         )
         with st.spinner("Assistant is typing..."):
             response = client.chat.completions.create(
-                model="deepseek/deepseek-chat",
+                model="deepseek/deepseek-r1-zero:free",
                 messages=[
                     {"role": "system", "content": prompt}
                 ]

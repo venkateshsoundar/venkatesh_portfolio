@@ -407,154 +407,6 @@ with left_col:
 )
 
 
-    
-# --- Center Pane ---
-with mid_col:
-    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
-
-
-    # Inject CSS for a .welcome-card class
-    st.markdown(
-    f"""
-    <style>
-      .welcome-card {{
-        background: url("{gif_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 3rem;
-        color: white;              /* or pick a contrasting color */
-        min-height: 180px;         /* adjust height as needed */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }}
-      /* If you need to override Streamlit container padding: */
-      .stApp .welcome-card {{
-        margin: 0 auto 1rem auto;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Now render your content inside that div
-    st.markdown(
-    """
-    <div class="welcome-card">
-      <div class="typewriter">
-      <div>
-        <h1>Hello and Welcome...</h1>
-        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-    
-  #  st.markdown(
-  #      '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
-  #      unsafe_allow_html=True
-  #  )
-
-    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-
-    st.markdown(
-    f"""
-    <style>
-      .welcome-card2 {{
-        background: url("{ai_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 0;                   /* remove internal padding */
-        color: white;
-        height: 200px;                /* fixed banner height */
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 24px;
-      }}
-      .welcome-card2 .text-container {{
-        position: absolute;
-        top: 70%;                     /* drop text lower */
-        right: 2rem;                  /* align text to the right edge */
-        transform: translateY(-50%);  /* center vertically at 60% point */
-        text-align: right;
-      }}
-      .welcome-card2 h2 {{
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-    st.markdown(
-    """
-    <div class="welcome-card2">
-      <div class="text-container">
-        <h2>Ask Buddy Bot!</h2>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-
-
-
-    api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = openai.OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-    )
-
-    # Stateless chat - no history
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat-v3-0324",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
-
-    # --- Projects Showcase ---
-    grid_html = '<div class="grid-container">'
-    for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
-            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
-        )
-    grid_html += '</div>'
-
-    st.markdown(
-        '<div class="card hover-zoom">'
-        '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    
-    
-    st.markdown(
-        f"""
-{grid_html}
-""",
-        unsafe_allow_html=True
-    )
-    
-
 # --- Right Pane ---
 with right_col:
     st.markdown("""
@@ -743,5 +595,155 @@ with right_col:
     ''',
     unsafe_allow_html=True
 )
+
+    
+# --- Center Pane ---
+with mid_col:
+    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+
+
+    # Inject CSS for a .welcome-card class
+    st.markdown(
+    f"""
+    <style>
+      .welcome-card {{
+        background: url("{gif_url}") center/cover no-repeat;
+        border-radius: 16px;
+        padding: 3rem;
+        color: white;              /* or pick a contrasting color */
+        min-height: 180px;         /* adjust height as needed */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+      }}
+      /* If you need to override Streamlit container padding: */
+      .stApp .welcome-card {{
+        margin: 0 auto 1rem auto;
+      }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Now render your content inside that div
+    st.markdown(
+    """
+    <div class="welcome-card">
+      <div class="typewriter">
+      <div>
+        <h1>Hello and Welcome...</h1>
+        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+    
+  #  st.markdown(
+  #      '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
+  #      unsafe_allow_html=True
+  #  )
+
+    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+
+    st.markdown(
+    f"""
+    <style>
+      .welcome-card2 {{
+        background: url("{ai_url}") center/cover no-repeat;
+        border-radius: 16px;
+        padding: 0;                   /* remove internal padding */
+        color: white;
+        height: 200px;                /* fixed banner height */
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 24px;
+      }}
+      .welcome-card2 .text-container {{
+        position: absolute;
+        top: 70%;                     /* drop text lower */
+        right: 2rem;                  /* align text to the right edge */
+        transform: translateY(-50%);  /* center vertically at 60% point */
+        text-align: right;
+      }}
+      .welcome-card2 h2 {{
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+      }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+    st.markdown(
+    """
+    <div class="welcome-card2">
+      <div class="text-container">
+        <h2>Ask Buddy Bot!</h2>
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+
+
+
+    api_key = st.secrets["DEEPSEEK_API_KEY"]
+    client = openai.OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+    )
+
+    # Stateless chat - no history
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.chat_message("user").write(user_input)
+        prompt = (
+            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+            + user_input
+        )
+        with st.spinner("Assistant is typing..."):
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat-v3-0324",
+                messages=[
+                    {"role": "system", "content": prompt}
+                ]
+            )
+            reply = response.choices[0].message.content
+        st.chat_message("assistant").write(reply)
+
+    # --- Projects Showcase ---
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom"><a href="{proj["url"]}" target="_blank">'
+            f'<img src="{proj["image"]}" class="card-img"/><div class="overlay">{proj["title"]}</div></a></div>'
+        )
+    grid_html += '</div>'
+
+    st.markdown(
+        '<div class="card hover-zoom">'
+        '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+    
+    
+    st.markdown(
+        f"""
+{grid_html}
+""",
+        unsafe_allow_html=True
+    )
+    
+
+
 
     

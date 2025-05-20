@@ -724,15 +724,14 @@ with mid_col:
     with project_container:
         st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
         grid_html = '<div class="grid-container">'
-        for proj in projects:
-            grid_html += (
-                f'<div class="project-item hover-zoom">'
-                f'  <a href="{proj["url"]}" target="_blank">'
-                f'    <img src="{proj["image"]}" class="card-img"/>'
-                f'    <div class="overlay">{proj["title"]}</div>'
-                f'  </a>'
-                f'</div>'
-            )
+        cols_proj = st.columns(3, gap="medium")
+        for idx, proj in enumerate(projects):
+            col = cols_proj[idx % 3]
+            with col:
+                st.image(proj["image"], use_column_width=True, caption=proj["title"])
+                if st.button("Details", key=f"details-{idx}"):
+                    with st.expander(f"About {proj['title']}", expanded=True):
+                        st.markdown(proj["details"])
         grid_html += '</div>'
         st.markdown(grid_html, unsafe_allow_html=True)
 

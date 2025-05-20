@@ -717,7 +717,7 @@ with mid_col:
             )
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
-
+    project_container = st.container()
     # --- Projects Showcase ---
     with project_container:
         st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)

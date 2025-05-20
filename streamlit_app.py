@@ -545,6 +545,32 @@ with mid_col:
     )
 
     st.markdown(
+    f'''
+    <div class="card hover-zoom" style="
+        background: url('https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/ProjectShowcase.jpg') center/cover no-repeat;
+        border-radius: 16px;
+        min-height: 220px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(44,62,80,0.15);
+    ">
+        <div class="section-title" style="
+            background: rgba(44,62,80,0.85); 
+            color: #fff; 
+            font-size: 2rem; 
+            padding: 1.2rem 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(44,62,80,0.10);
+        ">Projects Gallery</div>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
+
+
+
+    st.markdown(
         f"""
 {grid_html}
 """,

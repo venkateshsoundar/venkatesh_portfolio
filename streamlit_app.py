@@ -698,25 +698,27 @@ with mid_col:
         base_url="https://openrouter.ai/api/v1",
         api_key=api_key,
     )
+    chat_container=st.container()
+    with chat_container:
 
     # Stateless chat - no history
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat-v3-0324",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
+      user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+      if user_input:
+          st.chat_message("user").write(user_input)
+          prompt = (
+              "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+              "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+              + user_input
+          )
+          with st.spinner("Assistant is typing..."):
+              response = client.chat.completions.create(
+                  model="deepseek/deepseek-chat-v3-0324",
+                  messages=[
+                      {"role": "system", "content": prompt}
+                  ]
+              )
+              reply = response.choices[0].message.content
+          st.chat_message("assistant").write(reply)
     project_container = st.container()
     # --- Projects Showcase ---
     with project_container:
@@ -734,16 +736,6 @@ with mid_col:
         grid_html += '</div>'
         st.markdown(grid_html, unsafe_allow_html=True)
 
-    
-    
-    st.markdown(
-        f"""
-{grid_html}
-""",
-        unsafe_allow_html=True
-    )
-    
-
-
+  
 
     

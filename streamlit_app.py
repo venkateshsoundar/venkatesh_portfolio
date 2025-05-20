@@ -544,40 +544,7 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    st.markdown(
-    f'''
-    <div style="
-        background: url('https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/ProjectShowcase.gif') center/cover no-repeat;
-        border-radius: 18px;
-        min-height: 110px;           /* Reduced height */
-        display: flex;
-        align-items: center;         /* Vertical center */
-        justify-content: center;     /* Horizontal center */
-        box-shadow: 0 4px 12px rgba(44,62,80,0.15);
-        margin-bottom: 1.5rem;
-    ">
-        <span style="
-            color: #fff;
-            font-size: 2.1rem;
-            font-weight: bold;
-            letter-spacing: 1px;
-            text-align: center;
-            padding: 0.5rem 2rem;
-            border-radius: 20px;
-            background: transparent;
-            box-shadow: none;
-            width: 100%;
-            display: block;
-            text-shadow: 0 2px 6px rgba(0,0,0,0.25);
-        ">
-            Projects Gallery
-        </span>
-    </div>
-    ''',
-    unsafe_allow_html=True
-)
-
-
+    
     st.markdown(
         f"""
 {grid_html}

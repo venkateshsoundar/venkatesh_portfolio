@@ -691,22 +691,6 @@ with mid_col:
 )
 
 
-    project_container = st.container()
-    # --- Projects Showcase ---
-    with project_container:
-        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-        grid_html = '<div class="grid-container">'
-        for proj in projects:
-            grid_html += (
-                f'<div class="project-item hover-zoom">'
-                f'  <a href="{proj["url"]}" target="_blank">'
-                f'    <img src="{proj["image"]}" class="card-img"/>'
-                f'    <div class="overlay">{proj["title"]}</div>'
-                f'  </a>'
-                f'</div>'
-            )
-        grid_html += '</div>'
-        st.markdown(grid_html, unsafe_allow_html=True)
 
 
     api_key = st.secrets["DEEPSEEK_API_KEY"]
@@ -735,7 +719,22 @@ with mid_col:
               )
               reply = response.choices[0].message.content
           st.chat_message("assistant").write(reply)
-
+    project_container = st.container()
+    # --- Projects Showcase ---
+    with project_container:
+        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+        grid_html = '<div class="grid-container">'
+        for proj in projects:
+            grid_html += (
+                f'<div class="project-item hover-zoom">'
+                f'  <a href="{proj["url"]}" target="_blank">'
+                f'    <img src="{proj["image"]}" class="card-img"/>'
+                f'    <div class="overlay">{proj["title"]}</div>'
+                f'  </a>'
+                f'</div>'
+            )
+        grid_html += '</div>'
+        st.markdown(grid_html, unsafe_allow_html=True)
 
   
 

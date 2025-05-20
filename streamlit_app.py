@@ -546,27 +546,33 @@ with mid_col:
 
     st.markdown(
     f'''
-    <div class="card hover-zoom" style="
+    <div style="
         background: url('https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/ProjectShowcase.jpg') center/cover no-repeat;
-        border-radius: 16px;
-        min-height: 220px;
+        border-radius: 18px;
+        min-height: 110px;           /* Reduced height */
         display: flex;
         align-items: center;
         justify-content: center;
         box-shadow: 0 4px 12px rgba(44,62,80,0.15);
+        margin-bottom: 1.5rem;
     ">
-        <div class="section-title" style="
-            background: rgba(44,62,80,0.85); 
-            color: #fff; 
-            font-size: 2rem; 
-            padding: 1.2rem 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(44,62,80,0.10);
-        ">Projects Gallery</div>
+        <span style="
+            color: #fff;
+            font-size: 2.1rem;
+            font-weight: bold;
+            letter-spacing: 1px;
+            padding: 0.5rem 2rem;
+            border-radius: 10px;
+            background: transparent;   /* No background */
+            box-shadow: none;
+        ">
+            Projects Gallery
+        </span>
     </div>
     ''',
     unsafe_allow_html=True
 )
+
 
 
 

@@ -545,6 +545,48 @@ with mid_col:
         unsafe_allow_html=True
     )
 
+    st.markdown(
+    '''
+    <div style="
+        background: linear-gradient(120deg, #1e3c72 0%, #2a5298 100%);
+        border-radius: 22px;
+        min-height: 90px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 6px 30px rgba(30,60,114,0.15), 0 1.5px 6px rgba(30,60,114,0.13);
+        margin-bottom: 2rem;
+        position: relative;
+        overflow: hidden;
+    ">
+        <div style="
+            backdrop-filter: blur(7px);
+            background: rgba(30, 60, 114, 0.18);
+            border-radius: 14px;
+            padding: 1.2rem 3rem;
+            margin: 0.7rem;
+            box-shadow: 0 2px 6px rgba(30,60,114,0.12);
+            width: 90%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        ">
+            <span style="
+                color: #fff;
+                font-size: 2.2rem;
+                font-weight: bold;
+                letter-spacing: 1.5px;
+                text-align: center;
+                text-shadow: 0 4px 16px rgba(0,0,0,0.13), 0 1px 1px rgba(44,62,80,0.14);
+            ">
+                Projects Gallery
+            </span>
+        </div>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
+
     
     st.markdown(
         f"""

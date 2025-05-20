@@ -537,43 +537,9 @@ with mid_col:
         )
     grid_html += '</div>'
 
-
     st.markdown(
-    f"""
-    <style>
-      .welcome-card3 {{
-        background: url("{ai_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 0;                   /* remove internal padding */
-        color: white;
-        height: 200px;                /* fixed banner height */
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 24px;
-      }}
-      .welcome-card3 .text-container {{
-        position: absolute;
-        top: 70%;                     /* drop text lower */
-        right: 2rem;                  /* align text to the right edge */
-        transform: translateY(-50%);  /* center vertically at 60% point */
-        text-align: right;
-      }}
-      .welcome-card3 h2 {{
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-    st.markdown(
-        '<div class="welcome-card2">'
         '<div class="card hover-zoom">'
         '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
-        '</div>',
         '</div>',
         unsafe_allow_html=True
     )

@@ -261,7 +261,7 @@ with left_col:
       <div class="card profile-card-content hover-zoom">
         <h2>Venkatesh Soundararajan</h2>
         <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
-        <span style="color:#ADD8E6;"><strong>Calgary,AB,Canada</strong></span>
+        <span style="color:#ffd166;"><strong>Calgary,AB,Canada</strong></span>
       </div>
     </div>
     ''', unsafe_allow_html=True)

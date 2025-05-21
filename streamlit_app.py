@@ -802,7 +802,7 @@ with mid_col:
         col = cols[idx % 3]
         with col:
             # thumbnail + title
-            st.image(proj["image"], use_column_width=True, caption=proj["title"])
+            st.image(proj["image"], use_container_width=True, caption=proj["title"])
             st.markdown(f"**{proj['title']}**")
             # "Details" button to open modal
             if st.button("Details", key=f"detail_{idx}"):

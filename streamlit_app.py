@@ -813,30 +813,30 @@ with mid_col:
     # --- Projects Showcase ---
     # --- Projects Gallery with Hover-and-Click Modals ---
     with project_container:
-    st.markdown(
-        '<div class="card hover-zoom">'
-        '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
-        '</div>',
-        unsafe_allow_html=True
-    )
-
-    cols = st.columns(3, gap="small")
-    for idx, proj in enumerate(projects):
-        col = cols[idx % 3]
-        with col:
-            # relative container for image + invisible button
-            st.markdown(f'''
-            <div class="project-item" style="position:relative;">
-              <img src="{proj["image"]}" class="card-img"/>
-              <div class="overlay">{proj["title"]}</div>
-            </div>
-            ''', unsafe_allow_html=True)
-
-            # this hidden button sits on top of the image
-            if st.button("", key=f"detail_{idx}"):
-                # opens a modal on click
-                with st.modal(proj["title"]):
-                    st.image(proj["image"], use_column_width=True, caption=proj["title"])
-                    st.markdown(f"**Description:** {proj['description']}")
-                    st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
-                    st.markdown(f"[View code on GitHub]({proj['url']})")
+        st.markdown(
+            '<div class="card hover-zoom">'
+            '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+        
+        cols = st.columns(3, gap="small")
+        for idx, proj in enumerate(projects):
+            col = cols[idx % 3]
+            with col:
+                # relative container for image + invisible button
+                st.markdown(f'''
+                <div class="project-item" style="position:relative;">
+                  <img src="{proj["image"]}" class="card-img"/>
+                  <div class="overlay">{proj["title"]}</div>
+                </div>
+                ''', unsafe_allow_html=True)
+        
+                # this hidden button sits on top of the image
+                if st.button("", key=f"detail_{idx}"):
+                    # opens a modal on click
+                    with st.modal(proj["title"]):
+                        st.image(proj["image"], use_column_width=True, caption=proj["title"])
+                        st.markdown(f"**Description:** {proj['description']}")
+                        st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
+                        st.markdown(f"[View code on GitHub]({proj['url']})")

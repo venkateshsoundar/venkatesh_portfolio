@@ -796,13 +796,22 @@ with mid_col:
         unsafe_allow_html=True
     )
 
-    for proj in projects:
-        header = f"🛠 {proj['title']}"
-        with st.expander(header, expanded=False):
+    # show projects in a 3-column responsive grid
+    cols = st.columns(3, gap="small")
+    for idx, proj in enumerate(projects):
+        col = cols[idx % 3]
+        with col:
+            # thumbnail + title
             st.image(proj["image"], use_column_width=True, caption=proj["title"])
-            st.markdown(f"**Description:** {proj['description']}")
-            st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
-            st.markdown(f"[View code on GitHub]({proj['url']})")
+            st.markdown(f"**{proj['title']}**")
+            # "Details" button to open modal
+            if st.button("Details", key=f"detail_{idx}"):
+                # this context creates a true pop-up
+                with st.modal(proj["title"]):
+                    st.image(proj["image"], use_column_width=True, caption=proj["title"])
+                    st.markdown(f"**Description:** {proj['description']}")
+                    st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
+                    st.markdown(f"[View code on GitHub]({proj['url']})")
 
   
 

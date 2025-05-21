@@ -736,7 +736,7 @@ with mid_col:
         grid_html += '</div>'
         st.markdown(grid_html, unsafe_allow_html=True)    
 
-      from streamlit.components.v1 import html
+        from streamlit.components.v1 import html
 
     # --- Your list of projects ---
         projects = [

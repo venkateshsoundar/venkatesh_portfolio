@@ -30,85 +30,18 @@ resume_json = resume_df.to_json(orient='records')
 
 # --- Projects list ---
 projects = [
-    {
-        "title": "Canadian Quality of Life Analysis",
-        "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
-        "description": "Interactive analysis of Canadian quality of life indices, mapping socio-economic factors across provinces.",
-        "tech": ["Python", "Pandas", "Folium", "Plotly"]
-    },
-    {
-        "title": "Alberta Wildfire Analysis",
-        "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
-        "description": "Time-series and spatial modelling of wildfire occurrences in Alberta using climate and satellite data.",
-        "tech": ["Python", "GeoPandas", "Scikit-Learn", "Matplotlib"]
-    },
-    {
-        "title": "Toronto Crime Drivers",
-        "url": "https://github.com/venkateshsoundar/toronto-crime-drivers",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg",
-        "description": "Identified key socio-economic predictors of crime rates in Toronto neighbourhoods.",
-        "tech": ["R", "ggplot2", "dplyr", "Leaflet"]
-    },
-    {
-        "title": "Weight Change Regression Analysis",
-        "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg",
-        "description": "Built multiple regression models to forecast weight change based on lifestyle and dietary inputs.",
-        "tech": ["Python", "Scikit-Learn", "Statsmodels", "Seaborn"]
-    },
-    {
-        "title": "Calgary Childcare Compliance",
-        "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg",
-        "description": "Dashboard tracking regulatory compliance and capacity metrics for Calgary childcare centres.",
-        "tech": ["Streamlit", "Pandas", "Plotly", "SQL"]
-    },
-    {
-        "title": "Social Media Purchase Influence",
-        "url": "https://github.com/venkateshsoundar/social-media-purchase-influence",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg",
-        "description": "Analyzed how social media sentiment correlates with purchase behavior using Twitter and sales data.",
-        "tech": ["Python", "NLTK", "VADER", "Tableau"]
-    },
-    {
-        "title": "Obesity Level Estimation",
-        "url": "https://github.com/venkateshsoundar/obesity-level-estimation",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg",
-        "description": "Classification model to predict obesity levels from health and lifestyle survey data.",
-        "tech": ["Python", "XGBoost", "Pandas", "Matplotlib"]
-    },
-    {
-        "title": "Weather Data Pipeline (AWS)",
-        "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg",
-        "description": "End-to-end ETL pipeline on AWS S3/Lambda to ingest, process, and visualize weather forecasts.",
-        "tech": ["AWS S3", "Lambda", "Python", "Streamlit"]
-    },
-    {
-        "title": "Gmail Sentimental Analysis",
-        "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg",
-        "description": "Pipeline to fetch Gmail messages and score sentiment using VADER, with daily summary reports.",
-        "tech": ["Google API", "NLTK", "Pandas", "Matplotlib"]
-    },
-    {
-        "title": "Penguin Species Prediction Chatbot",
-        "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg",
-        "description": "Streamlit-based chatbot that predicts penguin species using user inputs on island and measurements.",
-        "tech": ["Streamlit", "Scikit-Learn", "OpenAI API", "Pandas"]
-    },
-    {
-        "title": "Uber Ride Prediction",
-        "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg",
-        "description": "Deployed regression model to estimate Uber trip durations based on pickup/dropoff and weather.",
-        "tech": ["Python", "XGBoost", "Flask", "Heroku"]
-    }
+    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
+    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
+    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
+    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
+    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
+    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
+    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
+    {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
+    {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
+    {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
 ]
-
 
 # --- Global CSS & Background ---
 st.markdown(
@@ -184,76 +117,34 @@ input[data-baseweb="input"] {
 }
 .project-item {
   position: relative;
-  width: 100%;
-  /* 1:1 aspect ratio – change to 56.25% for 16:9, 75% for 4:3, etc. */
-  padding-top: 100%;
+  aspect-ratio: 1/1;
   overflow: hidden;
   border-radius: 12px;
 }
-
-.project-item .card-img {
-  position: absolute;
-  top: 0; 
-  left: 0;
+.card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform .3s ease;
 }
-
 .project-item:hover .card-img {
   transform: scale(1.05);
 }
-
-/* 1: show title on hover (you already have this) */
-.project-item .overlay {
+.overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0);
-  color: transparent;
+  background: rgba(0,0,0,0.6);
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;
-  transition: background .3s ease, color .3s ease;
-  padding: 0 8px;
+  opacity: 0;
+  transition: opacity .3s ease;
+  font-size: 1.2rem;
+  color: #ffffff;
 }
 .project-item:hover .overlay {
-  background: rgba(0,0,0,0.6);
-  color: #fff;
+  opacity: 1;
 }
-
-/* 2: make the ST button invisible but full-size */
-button[id^="detail_"] {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  opacity: 0 !important;
-  cursor: pointer !important;
-  z-index: 10 !important;
-}
-
-/* 1) Position every Streamlit button wrapper absolutely to fill its parent */
-.stButton {
-  position: absolute !important;
-  top: 0; left: 0;
-  width: 100%; height: 100%;
-  margin: 0 !important;
-  padding: 0 !important;
-}
-
-/* 2) Hide the actual <button> when it has no label (our empty key buttons) */
-.stButton button:empty {
-  opacity: 0 !important;
-  background: none !important;
-  border: none !important;
-  cursor: pointer !important;
-  z-index: 10; /* keep it on top to catch clicks */
-}
-
-
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -285,98 +176,6 @@ button[id^="detail_"] {
   gap: 20px;
   margin-bottom: 20px;
 }
-
-/* Grid & thumbnails */
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
-  gap: 20px;
-  margin-bottom: 20px;
-}
-.project-item {
-  position: relative;
-  width: 100%;
-  padding-top: 100%;
-  overflow: hidden;
-  border-radius: 12px;
-}
-.project-item .card-img {
-  position: absolute;
-  top:0; left:0;
-  width:100%; height:100%;
-  object-fit: cover;
-  transition: transform .3s ease;
-}
-.project-item:hover .card-img {
-  transform: scale(1.05);
-}
-
-/* Hover‐title overlay */
-.project-item .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  color: #fff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 0 8px;
-  opacity: 0;
-  transition: opacity .3s ease;
-}
-.project-item:hover .overlay {
-  opacity: 1;
-}
-
-/* Hide the empty button label and make its wrapper fill the parent */
-.stButton button:empty {
-  opacity: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  position: absolute !important;
-  top:0; left:0;
-  cursor: pointer !important;
-  z-index: 20;
-  background: none !important;
-  border: none !important;
-}
-
-/* Modal backdrop & content */
-.modal-backdrop {
-  position: fixed;
-  top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 999;
-}
-.modal-content {
-  background: #fff;
-  border-radius: 8px;
-  max-width: 90%;
-  max-height: 90%;
-  overflow: auto;
-  padding: 20px;
-  position: relative;
-}
-.modal-content img {
-  max-width: 100%;
-  border-radius: 4px;
-}
-.modal-close {
-  position: absolute;
-  top: 10px; right: 10px;
-  background: #eee;
-  border: none;
-  font-size: 1.2rem;
-  cursor: pointer;
-  border-radius: 50%;
-  width: 32px; height: 32px;
-  line-height: 0.9;
-}
-
 
 /* --- Make chat_input box dark and bold --- */
 [data-testid="stChatInput"] input,
@@ -697,7 +496,7 @@ with right_col:
       <!-- Programming Languages -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">Python</div>
           <div class="skill-card">R</div>
           <div class="skill-card">SQL</div>
@@ -709,7 +508,7 @@ with right_col:
       <!-- Data Analysis Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Analysis Tools</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">Pandas</div>
           <div class="skill-card">NumPy</div>
           <div class="skill-card">Matplotlib</div>
@@ -719,7 +518,7 @@ with right_col:
       <!-- Visualization Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Visualization</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">Power BI</div>
           <div class="skill-card">Excel</div>
         </div>
@@ -728,7 +527,7 @@ with right_col:
       <!-- Statistical Analysis -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Statistical Analysis</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">Hypothesis Tests</div>
           <div class="skill-card">Regression</div>
         </div>
@@ -737,7 +536,7 @@ with right_col:
       <!-- Database Management Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Database Management</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">MySQL</div>
           <div class="skill-card">Oracle</div>
           <div class="skill-card">NoSQL</div>
@@ -747,7 +546,7 @@ with right_col:
       <!-- Version Control -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Version Control</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">Git</div>
         </div>
       </details>
@@ -755,7 +554,7 @@ with right_col:
       <!-- Project Management Tools-->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Project Management Tools</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">JIRA</div>
           <div class="skill-card">ALM</div>
           <div class="skill-card">Rally</div>
@@ -765,7 +564,7 @@ with right_col:
       <!-- QA Automation & Insurance -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Automation & Insurance Suite</summary>
-        <div class="skills-grid" style="color:#ffd166;">
+        <div class="skills-grid">
           <div class="skill-card">Selenium WebDriver</div>
           <div class="skill-card">Guidewire</div>
         </div>
@@ -921,59 +720,22 @@ with mid_col:
               reply = response.choices[0].message.content
           st.chat_message("assistant").write(reply)
     project_container = st.container()
-    # --- Projects Gallery with click-anywhere modals ---
-# container to hold the grid
+    # --- Projects Showcase ---
     with project_container:
-        st.markdown(
-            '<div class="card hover-zoom">'
-            '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
-        st.markdown('<div class="grid-container">', unsafe_allow_html=True)
+        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+        grid_html = '<div class="grid-container">'
+        for proj in projects:
+            grid_html += (
+                f'<div class="project-item hover-zoom">'
+                f'  <a href="{proj["url"]}" target="_blank">'
+                f'    <img src="{proj["image"]}" class="card-img"/>'
+                f'    <div class="overlay">{proj["title"]}</div>'
+                f'  </a>'
+                f'</div>'
+            )
+        grid_html += '</div>'
+        st.markdown(grid_html, unsafe_allow_html=True)
+
+  
+
     
-        # render each thumbnail + invisible button
-        for idx, proj in enumerate(projects):
-            st.markdown(f'''
-                <div class="project-item">
-                  <img src="{proj["image"]}" class="card-img"/>
-                  <div class="overlay">{proj["title"]}</div>
-                </div>
-            ''', unsafe_allow_html=True)
-    
-            # invisible button covers the same area
-            if st.button("", key=f"proj_{idx}"):
-                st.session_state.selected_proj = idx
-    
-        st.markdown('</div>', unsafe_allow_html=True)
-    
-    # now, if a project was clicked, show our modal
-    sel = st.session_state.get("selected_proj", None)
-    if sel is not None:
-        p = projects[sel]
-        # HTML for the modal
-        st.markdown(f'''
-        <div class="modal-backdrop">
-          <div class="modal-content">
-            <button class="modal-close" onclick="document.dispatchEvent(new CustomEvent('closeModal'));">×</button>
-            <h2>{p["title"]}</h2>
-            <img src="{p["image"]}" />
-            <p><strong>Description:</strong> {p["description"]}</p>
-            <p><strong>Tech used:</strong> {", ".join(p["tech"])}</p>
-            <p><a href="{p["url"]}" target="_blank">View code on GitHub</a></p>
-          </div>
-        </div>
-        ''', unsafe_allow_html=True)
-    
-        # close button (Python fallback)
-        if st.button("Close", key="close_modal"):
-            st.session_state.selected_proj = None
-    
-    # small JS snippet to catch the HTML close button click
-    st.components.v1.html("""
-    <script>
-      document.addEventListener('closeModal', () => {
-        window.parent.postMessage({isClose: true}, '*')
-      })
-    </script>
-    """, height=0)

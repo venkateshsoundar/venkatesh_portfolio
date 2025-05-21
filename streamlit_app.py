@@ -286,6 +286,98 @@ button[id^="detail_"] {
   margin-bottom: 20px;
 }
 
+/* Grid & thumbnails */
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px,1fr));
+  gap: 20px;
+  margin-bottom: 20px;
+}
+.project-item {
+  position: relative;
+  width: 100%;
+  padding-top: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+}
+.project-item .card-img {
+  position: absolute;
+  top:0; left:0;
+  width:100%; height:100%;
+  object-fit: cover;
+  transition: transform .3s ease;
+}
+.project-item:hover .card-img {
+  transform: scale(1.05);
+}
+
+/* Hover‐title overlay */
+.project-item .overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 8px;
+  opacity: 0;
+  transition: opacity .3s ease;
+}
+.project-item:hover .overlay {
+  opacity: 1;
+}
+
+/* Hide the empty button label and make its wrapper fill the parent */
+.stButton button:empty {
+  opacity: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  position: absolute !important;
+  top:0; left:0;
+  cursor: pointer !important;
+  z-index: 20;
+  background: none !important;
+  border: none !important;
+}
+
+/* Modal backdrop & content */
+.modal-backdrop {
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+.modal-content {
+  background: #fff;
+  border-radius: 8px;
+  max-width: 90%;
+  max-height: 90%;
+  overflow: auto;
+  padding: 20px;
+  position: relative;
+}
+.modal-content img {
+  max-width: 100%;
+  border-radius: 4px;
+}
+.modal-close {
+  position: absolute;
+  top: 10px; right: 10px;
+  background: #eee;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  width: 32px; height: 32px;
+  line-height: 0.9;
+}
+
+
 /* --- Make chat_input box dark and bold --- */
 [data-testid="stChatInput"] input,
 .stChatInput input,
@@ -830,30 +922,58 @@ with mid_col:
           st.chat_message("assistant").write(reply)
     project_container = st.container()
     # --- Projects Gallery with click-anywhere modals ---
-with project_container:
-    st.markdown(
-        '<div class="card hover-zoom">'
-        '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
-        '</div>',
-        unsafe_allow_html=True,
-    )
-
-    cols = st.columns(3, gap="small")
-    for idx, proj in enumerate(projects):
-        col = cols[idx % 3]
-        with col:
-            # thumbnail + hover-overlay
+# container to hold the grid
+    with project_container:
+        st.markdown(
+            '<div class="card hover-zoom">'
+            '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
+            '</div>',
+            unsafe_allow_html=True
+        )
+        st.markdown('<div class="grid-container">', unsafe_allow_html=True)
+    
+        # render each thumbnail + invisible button
+        for idx, proj in enumerate(projects):
             st.markdown(f'''
-              <div class="project-item" style="position:relative;">
-                <img src="{proj['image']}" class="card-img"/>
-                <div class="overlay">{proj['title']}</div>
-              </div>
+                <div class="project-item">
+                  <img src="{proj["image"]}" class="card-img"/>
+                  <div class="overlay">{proj["title"]}</div>
+                </div>
             ''', unsafe_allow_html=True)
-
-            # invisible button covering the same area
-            if st.button("", key=f"detail_{idx}"):
-                with st.modal(proj["title"]):
-                    st.image(proj["image"], use_column_width=True, caption=proj["title"])
-                    st.markdown(f"**Description:** {proj['description']}")
-                    st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
-                    st.markdown(f"[View code on GitHub]({proj['url']})")
+    
+            # invisible button covers the same area
+            if st.button("", key=f"proj_{idx}"):
+                st.session_state.selected_proj = idx
+    
+        st.markdown('</div>', unsafe_allow_html=True)
+    
+    # now, if a project was clicked, show our modal
+    sel = st.session_state.get("selected_proj", None)
+    if sel is not None:
+        p = projects[sel]
+        # HTML for the modal
+        st.markdown(f'''
+        <div class="modal-backdrop">
+          <div class="modal-content">
+            <button class="modal-close" onclick="document.dispatchEvent(new CustomEvent('closeModal'));">×</button>
+            <h2>{p["title"]}</h2>
+            <img src="{p["image"]}" />
+            <p><strong>Description:</strong> {p["description"]}</p>
+            <p><strong>Tech used:</strong> {", ".join(p["tech"])}</p>
+            <p><a href="{p["url"]}" target="_blank">View code on GitHub</a></p>
+          </div>
+        </div>
+        ''', unsafe_allow_html=True)
+    
+        # close button (Python fallback)
+        if st.button("Close", key="close_modal"):
+            st.session_state.selected_proj = None
+    
+    # small JS snippet to catch the HTML close button click
+    st.components.v1.html("""
+    <script>
+      document.addEventListener('closeModal', () => {
+        window.parent.postMessage({isClose: true}, '*')
+      })
+    </script>
+    """, height=0)

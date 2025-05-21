@@ -735,6 +735,52 @@ with mid_col:
             )
         grid_html += '</div>'
         st.markdown(grid_html, unsafe_allow_html=True)    
-      
+
+      from streamlit.components.v1 import html
+
+    # --- Your list of projects ---
+        projects = [
+            {
+                "title": "Canadian Quality of Life Analysis",
+                "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
+                "thumb": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
+                "full":  "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"
+            },
+            {
+                "title": "Alberta Wildfire Analysis",
+                "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
+                "thumb": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
+                "full":  "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"
+            },
+            # … add more projects here …
+        ]
+        
+        st.set_page_config(layout="wide")
+        st.title("📸 Projects Gallery")
+        
+        # 1) Include Lightbox2 CSS & JS
+        lightbox_header = """
+        <link 
+          href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/css/lightbox.min.css" 
+          rel="stylesheet" 
+        />
+        <script 
+          src="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.3/js/lightbox.min.js">
+        </script>
+        """
+        
+        # 2) Build the HTML gallery
+        gallery_html = '<div style="display: flex; flex-wrap: wrap; gap: 12px; justify-content: center;">\n'
+        for proj in projects:
+            gallery_html += f'''
+              <a href="{proj["full"]}" data-lightbox="portfolio" data-title="{proj["title"]}" style="width:200px; text-decoration:none;">
+                <img src="{proj["thumb"]}" alt="{proj["title"]}" style="width:100%; border-radius:8px;"/>
+                <div style="text-align:center; margin-top:4px; color:#fff;">{proj["title"]}</div>
+              </a>
+            '''
+        gallery_html += "</div>"
+        
+        # 3) Render via components.html
+        html(lightbox_header + gallery_html, height=600)
 
     

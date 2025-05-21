@@ -734,34 +734,7 @@ with mid_col:
                 f'</div>'
             )
         grid_html += '</div>'
-        st.markdown(grid_html, unsafe_allow_html=True)
-
-    # Sample projects list
-    projects = [
-        {
-            "title": "Canadian Quality of Life Analysis",
-            "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
-            "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
-            "description": "A deep dive into QoL across Canada using census and survey data."
-        },
-        # … your other projects …
-    ]
-    
-    st.title("Projects Gallery with Modal Pop-up")
-    
-    cols = st.columns(3)
-    for idx, proj in enumerate(projects):
-        col = cols[idx % 3]
-        # wrap the image in a button
-        if col.button("", key=f"btn_{idx}", help=proj["title"], args=None):
-            # when clicked, open a modal
-            with st.modal(f"{proj['title']} Details"):
-                st.image(proj["image"], use_column_width=True)
-                st.markdown(f"**Description:** {proj['description']}")
-                st.markdown(f"[View on GitHub]({proj['url']})")
-        # display the image itself (button hides the default label)
-        col.image(proj["image"], caption=proj["title"], use_column_width=True)
-    
+        st.markdown(grid_html, unsafe_allow_html=True)    
       
 
     

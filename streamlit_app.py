@@ -755,9 +755,7 @@ with mid_col:
             # … add more projects here …
         ]
         
-        st.set_page_config(layout="wide")
-        st.title("📸 Projects Gallery")
-        
+              
         # 1) Include Lightbox2 CSS & JS
         lightbox_header = """
         <link 

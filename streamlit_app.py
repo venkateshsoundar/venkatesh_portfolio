@@ -235,6 +235,25 @@ button[id^="detail_"] {
   z-index: 10 !important;
 }
 
+/* 1) Position every Streamlit button wrapper absolutely to fill its parent */
+.stButton {
+  position: absolute !important;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* 2) Hide the actual <button> when it has no label (our empty key buttons) */
+.stButton button:empty {
+  opacity: 0 !important;
+  background: none !important;
+  border: none !important;
+  cursor: pointer !important;
+  z-index: 10; /* keep it on top to catch clicks */
+}
+
+
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -810,33 +829,31 @@ with mid_col:
               reply = response.choices[0].message.content
           st.chat_message("assistant").write(reply)
     project_container = st.container()
-    # --- Projects Showcase ---
-    # --- Projects Gallery with Hover-and-Click Modals ---
-    with project_container:
-        st.markdown(
-            '<div class="card hover-zoom">'
-            '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
-            '</div>',
-            unsafe_allow_html=True
-        )
-        
-        cols = st.columns(3, gap="small")
-        for idx, proj in enumerate(projects):
-            col = cols[idx % 3]
-            with col:
-                # relative container for image + invisible button
-                st.markdown(f'''
-                <div class="project-item" style="position:relative;">
-                  <img src="{proj["image"]}" class="card-img"/>
-                  <div class="overlay">{proj["title"]}</div>
-                </div>
-                ''', unsafe_allow_html=True)
-        
-                # this hidden button sits on top of the image
-                if st.button("", key=f"detail_{idx}"):
-                    # opens a modal on click
-                    with st.modal(proj["title"]):
-                        st.image(proj["image"], use_column_width=True, caption=proj["title"])
-                        st.markdown(f"**Description:** {proj['description']}")
-                        st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
-                        st.markdown(f"[View code on GitHub]({proj['url']})")
+    # --- Projects Gallery with click-anywhere modals ---
+with project_container:
+    st.markdown(
+        '<div class="card hover-zoom">'
+        '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
+        '</div>',
+        unsafe_allow_html=True,
+    )
+
+    cols = st.columns(3, gap="small")
+    for idx, proj in enumerate(projects):
+        col = cols[idx % 3]
+        with col:
+            # thumbnail + hover-overlay
+            st.markdown(f'''
+              <div class="project-item" style="position:relative;">
+                <img src="{proj['image']}" class="card-img"/>
+                <div class="overlay">{proj['title']}</div>
+              </div>
+            ''', unsafe_allow_html=True)
+
+            # invisible button covering the same area
+            if st.button("", key=f"detail_{idx}"):
+                with st.modal(proj["title"]):
+                    st.image(proj["image"], use_column_width=True, caption=proj["title"])
+                    st.markdown(f"**Description:** {proj['description']}")
+                    st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
+                    st.markdown(f"[View code on GitHub]({proj['url']})")

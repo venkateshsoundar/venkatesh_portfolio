@@ -205,21 +205,36 @@ input[data-baseweb="input"] {
   transform: scale(1.05);
 }
 
-.overlay {
+/* 1: show title on hover (you already have this) */
+.project-item .overlay {
   position: absolute;
   inset: 0;
-  background: rgba(0,0,0,0.6);
+  background: rgba(0,0,0,0);
+  color: transparent;
   display: flex;
   align-items: center;
   justify-content: center;
-  opacity: 0;
-  transition: opacity .3s ease;
-  font-size: 1.2rem;
-  color: #ffffff;
+  text-align: center;
+  transition: background .3s ease, color .3s ease;
+  padding: 0 8px;
 }
 .project-item:hover .overlay {
-  opacity: 1;
+  background: rgba(0,0,0,0.6);
+  color: #fff;
 }
+
+/* 2: make the ST button invisible but full-size */
+button[id^="detail_"] {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  opacity: 0 !important;
+  cursor: pointer !important;
+  z-index: 10 !important;
+}
+
 .typewriter {
   width: fit-content;
   margin: 0 auto 20px;
@@ -796,31 +811,32 @@ with mid_col:
           st.chat_message("assistant").write(reply)
     project_container = st.container()
     # --- Projects Showcase ---
+    # --- Projects Gallery with Hover-and-Click Modals ---
     with project_container:
-        st.markdown(
+    st.markdown(
         '<div class="card hover-zoom">'
         '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
         '</div>',
         unsafe_allow_html=True
     )
 
-    # show projects in a 3-column responsive grid
     cols = st.columns(3, gap="small")
     for idx, proj in enumerate(projects):
         col = cols[idx % 3]
         with col:
-            # thumbnail + title
-            st.image(proj["image"], use_container_width=True, caption=proj["title"])
-            st.markdown(f"**{proj['title']}**")
-            # "Details" button to open modal
-            if st.button("Details", key=f"detail_{idx}"):
-                # this context creates a true pop-up
+            # relative container for image + invisible button
+            st.markdown(f'''
+            <div class="project-item" style="position:relative;">
+              <img src="{proj["image"]}" class="card-img"/>
+              <div class="overlay">{proj["title"]}</div>
+            </div>
+            ''', unsafe_allow_html=True)
+
+            # this hidden button sits on top of the image
+            if st.button("", key=f"detail_{idx}"):
+                # opens a modal on click
                 with st.modal(proj["title"]):
                     st.image(proj["image"], use_column_width=True, caption=proj["title"])
                     st.markdown(f"**Description:** {proj['description']}")
                     st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
                     st.markdown(f"[View code on GitHub]({proj['url']})")
-
-  
-
-    

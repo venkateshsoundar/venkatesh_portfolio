@@ -116,19 +116,17 @@ input[data-baseweb="input"] {
   vertical-align: middle;
 }
 .project-item {
-  position: relative;
+  /* no forced aspect-ratio container—let the image dictate its own height */
   width: 100%;
-  padding-top: 100%;        /* 1:1 aspect ratio */
   overflow: hidden;
   border-radius: 12px;
 }
 
 .project-item .card-img {
-  position: absolute;
-  top: 0;
-  left: 0;
+  /* fluid sizing: width fills the card, height auto-adjusts */
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
   object-fit: cover;
   transition: transform .3s ease;
 }
@@ -179,7 +177,9 @@ input[data-baseweb="input"] {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  /* auto-fit collapses columns when there's no room; 
+     minmax(150px,1fr) means “at least 150px, but grow to fill” */
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 20px;
   margin-bottom: 20px;
 }

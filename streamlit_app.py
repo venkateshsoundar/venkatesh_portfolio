@@ -184,19 +184,27 @@ input[data-baseweb="input"] {
 }
 .project-item {
   position: relative;
-  aspect-ratio: 1/1;
+  width: 100%;
+  /* 1:1 aspect ratio – change to 56.25% for 16:9, 75% for 4:3, etc. */
+  padding-top: 100%;
   overflow: hidden;
   border-radius: 12px;
 }
-.card-img {
+
+.project-item .card-img {
+  position: absolute;
+  top: 0; 
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform .3s ease;
 }
+
 .project-item:hover .card-img {
   transform: scale(1.05);
 }
+
 .overlay {
   position: absolute;
   inset: 0;

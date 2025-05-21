@@ -30,18 +30,85 @@ resume_json = resume_df.to_json(orient='records')
 
 # --- Projects list ---
 projects = [
-    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
-    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
-    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
-    {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
-    {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
-    {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
+    {
+        "title": "Canadian Quality of Life Analysis",
+        "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
+        "description": "Interactive analysis of Canadian quality of life indices, mapping socio-economic factors across provinces.",
+        "tech": ["Python", "Pandas", "Folium", "Plotly"]
+    },
+    {
+        "title": "Alberta Wildfire Analysis",
+        "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
+        "description": "Time-series and spatial modelling of wildfire occurrences in Alberta using climate and satellite data.",
+        "tech": ["Python", "GeoPandas", "Scikit-Learn", "Matplotlib"]
+    },
+    {
+        "title": "Toronto Crime Drivers",
+        "url": "https://github.com/venkateshsoundar/toronto-crime-drivers",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg",
+        "description": "Identified key socio-economic predictors of crime rates in Toronto neighbourhoods.",
+        "tech": ["R", "ggplot2", "dplyr", "Leaflet"]
+    },
+    {
+        "title": "Weight Change Regression Analysis",
+        "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg",
+        "description": "Built multiple regression models to forecast weight change based on lifestyle and dietary inputs.",
+        "tech": ["Python", "Scikit-Learn", "Statsmodels", "Seaborn"]
+    },
+    {
+        "title": "Calgary Childcare Compliance",
+        "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg",
+        "description": "Dashboard tracking regulatory compliance and capacity metrics for Calgary childcare centres.",
+        "tech": ["Streamlit", "Pandas", "Plotly", "SQL"]
+    },
+    {
+        "title": "Social Media Purchase Influence",
+        "url": "https://github.com/venkateshsoundar/social-media-purchase-influence",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg",
+        "description": "Analyzed how social media sentiment correlates with purchase behavior using Twitter and sales data.",
+        "tech": ["Python", "NLTK", "VADER", "Tableau"]
+    },
+    {
+        "title": "Obesity Level Estimation",
+        "url": "https://github.com/venkateshsoundar/obesity-level-estimation",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg",
+        "description": "Classification model to predict obesity levels from health and lifestyle survey data.",
+        "tech": ["Python", "XGBoost", "Pandas", "Matplotlib"]
+    },
+    {
+        "title": "Weather Data Pipeline (AWS)",
+        "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg",
+        "description": "End-to-end ETL pipeline on AWS S3/Lambda to ingest, process, and visualize weather forecasts.",
+        "tech": ["AWS S3", "Lambda", "Python", "Streamlit"]
+    },
+    {
+        "title": "Gmail Sentimental Analysis",
+        "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg",
+        "description": "Pipeline to fetch Gmail messages and score sentiment using VADER, with daily summary reports.",
+        "tech": ["Google API", "NLTK", "Pandas", "Matplotlib"]
+    },
+    {
+        "title": "Penguin Species Prediction Chatbot",
+        "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg",
+        "description": "Streamlit-based chatbot that predicts penguin species using user inputs on island and measurements.",
+        "tech": ["Streamlit", "Scikit-Learn", "OpenAI API", "Pandas"]
+    },
+    {
+        "title": "Uber Ride Prediction",
+        "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg",
+        "description": "Deployed regression model to estimate Uber trip durations based on pickup/dropoff and weather.",
+        "tech": ["Python", "XGBoost", "Flask", "Heroku"]
+    }
 ]
+
 
 # --- Global CSS & Background ---
 st.markdown(
@@ -722,19 +789,20 @@ with mid_col:
     project_container = st.container()
     # --- Projects Showcase ---
     with project_container:
-        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-        grid_html = '<div class="grid-container">'
-        for proj in projects:
-            grid_html += (
-                f'<div class="project-item hover-zoom">'
-                f'  <a href="{proj["url"]}" target="_blank">'
-                f'    <img src="{proj["image"]}" class="card-img"/>'
-                f'    <div class="overlay">{proj["title"]}</div>'
-                f'  </a>'
-                f'</div>'
-            )
-        grid_html += '</div>'
-        st.markdown(grid_html, unsafe_allow_html=True)
+        st.markdown(
+        '<div class="card hover-zoom">'
+        '<div class="section-title" style="background:#2C3E50;">Projects Gallery</div>'
+        '</div>',
+        unsafe_allow_html=True
+    )
+
+    for proj in projects:
+        header = f"🛠 {proj['title']}"
+        with st.expander(header, expanded=False):
+            st.image(proj["image"], use_column_width=True, caption=proj["title"])
+            st.markdown(f"**Description:** {proj['description']}")
+            st.markdown("**Tech used:** " + ", ".join(proj["tech"]))
+            st.markdown(f"[View code on GitHub]({proj['url']})")
 
   
 

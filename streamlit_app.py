@@ -117,19 +117,26 @@ input[data-baseweb="input"] {
 }
 .project-item {
   position: relative;
-  aspect-ratio: 1/1;
+  width: 100%;
+  padding-top: 100%;        /* 1:1 aspect ratio */
   overflow: hidden;
   border-radius: 12px;
 }
-.card-img {
+
+.project-item .card-img {
+  position: absolute;
+  top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform .3s ease;
 }
+
 .project-item:hover .card-img {
   transform: scale(1.05);
 }
+
 .overlay {
   position: absolute;
   inset: 0;
@@ -172,7 +179,7 @@ input[data-baseweb="input"] {
 }
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
   gap: 20px;
   margin-bottom: 20px;
 }

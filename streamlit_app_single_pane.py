@@ -8,35 +8,104 @@ import pandas as pd
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Sidebar Navigation & Actions ---
-st.sidebar.title("Navigation")
-st.sidebar.markdown("[Welcome](#welcome)")
-st.sidebar.markdown("[Profile](#profile)")
-st.sidebar.markdown("[Contact](#contact)")
-st.sidebar.markdown("[Education](#education)")
-st.sidebar.markdown("[Certifications](#certifications)")
-st.sidebar.markdown("[Awards](#awards)")
-st.sidebar.markdown("[Experience](#experience)")
-st.sidebar.markdown("[Skills & Tools](#skills-tools)")
-st.sidebar.markdown("[Chat](#chat)")
-st.sidebar.markdown("[Projects](#projects-gallery)")
+# --- Global Background from original code ---
+st.markdown(r"""
+<style>
+.stApp {
+  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
+  background-attachment: fixed;
+}
+</style>
+""", unsafe_allow_html=True)
 
-# Download Resume
-resume_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
-resume_pdf = requests.get(resume_url).content
-st.sidebar.download_button(
-    "Download Resume",
-    data=resume_pdf,
-    file_name="Venkatesh_Resume.pdf",
-    mime="application/pdf"
-)
-
-# Deploy Button (placeholder link)
-st.sidebar.markdown(
-    "[![Deploy to Streamlit]"
-    "(https://static.streamlit.io/badges/streamlit_badge_black_white.svg)]"
-    "(https://share.streamlit.io/venkateshsoundar/venkatesh_portfolio/streamlit_app_updated.py)"
-)
+# --- Top Navigation Bar CSS and HTML ---
+st.markdown(r"""
+<style>
+  nav {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(31, 42, 68, 0.9);
+    padding: 8px 24px;
+    z-index: 100;
+    display: flex;
+    gap: 16px;
+    align-items: center;
+  }
+  nav a {
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  .content {
+    margin-top: 60px;
+    padding: 0 24px;
+  }
+  .card {
+    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+    color: #ffffff;
+    opacity: 0;
+    transform: translateY(30px);
+    animation: fadeInUp 0.8s ease forwards;
+  }
+  .card:nth-child(1) { animation-delay: 0.2s; }
+  .card:nth-child(2) { animation-delay: 0.4s; }
+  .card:nth-child(3) { animation-delay: 0.6s; }
+  .card:nth-child(4) { animation-delay: 0.8s; }
+  .card:nth-child(5) { animation-delay: 1s; }
+  .card:nth-child(6) { animation-delay: 1.2s; }
+  .card:nth-child(7) { animation-delay: 1.4s; }
+  .card:nth-child(8) { animation-delay: 1.6s; }
+  .card:nth-child(9) { animation-delay: 1.8s; }
+  .card:nth-child(10){ animation-delay: 2s; }
+  @keyframes fadeInUp {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .project-item {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+  }
+  .project-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    transition: transform .3s ease;
+  }
+  .project-item:hover img {
+    transform: scale(1.05);
+  }
+  .project-item .overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    opacity: 0;
+    transition: opacity .3s ease;
+  }
+  .project-item:hover .overlay {
+    opacity: 1;
+  }
+</style>
+<nav>
+  <a href="#welcome">Welcome</a>
+  <a href="#profile">Profile</a>
+  <a href="#contact">Contact</a>
+  <a href="#education">Education</a>
+  <a href="#certifications">Certifications</a>
+  <a href="#awards">Awards</a>
+  <a href="#experience">Experience</a>
+  <a href="#skills-tools">Skills</a>
+  <a href="#chat">Chat</a>
+  <a href="#projects-gallery">Projects</a>
+</nav>
+""", unsafe_allow_html=True)
 
 # --- Load resume data ---
 def load_resume_df(url):
@@ -45,15 +114,14 @@ def load_resume_df(url):
     reader = PyPDF2.PdfReader(io.BytesIO(r.content))
     records = []
     for i, page in enumerate(reader.pages):
-        sentences = [
-            s.strip()
-            for s in (page.extract_text() or "").split('.')
-            if s.strip()
-        ]
+        sentences = [s.strip() for s in (page.extract_text() or "").split('.') if s.strip()]
         for sent in sentences:
-            records.append({"page": i + 1, "sentence": sent})
+            records.append({"page": i+1, "sentence": sent})
     return pd.DataFrame(records)
 
+resume_url = (
+    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
+)
 resume_df = load_resume_df(resume_url)
 resume_json = resume_df.to_json(orient="records")
 
@@ -72,119 +140,61 @@ projects = [
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
 ]
 
-# --- Global CSS styles ---
-st.markdown(r"""
-<style>
-.section { margin-bottom: 3rem; }
-.card-img { width: 100%; height: 200px; object-fit: cover; transition: transform .3s ease; }
-.project-item { position: relative; border-radius: 12px; overflow: hidden; }
-.project-item:hover .card-img { transform: scale(1.05); }
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: #fff;
-  font-size: 1.2rem;
-  opacity: 0;
-  transition: opacity .3s ease;
-  text-align: center;
-}
-.project-item:hover .overlay { opacity: 1; }
-</style>
-""", unsafe_allow_html=True)
+# --- Content Wrapper Start ---
+st.markdown('<div class="content">', unsafe_allow_html=True)
 
-# --- Sections ---
+# Welcome Section
+st.markdown('<div id="welcome" class="card"><h2>Welcome</h2><p>Explore my portfolio to learn more about my work in data science, analytics, and technology.</p></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="welcome">Welcome</h2>', unsafe_allow_html=True)
-st.write("Explore my portfolio to learn more about my work in data science, analytics, and technology.")
+# Profile Section
+st.markdown('<div id="profile" class="card"><h2>Profile</h2><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" width="120" style="border-radius:50%; margin-bottom:12px;"/><p><strong>Venkatesh Soundararajan</strong><br>Software Development Intern | Data Engineering<br>📍 Calgary, AB, Canada</p></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="profile">Profile</h2>', unsafe_allow_html=True)
-st.image("https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg", width=180)
-st.write("**Venkatesh Soundararajan**  \nSoftware Development Intern | Data Engineering  \n📍 Calgary, AB, Canada")
+# Contact Section
+st.markdown('<div id="contact" class="card"><h2>Contact</h2><p><a href="mailto:venkatesh.balusoundar@gmail.com">Email</a> | <a href="https://www.linkedin.com/in/venkateshbalus/">LinkedIn</a> | <a href="https://github.com/venkateshsoundar">GitHub</a> | <a href="https://medium.com/@venkatesh.balusoundar">Medium</a></p></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="contact">Contact</h2>', unsafe_allow_html=True)
-st.write(
-    "[Email](mailto:venkatesh.balusoundar@gmail.com) | "
-    "[LinkedIn](https://www.linkedin.com/in/venkateshbalus/) | "
-    "[GitHub](https://github.com/venkateshsoundar) | "
-    "[Medium](https://medium.com/@venkatesh.balusoundar)"
-)
+# Education Section
+st.markdown('<div id="education" class="card"><h2>Education</h2><ul><li><strong>Masters in Data Science and Analytics</strong>, University of Calgary (Sep 2024–Present)</li><li><strong>Bachelor of Engineering</strong>, Anna University, Chennai, India (Aug 2009–May 2013)</li></ul></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="education">Education</h2>', unsafe_allow_html=True)
-st.write("""
-- **Masters in Data Science and Analytics**, University of Calgary (Sep 2024–Present)  
-- **Bachelor of Engineering**, Anna University, Chennai, India (Aug 2009–May 2013)
-""")
+# Certifications Section
+st.markdown('<div id="certifications" class="card"><h2>Certifications & Courses</h2><ul><li>Insurance & Guidewire Suite Analyst 10.0 (Jasper)</li><li>Karate DSL (Udemy)</li><li>Rest API Automation (TestLeaf)</li><li>Selenium WebDriver (TestLeaf)</li><li>SQL for Data Science (Coursera)</li><li>SDET (Capgemini)</li></ul></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="certifications">Certifications & Courses</h2>', unsafe_allow_html=True)
-st.write("""
-- Insurance & Guidewire Suite Analyst 10.0 (Jasper)  
-- Karate DSL (Udemy)  
-- Rest API Automation (TestLeaf)  
-- Selenium WebDriver (TestLeaf)  
-- SQL for Data Science (Coursera)  
-- SDET (Capgemini)
-""")
+# Awards Section
+st.markdown('<div id="awards" class="card"><h2>Awards & Recognitions</h2><ul><li>Spot Award (InsurCloud – Deloitte, Canada)</li><li>Best Contributor (COMPASS – Hartford Insurance, USA)</li><li>QE & A Maestro (Centene by Cognizant, USA)</li><li>Pride of the Quarter (Health Net by Cognizant, USA)</li><li>Pillar of the Month (Health Net by Cognizant, USA)</li></ul></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="awards">Awards & Recognitions</h2>', unsafe_allow_html=True)
-st.write("""
-• Spot Award (InsurCloud – Deloitte, Canada)  
-• Best Contributor (COMPASS – Hartford Insurance, USA)  
-• QE & A Maestro (Centene by Cognizant, USA)  
-• Pride of the Quarter (Health Net by Cognizant, USA)  
-• Pillar of the Month (Health Net by Cognizant, USA)
-""")
+# Experience Section
+st.markdown('<div id="experience" class="card"><h2>Professional Experience</h2><ul><li><strong>Software Developer Intern</strong>, Tech Insights Inc (May 2025–Present)</li><li><strong>Senior Consultant</strong>, Deloitte Consulting India (Jun 2024–Aug 2024)</li><li><strong>Consultant</strong>, Deloitte Consulting India (Oct 2021–Jun 2024)</li><li><strong>Consultant</strong>, Capgemini (May 2018–Oct 2021)</li><li><strong>Associate</strong>, Cognizant (May 2016–May 2018)</li><li><strong>Programmer Analyst</strong>, Cognizant (Sep 2013–May 2016)</li></ul></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="experience">Professional Experience</h2>', unsafe_allow_html=True)
-st.write("""
-- **Software Developer Intern**, Tech Insights Inc, Canada (May 2025–Present)  
-- **Senior Consultant**, Deloitte Consulting India, India (Jun 2024–Aug 2024)  
-- **Consultant**, Deloitte Consulting India, India (Oct 2021–Jun 2024)  
-- **Consultant**, Capgemini, India (May 2018–Oct 2021)  
-- **Associate**, Cognizant, India (May 2016–May 2018)  
-- **Programmer Analyst**, Cognizant, India (Sep 2013–May 2016)
-""")
+# Skills Section
+st.markdown('<div id="skills-tools" class="card"><h2>Core Skills & Tools</h2><p>**Languages**: Python, R, SQL, Java, VBA<br>**Analytics**: Pandas, NumPy, Matplotlib, Power BI, Excel<br>**DBs**: MySQL, Oracle, NoSQL<br>**Tools**: Git, JIRA, ALM, Rally, Selenium, Guidewire</p></div>', unsafe_allow_html=True)
 
-st.markdown('<h2 id="skills-tools">Core Skills & Tools</h2>', unsafe_allow_html=True)
-st.write("""
-**Languages**: Python, R, SQL, Java, VBA  
-**Analytics**: Pandas, NumPy, Matplotlib, Power BI, Excel  
-**DBs**: MySQL, Oracle, NoSQL  
-**Tools**: Git, JIRA, ALM, Rally, Selenium, Guidewire
-""")
-
-# --- Ask Buddy Bot Chat Section ---
-st.markdown('<h2 id="chat">Chat</h2>', unsafe_allow_html=True)
-st.write("Ask any question about my projects or experience:")
+# Chat Section
+st.markdown('<div id="chat" class="card"><h2>Chat</h2><p>Ask any question about my projects or experience:</p></div>', unsafe_allow_html=True)
 api_key = st.secrets["DEEPSEEK_API_KEY"]
 client = openai.OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
 user_input = st.chat_input("Type your question here...")
 if user_input:
     st.chat_message("user").write(user_input)
     prompt = (
-        "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n"
-        + resume_json
-        + "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-        + user_input
+        "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+        "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: " + user_input
     )
     with st.spinner("Assistant is typing..."):
         response = client.chat.completions.create(
             model="deepseek/deepseek-chat-v3-0324",
             messages=[{"role": "system", "content": prompt}]
         )
-        answer = response.choices[0].message.content
-    st.chat_message("assistant").write(answer)
+        st.chat_message("assistant").write(response.choices[0].message.content)
 
-st.markdown('<h2 id="projects-gallery">Projects Gallery</h2>', unsafe_allow_html=True)
+# Projects Gallery
+st.markdown('<div id="projects-gallery" class="card"><h2>Projects Gallery</h2></div>', unsafe_allow_html=True)
 cols = st.columns(3)
 for idx, proj in enumerate(projects):
     with cols[idx % 3]:
         st.markdown(
-            f"<div class='project-item'><a href='{proj['url']}' target='_blank'>"
-            f"<img src='{proj['image']}' class='card-img'/>"
-            f"<div class='overlay'>{proj['title']}</div></a></div>",
+            f"<div class='project-item'><a href='{proj['url']}' target='_blank'>" +
+            f"<img src='{proj['image']}'/><div class='overlay'>{proj['title']}</div></a></div>",
             unsafe_allow_html=True
         )
+
+# End content wrapper
+st.markdown('</div>', unsafe_allow_html=True)

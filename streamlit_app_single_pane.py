@@ -31,70 +31,67 @@ projects = [
     {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
     {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
     {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
+    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/calgary-childcare-compliance/main/CalgaryChildcare.jpeg"},
     {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
     {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/obesity-level-estimation/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/weather-data-pipeline-aws/main/weatherprediction.jpeg"},
     {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/gmail-sentiment-analysis/main/email_sentiment_Analysis.jpeg"},
     {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/penguin-dataset-chatbot/main/Penguin_Analysis.jpeg"},
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/uber-ride-duration-predictorapp/main/Uberride_Prediction.jpeg"}
 ]
 
-# --- Modern Compact CSS & Animations ---
+# --- Large CSS & Animation ---
 st.markdown("""
 <style>
+html, body, [class*="css"]  {
+    font-size: 20px !important;
+    line-height: 1.65 !important;
+}
 .stApp {
     background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat fixed;
     font-family: 'Poppins', Arial, sans-serif;
 }
 .card {
     background: linear-gradient(120deg, #252849 65%, #1976d2 100%);
-    border-radius: 16px;
-    margin: 18px 0 18px 0;
-    box-shadow: 0 2px 18px 0 rgba(30,40,90,.07);
+    border-radius: 22px;
+    margin: 32px 0 32px 0;
+    box-shadow: 0 4px 32px 0 rgba(30,40,90,.11);
     color: #fff;
-    padding: 22px 26px 18px 26px;
+    padding: 40px 42px 32px 42px;
     transition: box-shadow 0.2s, transform 0.22s;
-    border: 1.5px solid #21587a22;
+    border: 2.5px solid #21587a22;
 }
-.card:hover {box-shadow:0 8px 28px 0 #15386b45; transform: translateY(-2px) scale(1.017);}
-.section-head {font-size:1.25rem; font-weight:600; letter-spacing:.5px; color:#ffd166; margin-bottom:9px;}
+.card:hover {box-shadow:0 12px 38px 0 #15386b45; transform: translateY(-2px) scale(1.023);}
+.section-head {font-size:2.1rem; font-weight:700; letter-spacing:.6px; color:#ffd166; margin-bottom:19px;}
 .profilepic {
-    width:112px; height:112px; border-radius:50%; object-fit:cover; border:2.5px solid #fff; margin:0 auto 8px auto; display:block; box-shadow:0 2px 12px #2222;
+    width:180px; height:180px; border-radius:50%; object-fit:cover; border:3px solid #fff; margin:0 auto 18px auto; display:block; box-shadow:0 3px 20px #2223;
 }
 .grid-container {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-    gap: 18px 18px;
-    margin-bottom: 10px;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 28px 28px;
+    margin-bottom: 20px;
+    margin-top: 8px;
 }
 .project-card {
     background:linear-gradient(120deg,#212647 60%,#1976d2 100%);
-    border-radius:13px; box-shadow:0 2px 8px 0 #1232;
-    padding:12px 10px 14px 10px; text-align:center;
+    border-radius:17px; box-shadow:0 2px 16px 0 #1233;
+    padding:18px 13px 16px 13px; text-align:center;
     transition:box-shadow .18s, transform .18s;
-    border: 1.3px solid #21587a22;
+    border: 2px solid #21587a22;
 }
-.project-card:hover {box-shadow:0 8px 32px #2349b933; transform:scale(1.027);}
+.project-card:hover {box-shadow:0 8px 40px #2349b933; transform:scale(1.037);}
 .project-img {
-    width:98%; max-width:260px; aspect-ratio:4/3;
-    border-radius:11px; margin-bottom:7px; object-fit:cover;
-    box-shadow:0 3px 16px #0003; opacity:0; transform:translateY(20px) scale(.96);
-    animation:fadeinproj .9s cubic-bezier(.3,.71,.36,1.3) forwards;
+    width:99%; max-width:420px; aspect-ratio:4/3;
+    border-radius:15px; margin-bottom:12px; object-fit:cover;
+    box-shadow:0 5px 22px #0004; opacity:0; transform:translateY(24px) scale(.95);
+    animation:fadeinproj 1.1s cubic-bezier(.3,.71,.36,1.3) forwards;
 }
 @keyframes fadeinproj {to{opacity:1;transform:translateY(0) scale(1);}}
-.overlay {
-    position:absolute; inset:0; background:rgba(25,35,66,0.63);
-    color:#fff; font-size:1rem; font-weight:600;
-    display:flex; align-items:center; justify-content:center; opacity:0;
-    transition:opacity .3s;
-    border-radius:11px;
-}
-.project-card:hover .overlay {opacity:1;}
 .skill-badge {
-    display:inline-block; background:#ffd16633; color:#fff;
-    border-radius:7px; padding:5px 12px; margin:2px 5px 2px 0;
-    font-size:.97rem; font-weight:500;
+    display:inline-block; background:#ffd16644; color:#fff;
+    border-radius:11px; padding:10px 24px; margin:3px 10px 7px 0;
+    font-size:1.25rem; font-weight:600;
 }
 </style>
 """, unsafe_allow_html=True)
@@ -104,14 +101,14 @@ st.markdown(f"""
 <div class="card" style="background: linear-gradient(120deg,#364875 70%,#5ab5e6 100%); text-align:center;">
     <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profilepic"/>
     <div class="section-head">Venkatesh Soundararajan</div>
-    <span style="color:#ffd166;">Software Development Intern, Tech Insights</span><br>
-    <span style="color:#c0deff;">Calgary, AB, Canada</span>
+    <span style="color:#ffd166; font-size:1.4rem;">Software Development Intern, Tech Insights</span><br>
+    <span style="color:#c0deff; font-size:1.1rem;">Calgary, AB, Canada</span>
 </div>
 """, unsafe_allow_html=True)
 
 # --- Contact Card ---
 st.markdown("""
-<div class="card" style="background:linear-gradient(100deg,#246bb2 70%,#324665 100%);">
+<div class="card" style="background:linear-gradient(100deg,#246bb2 70%,#324665 100%);font-size:1.3rem;">
   <div class="section-head">Contact</div>
   <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
   &nbsp;|&nbsp;
@@ -125,7 +122,7 @@ st.markdown("""
 
 # --- Education Card ---
 st.markdown("""
-<div class="card" style="background:linear-gradient(115deg,#21256e 60%,#2d769c 100%);">
+<div class="card" style="background:linear-gradient(115deg,#21256e 60%,#2d769c 100%);font-size:1.18rem;">
   <div class="section-head">Education</div>
   <b>Masters in Data Science and Analytics</b> – University of Calgary (Sep 2024–Present)<br>
   <b>Bachelor of Engineering</b> – Anna University (Aug 2009–May 2013)
@@ -134,7 +131,7 @@ st.markdown("""
 
 # --- Certifications Card ---
 st.markdown("""
-<div class="card" style="background:linear-gradient(108deg,#26324a 68%,#4a9de0 100%);">
+<div class="card" style="background:linear-gradient(108deg,#26324a 68%,#4a9de0 100%);font-size:1.15rem;">
   <div class="section-head">Certifications & Courses</div>
   Insurance & Guidewire Suite Analyst 10.0 &nbsp; | &nbsp; Karate DSL &nbsp; | &nbsp; Rest API Automation<br>
   Selenium WebDriver &nbsp; | &nbsp; SQL for Data Science &nbsp; | &nbsp; SDET
@@ -143,7 +140,7 @@ st.markdown("""
 
 # --- Awards Card ---
 st.markdown("""
-<div class="card" style="background:linear-gradient(105deg,#2e2244 65%,#b788e6 100%);">
+<div class="card" style="background:linear-gradient(105deg,#2e2244 65%,#b788e6 100%);font-size:1.13rem;">
   <div class="section-head">Awards & Recognitions</div>
   Spot Award • Best Contributor • QE & A Maestro • Pride of the Quarter • Pillar of the Month
 </div>
@@ -169,7 +166,7 @@ st.markdown("""
 
 # --- Experience Card ---
 st.markdown("""
-<div class="card" style="background:linear-gradient(115deg,#1e223c 68%,#7bc7e7 100%);">
+<div class="card" style="background:linear-gradient(115deg,#1e223c 68%,#7bc7e7 100%);font-size:1.19rem;">
   <div class="section-head">Professional Experience</div>
   <b>Software Developer Intern</b> (Tech Insights, 2025–Present)<br>
   <b>Senior Consultant</b> (Deloitte, 2024)<br>
@@ -185,12 +182,10 @@ gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfoli
 st.markdown(
     f"""
     <div class="card" style="background:linear-gradient(110deg,#224870 68%,#e0b04a 100%); text-align:center;">
-      <div class="typewriter">
-        <h1 style="color:#fff;">Hello and Welcome...</h1>
-        <img src="{gif_url}" width="280" style="margin:18px auto 0 auto; border-radius:15px; box-shadow:0 4px 28px #2225;">
-        <p style="margin-top:10px;">Explore my portfolio to learn more about my work in data science, analytics, and technology.<br>
-        Let’s connect and create something impactful together.</p>
-      </div>
+      <div class="section-head" style="font-size:2.5rem;">Hello and Welcome...</div>
+      <img src="{gif_url}" width="390" style="margin:24px auto 0 auto; border-radius:18px; box-shadow:0 4px 32px #2226;">
+      <p style="margin-top:15px;font-size:1.32rem;">Explore my portfolio to learn more about my work in data science, analytics, and technology.<br>
+      Let’s connect and create something impactful together.</p>
     </div>
     """,
     unsafe_allow_html=True,
@@ -202,8 +197,8 @@ st.markdown(
     f"""
     <div class="card" style="background:linear-gradient(107deg,#3d2556 55%,#6495ed 100%); padding:0;">
       <div style="display:flex;align-items:center;">
-        <img src="{ai_url}" width="120" style="margin:12px 28px 12px 12px; border-radius:10px;">
-        <h2 style="flex:1;color:#ffd166;">Ask Buddy Bot!</h2>
+        <img src="{ai_url}" width="160" style="margin:18px 40px 18px 18px; border-radius:12px;">
+        <h2 style="flex:1;color:#ffd166;font-size:2.1rem;">Ask Buddy Bot!</h2>
       </div>
     </div>
     """,
@@ -237,14 +232,14 @@ with chat_container:
         st.chat_message("assistant").write(reply)
 
 # --- Projects Gallery (Grid) ---
-st.markdown('<div class="card" style="background:linear-gradient(109deg,#223363 65%,#57c0e3 100%);"><div class="section-head">Projects Gallery</div></div>', unsafe_allow_html=True)
+st.markdown('<div class="card" style="background:linear-gradient(109deg,#223363 65%,#57c0e3 100%);"><div class="section-head" style="font-size:2.2rem;">Projects Gallery</div></div>', unsafe_allow_html=True)
 grid_html = '<div class="grid-container">'
 for proj in projects:
     grid_html += (
         f'<div class="project-card">'
         f'  <a href="{proj["url"]}" target="_blank" style="text-decoration:none;">'
         f'    <img src="{proj["image"]}" class="project-img"/>'
-        f'    <div style="font-size:1.08rem;font-weight:600;margin-top:7px;">{proj["title"]}</div>'
+        f'    <div style="font-size:1.21rem;font-weight:600;margin-top:13px;">{proj["title"]}</div>'
         f'  </a>'
         f'</div>'
     )

@@ -276,4 +276,67 @@ st.markdown("""
 <div class="section-card" data-aos="fade-up">
   <div class="section-head">Skills & Tools</div>
   <span class="skill-badge">Python</span>
-  <span
+  <span class="skill-badge">R</span>
+  <span class="skill-badge">SQL</span>
+  <span class="skill-badge">Java</span>
+  <span class="skill-badge">Pandas</span>
+  <span class="skill-badge">NumPy</span>
+  <span class="skill-badge">Power BI</span>
+  <span class="skill-badge">Git</span>
+  <span class="skill-badge">JIRA</span>
+  <span class="skill-badge">Selenium</span>
+  <span class="skill-badge">Guidewire</span>
+</div>
+""", unsafe_allow_html=True)
+
+# --- Projects Gallery (Grid) ---
+st.markdown('<div class="section-card" data-aos="fade-up"><div class="section-head" style="font-size:2rem;">Projects Gallery</div></div>', unsafe_allow_html=True)
+grid_html = '<div class="grid-container">'
+for proj in projects:
+    grid_html += (
+        f'<div class="project-card" data-aos="flip-right">'
+        f'  <a href="{proj["url"]}" target="_blank" style="text-decoration:none;">'
+        f'    <img src="{proj["image"]}" class="project-img"/>'
+        f'    <div style="font-size:1.21rem;font-weight:600;margin-top:13px;">{proj["title"]}</div>'
+        f'  </a>'
+        f'</div>'
+    )
+grid_html += '</div>'
+st.markdown(grid_html, unsafe_allow_html=True)
+
+# --- Chatbot with GIF Background ---
+ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+st.markdown(
+    f"""
+    <div class="chatbot-gif-bg" data-aos="fade-up">
+        <h2 style="flex:1;color:#ffd166;font-size:2.1rem;text-shadow:0 3px 15px #3338;">Ask Buddy Bot!</h2>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
+# --- Chatbot (stateless, no history) ---
+api_key = st.secrets["DEEPSEEK_API_KEY"]
+client = openai.OpenAI(
+    base_url="https://openrouter.ai/api/v1",
+    api_key=api_key,
+)
+chat_container = st.container()
+with chat_container:
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.chat_message("user").write(user_input)
+        prompt = (
+            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+            + user_input
+        )
+        with st.spinner("Assistant is typing..."):
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat-v3-0324",
+                messages=[
+                    {"role": "system", "content": prompt}
+                ]
+            )
+            reply = response.choices[0].message.content
+        st.chat_message("assistant").write(reply)

@@ -5,10 +5,8 @@ import PyPDF2
 import openai
 import pandas as pd
 
-# --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Resume Data ---
 def load_resume_df(url):
     r = requests.get(url)
     r.raise_for_status()
@@ -30,28 +28,19 @@ projects = [
     {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
     {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
     {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/calgary-childcare-compliance/main/CalgaryChildcare.jpeg"},
+    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
     {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
     {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/obesity-level-estimation/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/weather-data-pipeline-aws/main/weatherprediction.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
     {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/gmail-sentiment-analysis/main/email_sentiment_Analysis.jpeg"},
     {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/penguin-dataset-chatbot/main/Penguin_Analysis.jpeg"},
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/uber-ride-duration-predictorapp/main/Uberride_Prediction.jpeg"}
 ]
 
-# --- ANIMATIONS + CSS ---
+# --- CSS (no JS, all sections animate using CSS only) ---
 st.markdown("""
-<link href="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js"></script>
-<script>
-    window.addEventListener('DOMContentLoaded', function() {
-        if (window.AOS) {
-            AOS.init({duration: 1100, once: false, mirror: true});
-        }
-    });
-</script>
 <style>
-body, html { font-size: 22px !important; }
+body, html { font-size: 21px !important; }
 .stApp {background: #191e29;}
 .hero-marquee-bg {
     background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif') center/cover no-repeat;
@@ -62,20 +51,22 @@ body, html { font-size: 22px !important; }
 }
 .marquee {
     width: 100vw; max-width:1400px; overflow: hidden; white-space: nowrap; margin-bottom:25px;
+    background:rgba(0,0,0,0.32); border-radius:20px;
 }
 .marquee span {
     display: inline-block;
-    padding-left: 100vw;
-    font-size: 3.4rem;
+    font-size: 3.2rem;
     font-weight: 900;
     color: #fff;
     text-shadow: 0 2px 12px #113a;
-    animation: marqueeMove 14s linear infinite;
     letter-spacing:3px;
+    will-change: transform;
+    animation: cssmarquee 16s linear infinite;
+    padding-right:5vw;
 }
-@keyframes marqueeMove {
-    0%   { transform: translate(0, 0); }
-    100% { transform: translate(-110vw, 0); }
+@keyframes cssmarquee {
+    from {transform: translateX(100vw);}
+    to {transform: translateX(-100vw);}
 }
 .hero-desc {
     background: rgba(10,10,10,0.48);
@@ -104,7 +95,10 @@ body, html { font-size: 22px !important; }
     box-shadow: 0 2px 18px 0 rgba(30,40,90,.13);
     color: #fff;
     padding: 28px 34px 22px 34px;
+    opacity:0; transform: translateY(60px);
+    animation: fadein 1.3s .2s cubic-bezier(.3,.7,.36,1.3) forwards;
 }
+@keyframes fadein {to{opacity:1;transform:translateY(0);}}
 .section-head {font-size:1.5rem; font-weight:700; color:#ffd166; margin-bottom:19px;}
 .grid-container {
     display: grid;
@@ -119,21 +113,20 @@ body, html { font-size: 22px !important; }
     padding:16px 13px 16px 13px; text-align:center;
     transition:box-shadow .18s, transform .18s;
     border: 2px solid #21587a22;
+    opacity:0; animation: fadein 1s .5s cubic-bezier(.3,.7,.36,1.3) forwards;
 }
 .project-card:hover {box-shadow:0 8px 40px #2349b933; transform:scale(1.037);}
 .project-img {
     width:99%; max-width:420px; aspect-ratio:4/3;
     border-radius:12px; margin-bottom:10px; object-fit:cover;
-    box-shadow:0 5px 22px #0004; opacity:0; transform:translateY(24px) scale(.97);
-    animation:fadeinproj 1.1s cubic-bezier(.3,.71,.36,1.3) forwards;
+    box-shadow:0 5px 22px #0004;
 }
-@keyframes fadeinproj {to{opacity:1;transform:translateY(0) scale(1);}}
 .skill-badge {
     display:inline-block; background:#ffd16644; color:#fff;
     border-radius:11px; padding:10px 24px; margin:3px 10px 7px 0;
     font-size:1.25rem; font-weight:600;
 }
-/* --- Horizontal timeline for education/experience --- */
+/* Horizontal timeline */
 .timeline-horiz {
     display:flex; flex-wrap:wrap; align-items:center; justify-content:center; margin:36px 0;
     width:100%; max-width:1240px; margin-left:auto; margin-right:auto;
@@ -144,10 +137,8 @@ body, html { font-size: 22px !important; }
     margin:0 16px; color:#fff; text-align:center; position:relative;
     box-shadow:0 2px 14px #1128;
     transition:transform .25s;
-    z-index:2;
+    z-index:2; opacity:0; animation:fadein 1.2s .7s cubic-bezier(.3,.71,.36,1.3) forwards;
 }
-.timeline-block[data-aos] { opacity:0; transform:translateY(60px);}
-.timeline-block.aos-animate { opacity:1; transform:translateY(0);}
 .timeline-block .tl-title {font-weight:700; font-size:1.2rem; margin-bottom:6px;}
 .timeline-block .tl-org {color:#ffd166; font-size:1.08rem;}
 .timeline-block .tl-dates {font-size:1.01rem; color:#f1eeb7;}
@@ -175,7 +166,7 @@ body, html { font-size: 22px !important; }
 
 # --- HERO BANNER with MARQUEE and GIF background ---
 st.markdown("""
-<div class="hero-marquee-bg" data-aos="fade-down">
+<div class="hero-marquee-bg">
   <div class="marquee"><span>Welcome to My Portfolio! &nbsp; 🚀 Data, Analytics & Impact! &nbsp;|&nbsp; Hello, I'm Venkatesh! &nbsp;|&nbsp; Let's create together. &nbsp;</span></div>
   <div class="hero-desc">
     I'm Venkatesh, a Data Science and Analytics enthusiast.<br>
@@ -186,7 +177,7 @@ st.markdown("""
 
 # --- INTRO CARD (profile pic right) ---
 st.markdown(f"""
-<div class="intro-card" data-aos="fade-left">
+<div class="intro-card">
   <div class="intro-details">
     <h2>Venkatesh Soundararajan</h2>
     <h4>Software Development Intern, Tech Insights<br>
@@ -211,49 +202,49 @@ st.markdown("""
 <div class="section-card" style="padding-bottom:12px;">
   <div class="section-head">Education & Experience Timeline</div>
   <div class="timeline-horiz">
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">Masters in Data Science & Analytics</div>
       <div class="tl-org">University of Calgary</div>
       <div class="tl-dates">2024 – Present</div>
     </div>
     <div class="timeline-bar"></div>
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">B.E., Engineering</div>
       <div class="tl-org">Anna University</div>
       <div class="tl-dates">2009 – 2013</div>
     </div>
     <div class="timeline-bar"></div>
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">Software Developer Intern</div>
       <div class="tl-org">Tech Insights</div>
       <div class="tl-dates">2025 – Present</div>
     </div>
     <div class="timeline-bar"></div>
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">Senior Consultant</div>
       <div class="tl-org">Deloitte</div>
       <div class="tl-dates">2024</div>
     </div>
     <div class="timeline-bar"></div>
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">Consultant</div>
       <div class="tl-org">Deloitte</div>
       <div class="tl-dates">2021 – 2024</div>
     </div>
     <div class="timeline-bar"></div>
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">Consultant</div>
       <div class="tl-org">Capgemini</div>
       <div class="tl-dates">2018 – 2021</div>
     </div>
     <div class="timeline-bar"></div>
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">Associate</div>
       <div class="tl-org">Cognizant</div>
       <div class="tl-dates">2016 – 2018</div>
     </div>
     <div class="timeline-bar"></div>
-    <div class="timeline-block" data-aos="zoom-in">
+    <div class="timeline-block">
       <div class="tl-title">Programmer Analyst</div>
       <div class="tl-org">Cognizant</div>
       <div class="tl-dates">2013 – 2018</div>
@@ -264,7 +255,7 @@ st.markdown("""
 
 # --- Certifications & Awards ---
 st.markdown("""
-<div class="section-card" data-aos="fade-up">
+<div class="section-card">
   <div class="section-head">Certifications & Awards</div>
   <b>Certifications:</b> Insurance & Guidewire Suite Analyst 10.0 | Karate DSL | Rest API Automation | Selenium WebDriver | SQL for Data Science | SDET <br><br>
   <b>Awards:</b> Spot Award • Best Contributor • QE & A Maestro • Pride of the Quarter • Pillar of the Month
@@ -273,7 +264,7 @@ st.markdown("""
 
 # --- Skills ---
 st.markdown("""
-<div class="section-card" data-aos="fade-up">
+<div class="section-card">
   <div class="section-head">Skills & Tools</div>
   <span class="skill-badge">Python</span>
   <span class="skill-badge">R</span>
@@ -289,12 +280,12 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- Projects Gallery (Grid) ---
-st.markdown('<div class="section-card" data-aos="fade-up"><div class="section-head" style="font-size:2rem;">Projects Gallery</div></div>', unsafe_allow_html=True)
+# --- Projects Gallery ---
+st.markdown('<div class="section-card"><div class="section-head" style="font-size:2rem;">Projects Gallery</div></div>', unsafe_allow_html=True)
 grid_html = '<div class="grid-container">'
 for proj in projects:
     grid_html += (
-        f'<div class="project-card" data-aos="flip-right">'
+        f'<div class="project-card">'
         f'  <a href="{proj["url"]}" target="_blank" style="text-decoration:none;">'
         f'    <img src="{proj["image"]}" class="project-img"/>'
         f'    <div style="font-size:1.21rem;font-weight:600;margin-top:13px;">{proj["title"]}</div>'
@@ -308,7 +299,7 @@ st.markdown(grid_html, unsafe_allow_html=True)
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(
     f"""
-    <div class="chatbot-gif-bg" data-aos="fade-up">
+    <div class="chatbot-gif-bg">
         <h2 style="flex:1;color:#ffd166;font-size:2.1rem;text-shadow:0 3px 15px #3338;">Ask Buddy Bot!</h2>
     </div>
     """,

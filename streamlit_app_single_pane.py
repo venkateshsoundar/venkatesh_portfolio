@@ -7,6 +7,7 @@ import pandas as pd
 
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
+# --- Resume Data ---
 def load_resume_df(url):
     r = requests.get(url)
     r.raise_for_status()
@@ -37,68 +38,49 @@ projects = [
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/uber-ride-duration-predictorapp/main/Uberride_Prediction.jpeg"}
 ]
 
-# --- CSS (no JS, all sections animate using CSS only) ---
+# --- STYLES ---
 st.markdown("""
 <style>
-body, html { font-size: 21px !important; }
-.stApp {background: #191e29;}
-.hero-marquee-bg {
-    background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif') center/cover no-repeat;
-    border-radius: 0 0 36px 36px; min-height:340px;
-    box-shadow: 0 10px 50px #1237;
-    display: flex; flex-direction:column; align-items:center; justify-content:center; padding-top:55px; margin-bottom:35px;
-    position:relative;
+html, body, [class*="css"]  {
+    font-size: 22px !important;
 }
-.marquee {
-    width: 100vw; max-width:1400px; overflow: hidden; white-space: nowrap; margin-bottom:25px;
-    background:rgba(0,0,0,0.32); border-radius:20px;
+.stApp {background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat fixed;}
+.hero-banner {
+    background:linear-gradient(105deg,#224870 60%,#e0b04a 100%);
+    padding:48px 0 40px 0;
+    text-align:center;
+    margin-bottom:18px;
+    border-radius:0 0 32px 32px;
+    box-shadow:0 7px 34px #2232;
 }
-.marquee span {
-    display: inline-block;
-    font-size: 3.2rem;
-    font-weight: 900;
-    color: #fff;
-    text-shadow: 0 2px 12px #113a;
-    letter-spacing:3px;
-    will-change: transform;
-    animation: cssmarquee 16s linear infinite;
-    padding-right:5vw;
-}
-@keyframes cssmarquee {
-    from {transform: translateX(100vw);}
-    to {transform: translateX(-100vw);}
-}
-.hero-desc {
-    background: rgba(10,10,10,0.48);
-    border-radius:22px; color: #f4e3b3; font-size:1.32rem; max-width:820px; margin:0 auto 12px auto; padding:19px 44px 12px 44px; text-align:center; box-shadow:0 2px 16px #3232;
-}
+.hero-banner h1 {color:#fff;font-size:3.1rem;font-weight:800;letter-spacing:1.5px;margin-bottom:18px;}
+.hero-banner p {color:#f8f9fb;font-size:1.37rem;}
 .intro-card {
     background:linear-gradient(120deg, #3549a0 70%, #35cbe0 100%);
     border-radius: 22px;
     box-shadow: 0 4px 32px 0 rgba(30,40,90,.14);
-    color: #fff; padding: 38px 48px;
-    margin-bottom: 36px; display:flex; align-items:center; justify-content:space-between;
+    color: #fff;
+    padding: 34px 36px 34px 36px;
+    margin-bottom: 34px;
+    display:flex; align-items:center; justify-content:space-between;
 }
-.intro-details {flex:2; text-align:left; padding-right:28px;}
+.intro-details {flex:2; text-align:left; padding-right:18px;}
 .intro-details h2 {font-size:2.25rem;font-weight:700;margin-bottom:6px;}
 .intro-details h4 {font-size:1.21rem;margin:8px 0;}
 .intro-links a {color:#FFD700;margin-right:20px;font-size:1.25rem;}
 .intro-profilepic {
-    width:260px; height:260px; border-radius:50%; object-fit:cover;
-    border:4px solid #fff; box-shadow:0 4px 40px #1138;
-    background:#fff; margin-left:12px;
+    width:200px; height:200px; border-radius:50%; object-fit:cover;
+    border:4px solid #fff; box-shadow:0 4px 32px #1126;
+    background:#fff;
 }
 .section-card {
     background:linear-gradient(120deg, #252849 65%, #1976d2 100%);
     border-radius: 18px;
-    margin: 40px 0 30px 0;
+    margin: 30px 0 26px 0;
     box-shadow: 0 2px 18px 0 rgba(30,40,90,.13);
     color: #fff;
     padding: 28px 34px 22px 34px;
-    opacity:0; transform: translateY(60px);
-    animation: fadein 1.3s .2s cubic-bezier(.3,.7,.36,1.3) forwards;
 }
-@keyframes fadein {to{opacity:1;transform:translateY(0);}}
 .section-head {font-size:1.5rem; font-weight:700; color:#ffd166; margin-bottom:19px;}
 .grid-container {
     display: grid;
@@ -113,65 +95,47 @@ body, html { font-size: 21px !important; }
     padding:16px 13px 16px 13px; text-align:center;
     transition:box-shadow .18s, transform .18s;
     border: 2px solid #21587a22;
-    opacity:0; animation: fadein 1s .5s cubic-bezier(.3,.7,.36,1.3) forwards;
 }
 .project-card:hover {box-shadow:0 8px 40px #2349b933; transform:scale(1.037);}
 .project-img {
     width:99%; max-width:420px; aspect-ratio:4/3;
     border-radius:12px; margin-bottom:10px; object-fit:cover;
-    box-shadow:0 5px 22px #0004;
+    box-shadow:0 5px 22px #0004; opacity:0; transform:translateY(24px) scale(.97);
+    animation:fadeinproj 1.1s cubic-bezier(.3,.71,.36,1.3) forwards;
 }
+@keyframes fadeinproj {to{opacity:1;transform:translateY(0) scale(1);}}
 .skill-badge {
     display:inline-block; background:#ffd16644; color:#fff;
     border-radius:11px; padding:10px 24px; margin:3px 10px 7px 0;
     font-size:1.25rem; font-weight:600;
 }
-/* Horizontal timeline */
-.timeline-horiz {
-    display:flex; flex-wrap:wrap; align-items:center; justify-content:center; margin:36px 0;
-    width:100%; max-width:1240px; margin-left:auto; margin-right:auto;
+.timeline {
+    position:relative;
+    margin-left:0;
+    padding-left:24px;
+    border-left:4px solid #ffd166;
 }
-.timeline-block {
-    background:linear-gradient(120deg,#223363 60%,#20bde3 100%);
-    border-radius:18px; min-width:260px; max-width:320px; padding:22px 16px;
-    margin:0 16px; color:#fff; text-align:center; position:relative;
-    box-shadow:0 2px 14px #1128;
-    transition:transform .25s;
-    z-index:2; opacity:0; animation:fadein 1.2s .7s cubic-bezier(.3,.71,.36,1.3) forwards;
+.timeline-entry {
+    margin-bottom:32px;
+    position:relative;
 }
-.timeline-block .tl-title {font-weight:700; font-size:1.2rem; margin-bottom:6px;}
-.timeline-block .tl-org {color:#ffd166; font-size:1.08rem;}
-.timeline-block .tl-dates {font-size:1.01rem; color:#f1eeb7;}
-.timeline-bar {
-    flex:1; height:6px; background:linear-gradient(90deg,#ffd166,#1976d2); border-radius:4px; margin:0 6px; min-width:20px; z-index:1;
+.timeline-dot {
+    position:absolute; left:-35px; top:5px;
+    width:20px;height:20px; background:#FFD166; border-radius:50%; border:3.5px solid #223363;
+    box-shadow:0 2px 8px #1234;
 }
-@media (max-width:900px) {
-    .intro-card {flex-direction:column-reverse; text-align:center;}
-    .intro-details {padding-right:0;}
-    .intro-profilepic {margin-left:0;margin-bottom:20px;}
-    .timeline-horiz {flex-direction:column;}
-    .timeline-bar {display:none;}
-    .timeline-block {margin:14px 0;}
-}
-.chatbot-gif-bg {
-    background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center/cover no-repeat;
-    border-radius: 20px; padding:32px 34px;
-    margin-top:36px; margin-bottom:30px;
-    min-height:220px;
-    box-shadow:0 4px 30px #2039;
-    display: flex; align-items: center;
-}
+.timeline-title {font-weight:700; font-size:1.25rem;}
+.timeline-sub {color:#ffd166;font-size:1.08rem;}
+.timeline-dates {color:#c0deff;font-size:1.02rem;}
 </style>
 """, unsafe_allow_html=True)
 
-# --- HERO BANNER with MARQUEE and GIF background ---
-st.markdown("""
-<div class="hero-marquee-bg">
-  <div class="marquee"><span>Welcome to My Portfolio! &nbsp; 🚀 Data, Analytics & Impact! &nbsp;|&nbsp; Hello, I'm Venkatesh! &nbsp;|&nbsp; Let's create together. &nbsp;</span></div>
-  <div class="hero-desc">
-    I'm Venkatesh, a Data Science and Analytics enthusiast.<br>
-    Explore my journey, projects, and experience.
-  </div>
+# --- HERO BANNER ---
+st.markdown(f"""
+<div class="hero-banner">
+  <h1>Welcome to My Portfolio!</h1>
+  <p>I'm Venkatesh, a Data Science and Analytics enthusiast.<br>
+  Explore my journey, projects, and experience.</p>
 </div>
 """, unsafe_allow_html=True)
 
@@ -197,72 +161,33 @@ st.markdown(f"""
 </div>
 """, unsafe_allow_html=True)
 
-# --- HORIZONTAL TIMELINE (Education + Experience) ---
-st.markdown("""
-<div class="section-card" style="padding-bottom:12px;">
-  <div class="section-head">Education & Experience Timeline</div>
-  <div class="timeline-horiz">
-    <div class="timeline-block">
-      <div class="tl-title">Masters in Data Science & Analytics</div>
-      <div class="tl-org">University of Calgary</div>
-      <div class="tl-dates">2024 – Present</div>
-    </div>
-    <div class="timeline-bar"></div>
-    <div class="timeline-block">
-      <div class="tl-title">B.E., Engineering</div>
-      <div class="tl-org">Anna University</div>
-      <div class="tl-dates">2009 – 2013</div>
-    </div>
-    <div class="timeline-bar"></div>
-    <div class="timeline-block">
-      <div class="tl-title">Software Developer Intern</div>
-      <div class="tl-org">Tech Insights</div>
-      <div class="tl-dates">2025 – Present</div>
-    </div>
-    <div class="timeline-bar"></div>
-    <div class="timeline-block">
-      <div class="tl-title">Senior Consultant</div>
-      <div class="tl-org">Deloitte</div>
-      <div class="tl-dates">2024</div>
-    </div>
-    <div class="timeline-bar"></div>
-    <div class="timeline-block">
-      <div class="tl-title">Consultant</div>
-      <div class="tl-org">Deloitte</div>
-      <div class="tl-dates">2021 – 2024</div>
-    </div>
-    <div class="timeline-bar"></div>
-    <div class="timeline-block">
-      <div class="tl-title">Consultant</div>
-      <div class="tl-org">Capgemini</div>
-      <div class="tl-dates">2018 – 2021</div>
-    </div>
-    <div class="timeline-bar"></div>
-    <div class="timeline-block">
-      <div class="tl-title">Associate</div>
-      <div class="tl-org">Cognizant</div>
-      <div class="tl-dates">2016 – 2018</div>
-    </div>
-    <div class="timeline-bar"></div>
-    <div class="timeline-block">
-      <div class="tl-title">Programmer Analyst</div>
-      <div class="tl-org">Cognizant</div>
-      <div class="tl-dates">2013 – 2018</div>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
-# --- Certifications & Awards ---
+# --- Education Card ---
 st.markdown("""
 <div class="section-card">
-  <div class="section-head">Certifications & Awards</div>
-  <b>Certifications:</b> Insurance & Guidewire Suite Analyst 10.0 | Karate DSL | Rest API Automation | Selenium WebDriver | SQL for Data Science | SDET <br><br>
-  <b>Awards:</b> Spot Award • Best Contributor • QE & A Maestro • Pride of the Quarter • Pillar of the Month
+  <div class="section-head">Education</div>
+  <b>Masters in Data Science and Analytics</b> – University of Calgary (Sep 2024–Present)<br>
+  <b>Bachelor of Engineering</b> – Anna University (Aug 2009–May 2013)
 </div>
 """, unsafe_allow_html=True)
 
-# --- Skills ---
+# --- Certifications Card ---
+st.markdown("""
+<div class="section-card">
+  <div class="section-head">Certifications & Courses</div>
+  Insurance & Guidewire Suite Analyst 10.0 &nbsp; | &nbsp; Karate DSL &nbsp; | &nbsp; Rest API Automation<br>
+  Selenium WebDriver &nbsp; | &nbsp; SQL for Data Science &nbsp; | &nbsp; SDET
+</div>
+""", unsafe_allow_html=True)
+
+# --- Awards Card ---
+st.markdown("""
+<div class="section-card">
+  <div class="section-head">Awards & Recognitions</div>
+  Spot Award • Best Contributor • QE & A Maestro • Pride of the Quarter • Pillar of the Month
+</div>
+""", unsafe_allow_html=True)
+
+# --- Skills Card ---
 st.markdown("""
 <div class="section-card">
   <div class="section-head">Skills & Tools</div>
@@ -280,7 +205,69 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- Projects Gallery ---
+# --- Timeline/Experience Card ---
+st.markdown("""
+<div class="section-card">
+  <div class="section-head">Professional Experience</div>
+  <div class="timeline">
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Software Developer Intern</div>
+      <div class="timeline-sub">Tech Insights</div>
+      <div class="timeline-dates">2025–Present</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Senior Consultant</div>
+      <div class="timeline-sub">Deloitte</div>
+      <div class="timeline-dates">2024</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Consultant</div>
+      <div class="timeline-sub">Deloitte</div>
+      <div class="timeline-dates">2021–24</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Consultant</div>
+      <div class="timeline-sub">Capgemini</div>
+      <div class="timeline-dates">2018–21</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Associate</div>
+      <div class="timeline-sub">Cognizant</div>
+      <div class="timeline-dates">2016–18</div>
+    </div>
+    <div class="timeline-entry">
+      <div class="timeline-dot"></div>
+      <div class="timeline-title">Programmer Analyst</div>
+      <div class="timeline-sub">Cognizant</div>
+      <div class="timeline-dates">2013–18</div>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+# --- Add a sample visualization (replace with your actual data!) ---
+import numpy as np
+import matplotlib.pyplot as plt
+
+st.markdown("""
+<div class="section-card">
+  <div class="section-head">Sample Visualization</div>
+""", unsafe_allow_html=True)
+x = np.linspace(0, 10, 100)
+y = np.sin(x)
+fig, ax = plt.subplots(figsize=(7, 3))
+ax.plot(x, y, linewidth=3)
+ax.set_title("Sine Wave Example", fontsize=18)
+ax.grid(True, alpha=0.3)
+st.pyplot(fig)
+st.markdown("</div>", unsafe_allow_html=True)
+
+# --- Projects Gallery (Grid) ---
 st.markdown('<div class="section-card"><div class="section-head" style="font-size:2rem;">Projects Gallery</div></div>', unsafe_allow_html=True)
 grid_html = '<div class="grid-container">'
 for proj in projects:
@@ -295,12 +282,15 @@ for proj in projects:
 grid_html += '</div>'
 st.markdown(grid_html, unsafe_allow_html=True)
 
-# --- Chatbot with GIF Background ---
+# --- Chatbot Banner ---
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(
     f"""
-    <div class="chatbot-gif-bg">
-        <h2 style="flex:1;color:#ffd166;font-size:2.1rem;text-shadow:0 3px 15px #3338;">Ask Buddy Bot!</h2>
+    <div class="section-card" style="background:linear-gradient(107deg,#3d2556 55%,#6495ed 100%); padding:0;">
+      <div style="display:flex;align-items:center;">
+        <img src="{ai_url}" width="160" style="margin:18px 40px 18px 18px; border-radius:12px;">
+        <h2 style="flex:1;color:#ffd166;font-size:2.1rem;">Ask Buddy Bot!</h2>
+      </div>
     </div>
     """,
     unsafe_allow_html=True,

@@ -1,9 +1,7 @@
 import streamlit as st
-import streamlit.components.v1 as components
 import requests
 import io
 import PyPDF2
-import openai
 import pandas as pd
 
 # --- Page configuration ---
@@ -23,7 +21,6 @@ def load_resume_df(url):
 
 resume_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 resume_df = load_resume_df(resume_url)
-resume_json = resume_df.to_json(orient="records")
 
 # --- Projects list ---
 projects = [
@@ -40,94 +37,105 @@ projects = [
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/uber-ride-duration-predictorapp/main/Uberride_Prediction.jpeg"}
 ]
 
-# --- Embed AOS via components ---
-aos_html = """
-<link href='https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.css' rel='stylesheet'>
-<script src='https://cdn.jsdelivr.net/npm/aos@2.3.1/dist/aos.js'></script>
-<script>AOS.init({ duration: 800, once: false, mirror: true });</script>
-"""
-components.html(aos_html, height=0)
+# --- App Main Layout ---
+st.title("Venkatesh Portfolio")
 
-# --- Global CSS ---
+# --- Welcome Section ---
+st.header("Welcome")
+st.write("Explore my portfolio to learn more about my work in data science, analytics, and technology.")
+
+# --- Profile Section ---
+st.header("Profile")
+st.image("https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg", width=160)
+st.write("Results-driven data analyst and developer, passionate about analytics, cloud, and automation.")
+
+# --- Contact Section ---
+st.header("Contact")
 st.markdown("""
-<style>
-.stApp { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat; background-attachment: fixed; }
-.card { background: rgba(31,42,68,0.7); border-radius:12px; padding:20px; margin:24px 0; color:#fff; }
-.project-item { position:relative; border-radius:12px; overflow:hidden; }
-.project-item img { width:100%; height:200px; object-fit:cover; transition:transform .3s ease; }
-.project-item:hover img { transform:scale(1.05); }
-.overlay { position:absolute; inset:0; background:rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; color:#fff; opacity:0; transition:opacity .3s; }
-.project-item:hover .overlay { opacity:1; }
-nav { position:fixed; top:0; width:100%; background:rgba(31,42,68,0.9); padding:12px 36px; z-index:100; display:flex; gap:20px; }
-nav a { color:#fff; text-decoration:none; }
-.content { margin-top:60px; padding:0 24px; }
-</style>
-""", unsafe_allow_html=True)
+- Email: [venkatesh.balusoundar@gmail.com](mailto:venkatesh.balusoundar@gmail.com)
+- [LinkedIn](https://linkedin.com/in/venkateshbalusoundar)
+- [GitHub](https://github.com/venkateshsoundar)
+- [Medium](https://medium.com/@venkatesh.balusoundar)
+""")
 
-# --- Navigation Bar ---
-st.markdown("""
-<nav>
-  <a href='#welcome'>Welcome</a>
-  <a href='#profile'>Profile</a>
-  <a href='#contact'>Contact</a>
-  <a href='#education'>Education</a>
-  <a href='#certifications'>Certifications</a>
-  <a href='#awards'>Awards</a>
-  <a href='#experience'>Experience</a>
-  <a href='#skills'>Skills</a>
-  <a href='#chat'>Chat</a>
-  <a href='#projects'>Projects</a>
-</nav>
-<div class='content'>
-""", unsafe_allow_html=True)
+# --- Education Section ---
+st.header("Education")
+st.write("""
+- **Masters in Data Science and Analytics**, University of Calgary (Sep 2024–Present)
+- **Bachelor of Engineering**, Anna University (Aug 2009–May 2013)
+""")
 
-# --- Render Sections with AOS ---
-def render_card(idx, sec_id, title, content='', img_url=None):
-    html = f"<div id='{sec_id}' class='card' data-aos='fade-up'>"
-    html += f"<h2>{title}</h2>"
-    if img_url:
-        html += f"<img src='{img_url}' width='120' style='border-radius:50%;margin:12px 0;'/>"
-    if content:
-        html += f"<p>{content}</p>"
-    html += "</div>"
-    components.html(html, height=0)
+# --- Certifications Section ---
+st.header("Certifications & Courses")
+st.write("""
+- Insurance & Guidewire Suite Analyst 10.0
+- Karate DSL, Rest API Automation, Selenium WebDriver
+- SQL for Data Science, SDET
+""")
 
-# Section data
-sections = [
-    ('welcome','Welcome','Explore my portfolio to learn more about my work in data science, analytics, and technology.'),
-    ('profile','Profile','',"https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"),
-    ('contact','Contact','Email: venkatesh.balusoundar@gmail.com | LinkedIn | GitHub | Medium'),
-    ('education','Education','Masters in Data Science and Analytics, University of Calgary (Sep 2024–Present); Bachelor of Engineering, Anna University (Aug 2009–May 2013)'),
-    ('certifications','Certifications & Courses','Insurance & Guidewire Suite Analyst 10.0; Karate DSL; Rest API Automation; Selenium WebDriver; SQL for Data Science; SDET'),
-    ('awards','Awards & Recognitions','Spot Award; Best Contributor; QE & A Maestro; Pride of the Quarter; Pillar of the Month'),
-    ('experience','Professional Experience','Software Developer Intern (Tech Insights); Senior Consultant (Deloitte); Consultant (Capgemini); etc.'),
-    ('skills','Core Skills & Tools','Python, R, SQL, Java, Pandas, NumPy, Power BI, Git, JIRA, Selenium, Guidewire'),
-]
-for idx, sec in enumerate(sections):
-    render_card(idx, *sec)
+# --- Awards Section ---
+st.header("Awards & Recognitions")
+st.write("""
+- Spot Award, Best Contributor, QE & A Maestro
+- Pride of the Quarter, Pillar of the Month
+""")
 
-# Chat card
-chat_card = f"<div id='chat' class='card' data-aos='fade-up'><h2>Chat</h2><img src='https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif' style='width:100%;border-radius:12px;margin-bottom:12px;'/></div>"
-components.html(chat_card, height=0)
+# --- Experience Section ---
+st.header("Professional Experience")
+st.write("""
+- **Software Developer Intern** (Tech Insights)
+- **Senior Consultant** (Deloitte)
+- **Consultant** (Capgemini)
+- ...see full résumé for details!
+""")
 
-api_key = st.secrets['DEEPSEEK_API_KEY']
-client = openai.OpenAI(base_url='https://openrouter.ai/api/v1', api_key=api_key)
-user_input = st.chat_input('Ask something...')
-if user_input:
-    st.chat_message('user').write(user_input)
-    prompt = f"You are Venkatesh's assistant. Resume JSON: {resume_json}\nQuestion: {user_input}"
-    with st.spinner('Assistant is typing...'):
-        response = client.chat.completions.create(model='deepseek/deepseek-chat-v3-0324', messages=[{'role':'system','content':prompt}])
-    st.chat_message('assistant').write(response.choices[0].message.content)
+# --- Skills Section ---
+st.header("Core Skills & Tools")
+st.write("""
+Python, R, SQL, Java, Pandas, NumPy, Power BI, Git, JIRA, Selenium, Guidewire
+""")
 
-# Projects Gallery
-projects_card = f"<div id='projects' class='card' data-aos='fade-up'><h2>Projects Gallery</h2></div>"
-components.html(projects_card, height=0)
-cols = st.columns(3)
+# --- Chat Section (Optional: Uncomment if you have OpenAI API key in your secrets) ---
+# st.header("AI Chatbot (Ask about my résumé)")
+# import openai
+# api_key = st.secrets["DEEPSEEK_API_KEY"]
+# client = openai.OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+# user_input = st.chat_input("Ask something about my experience or projects...")
+# if user_input:
+#     st.chat_message("user").write(user_input)
+#     resume_json = resume_df.to_json(orient="records")
+#     prompt = f"You are Venkatesh's assistant. Resume JSON: {resume_json}\nQuestion: {user_input}"
+#     with st.spinner('Assistant is typing...'):
+#         response = client.chat.completions.create(
+#             model='deepseek/deepseek-chat-v3-0324',
+#             messages=[{'role':'system','content':prompt}]
+#         )
+#     st.chat_message("assistant").write(response.choices[0].message.content)
+
+# --- Projects Gallery (Grid) ---
+st.header("Projects Gallery")
+proj_cols = st.columns(3)
 for idx, proj in enumerate(projects):
-    with cols[idx%3]:
-        proj_html = f"<div class='project-item' data-aos='fade-up'><a href='{proj['url']}' target='_blank'><img src='{proj['image']}'/><div class='overlay'>{proj['title']}</div></a></div>"
-        components.html(proj_html, height=0)
+    with proj_cols[idx % 3]:
+        st.image(proj["image"], caption=proj["title"], use_column_width=True)
+        st.markdown(f"[GitHub Link]({proj['url']})", unsafe_allow_html=True)
 
-# Close content wrapper
-st.markdown("</div>", unsafe_allow_html=True)
+# --- ATS Match Score Section ---
+st.header("ATS Job Match Demo")
+job_desc = st.text_area("Paste Job Description Here")
+if st.button("Check ATS Match"):
+    # Simple keyword list for demo, adjust as needed
+    required_keywords = [
+        "data risk", "control self-assessment", "collibra", "BCBS239",
+        "DRA", "data quality", "regulatory reporting", "metadata", "lineage"
+    ]
+    resume_text = " ".join(resume_df['sentence'])
+    score = sum(1 for kw in required_keywords if kw.lower() in resume_text.lower())
+    st.success(f"ATS Match Score: {score}/{len(required_keywords)} ({int(100*score/len(required_keywords))}%)")
+
+# --- Download Resume Section ---
+st.header("Download My Resume")
+resume_file_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
+st.markdown(f"[Download Resume (PDF)]({resume_file_url})")
+
+# End of app

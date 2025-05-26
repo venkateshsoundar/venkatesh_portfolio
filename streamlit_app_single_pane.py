@@ -405,8 +405,6 @@ with left_col:
     """,
     unsafe_allow_html=True
 )
-
-
     st.markdown(
     """
     <style>

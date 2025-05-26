@@ -8,40 +8,48 @@ import pandas as pd
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Load resume bullets ---
-def load_resume_df(url):
-    r = requests.get(url)
-    r.raise_for_status()
-    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    records = []
-    for i, page in enumerate(reader.pages):
-        text = page.extract_text() or ""
-        sentences = [s.strip() for s in text.split('.') if s.strip()]
-        for sent in sentences:
-            records.append({"page": i+1, "sentence": sent})
-    return pd.DataFrame(records)
-
-resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
+# --- Sticky Top Navigation Bar ---
+st.markdown(
+    """
+    <style>
+    .nav-bar {
+        display: flex;
+        justify-content: center;
+        gap: 36px;
+        background: rgba(44,62,80,0.90);
+        padding: 16px 0 6px 0;
+        border-radius: 0 0 20px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 99;
+        margin-bottom: 28px;
+    }
+    .nav-link {
+        color: #ffd166 !important;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.13rem;
+        letter-spacing: 1px;
+        padding: 6px 18px;
+        border-radius: 7px;
+        transition: background .18s, color .18s;
+    }
+    .nav-link:hover {
+        background: #406496;
+        color: #fff !important;
+        text-decoration: none;
+    }
+    </style>
+    <div class="nav-bar">
+        <a class="nav-link" href="#about-me">About</a>
+        <a class="nav-link" href="#projects-gallery">Projects</a>
+        <a class="nav-link" href="#professional-experience">Experience</a>
+        <a class="nav-link" href="#core-skills-tools">Skills</a>
+        <a class="nav-link" href="#contact">Contact</a>
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
-resume_df = load_resume_df(resume_url)
-# Serialize DataFrame to JSON for direct prompt
-resume_json = resume_df.to_json(orient='records')
-
-# --- Projects list ---
-projects = [
-    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
-    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
-    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
-    {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
-    {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
-    {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
-]
 
 # --- Global CSS & Background ---
 st.markdown(
@@ -89,9 +97,9 @@ st.markdown(
 [data-testid="stChatInput"] input,
 .stChatInput input,
 input[data-baseweb="input"] {
-  border: 2px solid #406496 !important;     /* <-- blue border */
-  border-radius: 10px !important;           /* rounded corners (optional) */
-  background: #fff !important;              /* or any background */
+  border: 2px solid #406496 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
   color: #222 !important;
   font-size: 1.08rem !important;
   box-shadow: 0 2px 10px rgba(30,50,100,0.08);
@@ -106,7 +114,6 @@ input[data-baseweb="input"] {
 .profile-card-content {
   padding-top: 200px;
 }
-
 .contact-icon {
   width: 30px;
   height: 30px;
@@ -176,14 +183,13 @@ input[data-baseweb="input"] {
   gap: 20px;
   margin-bottom: 20px;
 }
-
 /* --- Make chat_input box dark and bold --- */
 [data-testid="stChatInput"] input,
 .stChatInput input,
 input[data-baseweb="input"] {
-  background: #26334d !important;        /* deep blue-gray */
-  color: #222 !important;                /* white text */
-  border: 2px solid #5A84B4 !important;  /* blue border */
+  background: #26334d !important;
+  color: #222 !important;
+  border: 2px solid #5A84B4 !important;
   border-radius: 12px !important;
   font-size: 1.08rem !important;
   box-shadow: 0 2px 10px rgba(30,50,100,0.14);
@@ -194,12 +200,10 @@ input[data-baseweb="input"] {
 [data-testid="stChatInput"] input:focus,
 .stChatInput input:focus,
 input[data-baseweb="input"]:focus {
-  border: 2px solid #ffd166 !important;  /* gold highlight on focus */
+  border: 2px solid #ffd166 !important;
   outline: none !important;
   box-shadow: 0 0 0 2px #ffd16666;
 }
-
-/* Try to target the chat input's container for border */
 [data-testid="stChatInput"] {
   border: 2px solid #406496 !important;
   border-radius: 12px !important;
@@ -210,23 +214,23 @@ input[data-baseweb="input"]:focus {
 [data-testid="stChatInput"] input,
 .stChatInput input,
 input[data-baseweb="input"] {
-  border: none !important; /* Let the outer border show! */
+  border: none !important;
   background: transparent !important;
   box-shadow: none !important;
   color: #222 !important;
   font-size: 1.08rem !important;
 }
 [data-testid="stChatInput"]:focus-within {
-  border: 2px solid #FFD166 !important; /* gold on focus */
+  border: 2px solid #FFD166 !important;
   box-shadow: 0 0 0 2px #ffd16633;
 }
 div[data-testid="stSpinner"] > div {
-    color: #111 !important;    /* black text */
+    color: #111 !important;
     font-weight: 600;
 }
 .project-title {
   text-align: center;
-  margin-top: 8px;       /* space above the title */
+  margin-top: 8px;
   font-weight: bold;
   color: #ffffff;
 }
@@ -237,23 +241,57 @@ div[data-testid="stSpinner"] > div {
   display: flex;
   align-items: center;
   justify-content: center;
-  text-align: center;       /* ← ensure multi-line is centered */
+  text-align: center;
   opacity: 0;
   transition: opacity .3s ease;
   font-size: 1.2rem;
   color: #ffffff;
-  padding: 0 8px;           /* optional: add horizontal padding */
+  padding: 0 8px;
 }
-
 </style>
-    ''', unsafe_allow_html=True
+''', unsafe_allow_html=True
 )
+
+# --- Load resume bullets ---
+def load_resume_df(url):
+    r = requests.get(url)
+    r.raise_for_status()
+    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
+    records = []
+    for i, page in enumerate(reader.pages):
+        text = page.extract_text() or ""
+        sentences = [s.strip() for s in text.split('.') if s.strip()]
+        for sent in sentences:
+            records.append({"page": i+1, "sentence": sent})
+    return pd.DataFrame(records)
+
+resume_url = (
+    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
+)
+resume_df = load_resume_df(resume_url)
+resume_json = resume_df.to_json(orient='records')
+
+# --- Projects list ---
+projects = [
+    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
+    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
+    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
+    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
+    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
+    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
+    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
+    {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
+    {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
+    {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
+]
 
 # --- Layout ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="small")
 
-# --- Left Pane (profile pic pops out of card) ---
+# --- Left Pane (profile, contact, education, certs, awards) ---
 with left_col:
+    st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
     st.markdown('''
     <div class="profile-card-container">
       <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
@@ -265,7 +303,6 @@ with left_col:
       </div>
     </div>
     ''', unsafe_allow_html=True)
-
     st.markdown(
         '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Contact</div>' +
         '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">' +
@@ -276,7 +313,6 @@ with left_col:
         '</div></div>',
         unsafe_allow_html=True
     )
-
     st.markdown(
     """
     <div class="card hover-zoom">
@@ -296,9 +332,6 @@ with left_col:
     </div>
     """, unsafe_allow_html=True
 )
-
-
-    # Certifications & Courses as simple list
     st.markdown(
     """
     <div class="card hover-zoom">
@@ -339,8 +372,6 @@ with left_col:
     """,
     unsafe_allow_html=True
 )
-
-
     st.markdown(
     '''
     <div class="card hover-zoom">
@@ -373,7 +404,6 @@ with left_col:
         </div>
       </div>
     </div>
-
     <style>
       .awards-grid {
         display: grid;
@@ -406,9 +436,9 @@ with left_col:
     unsafe_allow_html=True
 )
 
-
-# --- Right Pane ---
+# --- Right Pane (Experience, Skills) ---
 with right_col:
+    st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
     st.markdown("""
 <style>
 .exp-timeline {
@@ -488,11 +518,11 @@ with right_col:
 </div>
 """, unsafe_allow_html=True)
 
+    st.markdown('<a id="core-skills-tools"></a>', unsafe_allow_html=True)
     st.markdown(
     '''
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-      
       <!-- Programming Languages -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
@@ -504,7 +534,6 @@ with right_col:
           <div class="skill-card">VBA Macro</div>
         </div>
       </details>
-
       <!-- Data Analysis Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Analysis Tools</summary>
@@ -514,7 +543,6 @@ with right_col:
           <div class="skill-card">Matplotlib</div>
         </div>
       </details>
-
       <!-- Visualization Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Data Visualization</summary>
@@ -523,7 +551,6 @@ with right_col:
           <div class="skill-card">Excel</div>
         </div>
       </details>
-
       <!-- Statistical Analysis -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Statistical Analysis</summary>
@@ -532,7 +559,6 @@ with right_col:
           <div class="skill-card">Regression</div>
         </div>
       </details>
-
       <!-- Database Management Tools -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Database Management</summary>
@@ -542,7 +568,6 @@ with right_col:
           <div class="skill-card">NoSQL</div>
         </div>
       </details>
-
       <!-- Version Control -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Version Control</summary>
@@ -550,7 +575,6 @@ with right_col:
           <div class="skill-card">Git</div>
         </div>
       </details>
-
       <!-- Project Management Tools-->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Project Management Tools</summary>
@@ -560,7 +584,6 @@ with right_col:
           <div class="skill-card">Rally</div>
         </div>
       </details>
-
       <!-- QA Automation & Insurance -->
       <details open>
         <summary style="font-weight:bold; cursor:pointer;">Automation & Insurance Suite</summary>
@@ -570,7 +593,6 @@ with right_col:
         </div>
       </details>
     </div>
-
     <style>
       .skills-grid {
         display: grid;
@@ -596,142 +618,140 @@ with right_col:
     unsafe_allow_html=True
 )
 
-    
-# --- Center Pane ---
+# --- Center Pane (Welcome, About, Chatbot, Projects) ---
 with mid_col:
     gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
-
-
-    # Inject CSS for a .welcome-card class
     st.markdown(
-    f"""
-    <style>
-      .welcome-card {{
-        background: url("{gif_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 3rem;
-        color: white;              /* or pick a contrasting color */
-        min-height: 180px;         /* adjust height as needed */
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-      }}
-      /* If you need to override Streamlit container padding: */
-      .stApp .welcome-card {{
-        margin: 0 auto 1rem auto;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-# Now render your content inside that div
+        f"""
+        <style>
+          .welcome-card {{
+            background: url("{gif_url}") center/cover no-repeat;
+            border-radius: 16px;
+            padding: 3rem;
+            color: white;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+          }}
+          .stApp .welcome-card {{
+            margin: 0 auto 1rem auto;
+          }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     st.markdown(
-    """
-    <div class="welcome-card">
-      <div class="typewriter">
-      <div>
-        <h1>Hello and Welcome...</h1>
-        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+        """
+        <div class="welcome-card">
+          <div class="typewriter">
+          <div>
+            <h1>Hello and Welcome...</h1>
+            <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-    
-  #  st.markdown(
-  #      '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
-  #      unsafe_allow_html=True
-  #  )
+    # About section
+    st.markdown('<a id="about-me"></a>', unsafe_allow_html=True)
+    st.markdown(
+        """
+        <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
+          <div class="section-title" style="background:#22304A;">About Me</div>
+          <div style="font-size:1.08rem; text-align:left; color:#fff;">
+            👋 I'm Venkatesh, a results-driven Data Scientist and Software Developer passionate about leveraging data to drive real-world impact. With 8+ years in quality engineering, business intelligence, and analytics, I thrive at the intersection of technology and business. <br><br>
+            My expertise includes building scalable ETL pipelines, designing predictive models, and creating interactive dashboards in cloud environments (AWS, Azure). I enjoy solving complex business problems, collaborating with cross-functional teams, and telling stories with data.<br><br>
+            Let’s connect to create data-powered solutions!
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
+    # Chatbot section
     ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-
     st.markdown(
-    f"""
-    <style>
-      .welcome-card2 {{
-        background: url("{ai_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 0;                   /* remove internal padding */
-        color: white;
-        height: 200px;                /* fixed banner height */
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 24px;
-      }}
-      .welcome-card2 .text-container {{
-        position: absolute;
-        top: 70%;                     /* drop text lower */
-        right: 2rem;                  /* align text to the right edge */
-        transform: translateY(-50%);  /* center vertically at 60% point */
-        text-align: right;
-      }}
-      .welcome-card2 h2 {{
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
+        f"""
+        <style>
+          .welcome-card2 {{
+            background: url("{ai_url}") center/cover no-repeat;
+            border-radius: 16px;
+            padding: 0;
+            color: white;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 24px;
+          }}
+          .welcome-card2 .text-container {{
+            position: absolute;
+            top: 70%;
+            right: 2rem;
+            transform: translateY(-50%);
+            text-align: right;
+          }}
+          .welcome-card2 h2 {{
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+          }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
     st.markdown(
-    """
-    <div class="welcome-card2">
-      <div class="text-container">
-        <h2>Ask Buddy Bot!</h2>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+        """
+        <div class="welcome-card2">
+          <div class="text-container">
+            <h2>Ask Buddy Bot!</h2>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
 
-
-
-
+    # Chatbot input/output (replace with your key handling)
     api_key = st.secrets["DEEPSEEK_API_KEY"]
     client = openai.OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=api_key,
     )
-    chat_container=st.container()
+    chat_container = st.container()
     with chat_container:
-
-    # Stateless chat - no history
-      user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-      if user_input:
-          st.chat_message("user").write(user_input)
-          prompt = (
-              "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-              "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-              + user_input
-          )
-          with st.spinner("Assistant is typing..."):
-              response = client.chat.completions.create(
-                  model="deepseek/deepseek-chat-v3-0324",
-                  messages=[
-                      {"role": "system", "content": prompt}
-                  ]
-              )
-              reply = response.choices[0].message.content
-          st.chat_message("assistant").write(reply)
-    project_container = st.container()
-    # --- Projects Showcase ---
-    with project_container:
-        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-        grid_html = '<div class="grid-container">'
-        for proj in projects:
-            grid_html += (
-                f'<div class="project-item hover-zoom">'
-                f'  <a href="{proj["url"]}" target="_blank">'
-                f'    <img src="{proj["image"]}" class="card-img"/>'
-                f'    <div class="overlay">{proj["title"]}</div>'
-                f'  </a>'
-                f'</div>'
+        user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+        if user_input:
+            st.chat_message("user").write(user_input)
+            prompt = (
+                "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+                "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+                + user_input
             )
-        grid_html += '</div>'
-        st.markdown(grid_html, unsafe_allow_html=True)
+            with st.spinner("Assistant is typing..."):
+                response = client.chat.completions.create(
+                    model="deepseek/deepseek-chat-v3-0324",
+                    messages=[
+                        {"role": "system", "content": prompt}
+                    ]
+                )
+                reply = response.choices[0].message.content
+            st.chat_message("assistant").write(reply)
+
+    # Projects Gallery
+    st.markdown('<a id="projects-gallery"></a>', unsafe_allow_html=True)
+    st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+    grid_html = '<div class="grid-container">'
+    for proj in projects:
+        grid_html += (
+            f'<div class="project-item hover-zoom">'
+            f'  <a href="{proj["url"]}" target="_blank">'
+            f'    <img src="{proj["image"]}" class="card-img"/>'
+            f'    <div class="overlay">{proj["title"]}</div>'
+            f'  </a>'
+            f'</div>'
+        )
+    grid_html += '</div>'
+    st.markdown(grid_html, unsafe_allow_html=True)

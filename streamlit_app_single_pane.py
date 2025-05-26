@@ -5,9 +5,9 @@ import PyPDF2
 import openai
 import pandas as pd
 
-# ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
+# ---- CSS ----
 st.markdown("""
 <style>
 .stApp {
@@ -82,31 +82,11 @@ sections = ["About", "Projects", "Experience", "Skills", "Contact"]
 if "tab" not in st.session_state:
     st.session_state.tab = "About"
 
-# ---- TAB NAVIGATION ----
-st.markdown('<div class="tab-nav">' + ''.join([
-    f'<button class="tab-btn{" active" if st.session_state.tab==name else ""}" onclick="window.location.search = \'?tab={name}\'">{name}</button>'
-    for name in sections
-]) + '</div>', unsafe_allow_html=True)
-
-# Simple JS to update tab in session state without reload
-st.markdown("""
-<script>
-for (const btn of window.parent.document.querySelectorAll('.tab-btn')) {
-  btn.onclick = function(e) {
-    window.parent.postMessage({isStreamlitMessage: true, type: "streamlit:setComponentValue", key: "tab", value: this.textContent.trim()}, "*");
-    return false;
-  }
-}
-</script>
-""", unsafe_allow_html=True)
-
-# -- PATCH to update Streamlit session_state.tab (works in Streamlit Cloud and desktop)
-from streamlit import runtime
-if runtime.exists():
-    import streamlit.runtime.scriptrunner.script_run_context as src
-    ctx = src.get_script_run_ctx()
-    import streamlit.runtime.state.session_state_proxy as ssp
-    st.session_state.tab = st.experimental_get_query_params().get("tab", [st.session_state.tab])[0]
+# ---- TAB NAVIGATION (USING BUTTONS) ----
+cols = st.columns(len(sections))
+for i, name in enumerate(sections):
+    if cols[i].button(f"{name}", key=name, use_container_width=True):
+        st.session_state.tab = name
 
 # ---- SECTION RENDERING ----
 def show_about():
@@ -226,7 +206,7 @@ def show_about():
         """,
         unsafe_allow_html=True,
     )
-    # Education, Certs, Awards (as before)
+    # Education, Certs, Awards
     st.markdown(
     """
     <div class="card hover-zoom">

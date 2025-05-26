@@ -324,29 +324,87 @@ with left_col:
     st.markdown(
     """
     <style>
-    /* ...CSS... */
+    .edu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      align-items: center;
+      margin-top: 18px;
+    }
+    .edu-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+      border-radius: 12px;
+      padding: 18px 30px 18px 30px;
+      box-shadow: 0 2px 12px rgba(44, 62, 80, 0.09);
+      border: 1.5px solid #40649644;
+      transition: box-shadow 0.18s;
+      width: 380px;
+      max-width: 100%;
+    }
+    .edu-card:hover {
+      box-shadow: 0 8px 26px rgba(30,50,100,0.19);
+      background: linear-gradient(135deg, #22304A 0%, #406496 100%);
+    }
+    .edu-logo {
+      width: 60px;
+      height: 60px;
+      object-fit: contain;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      background: #fff;
+      border: 1px solid #fff;
+      box-shadow: 0 1px 5px #32466533;
+      display: block;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .edu-degree {
+      color: #ffd166;
+      font-weight: bold;
+      font-size: 1.13rem;
+      margin-bottom: 2px;
+      text-align: center;
+    }
+    .edu-univ {
+      color: #ADD8E6;
+      font-size: 1.01rem;
+      text-align: center;
+    }
+    .edu-dates {
+      color: #fff;
+      font-size: 0.99rem;
+      opacity: 0.92;
+      margin-top: 3px;
+      text-align: center;
+    }
     </style>
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E; text-align:center;">Education</div>
       <div class="edu-list">
+
         <div class="edu-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-logo"/>
           <span class="edu-degree">Masters in Data Science and Analytics</span>
           <span class="edu-univ">University of Calgary, Alberta, Canada</span>
           <span class="edu-dates">September 2024 – Present</span>
         </div>
+
         <div class="edu-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-logo"/>
           <span class="edu-degree">Bachelor of Engineering</span>
           <span class="edu-univ">Anna University, Chennai, India</span>
           <span class="edu-dates">August 2009 – May 2013</span>
         </div>
+
       </div>
     </div>
     """,
     unsafe_allow_html=True
 )
-
     st.markdown(
     """
     <style>

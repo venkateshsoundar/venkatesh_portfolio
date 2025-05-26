@@ -385,25 +385,21 @@ with left_col:
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E; text-align:center;">Education</div>
       <div class="edu-list">
-
         <div class="edu-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-logo"/>
           <span class="edu-degree">Masters in Data Science and Analytics</span>
           <span class="edu-univ">University of Calgary, Alberta, Canada</span>
           <span class="edu-dates">September 2024 – Present</span>
         </div>
-
         <div class="edu-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-logo"/>
           <span class="edu-degree">Bachelor of Engineering</span>
           <span class="edu-univ">Anna University, Chennai, India</span>
           <span class="edu-dates">August 2009 – May 2013</span>
         </div>
-
       </div>
     </div>
-    """,
-    unsafe_allow_html=True
+    """,unsafe_allow_html=True
 )
     st.markdown(
     """

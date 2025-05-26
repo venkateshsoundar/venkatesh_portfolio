@@ -1,658 +1,232 @@
 import streamlit as st
-import requests
-import io
-import PyPDF2
-import openai
-import pandas as pd
 
-st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
-
-# --- ANIMATED SECTIONS CSS & JS ---
-st.markdown("""
-<style>
-.animated-section {
-    opacity: 0;
-    transform: translateY(40px) scale(0.98);
-    transition: opacity 0.7s cubic-bezier(.17,.67,.43,1.05), transform 0.7s cubic-bezier(.17,.67,.43,1.05);
-}
-.animated-section.visible {
-    opacity: 1 !important;
-    transform: none !important;
-}
-</style>
-<script>
-function revealOnScroll() {
-    var elements = document.querySelectorAll('.animated-section');
-    var windowHeight = window.innerHeight;
-    for (var i = 0; i < elements.length; i++) {
-        var element = elements[i];
-        var position = element.getBoundingClientRect().top;
-        if (position < windowHeight - 80) {
-            element.classList.add('visible');
-        } else {
-            element.classList.remove('visible');
-        }
-    }
-}
-window.addEventListener('scroll', revealOnScroll);
-window.addEventListener('DOMContentLoaded', revealOnScroll);
-window.addEventListener('resize', revealOnScroll);
-revealOnScroll();
-</script>
-""", unsafe_allow_html=True)
-
-# --- Animated NAV BAR ---
-st.markdown(
-    """
-    <style>
-    .nav-bar {
-        display: flex;
-        justify-content: center;
-        gap: 36px;
-        background: rgba(44,62,80,0.90);
-        padding: 16px 0 6px 0;
-        border-radius: 0 0 20px 20px;
-        position: sticky;
-        top: 0;
-        z-index: 99;
-        margin-bottom: 28px;
-    }
-    .nav-link {
-        background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-        color: #ffd166 !important;
-        text-decoration: none;
-        font-weight: bold;
-        font-size: 1.13rem;
-        letter-spacing: 1px;
-        padding: 10px 26px;
-        border-radius: 12px;
-        box-shadow: 0 2px 8px rgba(44,62,80,0.15);
-        transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s, background .22s;
-        display: inline-block;
-        margin-bottom: 0;
-    }
-    .nav-link:hover, .nav-link:focus {
-        transform: translateY(-5px) scale(1.07);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.24);
-        background: linear-gradient(135deg, #406496 0%, #22304A 100%);
-        color: #fff !important;
-        text-decoration: none;
-    }
-    </style>
-    <div class="nav-bar">
-        <a class="nav-link" href="#about-me">About</a>
-        <a class="nav-link" href="#projects-gallery">Projects</a>
-        <a class="nav-link" href="#professional-experience">Experience</a>
-        <a class="nav-link" href="#core-skills-tools">Skills</a>
-        <a class="nav-link" href="#contact">Contact</a>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-# --- Your Global Card & Visual Styles ---
-st.markdown(
-    '''
-<style>
-.stApp {
-  background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
-  background-attachment: fixed;
-  color: #ffffff;
-  font-family: 'Poppins', sans-serif;
-}
-.card {
-  width: 100% !important;
-  border-radius: 12px;
-  padding: 20px;
-  margin-bottom: 20px;
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
-  text-align: center;
-}
-.card:hover, .card.hover-zoom:hover {
-  transform: translateY(-5px) scale(1.04);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.24);
-}
-.section-title {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 12px;
-  padding: 8px;
-  border-radius: 6px;
-}
-.profile-pic-popout {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 20px;
-  z-index: 10;
-}
-.contact-icon {
-  width: 30px;
-  height: 30px;
-  filter: invert(100%);
-  color:#ADD8E6;
-  margin: 0 8px;
-  vertical-align: middle;
-}
-.project-item {
-  position: relative;
-  aspect-ratio: 1/1;
-  overflow: hidden;
-  border-radius: 12px;
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
-}
-.card-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1);
-}
-.project-item:hover .card-img {
-  transform: scale(1.05);
-}
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  opacity: 0;
-  transition: opacity .3s ease;
-  font-size: 1.2rem;
-  color: #ffffff;
-}
-.project-item:hover .overlay {
-  opacity: 1;
-}
-.typewriter {
-  width: fit-content;
-  margin: 0 auto 20px;
-}
-.typewriter h1 {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: .15em solid #5A84B4;
-  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
-  color: #ffffff;
-}
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
-.details-summary {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
-  color: #ffffff !important;
-  font-size: 1.6rem !important;
-  font-weight: bold !important;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  text-align: center;
-  cursor: pointer;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
-  margin-bottom: 20px;
-}
-</style>
-''', unsafe_allow_html=True
-)
-
-# --- Resume Data ---
-def load_resume_df(url):
-    r = requests.get(url)
-    r.raise_for_status()
-    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    records = []
-    for i, page in enumerate(reader.pages):
-        text = page.extract_text() or ""
-        sentences = [s.strip() for s in text.split('.') if s.strip()]
-        for sent in sentences:
-            records.append({"page": i+1, "sentence": sent})
-    return pd.DataFrame(records)
-
-resume_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
-resume_df = load_resume_df(resume_url)
-resume_json = resume_df.to_json(orient='records')
-
+# -------------------- PROJECT DATA --------------------
 projects = [
-    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
-    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
-    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
-    {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
-    {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
-    {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
+    {
+        "title": "Canadian Quality of Life Analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
+        "description": "Analyzed quality of life metrics across Canada using open datasets, pandas, and matplotlib to uncover regional disparities and trends. Built interactive dashboards to support decision-making."
+    },
+    {
+        "title": "Alberta Wildfire Analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
+        "description": "Explored and visualized wildfire patterns and environmental impacts in Alberta. Built predictive models and interactive reports for risk mitigation using Python."
+    },
+    {
+        "title": "Toronto Crime Drivers",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg",
+        "description": "Investigated socio-economic and environmental drivers of crime in Toronto neighborhoods. Applied correlation analysis and regression for actionable insights."
+    },
+    {
+        "title": "Weight Change Regression Analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg",
+        "description": "Built regression models to predict weight change based on personal and lifestyle factors. Explored feature importance and visualized results with Python libraries."
+    },
+    {
+        "title": "Calgary Childcare Compliance",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg",
+        "description": "Analyzed and visualized compliance data from Calgary childcare providers to identify trends and inform policy recommendations."
+    },
+    {
+        "title": "Social Media Purchase Influence",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg",
+        "description": "Studied the influence of social media marketing on consumer purchase decisions using survey data, sentiment analysis, and visualization."
+    },
+    {
+        "title": "Obesity Level Estimation",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg",
+        "description": "Developed classification models to estimate obesity levels based on eating habits, activity, and health data. Employed scikit-learn and feature engineering."
+    },
+    {
+        "title": "Weather Data Pipeline (AWS)",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg",
+        "description": "Built an AWS-based ETL pipeline to ingest, process, and visualize historical and forecast weather data. Automated data quality checks and reporting."
+    },
+    {
+        "title": "Gmail Sentiment Analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg",
+        "description": "Applied NLP techniques to classify sentiment of Gmail messages, visualize trends, and build a topic model using Python."
+    },
+    {
+        "title": "Penguin Species Prediction Chatbot",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg",
+        "description": "Built a chatbot using Streamlit and ML to classify penguin species based on user input, with interactive explanations and charts."
+    },
+    {
+        "title": "Uber Ride Prediction",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg",
+        "description": "Developed a regression model to predict Uber ride durations using geospatial and temporal features. Delivered insights through a Streamlit dashboard."
+    }
 ]
 
-# --- Layout ---
-left_col, mid_col, right_col = st.columns([1,2,1], gap="small")
+# -------------------- MODAL STATE SETUP --------------------
+if "modal_open" not in st.session_state:
+    st.session_state.modal_open = False
+if "modal_idx" not in st.session_state:
+    st.session_state.modal_idx = None
 
-# --- LEFT ---
-with left_col:
-    st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
-    st.markdown('''
-    <div class="animated-section card profile-card-container hover-zoom">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
-           class="profile-pic-popout" />
-      <div class="profile-card-content">
-        <h2>Venkatesh Soundararajan</h2>
-        <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
-        <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
-      </div>
-    </div>
-    ''', unsafe_allow_html=True)
+def open_modal(i):
+    st.session_state.modal_open = True
+    st.session_state.modal_idx = i
 
-    st.markdown(
-        '''
-        <div class="animated-section card hover-zoom">
-            <div class="section-title" style="background:#34495E;">Contact</div>
-            <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
-            <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>
-            <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>
-            <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>
-            <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon"/></a>
-            </div>
-        </div>
-        ''', unsafe_allow_html=True
-    )
-    st.markdown(
+def close_modal():
+    st.session_state.modal_open = False
+    st.session_state.modal_idx = None
+
+# -------------------- PAGE STYLE --------------------
+st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
+st.markdown("""
+<style>
+body {background: #19213a;}
+h2, h3, h4 {color: #ffd166 !important;}
+.project-gallery-title {font-size:2rem; font-weight:700; margin-bottom:18px;}
+.project-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px,1fr));
+    gap: 28px;
+}
+.project-card {
+    background: #1F2A44;
+    border-radius: 14px;
+    box-shadow: 0 2px 8px rgba(44,62,80,0.16);
+    text-align: center;
+    transition: transform .18s, box-shadow .18s;
+    cursor: pointer;
+    overflow: hidden;
+    position: relative;
+}
+.project-card:hover {
+    transform: translateY(-7px) scale(1.03);
+    box-shadow: 0 12px 22px rgba(44,62,80,0.28);
+}
+.project-card img {
+    width: 100%;
+    height: 160px;
+    object-fit: cover;
+    border-bottom: 3px solid #ffd166;
+}
+.project-title {
+    font-weight: bold;
+    color: #ffd166;
+    padding: 12px 0 6px 0;
+    font-size: 1.08rem;
+}
+.modal-bg {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    z-index: 99;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.modal-content {
+    background: linear-gradient(120deg, #22304A 60%, #324665 100%);
+    border-radius: 18px;
+    padding: 2.4rem 2.3rem 1.7rem 2.3rem;
+    box-shadow: 0 14px 50px rgba(0,0,0,0.32);
+    color: #fff;
+    min-width: 340px;
+    max-width: 90vw;
+    position: relative;
+    animation: fadeInModal .7s cubic-bezier(.17,.67,.43,1.05);
+}
+@keyframes fadeInModal {
+    0% { opacity: 0; transform: scale(0.84) translateY(50px);}
+    100% { opacity: 1; transform: none;}
+}
+.close-btn {
+    position: absolute;
+    top: 18px; right: 24px;
+    background: none;
+    border: none;
+    font-size: 2.1rem;
+    color: #ffd166;
+    cursor: pointer;
+    transition: color .2s;
+}
+.close-btn:hover { color: #ff5656; }
+</style>
+""", unsafe_allow_html=True)
+
+# -------------------- PAGE HEADER / WELCOME --------------------
+st.markdown(
     """
-    <div class="animated-section card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Education</div>
-      <div style="text-align:left; margin-left:10px;">
-        <p>
-          <b>Masters in Data Science and Analytics</b><br>  
-          <span style="color:#ADD8E6;">University of Calgary, Alberta, Canada</span><br> 
-          <span style="color:#ffd166;">September 2024 – Present</span>
+    <div style="text-align:center;margin-top:20px;">
+        <h1 style="color:#ffd166;font-size:2.4rem;margin-bottom:5px;">👋 Venkatesh Portfolio</h1>
+        <p style="color:#fff;font-size:1.18rem;">
+            Data Scientist & Software Developer passionate about analytics, cloud, and building solutions.<br>
+            <span style="color:#ffd166">Click any project below to see details!</span>
         </p>
-        <p>
-          <b>Bachelor of Engineering</b><br>  
-          <span style="color:#ADD8E6;">Anna University, Chennai, India</span><br> 
-          <span style="color:#ffd166;">August 2009 – May 2013</span>                
-        </p>
-      </div>
-    </div>
-    """, unsafe_allow_html=True
-)
-    st.markdown(
-    """
-    <div class="animated-section card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
-      <div style="text-align:left; margin-left:10px;">
-        <p>
-          <b>Insurance &amp; Guidewire Suite Analyst 10.0</b><br>
-          <span style="color:#ADD8E6;">Jasper – Guidewire Education</span><br>
-          <span style="color:#ffd166;">2024</span>
-        </p>
-        <p>
-          <b>Karate DSL</b><br>
-          <span style="color:#ADD8E6;">Udemy</span><br>
-          <span style="color:#ffd166;">2023</span>
-        </p>
-        <p>
-          <b>Rest API Automation</b><br>
-          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
-          <span style="color:#ffd166;">2023</span>
-        </p>
-        <p>
-          <b>Selenium WebDriver</b><br>
-          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
-          <span style="color:#ffd166;">2022</span>
-        </p>
-        <p>
-          <b>SQL for Data Science</b><br>
-          <span style="color:#ADD8E6;">Coursera</span><br>
-          <span style="color:#ffd166;">2020</span>
-        </p>
-        <p>
-          <b>SDET</b><br>
-          <span style="color:#ADD8E6;">Capgemini</span><br>
-          <span style="color:#ffd166;">2020</span>
-        </p>
-      </div>
     </div>
     """,
     unsafe_allow_html=True
 )
-    st.markdown(
-    '''
-    <div class="animated-section card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
-      <div class="awards-grid">
-        <div class="award-badge">
-          <div class="award-year">2022 & 2023</div>
-          <div class="award-title">Spot Award</div>
-          <div class="award-sub">InsurCloud – Deloitte, Canada</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">2018</div>
-          <div class="award-title">Best Contributor</div>
-          <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">2017</div>
-          <div class="award-title">QE & A Maestro</div>
-          <div class="award-sub">Centene by Cognizant QE&A, USA</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">Q1 2017</div>
-          <div class="award-title">Pride of the Quarter</div>
-          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">May 2014 & Aug 2015</div>
-          <div class="award-title">Pillar of the Month</div>
-          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-        </div>
-      </div>
-    </div>
-    <style>
-      .awards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 12px;
-        margin-top: 12px;
-      }
-      .award-badge {
-        background: rgba(255,255,255,0.1);
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-      }
-      .award-year {
-        font-size: 0.85rem;
-        color: #ffd166;
-        margin-bottom: 4px;
-      }
-      .award-title {
-        font-weight: bold;
-        font-size: 1rem;
-        margin-bottom: 4px;
-      }
-      .award-sub {
-        font-size: 0.9rem;
-        opacity: 0.8;
-      }
-    </style>
-    ''',
-    unsafe_allow_html=True
-)
 
-# --- RIGHT ---
-with right_col:
-    st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
-    st.markdown("""
-<div class="animated-section card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-timeline">
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Software Developer Intern</div>
-      <div class="exp-company">Tech Insights Inc, Canada</div>
-      <div class="exp-date">May 2025 – Present</div>
+# -------------------- PROJECT GALLERY --------------------
+st.markdown('<div class="project-gallery-title">Projects Gallery</div>', unsafe_allow_html=True)
+st.markdown('<div class="project-grid">', unsafe_allow_html=True)
+for idx, proj in enumerate(projects):
+    card_html = f"""
+    <div class="project-card" onclick="window.dispatchEvent(new CustomEvent('OPEN_MODAL_{idx}'));">
+        <img src="{proj['image']}" />
+        <div class="project-title">{proj['title']}</div>
     </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Senior Consultant</div>
-      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-date">June 2024 – August 2024</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Consultant</div>
-      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-date">October 2021 – June 2024</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Consultant</div>
-      <div class="exp-company">Capgemini Technology Services India Private Limited, India</div>
-      <div class="exp-date">May 2018 – October 2021</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Associate</div>
-      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-date">May 2016 – May 2018</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Programmer Analyst</div>
-      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-date">Sep 2013 – May 2018</div>
-    </div>
-  </div>
-</div>
-<style>
-.exp-timeline {
-  position: relative;
-  margin-left: 25px;
-  margin-top: 20px;
-}
-.exp-item {
-  position: relative;
-  margin-bottom: 30px;
-}
-.exp-dot {
-  position: absolute;
-  left: -30px;
-  top: 7px;
-  width: 16px;
-  height: 16px;
-  background: #406496;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px #b3c6e2;
-}
-.exp-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: -22px;
-  top: 24px;
-  width: 2px;
-  height: 35px;
-  background: #b3c6e2;
-  z-index: 0;
-}
-.exp-title { font-weight: bold; font-size: 1.1rem; }
-.exp-company { color: #ADD8E6; font-size: 1rem; }
-.exp-date { color: #ffd166; font-size: 0.97rem; }
-</style>
-""", unsafe_allow_html=True)
-
-    st.markdown('<a id="core-skills-tools"></a>', unsafe_allow_html=True)
-    st.markdown(
-    '''
-    <div class="animated-section card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-      <!-- Programming Languages -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Python</div>
-          <div class="skill-card">R</div>
-          <div class="skill-card">SQL</div>
-          <div class="skill-card">Java</div>
-          <div class="skill-card">VBA Macro</div>
-        </div>
-      </details>
-      <!-- Data Analysis Tools -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Data Analysis Tools</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Pandas</div>
-          <div class="skill-card">NumPy</div>
-          <div class="skill-card">Matplotlib</div>
-        </div>
-      </details>
-      <!-- Visualization Tools -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Data Visualization</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Power BI</div>
-          <div class="skill-card">Excel</div>
-        </div>
-      </details>
-      <!-- Statistical Analysis -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Statistical Analysis</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Hypothesis Tests</div>
-          <div class="skill-card">Regression</div>
-        </div>
-      </details>
-      <!-- Database Management Tools -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Database Management</summary>
-        <div class="skills-grid">
-          <div class="skill-card">MySQL</div>
-          <div class="skill-card">Oracle</div>
-          <div class="skill-card">NoSQL</div>
-        </div>
-      </details>
-      <!-- Version Control -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Version Control</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Git</div>
-        </div>
-      </details>
-      <!-- Project Management Tools-->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Project Management Tools</summary>
-        <div class="skills-grid">
-          <div class="skill-card">JIRA</div>
-          <div class="skill-card">ALM</div>
-          <div class="skill-card">Rally</div>
-        </div>
-      </details>
-      <!-- QA Automation & Insurance -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Automation & Insurance Suite</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Selenium WebDriver</div>
-          <div class="skill-card">Guidewire</div>
-        </div>
-      </details>
-    </div>
-    <style>
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 8px;
-        margin: 8px 0 12px;
-      }
-      .skill-card {
-        background: rgba(255,255,255,0.15);
-        padding: 6px;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        text-align: center;
-      }
-      details summary {
-        list-style: none;
-      }
-      details summary::-webkit-details-marker {
-        display: none;
-      }
-    </style>
-    ''',
-    unsafe_allow_html=True
-)
-
-# --- CENTER ---
-with mid_col:
-    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+    """
+    # Button for fallback Streamlit callback
     st.markdown(
         f"""
-        <div class="animated-section welcome-card">
-          <div class="typewriter">
-          <div>
-            <h1>Hello and Welcome...</h1>
-            <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-          </div>
+        <div onclick="window.dispatchEvent(new CustomEvent('OPEN_MODAL_{idx}'));" style="display:inline-block;width:100%;">
+        <button style="display:none;" onClick="window.dispatchEvent(new CustomEvent('OPEN_MODAL_{idx}'));">.</button>
+        {card_html}
         </div>
         """,
         unsafe_allow_html=True,
     )
+st.markdown('</div>', unsafe_allow_html=True)
 
-    st.markdown('<a id="about-me"></a>', unsafe_allow_html=True)
-    st.markdown(
-        """
-        <div class="animated-section card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
-          <div class="section-title" style="background:#22304A;">About Me</div>
-          <div style="font-size:1.08rem; text-align:left; color:#fff;">
-            👋 I'm Venkatesh, a results-driven Data Scientist and Software Developer passionate about leveraging data to drive real-world impact. With 8+ years in quality engineering, business intelligence, and analytics, I thrive at the intersection of technology and business. <br><br>
-            My expertise includes building scalable ETL pipelines, designing predictive models, and creating interactive dashboards in cloud environments (AWS, Azure). I enjoy solving complex business problems, collaborating with cross-functional teams, and telling stories with data.<br><br>
-            Let’s connect to create data-powered solutions!
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+# --- Simulate JavaScript click in Streamlit for project popup ---
+for idx in range(len(projects)):
+    st.components.v1.html(f"""
+        <script>
+        window.addEventListener('OPEN_MODAL_{idx}', function() {{
+            window.parent.postMessage({{"isStreamlitMessage":true,"type":"streamlit:setComponentValue","key":"modal{idx}","value":true}}, "*");
+        }});
+        </script>
+    """, height=0)
+    if st.experimental_get_query_params().get(f"modal{idx}"):
+        open_modal(idx)
 
-    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+# --- Streamlit-native fallback for modal on card click (so it always works) ---
+for idx, proj in enumerate(projects):
+    if st.button("", key=f"project_btn_{idx}", help=proj["title"], args=(idx,), on_click=open_modal, kwargs={"i": idx}):
+        pass
+
+# -------------------- MODAL POPUP --------------------
+if st.session_state.modal_open and st.session_state.modal_idx is not None:
+    proj = projects[st.session_state.modal_idx]
     st.markdown(
         f"""
-        <div class="animated-section welcome-card2" style="background:url('{ai_url}') center/cover no-repeat;">
-          <div class="text-container" style="position:absolute;top:70%;right:2rem;transform:translateY(-50%);text-align:right;">
-            <h2>Ask Buddy Bot!</h2>
-          </div>
+        <div class="modal-bg">
+            <div class="modal-content">
+                <button class="close-btn" onclick="window.dispatchEvent(new CustomEvent('CLOSE_MODAL'));">&#10005;</button>
+                <img src="{proj['image']}" style="width:100%;border-radius:10px;max-height:200px;object-fit:cover;margin-bottom:12px;"/>
+                <h2 style="color:#ffd166;">{proj['title']}</h2>
+                <p style="margin-top:1rem;font-size:1.08rem;">{proj['description']}</p>
+            </div>
         </div>
+        <script>
+        window.addEventListener('CLOSE_MODAL', function() {{
+            window.parent.postMessage({{"isStreamlitMessage":true,"type":"streamlit:setComponentValue","key":"close_modal","value":true}}, "*");
+        }});
+        </script>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
+    # Streamlit fallback for close
+    if st.button("Close", key="modal_close_btn", on_click=close_modal):
+        pass
 
-    api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = openai.OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-    )
-    chat_container = st.container()
-    with chat_container:
-        user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-        if user_input:
-            st.chat_message("user").write(user_input)
-            prompt = (
-                "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-                "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-                + user_input
-            )
-            with st.spinner("Assistant is typing..."):
-                response = client.chat.completions.create(
-                    model="deepseek/deepseek-chat-v3-0324",
-                    messages=[
-                        {"role": "system", "content": prompt}
-                    ]
-                )
-                reply = response.choices[0].message.content
-            st.chat_message("assistant").write(reply)
-
-    st.markdown('<a id="projects-gallery"></a>', unsafe_allow_html=True)
-    st.markdown('<div class="animated-section card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-    grid_html = '<div class="animated-section grid-container">'
-    for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom">'
-            f'  <a href="{proj["url"]}" target="_blank">'
-            f'    <img src="{proj["image"]}" class="card-img"/>'
-            f'    <div class="overlay">{proj["title"]}</div>'
-            f'  </a>'
-            f'</div>'
-        )
-    grid_html += '</div>'
-    st.markdown(grid_html, unsafe_allow_html=True)
+# Fallback: Streamlit native close from JS message (always safe)
+if st.experimental_get_query_params().get("close_modal"):
+    close_modal()

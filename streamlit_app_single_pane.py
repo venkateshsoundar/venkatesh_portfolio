@@ -1,4 +1,4 @@
-import streamlit as st1
+import streamlit as st
 import requests
 import io
 import PyPDF2

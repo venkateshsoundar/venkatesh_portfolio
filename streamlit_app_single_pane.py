@@ -764,49 +764,73 @@ with mid_col:
     st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
-.exp-accordion .section-title {margin-bottom:2px;}
-details.exp-detail {
-    background: linear-gradient(135deg,#324665 80%,#1F2A44 100%);
-    border-radius: 11px;
-    margin-bottom: 9px;
-    box-shadow: 0 1px 6px rgba(44,62,80,0.09);
-    padding: 0 16px;
-    color: #ffd166;
-    font-weight: bold;
-    transition: box-shadow .19s;
+.exp-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 18px;
+    margin: 35px 0 20px 0;
 }
-details.exp-detail[open] { box-shadow: 0 4px 18px rgba(44,62,80,0.14);}
-summary {color:#ffd166;font-size:1.07rem;}
-.exp-company { color: #ADD8E6; font-size:1.01rem; margin-left:10px;}
-.exp-date { color: #eee; font-size:0.97rem; margin-left:10px;}
-.exp-desc { color: #fff; font-size:0.99rem; margin:9px 0 8px 0;}
+.exp-card {
+    flex: 1 0 220px;
+    min-width: 210px;
+    background: linear-gradient(135deg,#2c3e50 70%,#1f2a44 100%);
+    border-radius: 14px;
+    padding: 18px 15px 10px 15px;
+    text-align: center;
+    box-shadow: 0 1px 7px rgba(44,62,80,0.11);
+    transition: transform .16s;
+    position: relative;
+}
+.exp-card:hover { transform: scale(1.045) translateY(-6px);}
+.exp-icon {
+    font-size: 2.1rem;
+    color: #ffd166;
+    margin-bottom: 6px;
+}
+.exp-title { font-weight: bold; color: #ffd166; font-size: 1.1rem;}
+.exp-company { color: #ADD8E6; margin: 4px 0 2px 0; font-size: 1.01rem;}
+.exp-date { color: #eee; font-size: 0.96rem;}
 </style>
-<div class="card exp-accordion">
+<div class="card" style="background:transparent;">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <details class="exp-detail">
-    <summary>Software Developer Intern<span class="exp-company">Tech Insights Inc</span><span class="exp-date">May 2025 – Present</span></summary>
-    <div class="exp-desc">Worked on cloud data pipelines and analytics dashboards.</div>
-  </details>
-  <details class="exp-detail">
-    <summary>Senior Consultant<span class="exp-company">Deloitte India</span><span class="exp-date">Jun 2024 – Aug 2024</span></summary>
-    <div class="exp-desc">Led cross-functional teams to deliver end-to-end analytics solutions.</div>
-  </details>
-  <details class="exp-detail">
-    <summary>Consultant<span class="exp-company">Deloitte India</span><span class="exp-date">Oct 2021 – Jun 2024</span></summary>
-    <div class="exp-desc">Built BI dashboards, automation, and improved reporting accuracy.</div>
-  </details>
-  <details class="exp-detail">
-    <summary>Consultant<span class="exp-company">Capgemini</span><span class="exp-date">May 2018 – Oct 2021</span></summary>
-    <div class="exp-desc">Managed insurance domain QA projects and testing automation.</div>
-  </details>
-  <details class="exp-detail">
-    <summary>Associate<span class="exp-company">Cognizant</span><span class="exp-date">May 2016 – May 2018</span></summary>
-    <div class="exp-desc">Quality assurance for US healthcare projects.</div>
-  </details>
-  <details class="exp-detail">
-    <summary>Programmer Analyst<span class="exp-company">Cognizant</span><span class="exp-date">Sep 2013 – May 2018</span></summary>
-    <div class="exp-desc">Supported software development and automation testing.</div>
-  </details>
+  <div class="exp-cards">
+    <div class="exp-card">
+      <div class="exp-icon">💻</div>
+      <div class="exp-title">Software Developer Intern</div>
+      <div class="exp-company">Tech Insights Inc</div>
+      <div class="exp-date">May 2025 – Present</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">👔</div>
+      <div class="exp-title">Senior Consultant</div>
+      <div class="exp-company">Deloitte India</div>
+      <div class="exp-date">Jun 2024 – Aug 2024</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">👔</div>
+      <div class="exp-title">Consultant</div>
+      <div class="exp-company">Deloitte India</div>
+      <div class="exp-date">Oct 2021 – Jun 2024</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🧑‍💼</div>
+      <div class="exp-title">Consultant</div>
+      <div class="exp-company">Capgemini</div>
+      <div class="exp-date">May 2018 – Oct 2021</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🧑‍💻</div>
+      <div class="exp-title">Associate</div>
+      <div class="exp-company">Cognizant</div>
+      <div class="exp-date">May 2016 – May 2018</div>
+    </div>
+    <div class="exp-card">
+      <div class="exp-icon">🧑‍💻</div>
+      <div class="exp-title">Programmer Analyst</div>
+      <div class="exp-company">Cognizant</div>
+      <div class="exp-date">Sep 2013 – May 2018</div>
+    </div>
+  </div>
 </div>
 """, unsafe_allow_html=True)
 

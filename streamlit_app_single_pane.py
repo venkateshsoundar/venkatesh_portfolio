@@ -404,7 +404,7 @@ with chat_container:
         st.chat_message("assistant").write(reply)
 
 # ---- TABS ----
-tabs = st.tabs(["About", "Projects", "Experience", "Skills", "Contact"])
+tabs = st.tabs(["Home", "Projects", "Experience", "Skills", "Contact"])
 
 # ---- ABOUT TAB ----
 st.markdown("""
@@ -547,7 +547,7 @@ st.markdown(
 )
 
 # --- Spacer before next section ---
-    st.markdown(
+st.markdown(
     """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Education</div>

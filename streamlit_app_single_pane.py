@@ -491,6 +491,7 @@ with right_col:
 .exp-company { color: #ADD8E6; font-size: 1rem;}
 .exp-date { color: #ffd166; font-size: 0.97rem;}
 </style>
+st.markdown("""
 <div class="card hover-zoom">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
   <div class="exp-timeline">

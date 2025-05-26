@@ -437,39 +437,86 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- Create Two Columns Layout ---
+# --- Custom Styling ---
+st.markdown("""
+<style>
+/* Square profile pic with animation */
+.profile-pic-square {
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 4px solid #ffd166;
+    box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
+    margin: 0 auto 20px auto;
+    display: block;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-pic-square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
+}
+
+/* Card styling */
+.card {
+    background: #1F2A44;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+.hover-zoom:hover {
+    transform: scale(1.02);
+}
+
+/* Title style */
+.section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    color: #fff;
+    background:#22304A;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- 2-Column Layout: Left Profile / Right About ---
 col1, col2 = st.columns([1, 2], gap="large")
 
-# --- Left: Profile Card ---
 with col1:
     st.markdown(
         """
-        <div class="card profile-card-content hover-zoom" style="text-align:center;">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
-               class="profile-pic-popout" />
-          <h2 style="color:#fff;">Venkatesh Soundararajan</h2>
-          <p style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</p>
-          <p style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></p>
+        <div class="card hover-zoom" style="text-align:center;">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
+            <h2 style="color:#fff; margin-bottom: 5px;">Venkatesh Soundararajan</h2>
+            <p style="color:#ADD8E6; font-size: 16px;">
+                <strong>Software Development Intern</strong><br>Data Engineering
+            </p>
+            <p style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></p>
         </div>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
 
-# --- Right: About Me Card ---
 with col2:
     st.markdown(
         """
         <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);">
-          <div class="section-title" style="background:#22304A;">About Me</div>
-          <div style="font-size:1.08rem; text-align:left; color:#fff;">
-            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. 
-            I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. 
-            I’m passionate about solving business problems and delivering impactful, data-driven solutions.
-          </div>
+            <div class="section-title">About Me</div>
+            <div style="font-size:1.05rem; color:#fff; line-height:1.6;">
+                I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. 
+                I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. 
+                I’m passionate about solving business problems and delivering impactful, data-driven solutions.
+            </div>
         </div>
         """,
-        unsafe_allow_html=True,
+        unsafe_allow_html=True
     )
+
+# --- Spacer before next section ---
+st.markdown("<br><hr style='border:1px solid #666;'><br>", unsafe_allow_html=True)
     # Education Card
     st.markdown(
     """

@@ -10,39 +10,40 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
 st.markdown("""
 <style>
-/* ... (All your CSS remains unchanged. See previous code) ... */
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
   background-attachment: fixed;
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
-.stTabs [data-baseweb="tab-list"] {
-    gap: 10px;
-    border-bottom: 3px solid #22304A;
+.tab-nav {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+  margin: 24px 0 32px 0;
+  z-index: 50;
 }
-.stTabs [data-baseweb="tab"] {
-    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-    color: #ffd166 !important;
-    border-radius: 12px 12px 0 0 !important;
-    padding: 16px 36px !important;
-    font-size: 1.14rem;
-    font-weight: bold;
-    margin-bottom: -3px !important;
-    transition: all .25s;
+.tab-btn {
+  padding: 16px 40px;
+  font-size: 1.13rem;
+  font-weight: bold;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  color: #ffd166;
+  border: none;
+  border-radius: 14px 14px 0 0;
+  box-shadow: 0 2px 10px rgba(30,50,80,0.11);
+  transition: all .22s cubic-bezier(.4,1.6,.6,1);
+  cursor: pointer;
+  outline: none;
+  margin-bottom: -3px;
 }
-.stTabs [data-baseweb="tab"]:hover {
-    color: #fff !important;
-    background: linear-gradient(135deg, #406496 0%, #22304A 100%);
+.tab-btn.active, .tab-btn:focus {
+  background: linear-gradient(135deg, #22304A 0%, #ffd166 150%) !important;
+  color: #222 !important;
+  border-bottom: 4px solid #ffd166 !important;
+  transform: scale(1.07) translateY(-3px);
+  box-shadow: 0 7px 24px rgba(44,62,80,0.18);
 }
-.stTabs [aria-selected="true"] {
-    background: linear-gradient(135deg, #22304A 0%, #ffd166 150%) !important;
-    color: #222 !important;
-    border-bottom: 4px solid #ffd166 !important;
-    transform: scale(1.06) translateY(-2px);
-    box-shadow: 0 6px 22px rgba(44,62,80,0.13);
-}
-/* ... (All your card, grid, and section CSS remains unchanged. See previous code) ... */
 </style>
 """, unsafe_allow_html=True)
 
@@ -59,9 +60,7 @@ def load_resume_df(url):
             records.append({"page": i+1, "sentence": sent})
     return pd.DataFrame(records)
 
-resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
-)
+resume_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 resume_df = load_resume_df(resume_url)
 resume_json = resume_df.to_json(orient='records')
 
@@ -79,12 +78,38 @@ projects = [
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
 ]
 
-# ---- TABS ----
-tabs = st.tabs(["About", "Projects", "Experience", "Skills", "Contact"])
+sections = ["About", "Projects", "Experience", "Skills", "Contact"]
+if "tab" not in st.session_state:
+    st.session_state.tab = "About"
 
-# ---- ABOUT TAB ----
-with tabs[0]:
-    # --- Welcome ---
+# ---- TAB NAVIGATION ----
+st.markdown('<div class="tab-nav">' + ''.join([
+    f'<button class="tab-btn{" active" if st.session_state.tab==name else ""}" onclick="window.location.search = \'?tab={name}\'">{name}</button>'
+    for name in sections
+]) + '</div>', unsafe_allow_html=True)
+
+# Simple JS to update tab in session state without reload
+st.markdown("""
+<script>
+for (const btn of window.parent.document.querySelectorAll('.tab-btn')) {
+  btn.onclick = function(e) {
+    window.parent.postMessage({isStreamlitMessage: true, type: "streamlit:setComponentValue", key: "tab", value: this.textContent.trim()}, "*");
+    return false;
+  }
+}
+</script>
+""", unsafe_allow_html=True)
+
+# -- PATCH to update Streamlit session_state.tab (works in Streamlit Cloud and desktop)
+from streamlit import runtime
+if runtime.exists():
+    import streamlit.runtime.scriptrunner.script_run_context as src
+    ctx = src.get_script_run_ctx()
+    import streamlit.runtime.state.session_state_proxy as ssp
+    st.session_state.tab = st.experimental_get_query_params().get("tab", [st.session_state.tab])[0]
+
+# ---- SECTION RENDERING ----
+def show_about():
     gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
     st.markdown(
         f"""
@@ -116,8 +141,6 @@ with tabs[0]:
         """,
         unsafe_allow_html=True,
     )
-
-    # --- Chatbot Card ---
     ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
     st.markdown(
         f"""
@@ -159,8 +182,6 @@ with tabs[0]:
         """,
         unsafe_allow_html=True,
     )
-
-    # --- Chatbot input/output ---
     api_key = st.secrets["DEEPSEEK_API_KEY"]
     client = openai.OpenAI(
         base_url="https://openrouter.ai/api/v1",
@@ -185,8 +206,6 @@ with tabs[0]:
                 )
                 reply = response.choices[0].message.content
             st.chat_message("assistant").write(reply)
-
-    # --- Profile, About, Education, Certifications, Awards ---
     st.markdown(
         """
         <div class="profile-card-container">
@@ -207,7 +226,7 @@ with tabs[0]:
         """,
         unsafe_allow_html=True,
     )
-    # Education Card
+    # Education, Certs, Awards (as before)
     st.markdown(
     """
     <div class="card hover-zoom">
@@ -292,12 +311,10 @@ with tabs[0]:
         </div>
       </div>
     </div>
-    """,
-    unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True
+    )
 
-# ---- PROJECTS TAB ----
-with tabs[1]:
+def show_projects():
     st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
     grid_html = '<div class="grid-container">'
     for proj in projects:
@@ -312,8 +329,7 @@ with tabs[1]:
     grid_html += '</div>'
     st.markdown(grid_html, unsafe_allow_html=True)
 
-# ---- EXPERIENCE TAB ----
-with tabs[2]:
+def show_experience():
     st.markdown("""
 <div class="card hover-zoom">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
@@ -346,8 +362,7 @@ with tabs[2]:
 </div>
 """, unsafe_allow_html=True)
 
-# ---- SKILLS TAB ----
-with tabs[3]:
+def show_skills():
     st.markdown(
     '''
     <div class="card hover-zoom">
@@ -411,8 +426,7 @@ with tabs[3]:
     unsafe_allow_html=True
 )
 
-# ---- CONTACT TAB ----
-with tabs[4]:
+def show_contact():
     st.markdown(
         '''
         <div class="card hover-zoom">
@@ -432,3 +446,13 @@ with tabs[4]:
         ''',
         unsafe_allow_html=True
     )
+
+# ---- RENDER THE CHOSEN SECTION ----
+section_map = {
+    "About": show_about,
+    "Projects": show_projects,
+    "Experience": show_experience,
+    "Skills": show_skills,
+    "Contact": show_contact
+}
+section_map.get(st.session_state.tab, show_about)()

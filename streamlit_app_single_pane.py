@@ -764,73 +764,87 @@ with mid_col:
     st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
-.exp-cards {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 18px;
-    margin: 35px 0 20px 0;
+.exp-horizontal-timeline {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 24px;
+  margin: 40px 0 20px 0;
+  overflow-x: auto;
 }
-.exp-card {
-    flex: 1 0 220px;
-    min-width: 210px;
-    background: linear-gradient(135deg,#2c3e50 70%,#1f2a44 100%);
-    border-radius: 14px;
-    padding: 18px 15px 10px 15px;
-    text-align: center;
-    box-shadow: 0 1px 7px rgba(44,62,80,0.11);
-    transition: transform .16s;
-    position: relative;
+.exp-step {
+  background: linear-gradient(135deg,#324665 60%,#1F2A44 100%);
+  border-radius: 16px;
+  padding: 18px 20px 10px 20px;
+  min-width: 210px;
+  max-width: 260px;
+  text-align: center;
+  box-shadow: 0 1px 7px rgba(44,62,80,0.10);
+  position: relative;
+  transition: transform .18s;
 }
-.exp-card:hover { transform: scale(1.045) translateY(-6px);}
-.exp-icon {
-    font-size: 2.1rem;
-    color: #ffd166;
-    margin-bottom: 6px;
+.exp-step:hover { transform: scale(1.045) translateY(-6px);}
+.exp-logo {
+  width: 45px; height: 45px; border-radius: 50%;
+  background: #fff;
+  margin-bottom: 8px;
+  box-shadow: 0 1px 7px rgba(44,62,80,0.10);
+  object-fit: contain;
 }
-.exp-title { font-weight: bold; color: #ffd166; font-size: 1.1rem;}
-.exp-company { color: #ADD8E6; margin: 4px 0 2px 0; font-size: 1.01rem;}
-.exp-date { color: #eee; font-size: 0.96rem;}
+.exp-role { font-weight: bold; color: #ffd166; font-size: 1.07rem; }
+.exp-company { color: #ADD8E6; margin: 4px 0 2px 0; font-size: 1.03rem;}
+.exp-date { color: #eee; font-size: 0.97rem; }
+.exp-line {
+  position: absolute; top: 32px; right: -20px;
+  width: 40px; height: 2px; background: #b3c6e2;
+  z-index: 1;
+}
+.exp-step:last-child .exp-line { display: none; }
 </style>
 <div class="card" style="background:transparent;">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-cards">
-    <div class="exp-card">
-      <div class="exp-icon">💻</div>
-      <div class="exp-title">Software Developer Intern</div>
+  <div class="exp-horizontal-timeline">
+    <div class="exp-step">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/techinsights_logo.png" class="exp-logo" />
+      <div class="exp-role">Software Developer Intern</div>
       <div class="exp-company">Tech Insights Inc</div>
       <div class="exp-date">May 2025 – Present</div>
+      <div class="exp-line"></div>
     </div>
-    <div class="exp-card">
-      <div class="exp-icon">👔</div>
-      <div class="exp-title">Senior Consultant</div>
+    <div class="exp-step">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/deloitte_logo.png" class="exp-logo" />
+      <div class="exp-role">Senior Consultant</div>
       <div class="exp-company">Deloitte India</div>
       <div class="exp-date">Jun 2024 – Aug 2024</div>
+      <div class="exp-line"></div>
     </div>
-    <div class="exp-card">
-      <div class="exp-icon">👔</div>
-      <div class="exp-title">Consultant</div>
+    <div class="exp-step">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/deloitte_logo.png" class="exp-logo" />
+      <div class="exp-role">Consultant</div>
       <div class="exp-company">Deloitte India</div>
       <div class="exp-date">Oct 2021 – Jun 2024</div>
+      <div class="exp-line"></div>
     </div>
-    <div class="exp-card">
-      <div class="exp-icon">🧑‍💼</div>
-      <div class="exp-title">Consultant</div>
+    <div class="exp-step">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/capgemini_logo.png" class="exp-logo" />
+      <div class="exp-role">Consultant</div>
       <div class="exp-company">Capgemini</div>
       <div class="exp-date">May 2018 – Oct 2021</div>
+      <div class="exp-line"></div>
     </div>
-    <div class="exp-card">
-      <div class="exp-icon">🧑‍💻</div>
-      <div class="exp-title">Associate</div>
+    <div class="exp-step">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/cognizant_logo.png" class="exp-logo" />
+      <div class="exp-role">Associate</div>
       <div class="exp-company">Cognizant</div>
       <div class="exp-date">May 2016 – May 2018</div>
+      <div class="exp-line"></div>
     </div>
-    <div class="exp-card">
-      <div class="exp-icon">🧑‍💻</div>
-      <div class="exp-title">Programmer Analyst</div>
+    <div class="exp-step">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/cognizant_logo.png" class="exp-logo" />
+      <div class="exp-role">Programmer Analyst</div>
       <div class="exp-company">Cognizant</div>
       <div class="exp-date">Sep 2013 – May 2018</div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
-

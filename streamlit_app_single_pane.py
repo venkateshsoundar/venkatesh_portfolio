@@ -762,7 +762,7 @@ with mid_col:
     st.markdown(grid_html, unsafe_allow_html=True)
 
     st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
-st.markdown("""
+    st.markdown("""
 <style>
 .exp-horizontal-timeline {
   display: flex;

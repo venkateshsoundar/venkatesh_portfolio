@@ -407,22 +407,64 @@ with chat_container:
 tabs = st.tabs(["About", "Projects", "Experience", "Skills", "Contact"])
 
 # ---- ABOUT TAB ----
-with tabs[0]:
+st.markdown("""
+<style>
+.profile-pic-popout {
+    width: 180px;
+    border-radius: 50%;
+    border: 4px solid #ffd166;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.4);
+    margin-bottom: 12px;
+}
+.card {
+    background: #1F2A44;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+.hover-zoom:hover {
+    transform: scale(1.02);
+}
+.section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    color: #fff;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- Create Two Columns Layout ---
+col1, col2 = st.columns([1, 2], gap="large")
+
+# --- Left: Profile Card ---
+with col1:
     st.markdown(
         """
-        <div class="profile-card-container">
+        <div class="card profile-card-content hover-zoom" style="text-align:center;">
           <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
                class="profile-pic-popout" />
-          <div class="card profile-card-content hover-zoom">
-            <h2>Venkatesh Soundararajan</h2>
-            <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
-            <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
-          </div>
+          <h2 style="color:#fff;">Venkatesh Soundararajan</h2>
+          <p style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</p>
+          <p style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></p>
         </div>
-        <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
+        """,
+        unsafe_allow_html=True,
+    )
+
+# --- Right: About Me Card ---
+with col2:
+    st.markdown(
+        """
+        <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);">
           <div class="section-title" style="background:#22304A;">About Me</div>
           <div style="font-size:1.08rem; text-align:left; color:#fff;">
-            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. I’m passionate about solving business problems and delivering impactful, data-driven solutions.
+            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. 
+            I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. 
+            I’m passionate about solving business problems and delivering impactful, data-driven solutions.
           </div>
         </div>
         """,

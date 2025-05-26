@@ -14,8 +14,8 @@ st.markdown(
     <style>
     .nav-bar {
         display: flex;
-        justify-content: center;
-        gap: 36px;
+        justify-content: space-evenly;   /* <--- Spreads links evenly */
+        align-items: center;
         background: rgba(44,62,80,0.90);
         padding: 16px 0 6px 0;
         border-radius: 0 0 20px 20px;
@@ -23,24 +23,28 @@ st.markdown(
         top: 0;
         z-index: 99;
         margin-bottom: 28px;
+        width: 100%;
     }
     .nav-link {
         background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
         color: #ffd166 !important;
         text-decoration: none;
         font-weight: bold;
-        font-size: 1.13rem;
+        font-size: 1.16rem;
         letter-spacing: 1px;
-        padding: 10px 26px;
-        border-radius: 12px;
+        padding: 12px 48px;
+        border-radius: 16px;
+        min-width: 150px;
         box-shadow: 0 2px 8px rgba(44,62,80,0.15);
         transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s, background .22s;
-        display: inline-block;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         margin-bottom: 0;
     }
     .nav-link:hover, .nav-link:focus {
-        transform: translateY(-5px) scale(1.07);
-        box-shadow: 0 8px 16px rgba(0,0,0,0.24);
+        transform: translateY(-5px) scale(1.08);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.22);
         background: linear-gradient(135deg, #406496 0%, #22304A 100%);
         color: #fff !important;
         text-decoration: none;
@@ -56,6 +60,7 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
 
 # --- Global CSS & Background for Cards and Animations ---
 st.markdown(

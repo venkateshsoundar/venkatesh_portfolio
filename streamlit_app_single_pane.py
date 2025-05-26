@@ -481,9 +481,60 @@ with left_col:
 
     st.markdown(
     '''
+    <style>
+    .awards-row {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: stretch;
+      flex-wrap: wrap;
+      gap: 0;
+      margin-top: 16px;
+      margin-bottom: 2px;
+      width: 100%;
+    }
+    .award-badge {
+      background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+      border-radius: 16px;
+      min-width: 180px;
+      max-width: 230px;
+      flex: 1 1 180px;
+      margin: 0 12px;
+      padding: 18px 18px 13px 18px;
+      box-shadow: 0 2px 8px rgba(60,100,160,0.10);
+      text-align: center;
+      border: 2px solid #40649622;
+      transition: transform .22s, box-shadow .18s, background .19s;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .award-badge:hover {
+      transform: translateY(-5px) scale(1.06);
+      box-shadow: 0 8px 18px rgba(20,60,120,0.18);
+      background: linear-gradient(135deg, #22304A 0%, #406496 100%);
+    }
+    .award-year {
+      font-size: 0.98rem;
+      color: #ffd166;
+      margin-bottom: 2px;
+      font-weight: bold;
+    }
+    .award-title {
+      font-weight: bold;
+      font-size: 1.07rem;
+      color: #fff;
+      margin-bottom: 2px;
+    }
+    .award-sub {
+      font-size: 0.99rem;
+      color: #ADD8E6;
+      opacity: 0.85;
+    }
+    </style>
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
-      <div class="awards-grid">
+      <div class="awards-row">
         <div class="award-badge">
           <div class="award-year">2022 & 2023</div>
           <div class="award-title">Spot Award</div>
@@ -511,37 +562,10 @@ with left_col:
         </div>
       </div>
     </div>
-    <style>
-      .awards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 12px;
-        margin-top: 12px;
-      }
-      .award-badge {
-        background: rgba(255,255,255,0.1);
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-      }
-      .award-year {
-        font-size: 0.85rem;
-        color: #ffd166;
-        margin-bottom: 4px;
-      }
-      .award-title {
-        font-weight: bold;
-        font-size: 1rem;
-        margin-bottom: 4px;
-      }
-      .award-sub {
-        font-size: 0.9rem;
-        opacity: 0.8;
-      }
-    </style>
     ''',
     unsafe_allow_html=True
 )
+
 
 # --- Right Pane (Experience, Skills) ---
 with right_col:

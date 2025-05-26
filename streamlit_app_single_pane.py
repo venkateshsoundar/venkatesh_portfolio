@@ -324,87 +324,63 @@ with left_col:
     st.markdown(
     """
     <style>
-    .edu-list {
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      align-items: center;
-      margin-top: 18px;
+    .edu-cards-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 18px;
+      margin-top: 20px;
+      margin-bottom: 18px;
+    }
+    @media (max-width: 500px) {
+      .edu-cards-grid {
+        grid-template-columns: 1fr;
+      }
     }
     .edu-card {
+      background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+      border-radius: 15px;
+      padding: 22px 14px 16px 14px;
+      box-shadow: 0 2px 10px rgba(30,50,80,0.13);
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      background: linear-gradient(135deg, #34495E 0%, #406496 100%);
-      border-radius: 12px;
-      padding: 18px 30px 18px 30px;
-      box-shadow: 0 2px 12px rgba(44, 62, 80, 0.09);
-      border: 1.5px solid #40649644;
-      transition: box-shadow 0.18s;
-      width: 380px;
-      max-width: 100%;
-      opacity: 0;
-      transform: translateY(40px);
-      animation: eduFadeInUp 1.1s cubic-bezier(.34,1.56,.64,1) forwards;
-    }
-    .edu-card:nth-child(2) { animation-delay: .25s; }
-    .edu-card:nth-child(3) { animation-delay: .5s; }
-    @keyframes eduFadeInUp {
-      from { opacity: 0; transform: translateY(40px); }
-      to   { opacity: 1; transform: translateY(0); }
+      min-height: 170px;
+      transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+      border: 2px solid #40649622;
     }
     .edu-card:hover {
-      box-shadow: 0 8px 26px rgba(30,50,100,0.19);
-      background: linear-gradient(135deg, #22304A 0%, #406496 100%);
+      transform: translateY(-7px) scale(1.03);
+      box-shadow: 0 8px 18px rgba(20,40,80,0.19);
+      background: linear-gradient(135deg, #406496 0%, #34495E 100%);
     }
-    .edu-logo {
-      width: 60px;
-      height: 60px;
+    .edu-card-logo {
+      width: 56px;
+      height: 56px;
       object-fit: contain;
-      border-radius: 12px;
-      margin-bottom: 10px;
+      border-radius: 11px;
       background: #fff;
-      border: 1px solid #fff;
-      box-shadow: 0 1px 5px #32466533;
-      display: block;
-      margin-left: auto;
-      margin-right: auto;
+      margin-bottom: 10px;
+      box-shadow: 0 1px 8px rgba(44,62,80,0.09);
+      border: 1.5px solid #eee;
     }
-    .edu-degree {
-      color: #ffd166;
-      font-weight: bold;
-      font-size: 1.13rem;
-      margin-bottom: 2px;
-      text-align: center;
-    }
-    .edu-univ {
-      color: #ADD8E6;
-      font-size: 1.01rem;
-      text-align: center;
-    }
-    .edu-dates {
-      color: #fff;
-      font-size: 0.99rem;
-      opacity: 0.92;
-      margin-top: 3px;
-      text-align: center;
-    }
+    .edu-card-degree { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px; color: #ffd166;}
+    .edu-card-univ { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
+    .edu-card-date { color: #fff; font-size: 0.98rem;}
     </style>
     <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E; text-align:center;">Education</div>
-      <div class="edu-list">
+      <div class="section-title" style="background:#34495E;">Education</div>
+      <div class="edu-cards-grid">
         <div class="edu-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-logo"/>
-          <span class="edu-degree">Masters in Data Science and Analytics</span>
-          <span class="edu-univ">University of Calgary, Alberta, Canada</span>
-          <span class="edu-dates">September 2024 – Present</span>
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo"/>
+          <div class="edu-card-degree">Masters in Data Science and Analytics</div>
+          <div class="edu-card-univ">University of Calgary, Alberta, Canada</div>
+          <div class="edu-card-date">September 2024 – Present</div>
         </div>
         <div class="edu-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-logo"/>
-          <span class="edu-degree">Bachelor of Engineering</span>
-          <span class="edu-univ">Anna University, Chennai, India</span>
-          <span class="edu-dates">August 2009 – May 2013</span>
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-card-logo"/>
+          <div class="edu-card-degree">Bachelor of Engineering</div>
+          <div class="edu-card-univ">Anna University, Chennai, India</div>
+          <div class="edu-card-date">August 2009 – May 2013</div>
         </div>
       </div>
     </div>

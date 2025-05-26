@@ -610,11 +610,11 @@ def section_contact():
         unsafe_allow_html=True
     )
 
-# ---- TABS ----
-tabs = st.tabs([
+tab_names = [
     "Home🏠", "Profile", "Welcome", "About", "Chatbot", "Education",
     "Certifications", "Awards", "Projects", "Experience", "Skills", "Contact"
-])
+]
+tabs = st.tabs(tab_names)
 
 with tabs[0]:
     section_profile()
@@ -629,14 +629,36 @@ with tabs[0]:
     section_skills()
     section_contact()
 
-with tabs[1]: section_profile()
-with tabs[2]: section_welcome()
-with tabs[3]: section_about()
-with tabs[4]: section_chatbot()
-with tabs[5]: section_education()
-with tabs[6]: section_certs()
-with tabs[7]: section_awards()
-with tabs[8]: section_projects()
-with tabs[9]: section_experience()
-with tabs[10]: section_skills()
-with tabs[11]: section_contact()
+with tabs[1]:
+    section_profile()
+
+with tabs[2]:
+    section_welcome()
+
+with tabs[3]:
+    section_about()
+
+with tabs[4]:
+    section_chatbot()
+
+with tabs[5]:
+    section_education()
+
+with tabs[6]:
+    section_certs()
+
+with tabs[7]:
+    section_awards()
+
+with tabs[8]:
+    section_projects()
+
+with tabs[9]:
+    section_experience()
+
+with tabs[10]:
+    section_skills()
+
+with tabs[11]:
+    section_contact()
+

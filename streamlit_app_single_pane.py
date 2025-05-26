@@ -480,91 +480,87 @@ with left_col:
 )
 
     st.markdown(
-    '''
+    """
     <style>
-    .awards-row {
-      display: flex;
-      justify-content: space-evenly;
-      align-items: stretch;
-      flex-wrap: wrap;
-      gap: 0;
-      margin-top: 16px;
+    .awards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
       margin-bottom: 2px;
-      width: 100%;
     }
-    .award-badge {
+    .award-card {
       background: linear-gradient(135deg, #34495E 0%, #406496 100%);
-      border-radius: 16px;
-      min-width: 180px;
-      max-width: 230px;
-      flex: 1 1 180px;
-      margin: 0 12px;
-      padding: 18px 18px 13px 18px;
-      box-shadow: 0 2px 8px rgba(60,100,160,0.10);
-      text-align: center;
-      border: 2px solid #40649622;
-      transition: transform .22s, box-shadow .18s, background .19s;
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(60,100,160,0.07);
+      padding: 18px 18px 14px 18px;
+      min-height: 80px;
+      transition: transform .17s, box-shadow .17s, background .19s;
+      border: 1.5px solid #40649644;
+      text-align: left;
+      position: relative;
       display: flex;
       flex-direction: column;
-      align-items: center;
-      justify-content: center;
+      justify-content: flex-start;
     }
-    .award-badge:hover {
-      transform: translateY(-5px) scale(1.06);
-      box-shadow: 0 8px 18px rgba(20,60,120,0.18);
-      background: linear-gradient(135deg, #22304A 0%, #406496 100%);
-    }
-    .award-year {
-      font-size: 0.98rem;
-      color: #ffd166;
-      margin-bottom: 2px;
-      font-weight: bold;
+    .award-card:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(20,60,120,0.15);
+      background: linear-gradient(135deg, #22304A 0%, #406496 88%);
     }
     .award-title {
       font-weight: bold;
       font-size: 1.07rem;
+      color: #ffd166;
+      margin-bottom: 2px;
+      margin-top: 0;
+    }
+    .award-year {
+      font-size: 0.99rem;
       color: #fff;
       margin-bottom: 2px;
+      opacity: 0.85;
     }
     .award-sub {
-      font-size: 0.99rem;
+      font-size: 0.97rem;
       color: #ADD8E6;
-      opacity: 0.85;
+      opacity: 0.92;
     }
     </style>
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
-      <div class="awards-row">
-        <div class="award-badge">
-          <div class="award-year">2022 & 2023</div>
+      <div class="awards-grid">
+        <div class="award-card">
           <div class="award-title">Spot Award</div>
+          <div class="award-year">2022 & 2023</div>
           <div class="award-sub">InsurCloud – Deloitte, Canada</div>
         </div>
-        <div class="award-badge">
-          <div class="award-year">2018</div>
+        <div class="award-card">
           <div class="award-title">Best Contributor</div>
+          <div class="award-year">2018</div>
           <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
         </div>
-        <div class="award-badge">
-          <div class="award-year">2017</div>
+        <div class="award-card">
           <div class="award-title">QE & A Maestro</div>
+          <div class="award-year">2017</div>
           <div class="award-sub">Centene by Cognizant QE&A, USA</div>
         </div>
-        <div class="award-badge">
-          <div class="award-year">Q1 2017</div>
+        <div class="award-card">
           <div class="award-title">Pride of the Quarter</div>
+          <div class="award-year">Q1 2017</div>
           <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
         </div>
-        <div class="award-badge">
-          <div class="award-year">May 2014 & Aug 2015</div>
+        <div class="award-card">
           <div class="award-title">Pillar of the Month</div>
+          <div class="award-year">May 2014 & Aug 2015</div>
           <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
         </div>
       </div>
     </div>
-    ''',
+    """,
     unsafe_allow_html=True
 )
+
 
 
 # --- Right Pane (Experience, Skills) ---

@@ -344,6 +344,15 @@ with left_col:
       transition: box-shadow 0.18s;
       width: 380px;
       max-width: 100%;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: eduFadeInUp 1.1s cubic-bezier(.34,1.56,.64,1) forwards;
+    }
+    .edu-card:nth-child(2) { animation-delay: .25s; }
+    .edu-card:nth-child(3) { animation-delay: .5s; }
+    @keyframes eduFadeInUp {
+      from { opacity: 0; transform: translateY(40px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
     .edu-card:hover {
       box-shadow: 0 8px 26px rgba(30,50,100,0.19);
@@ -399,8 +408,10 @@ with left_col:
         </div>
       </div>
     </div>
-    """,unsafe_allow_html=True
+    """,
+    unsafe_allow_html=True
 )
+
     st.markdown(
     """
     <style>

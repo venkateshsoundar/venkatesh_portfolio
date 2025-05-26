@@ -323,64 +323,59 @@ with left_col:
 
     st.markdown("""
 <style>
-.edu-list {
+.edu-experience-list {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 20px;
   margin-top: 10px;
 }
-.edu-card-h {
+.edu-experience-card {
   background: linear-gradient(135deg, #34495E 0%, #406496 100%);
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(30,50,80,0.10);
-  padding: 18px 24px;
+  padding: 16px 24px;
   display: flex;
   align-items: center;
-  min-height: 110px;
+  min-height: 90px;
   border: 2px solid #40649622;
   transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
 }
-.edu-card-h:hover {
+.edu-experience-card:hover {
   transform: translateY(-5px) scale(1.02);
   box-shadow: 0 6px 16px rgba(20,40,80,0.18);
   background: linear-gradient(135deg, #406496 0%, #34495E 100%);
 }
-.edu-logo-h {
-  width: 56px;
-  height: 56px;
+.edu-logo-exp {
+  width: 46px;
+  height: 46px;
   object-fit: contain;
-  border-radius: 10px;
+  border-radius: 8px;
   background: #fff;
   margin-right: 20px;
   box-shadow: 0 2px 8px rgba(44,62,80,0.10);
   border: 1.5px solid #eee;
 }
-.edu-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-}
-.edu-degree { font-weight: bold; font-size: 1.08rem; margin-bottom: 2px;}
-.edu-uni { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
-.edu-dates { color: #ffd166; font-size: 0.96rem;}
+.edu-degree-exp { font-weight: bold; font-size: 1.08rem; margin-bottom: 2px;}
+.edu-uni-exp { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
+.edu-date-exp { color: #ffd166; font-size: 0.96rem;}
 </style>
 <div class="card hover-zoom">
   <div class="section-title" style="background:#34495E;">Education</div>
-  <div class="edu-list">
-    <div class="edu-card-h">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-logo-h"/>
-      <div class="edu-info">
-        <div class="edu-degree">Masters in Data Science and Analytics</div>
-        <div class="edu-uni">University of Calgary, Alberta, Canada</div>
-        <div class="edu-dates">September 2024 – Present</div>
+  <div class="edu-experience-list">
+    <div class="edu-experience-card">
+      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-logo-exp"/>
+      <div>
+        <div class="edu-degree-exp">Masters in Data Science and Analytics</div>
+        <div class="edu-uni-exp">University of Calgary, Alberta, Canada</div>
+        <div class="edu-date-exp">September 2024 – Present</div>
       </div>
     </div>
-    <div class="edu-card-h">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-logo-h"/>
-      <div class="edu-info">
-        <div class="edu-degree">Bachelor of Engineering</div>
-        <div class="edu-uni">Anna University, Chennai, India</div>
-        <div class="edu-dates">August 2009 – May 2013</div>
+    <div class="edu-experience-card">
+      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-logo-exp"/>
+      <div>
+        <div class="edu-degree-exp">Bachelor of Engineering</div>
+        <div class="edu-uni-exp">Anna University, Chennai, India</div>
+        <div class="edu-date-exp">August 2009 – May 2013</div>
       </div>
     </div>
   </div>

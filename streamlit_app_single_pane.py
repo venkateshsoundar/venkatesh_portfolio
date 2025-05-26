@@ -763,65 +763,85 @@ with mid_col:
 
     st.markdown("""
 <style>
-.exp-carousel {
+.exp-progressbar {
   display: flex;
-  overflow-x: auto;
-  gap: 22px;
-  padding-bottom: 6px;
-  margin: 32px 0 18px 0;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 0 25px 0;
+  gap: 0;
+  width: 100%;
 }
-.exp-carousel-card {
-  min-width: 260px; max-width: 300px;
-  background: linear-gradient(135deg,#22304A 60%,#324665 100%);
-  border-radius: 13px;
-  box-shadow: 0 2px 10px rgba(44,62,80,0.13);
-  padding: 19px 17px 12px 17px;
-  flex: 0 0 auto;
-  transition: transform .17s;
-  text-align: left;
-  color: #ffd166;
+.exp-stepper {
+  flex: 1;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.exp-carousel-card:hover { transform: scale(1.045) translateY(-8px);}
-.exp-job { font-weight: bold; color: #ffd166; font-size: 1.1rem; }
-.exp-company { color: #ADD8E6; font-size: 1.04rem;}
-.exp-date { color: #eee; font-size: 0.97rem;}
-.exp-short {color:#fff;font-size:0.98rem;margin-top:6px;}
+.exp-circle {
+  width: 34px; height: 34px;
+  background: #ffd166;
+  color: #22304A;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800;
+  font-size: 1.1rem;
+  z-index: 2;
+  border: 3px solid #fff;
+  box-shadow: 0 2px 10px rgba(44,62,80,0.08);
+  margin-bottom: 7px;
+}
+.exp-label {
+  color: #ffd166;
+  font-size: 1.01rem;
+  font-weight: 700;
+  text-align: center;
+}
+.exp-sub {
+  color: #ADD8E6; font-size: 0.99rem; font-weight: 500;
+}
+.exp-bar {
+  position: absolute; top: 17px; left: 100%; width: 100%; height: 5px;
+  background: linear-gradient(90deg,#ffd166 60%,#22304A 100%);
+  z-index: 1;
+  margin-left: -10px;
+}
+.exp-stepper:last-child .exp-bar { display: none;}
 </style>
 <div class="card" style="background:transparent;">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-carousel">
-    <div class="exp-carousel-card">
-      <div class="exp-job">Software Developer Intern</div>
-      <div class="exp-company">Tech Insights</div>
-      <div class="exp-date">2025–Present</div>
-      <div class="exp-short">Building cloud data pipelines and dashboards.</div>
+  <div class="exp-progressbar">
+    <div class="exp-stepper">
+      <div class="exp-circle">1</div>
+      <div class="exp-label">Software Developer Intern</div>
+      <div class="exp-sub">Tech Insights<br><span style="color:#eee">2025–Present</span></div>
+      <div class="exp-bar"></div>
     </div>
-    <div class="exp-carousel-card">
-      <div class="exp-job">Senior Consultant</div>
-      <div class="exp-company">Deloitte</div>
-      <div class="exp-date">2024</div>
-      <div class="exp-short">Led cross-team analytics projects.</div>
+    <div class="exp-stepper">
+      <div class="exp-circle">2</div>
+      <div class="exp-label">Senior Consultant</div>
+      <div class="exp-sub">Deloitte<br><span style="color:#eee">2024</span></div>
+      <div class="exp-bar"></div>
     </div>
-    <div class="exp-carousel-card">
-      <div class="exp-job">Consultant</div>
-      <div class="exp-company">Capgemini</div>
-      <div class="exp-date">2018–2021</div>
-      <div class="exp-short">Automation and analytics for insurance.</div>
+    <div class="exp-stepper">
+      <div class="exp-circle">3</div>
+      <div class="exp-label">Consultant</div>
+      <div class="exp-sub">Capgemini<br><span style="color:#eee">2018–2021</span></div>
+      <div class="exp-bar"></div>
     </div>
-    <div class="exp-carousel-card">
-      <div class="exp-job">Associate</div>
-      <div class="exp-company">Cognizant</div>
-      <div class="exp-date">2016–2018</div>
-      <div class="exp-short">QA for healthcare software.</div>
+    <div class="exp-stepper">
+      <div class="exp-circle">4</div>
+      <div class="exp-label">Associate</div>
+      <div class="exp-sub">Cognizant<br><span style="color:#eee">2016–2018</span></div>
+      <div class="exp-bar"></div>
     </div>
-    <div class="exp-carousel-card">
-      <div class="exp-job">Programmer Analyst</div>
-      <div class="exp-company">Cognizant</div>
-      <div class="exp-date">2013–2016</div>
-      <div class="exp-short">Software and automation testing.</div>
+    <div class="exp-stepper">
+      <div class="exp-circle">5</div>
+      <div class="exp-label">Programmer Analyst</div>
+      <div class="exp-sub">Cognizant<br><span style="color:#eee">2013–2016</span></div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 

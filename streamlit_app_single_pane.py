@@ -547,8 +547,6 @@ st.markdown(
 )
 
 # --- Spacer before next section ---
-    st.markdown("<br><hr style='border:1px solid #666;'><br>", unsafe_allow_html=True)
-    # Education Card
     st.markdown(
     """
     <div class="card hover-zoom">

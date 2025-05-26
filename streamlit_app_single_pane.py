@@ -455,43 +455,6 @@ with right_col:
 }
 .exp-item {
   position: relative;
-  margin-bottom: 30px;
-}
-.exp-dot {
-  position: absolute;
-  left: -30px;
-  top: 7px;
-  width: 16px;
-  height: 16px;
-  background: #406496;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px #b3c6e2;
-}
-.exp-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: -22px;
-  top: 24px;
-  width: 2px;
-  height: 35px;
-  background: #b3c6e2;
-  z-index: 0;
-}
-.exp-title { font-weight: bold; font-size: 1.1rem; }
-.exp-company { color: #ADD8E6; font-size: 1rem; }
-.exp-date { color: #ffd166; font-size: 0.97rem; }
-</style>
-st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
-st.markdown("""
-<style>
-.exp-timeline {
-  position: relative;
-  margin-left: 25px;
-  margin-top: 20px;
-}
-.exp-item {
-  position: relative;
   margin-bottom: 38px;
   display: flex;
   align-items: flex-start;
@@ -594,7 +557,6 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-
 
     st.markdown('<a id="core-skills-tools"></a>', unsafe_allow_html=True)
     st.markdown(
@@ -831,5 +793,3 @@ with mid_col:
         )
     grid_html += '</div>'
     st.markdown(grid_html, unsafe_allow_html=True)
-
-    

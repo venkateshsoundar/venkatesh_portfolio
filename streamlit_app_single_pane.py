@@ -760,3 +760,53 @@ with mid_col:
         )
     grid_html += '</div>'
     st.markdown(grid_html, unsafe_allow_html=True)
+
+    st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
+st.markdown("""
+<style>
+.exp-accordion .section-title {margin-bottom:2px;}
+details.exp-detail {
+    background: linear-gradient(135deg,#324665 80%,#1F2A44 100%);
+    border-radius: 11px;
+    margin-bottom: 9px;
+    box-shadow: 0 1px 6px rgba(44,62,80,0.09);
+    padding: 0 16px;
+    color: #ffd166;
+    font-weight: bold;
+    transition: box-shadow .19s;
+}
+details.exp-detail[open] { box-shadow: 0 4px 18px rgba(44,62,80,0.14);}
+summary {color:#ffd166;font-size:1.07rem;}
+.exp-company { color: #ADD8E6; font-size:1.01rem; margin-left:10px;}
+.exp-date { color: #eee; font-size:0.97rem; margin-left:10px;}
+.exp-desc { color: #fff; font-size:0.99rem; margin:9px 0 8px 0;}
+</style>
+<div class="card exp-accordion">
+  <div class="section-title" style="background:#34495E;">Professional Experience</div>
+  <details class="exp-detail">
+    <summary>Software Developer Intern<span class="exp-company">Tech Insights Inc</span><span class="exp-date">May 2025 – Present</span></summary>
+    <div class="exp-desc">Worked on cloud data pipelines and analytics dashboards.</div>
+  </details>
+  <details class="exp-detail">
+    <summary>Senior Consultant<span class="exp-company">Deloitte India</span><span class="exp-date">Jun 2024 – Aug 2024</span></summary>
+    <div class="exp-desc">Led cross-functional teams to deliver end-to-end analytics solutions.</div>
+  </details>
+  <details class="exp-detail">
+    <summary>Consultant<span class="exp-company">Deloitte India</span><span class="exp-date">Oct 2021 – Jun 2024</span></summary>
+    <div class="exp-desc">Built BI dashboards, automation, and improved reporting accuracy.</div>
+  </details>
+  <details class="exp-detail">
+    <summary>Consultant<span class="exp-company">Capgemini</span><span class="exp-date">May 2018 – Oct 2021</span></summary>
+    <div class="exp-desc">Managed insurance domain QA projects and testing automation.</div>
+  </details>
+  <details class="exp-detail">
+    <summary>Associate<span class="exp-company">Cognizant</span><span class="exp-date">May 2016 – May 2018</span></summary>
+    <div class="exp-desc">Quality assurance for US healthcare projects.</div>
+  </details>
+  <details class="exp-detail">
+    <summary>Programmer Analyst<span class="exp-company">Cognizant</span><span class="exp-date">Sep 2013 – May 2018</span></summary>
+    <div class="exp-desc">Supported software development and automation testing.</div>
+  </details>
+</div>
+""", unsafe_allow_html=True)
+

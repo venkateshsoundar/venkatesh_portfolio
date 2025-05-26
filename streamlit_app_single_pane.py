@@ -516,7 +516,7 @@ with col2:
     )
 
 # --- Spacer before next section ---
-st.markdown("<br><hr style='border:1px solid #666;'><br>", unsafe_allow_html=True)
+    st.markdown("<br><hr style='border:1px solid #666;'><br>", unsafe_allow_html=True)
     # Education Card
     st.markdown(
     """

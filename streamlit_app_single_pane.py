@@ -5,9 +5,8 @@ import PyPDF2
 import openai
 import pandas as pd
 
-# ---- PAGE CONFIG & GLOBAL CSS ----
+# ---- PAGE CONFIG & CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
-
 st.markdown("""
 <style>
 .stApp {
@@ -297,53 +296,15 @@ projects = [
     {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
     {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
     {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
     {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
     {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
 ]
 
-# ---- WELCOME & CHATBOT ----
-gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
-st.markdown(
-    f"""
-    <style>
-      .welcome-card {{
-        background: url("{gif_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 3rem;
-        color: white;
-        min-height: 180px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        margin-bottom:24px;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-st.markdown(
-    """
-    <div class="welcome-card">
-      <div>
-        <h1>Hello and Welcome...</h1>
-        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+# ---- SECTION FUNCTIONS ----
 
-
-
-# ---- TABS ----
-tabs = st.tabs(["Home🏠", "Projects", "Experience", "Skills", "Contact"])
-
-# ---- ABOUT TAB ----
-
-with tabs[0]:
+def section_profile():
     st.markdown(
         """
         <div class="profile-card-container">
@@ -355,6 +316,24 @@ with tabs[0]:
             <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
           </div>
         </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+def section_welcome():
+    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+    st.markdown(
+        f"""
+        <div class="welcome-card" style="background: url('{gif_url}') center/cover no-repeat;">
+            <h1>Hello and Welcome...</h1>
+            <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
+        </div>
+        """,
+        unsafe_allow_html=True)
+
+def section_about():
+    st.markdown(
+        """
         <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
           <div class="section-title" style="background:#22304A;">About Me</div>
           <div style="font-size:1.08rem; text-align:left; color:#fff;">
@@ -364,73 +343,44 @@ with tabs[0]:
         """,
         unsafe_allow_html=True,
     )
-    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-st.markdown(
-    f"""
-    <style>
-      .welcome-card2 {{
-        background: url("{ai_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 0;
-        color: white;
-        height: 200px;
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 32px;
-      }}
-      .welcome-card2 .text-container {{
-        position: absolute;
-        top: 70%;
-        right: 2rem;
-        transform: translateY(-50%);
-        text-align: right;
-      }}
-      .welcome-card2 h2 {{
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-st.markdown(
-    """
-    <div class="welcome-card2">
-      <div class="text-container">
-        <h2>Ask Buddy Bot!</h2>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
-api_key = st.secrets["DEEPSEEK_API_KEY"]
-client = openai.OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=api_key,
-)
-chat_container = st.container()
-with chat_container:
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat-v3-0324",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
+def section_chatbot():
+    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+    st.markdown(
+        f"""
+        <div class="welcome-card2" style="background:url('{ai_url}') center/cover no-repeat;">
+          <div class="text-container" style="position:absolute;top:70%;right:2rem;transform:translateY(-50%);text-align:right;">
+            <h2>Ask Buddy Bot!</h2>
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True)
+    api_key = st.secrets["DEEPSEEK_API_KEY"]
+    client = openai.OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+    )
+    chat_container = st.container()
+    with chat_container:
+        user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+        if user_input:
+            st.chat_message("user").write(user_input)
+            prompt = (
+                "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+                "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+                + user_input
             )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
-    # Education Card
+            with st.spinner("Assistant is typing..."):
+                response = client.chat.completions.create(
+                    model="deepseek/deepseek-chat-v3-0324",
+                    messages=[
+                        {"role": "system", "content": prompt}
+                    ]
+                )
+                reply = response.choices[0].message.content
+            st.chat_message("assistant").write(reply)
+
+def section_education():
     st.markdown(
     """
     <div class="card hover-zoom">
@@ -450,6 +400,11 @@ with chat_container:
         </div>
       </div>
     </div>
+    """, unsafe_allow_html=True)
+
+def section_certs():
+    st.markdown(
+    """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
       <div class="cert-grid">
@@ -485,6 +440,11 @@ with chat_container:
         </div>
       </div>
     </div>
+    """, unsafe_allow_html=True)
+
+def section_awards():
+    st.markdown(
+    """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
       <div class="awards-grid">
@@ -515,12 +475,9 @@ with chat_container:
         </div>
       </div>
     </div>
-    """,
-    unsafe_allow_html=True
-)
+    """, unsafe_allow_html=True)
 
-# ---- PROJECTS TAB ----
-with tabs[1]:
+def section_projects():
     st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
     grid_html = '<div class="grid-container">'
     for proj in projects:
@@ -535,42 +492,40 @@ with tabs[1]:
     grid_html += '</div>'
     st.markdown(grid_html, unsafe_allow_html=True)
 
-# ---- EXPERIENCE TAB ----
-with tabs[2]:
+def section_experience():
     st.markdown("""
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-cards-grid">
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Software Developer Intern</div>
-      <div class="exp-card-company">Tech Insights Inc, Canada</div>
-      <div class="exp-card-date">May 2025 – Present</div>
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Professional Experience</div>
+      <div class="exp-cards-grid">
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Software Developer Intern</div>
+          <div class="exp-card-company">Tech Insights Inc, Canada</div>
+          <div class="exp-card-date">May 2025 – Present</div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Senior Consultant</div>
+          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+          <div class="exp-card-date">October 2021 – August 2024</div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Consultant</div>
+          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+          <div class="exp-card-date">May 2018 – October 2021</div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Associate</div>
+          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+          <div class="exp-card-date">Sep 2013 – May 2018</div>
+        </div>
+      </div>
     </div>
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Senior Consultant</div>
-      <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-card-date">October 2021 – August 2024</div>
-    </div>
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Consultant</div>
-      <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
-      <div class="exp-card-date">May 2018 – October 2021</div>
-    </div>
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Associate</div>
-      <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-card-date">Sep 2013 – May 2018</div>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+    """, unsafe_allow_html=True)
 
-# ---- SKILLS TAB ----
-with tabs[3]:
+def section_skills():
     st.markdown(
     '''
     <div class="card hover-zoom">
@@ -634,8 +589,7 @@ with tabs[3]:
     unsafe_allow_html=True
 )
 
-# ---- CONTACT TAB ----
-with tabs[4]:
+def section_contact():
     st.markdown(
         '''
         <div class="card hover-zoom">
@@ -655,3 +609,34 @@ with tabs[4]:
         ''',
         unsafe_allow_html=True
     )
+
+# ---- TABS ----
+tabs = st.tabs([
+    "Home🏠", "Profile", "Welcome", "About", "Chatbot", "Education",
+    "Certifications", "Awards", "Projects", "Experience", "Skills", "Contact"
+])
+
+with tabs[0]:
+    section_profile()
+    section_welcome()
+    section_about()
+    section_chatbot()
+    section_education()
+    section_certs()
+    section_awards()
+    section_projects()
+    section_experience()
+    section_skills()
+    section_contact()
+
+with tabs[1]: section_profile()
+with tabs[2]: section_welcome()
+with tabs[3]: section_about()
+with tabs[4]: section_chatbot()
+with tabs[5]: section_education()
+with tabs[6]: section_certs()
+with tabs[7]: section_awards()
+with tabs[8]: section_projects()
+with tabs[9]: section_experience()
+with tabs[10]: section_skills()
+with tabs[11]: section_contact()

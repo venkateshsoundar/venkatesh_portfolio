@@ -5,10 +5,43 @@ import PyPDF2
 import openai
 import pandas as pd
 
-# --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Sticky Top Navigation Bar with Animation ---
+# --- ANIMATED SECTIONS CSS & JS ---
+st.markdown("""
+<style>
+.animated-section {
+    opacity: 0;
+    transform: translateY(40px) scale(0.98);
+    transition: opacity 0.7s cubic-bezier(.17,.67,.43,1.05), transform 0.7s cubic-bezier(.17,.67,.43,1.05);
+}
+.animated-section.visible {
+    opacity: 1 !important;
+    transform: none !important;
+}
+</style>
+<script>
+function revealOnScroll() {
+    var elements = document.querySelectorAll('.animated-section');
+    var windowHeight = window.innerHeight;
+    for (var i = 0; i < elements.length; i++) {
+        var element = elements[i];
+        var position = element.getBoundingClientRect().top;
+        if (position < windowHeight - 80) {
+            element.classList.add('visible');
+        } else {
+            element.classList.remove('visible');
+        }
+    }
+}
+window.addEventListener('scroll', revealOnScroll);
+window.addEventListener('DOMContentLoaded', revealOnScroll);
+window.addEventListener('resize', revealOnScroll);
+revealOnScroll();
+</script>
+""", unsafe_allow_html=True)
+
+# --- Animated NAV BAR ---
 st.markdown(
     """
     <style>
@@ -57,7 +90,7 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# --- Global CSS & Background for Cards and Animations ---
+# --- Your Global Card & Visual Styles ---
 st.markdown(
     '''
 <style>
@@ -99,26 +132,6 @@ st.markdown(
   transform: translateX(-50%);
   top: 20px;
   z-index: 10;
-}
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  border: 2px solid #406496 !important;
-  border-radius: 10px !important;
-  background: #fff !important;
-  color: #222 !important;
-  font-size: 1.08rem !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.08);
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-}
-.profile-card-container {
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-}
-.profile-card-content {
-  padding-top: 200px;
 }
 .contact-icon {
   width: 30px;
@@ -190,76 +203,11 @@ input[data-baseweb="input"] {
   gap: 20px;
   margin-bottom: 20px;
 }
-/* --- Make chat_input box dark and bold --- */
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  background: #26334d !important;
-  color: #222 !important;
-  border: 2px solid #5A84B4 !important;
-  border-radius: 12px !important;
-  font-size: 1.08rem !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.14);
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-  transition: box-shadow 0.2s, border 0.2s;
-}
-[data-testid="stChatInput"] input:focus,
-.stChatInput input:focus,
-input[data-baseweb="input"]:focus {
-  border: 2px solid #ffd166 !important;
-  outline: none !important;
-  box-shadow: 0 0 0 2px #ffd16666;
-}
-[data-testid="stChatInput"] {
-  border: 2px solid #406496 !important;
-  border-radius: 12px !important;
-  background: #fff !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.09);
-  padding: 0 !important;
-}
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  border: none !important;
-  background: transparent !important;
-  box-shadow: none !important;
-  color: #222 !important;
-  font-size: 1.08rem !important;
-}
-[data-testid="stChatInput"]:focus-within {
-  border: 2px solid #FFD166 !important;
-  box-shadow: 0 0 0 2px #ffd16633;
-}
-div[data-testid="stSpinner"] > div {
-    color: #111 !important;
-    font-weight: 600;
-}
-.project-title {
-  text-align: center;
-  margin-top: 8px;
-  font-weight: bold;
-  color: #ffffff;
-}
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  opacity: 0;
-  transition: opacity .3s ease;
-  font-size: 1.2rem;
-  color: #ffffff;
-  padding: 0 8px;
-}
 </style>
 ''', unsafe_allow_html=True
 )
 
-# --- Load resume bullets ---
+# --- Resume Data ---
 def load_resume_df(url):
     r = requests.get(url)
     r.raise_for_status()
@@ -272,13 +220,10 @@ def load_resume_df(url):
             records.append({"page": i+1, "sentence": sent})
     return pd.DataFrame(records)
 
-resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
-)
+resume_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 resume_df = load_resume_df(resume_url)
 resume_json = resume_df.to_json(orient='records')
 
-# --- Projects list ---
 projects = [
     {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
     {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
@@ -296,33 +241,37 @@ projects = [
 # --- Layout ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="small")
 
-# --- Left Pane (profile, contact, education, certs, awards) ---
+# --- LEFT ---
 with left_col:
     st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
     st.markdown('''
-    <div class="profile-card-container">
+    <div class="animated-section card profile-card-container hover-zoom">
       <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
            class="profile-pic-popout" />
-      <div class="card profile-card-content hover-zoom">
+      <div class="profile-card-content">
         <h2>Venkatesh Soundararajan</h2>
         <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
         <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
       </div>
     </div>
     ''', unsafe_allow_html=True)
+
     st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Contact</div>' +
-        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">' +
-        '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
-        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
-        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
-        '<a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon"/></a>' +
-        '</div></div>',
-        unsafe_allow_html=True
+        '''
+        <div class="animated-section card hover-zoom">
+            <div class="section-title" style="background:#34495E;">Contact</div>
+            <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
+            <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>
+            <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>
+            <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>
+            <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon"/></a>
+            </div>
+        </div>
+        ''', unsafe_allow_html=True
     )
     st.markdown(
     """
-    <div class="card hover-zoom">
+    <div class="animated-section card hover-zoom">
       <div class="section-title" style="background:#34495E;">Education</div>
       <div style="text-align:left; margin-left:10px;">
         <p>
@@ -341,7 +290,7 @@ with left_col:
 )
     st.markdown(
     """
-    <div class="card hover-zoom">
+    <div class="animated-section card hover-zoom">
       <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
       <div style="text-align:left; margin-left:10px;">
         <p>
@@ -381,7 +330,7 @@ with left_col:
 )
     st.markdown(
     '''
-    <div class="card hover-zoom">
+    <div class="animated-section card hover-zoom">
       <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
       <div class="awards-grid">
         <div class="award-badge">
@@ -443,46 +392,11 @@ with left_col:
     unsafe_allow_html=True
 )
 
-# --- Right Pane (Experience, Skills) ---
+# --- RIGHT ---
 with right_col:
     st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
     st.markdown("""
-<style>
-.exp-timeline {
-  position: relative;
-  margin-left: 25px;
-  margin-top: 20px;
-}
-.exp-item {
-  position: relative;
-  margin-bottom: 30px;
-}
-.exp-dot {
-  position: absolute;
-  left: -30px;
-  top: 7px;
-  width: 16px;
-  height: 16px;
-  background: #406496;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px #b3c6e2;
-}
-.exp-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: -22px;
-  top: 24px;
-  width: 2px;
-  height: 35px;
-  background: #b3c6e2;
-  z-index: 0;
-}
-.exp-title { font-weight: bold; font-size: 1.1rem; }
-.exp-company { color: #ADD8E6; font-size: 1rem; }
-.exp-date { color: #ffd166; font-size: 0.97rem; }
-</style>
-<div class="card hover-zoom">
+<div class="animated-section card hover-zoom">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
   <div class="exp-timeline">
     <div class="exp-item">
@@ -523,12 +437,47 @@ with right_col:
     </div>
   </div>
 </div>
+<style>
+.exp-timeline {
+  position: relative;
+  margin-left: 25px;
+  margin-top: 20px;
+}
+.exp-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+.exp-dot {
+  position: absolute;
+  left: -30px;
+  top: 7px;
+  width: 16px;
+  height: 16px;
+  background: #406496;
+  border-radius: 50%;
+  border: 2px solid #fff;
+  box-shadow: 0 0 0 3px #b3c6e2;
+}
+.exp-item:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: -22px;
+  top: 24px;
+  width: 2px;
+  height: 35px;
+  background: #b3c6e2;
+  z-index: 0;
+}
+.exp-title { font-weight: bold; font-size: 1.1rem; }
+.exp-company { color: #ADD8E6; font-size: 1rem; }
+.exp-date { color: #ffd166; font-size: 0.97rem; }
+</style>
 """, unsafe_allow_html=True)
 
     st.markdown('<a id="core-skills-tools"></a>', unsafe_allow_html=True)
     st.markdown(
     '''
-    <div class="card hover-zoom">
+    <div class="animated-section card hover-zoom">
       <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
       <!-- Programming Languages -->
       <details open>
@@ -625,33 +574,12 @@ with right_col:
     unsafe_allow_html=True
 )
 
-# --- Center Pane (Welcome, About, Chatbot, Projects) ---
+# --- CENTER ---
 with mid_col:
     gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
     st.markdown(
         f"""
-        <style>
-          .welcome-card {{
-            background: url("{gif_url}") center/cover no-repeat;
-            border-radius: 16px;
-            padding: 3rem;
-            color: white;
-            min-height: 180px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-          }}
-          .stApp .welcome-card {{
-            margin: 0 auto 1rem auto;
-          }}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        """
-        <div class="welcome-card">
+        <div class="animated-section welcome-card">
           <div class="typewriter">
           <div>
             <h1>Hello and Welcome...</h1>
@@ -662,11 +590,10 @@ with mid_col:
         unsafe_allow_html=True,
     )
 
-    # About section
     st.markdown('<a id="about-me"></a>', unsafe_allow_html=True)
     st.markdown(
         """
-        <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
+        <div class="animated-section card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
           <div class="section-title" style="background:#22304A;">About Me</div>
           <div style="font-size:1.08rem; text-align:left; color:#fff;">
             👋 I'm Venkatesh, a results-driven Data Scientist and Software Developer passionate about leveraging data to drive real-world impact. With 8+ years in quality engineering, business intelligence, and analytics, I thrive at the intersection of technology and business. <br><br>
@@ -678,42 +605,11 @@ with mid_col:
         unsafe_allow_html=True,
     )
 
-    # Chatbot section
     ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
     st.markdown(
         f"""
-        <style>
-          .welcome-card2 {{
-            background: url("{ai_url}") center/cover no-repeat;
-            border-radius: 16px;
-            padding: 0;
-            color: white;
-            height: 200px;
-            position: relative;
-            overflow: hidden;
-            margin-bottom: 24px;
-          }}
-          .welcome-card2 .text-container {{
-            position: absolute;
-            top: 70%;
-            right: 2rem;
-            transform: translateY(-50%);
-            text-align: right;
-          }}
-          .welcome-card2 h2 {{
-            margin: 0;
-            font-family: 'Poppins', sans-serif;
-            font-weight: 700;
-            font-size: 1.8rem;
-          }}
-        </style>
-        """,
-        unsafe_allow_html=True,
-    )
-    st.markdown(
-        """
-        <div class="welcome-card2">
-          <div class="text-container">
+        <div class="animated-section welcome-card2" style="background:url('{ai_url}') center/cover no-repeat;">
+          <div class="text-container" style="position:absolute;top:70%;right:2rem;transform:translateY(-50%);text-align:right;">
             <h2>Ask Buddy Bot!</h2>
           </div>
         </div>
@@ -721,7 +617,6 @@ with mid_col:
         unsafe_allow_html=True,
     )
 
-    # Chatbot input/output (replace with your key handling)
     api_key = st.secrets["DEEPSEEK_API_KEY"]
     client = openai.OpenAI(
         base_url="https://openrouter.ai/api/v1",
@@ -747,10 +642,9 @@ with mid_col:
                 reply = response.choices[0].message.content
             st.chat_message("assistant").write(reply)
 
-    # Projects Gallery
     st.markdown('<a id="projects-gallery"></a>', unsafe_allow_html=True)
-    st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-    grid_html = '<div class="grid-container">'
+    st.markdown('<div class="animated-section card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+    grid_html = '<div class="animated-section grid-container">'
     for proj in projects:
         grid_html += (
             f'<div class="project-item hover-zoom">'

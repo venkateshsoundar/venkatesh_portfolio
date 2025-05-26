@@ -669,9 +669,7 @@ with mid_col:
         <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
           <div class="section-title" style="background:#22304A;">About Me</div>
           <div style="font-size:1.08rem; text-align:left; color:#fff;">
-            👋 I'm Venkatesh, a results-driven Data Scientist and Software Developer passionate about leveraging data to drive real-world impact. With 8+ years in quality engineering, business intelligence, and analytics, I thrive at the intersection of technology and business. <br><br>
-            My expertise includes building scalable ETL pipelines, designing predictive models, and creating interactive dashboards in cloud environments (AWS, Azure). I enjoy solving complex business problems, collaborating with cross-functional teams, and telling stories with data.<br><br>
-            Let’s connect to create data-powered solutions!
+            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. I’m passionate about solving business problems and delivering impactful, data-driven solutions.
           </div>
         </div>
         """,

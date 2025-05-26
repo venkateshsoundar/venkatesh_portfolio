@@ -448,82 +448,86 @@ with right_col:
     st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
     st.markdown("""
 <style>
-.exp-timeline {
-  position: relative;
-  margin-left: 25px;
+.exp-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
   margin-top: 20px;
+  margin-bottom: 20px;
 }
-.exp-item {
-  position: relative;
-  margin-bottom: 30px;
+.exp-card {
+  background: linear-gradient(135deg, #22304A 0%, #34495E 100%);
+  border-radius: 15px;
+  padding: 22px 14px 16px 14px;
+  box-shadow: 0 2px 10px rgba(30,50,80,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 215px;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+  border: 2px solid #40649622;
 }
-.exp-dot {
-  position: absolute;
-  left: -30px;
-  top: 7px;
-  width: 16px;
-  height: 16px;
-  background: #406496;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px #b3c6e2;
+.exp-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(20,40,80,0.19);
 }
-.exp-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: -22px;
-  top: 24px;
-  width: 2px;
-  height: 35px;
-  background: #b3c6e2;
-  z-index: 0;
+.exp-card-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 11px;
+  background: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 8px rgba(44,62,80,0.09);
+  border: 1.5px solid #eee;
 }
-.exp-title { font-weight: bold; font-size: 1.1rem; }
-.exp-company { color: #ADD8E6; font-size: 1rem; }
-.exp-date { color: #ffd166; font-size: 0.97rem; }
+.exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
+.exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
+.exp-card-date { color: #ffd166; font-size: 0.98rem;}
 </style>
 <div class="card hover-zoom">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-timeline">
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Software Developer Intern</div>
-      <div class="exp-company">Tech Insights Inc, Canada</div>
-      <div class="exp-date">May 2025 – Present</div>
+  <div class="exp-cards-grid">
+    <div class="exp-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/TechInsights_logo.png" class="exp-card-logo"/>
+      <div class="exp-card-title">Software Developer Intern</div>
+      <div class="exp-card-company">Tech Insights Inc, Canada</div>
+      <div class="exp-card-date">May 2025 – Present</div>
     </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Senior Consultant</div>
-      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-date">June 2024 – August 2024</div>
+    <div class="exp-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Deloitte.svg" class="exp-card-logo"/>
+      <div class="exp-card-title">Senior Consultant</div>
+      <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+      <div class="exp-card-date">June 2024 – August 2024</div>
     </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Consultant</div>
-      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-date">October 2021 – June 2024</div>
+    <div class="exp-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Deloitte.svg" class="exp-card-logo"/>
+      <div class="exp-card-title">Consultant</div>
+      <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+      <div class="exp-card-date">October 2021 – June 2024</div>
     </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Consultant</div>
-      <div class="exp-company">Capgemini Technology Services India Private Limited, India</div>
-      <div class="exp-date">May 2018 – October 2021</div>
+    <div class="exp-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/9/9e/Capgemini_201x_logo.svg" class="exp-card-logo"/>
+      <div class="exp-card-title">Consultant</div>
+      <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+      <div class="exp-card-date">May 2018 – October 2021</div>
     </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Associate</div>
-      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-date">May 2016 – May 2018</div>
+    <div class="exp-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Cognizant_logo_2022.svg" class="exp-card-logo"/>
+      <div class="exp-card-title">Associate</div>
+      <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+      <div class="exp-card-date">May 2016 – May 2018</div>
     </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Programmer Analyst</div>
-      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-date">Sep 2013 – May 2018</div>
+    <div class="exp-card">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/57/Cognizant_logo_2022.svg" class="exp-card-logo"/>
+      <div class="exp-card-title">Programmer Analyst</div>
+      <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+      <div class="exp-card-date">Sep 2013 – May 2018</div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
     st.markdown('<a id="core-skills-tools"></a>', unsafe_allow_html=True)
     st.markdown(

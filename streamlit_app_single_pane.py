@@ -761,90 +761,67 @@ with mid_col:
     grid_html += '</div>'
     st.markdown(grid_html, unsafe_allow_html=True)
 
-    st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
     st.markdown("""
 <style>
-.exp-horizontal-timeline {
+.exp-carousel {
   display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: 24px;
-  margin: 40px 0 20px 0;
   overflow-x: auto;
+  gap: 22px;
+  padding-bottom: 6px;
+  margin: 32px 0 18px 0;
 }
-.exp-step {
-  background: linear-gradient(135deg,#324665 60%,#1F2A44 100%);
-  border-radius: 16px;
-  padding: 18px 20px 10px 20px;
-  min-width: 210px;
-  max-width: 260px;
-  text-align: center;
-  box-shadow: 0 1px 7px rgba(44,62,80,0.10);
+.exp-carousel-card {
+  min-width: 260px; max-width: 300px;
+  background: linear-gradient(135deg,#22304A 60%,#324665 100%);
+  border-radius: 13px;
+  box-shadow: 0 2px 10px rgba(44,62,80,0.13);
+  padding: 19px 17px 12px 17px;
+  flex: 0 0 auto;
+  transition: transform .17s;
+  text-align: left;
+  color: #ffd166;
   position: relative;
-  transition: transform .18s;
 }
-.exp-step:hover { transform: scale(1.045) translateY(-6px);}
-.exp-logo {
-  width: 45px; height: 45px; border-radius: 50%;
-  background: #fff;
-  margin-bottom: 8px;
-  box-shadow: 0 1px 7px rgba(44,62,80,0.10);
-  object-fit: contain;
-}
-.exp-role { font-weight: bold; color: #ffd166; font-size: 1.07rem; }
-.exp-company { color: #ADD8E6; margin: 4px 0 2px 0; font-size: 1.03rem;}
-.exp-date { color: #eee; font-size: 0.97rem; }
-.exp-line {
-  position: absolute; top: 32px; right: -20px;
-  width: 40px; height: 2px; background: #b3c6e2;
-  z-index: 1;
-}
-.exp-step:last-child .exp-line { display: none; }
+.exp-carousel-card:hover { transform: scale(1.045) translateY(-8px);}
+.exp-job { font-weight: bold; color: #ffd166; font-size: 1.1rem; }
+.exp-company { color: #ADD8E6; font-size: 1.04rem;}
+.exp-date { color: #eee; font-size: 0.97rem;}
+.exp-short {color:#fff;font-size:0.98rem;margin-top:6px;}
 </style>
 <div class="card" style="background:transparent;">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-horizontal-timeline">
-    <div class="exp-step">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/techinsights_logo.png" class="exp-logo" />
-      <div class="exp-role">Software Developer Intern</div>
-      <div class="exp-company">Tech Insights Inc</div>
-      <div class="exp-date">May 2025 – Present</div>
-      <div class="exp-line"></div>
+  <div class="exp-carousel">
+    <div class="exp-carousel-card">
+      <div class="exp-job">Software Developer Intern</div>
+      <div class="exp-company">Tech Insights</div>
+      <div class="exp-date">2025–Present</div>
+      <div class="exp-short">Building cloud data pipelines and dashboards.</div>
     </div>
-    <div class="exp-step">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/deloitte_logo.png" class="exp-logo" />
-      <div class="exp-role">Senior Consultant</div>
-      <div class="exp-company">Deloitte India</div>
-      <div class="exp-date">Jun 2024 – Aug 2024</div>
-      <div class="exp-line"></div>
+    <div class="exp-carousel-card">
+      <div class="exp-job">Senior Consultant</div>
+      <div class="exp-company">Deloitte</div>
+      <div class="exp-date">2024</div>
+      <div class="exp-short">Led cross-team analytics projects.</div>
     </div>
-    <div class="exp-step">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/deloitte_logo.png" class="exp-logo" />
-      <div class="exp-role">Consultant</div>
-      <div class="exp-company">Deloitte India</div>
-      <div class="exp-date">Oct 2021 – Jun 2024</div>
-      <div class="exp-line"></div>
-    </div>
-    <div class="exp-step">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/capgemini_logo.png" class="exp-logo" />
-      <div class="exp-role">Consultant</div>
+    <div class="exp-carousel-card">
+      <div class="exp-job">Consultant</div>
       <div class="exp-company">Capgemini</div>
-      <div class="exp-date">May 2018 – Oct 2021</div>
-      <div class="exp-line"></div>
+      <div class="exp-date">2018–2021</div>
+      <div class="exp-short">Automation and analytics for insurance.</div>
     </div>
-    <div class="exp-step">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/cognizant_logo.png" class="exp-logo" />
-      <div class="exp-role">Associate</div>
+    <div class="exp-carousel-card">
+      <div class="exp-job">Associate</div>
       <div class="exp-company">Cognizant</div>
-      <div class="exp-date">May 2016 – May 2018</div>
-      <div class="exp-line"></div>
+      <div class="exp-date">2016–2018</div>
+      <div class="exp-short">QA for healthcare software.</div>
     </div>
-    <div class="exp-step">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/cognizant_logo.png" class="exp-logo" />
-      <div class="exp-role">Programmer Analyst</div>
+    <div class="exp-carousel-card">
+      <div class="exp-job">Programmer Analyst</div>
       <div class="exp-company">Cognizant</div>
-      <div class="exp-date">Sep 2013 – May 2018</div>
+      <div class="exp-date">2013–2016</div>
+      <div class="exp-short">Software and automation testing.</div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+

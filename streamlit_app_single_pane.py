@@ -336,7 +336,35 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+
+
+# ---- TABS ----
+tabs = st.tabs(["Home🏠", "Projects", "Experience", "Skills", "Contact"])
+
+# ---- ABOUT TAB ----
+
+with tabs[0]:
+    st.markdown(
+        """
+        <div class="profile-card-container">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
+               class="profile-pic-popout" />
+          <div class="card profile-card-content hover-zoom">
+            <h2>Venkatesh Soundararajan</h2>
+            <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
+            <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
+          </div>
+        </div>
+        <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
+          <div class="section-title" style="background:#22304A;">About Me</div>
+          <div style="font-size:1.08rem; text-align:left; color:#fff;">
+            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. I’m passionate about solving business problems and delivering impactful, data-driven solutions.
+          </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(
     f"""
     <style>
@@ -402,32 +430,6 @@ with chat_container:
             )
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
-
-# ---- TABS ----
-tabs = st.tabs(["About", "Projects", "Experience", "Skills", "Contact"])
-
-# ---- ABOUT TAB ----
-with tabs[0]:
-    st.markdown(
-        """
-        <div class="profile-card-container">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
-               class="profile-pic-popout" />
-          <div class="card profile-card-content hover-zoom">
-            <h2>Venkatesh Soundararajan</h2>
-            <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
-            <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
-          </div>
-        </div>
-        <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);margin-bottom:24px;">
-          <div class="section-title" style="background:#22304A;">About Me</div>
-          <div style="font-size:1.08rem; text-align:left; color:#fff;">
-            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. I’m passionate about solving business problems and delivering impactful, data-driven solutions.
-          </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
     # Education Card
     st.markdown(
     """

@@ -8,73 +8,58 @@ import pandas as pd
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Sticky Top Navigation Bar with Animation & Centering ---
-st.markdown("""
-<style>
-html {
-  scroll-padding-top: 110px;
-  scroll-behavior: smooth;
-}
-.nav-bar-wrap {
-  width: 100vw;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 100;
-}
-.nav-bar {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 36px;
-  background: rgba(44,62,80,0.90);
-  padding: 16px 0 6px 0;
-  border-radius: 0 0 20px 20px;
-  position: sticky;
-  top: 0;
-  z-index: 99;
-  margin-bottom: 28px;
-  width: auto;
-  box-sizing: border-box;
-}
-.nav-link {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  color: #ffd166 !important;
-  text-decoration: none;
-  font-weight: bold;
-  font-size: 1.13rem;
-  letter-spacing: 1px;
-  padding: 10px 26px;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(44,62,80,0.15);
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s, background .22s;
-  display: inline-block;
-  margin-bottom: 0;
-  cursor: pointer !important;
-}
-.nav-link:hover, .nav-link:focus {
-  transform: translateY(-5px) scale(1.07);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.24);
-  background: linear-gradient(135deg, #406496 0%, #22304A 100%);
-  color: #fff !important;
-  text-decoration: none;
-}
-</style>
-<div class="nav-bar-wrap">
-  <div class="nav-bar">
-    <a class="nav-link" href="#about-me">About</a>
-    <a class="nav-link" href="#projects-gallery">Projects</a>
-    <a class="nav-link" href="#professional-experience">Experience</a>
-    <a class="nav-link" href="#core-skills-tools">Skills</a>
-    <a class="nav-link" href="#contact">Contact</a>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+# --- Sticky Top Navigation Bar with Animation ---
+st.markdown(
+    """
+    <style>
+    .nav-bar {
+        display: flex;
+        justify-content: center;
+        gap: 36px;
+        background: rgba(44,62,80,0.90);
+        padding: 16px 0 6px 0;
+        border-radius: 0 0 20px 20px;
+        position: sticky;
+        top: 0;
+        z-index: 99;
+        margin-bottom: 28px;
+    }
+    .nav-link {
+        background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+        color: #ffd166 !important;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.13rem;
+        letter-spacing: 1px;
+        padding: 10px 26px;
+        border-radius: 12px;
+        box-shadow: 0 2px 8px rgba(44,62,80,0.15);
+        transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s, background .22s;
+        display: inline-block;
+        margin-bottom: 0;
+    }
+    .nav-link:hover, .nav-link:focus {
+        transform: translateY(-5px) scale(1.07);
+        box-shadow: 0 8px 16px rgba(0,0,0,0.24);
+        background: linear-gradient(135deg, #406496 0%, #22304A 100%);
+        color: #fff !important;
+        text-decoration: none;
+    }
+    </style>
+    <div class="nav-bar">
+        <a class="nav-link" href="#about-me">About</a>
+        <a class="nav-link" href="#projects-gallery">Projects</a>
+        <a class="nav-link" href="#professional-experience">Experience</a>
+        <a class="nav-link" href="#core-skills-tools">Skills</a>
+        <a class="nav-link" href="#contact">Contact</a>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-# --- Global CSS & Card Styling ---
-st.markdown('''
+# --- Global CSS & Background for Cards and Animations ---
+st.markdown(
+    '''
 <style>
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
@@ -114,6 +99,26 @@ st.markdown('''
   transform: translateX(-50%);
   top: 20px;
   z-index: 10;
+}
+[data-testid="stChatInput"] input,
+.stChatInput input,
+input[data-baseweb="input"] {
+  border: 2px solid #406496 !important;
+  border-radius: 10px !important;
+  background: #fff !important;
+  color: #222 !important;
+  font-size: 1.08rem !important;
+  box-shadow: 0 2px 10px rgba(30,50,100,0.08);
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+}
+.profile-card-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.profile-card-content {
+  padding-top: 200px;
 }
 .contact-icon {
   width: 30px;
@@ -168,53 +173,91 @@ st.markdown('''
 }
 @keyframes typing { from { width: 0; } to { width: 100%; } }
 @keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
+.details-summary {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
+  color: #ffffff !important;
+  font-size: 1.6rem !important;
+  font-weight: bold !important;
+  padding: 20px;
+  border-radius: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+  cursor: pointer;
+}
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 20px;
   margin-bottom: 20px;
 }
-.awards-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-  gap: 12px;
-  margin-top: 12px;
+/* --- Make chat_input box dark and bold --- */
+[data-testid="stChatInput"] input,
+.stChatInput input,
+input[data-baseweb="input"] {
+  background: #26334d !important;
+  color: #222 !important;
+  border: 2px solid #5A84B4 !important;
+  border-radius: 12px !important;
+  font-size: 1.08rem !important;
+  box-shadow: 0 2px 10px rgba(30,50,100,0.14);
+  margin-top: 10px !important;
+  margin-bottom: 10px !important;
+  transition: box-shadow 0.2s, border 0.2s;
 }
-.award-badge {
-  background: rgba(255,255,255,0.1);
-  padding: 12px;
-  border-radius: 8px;
+[data-testid="stChatInput"] input:focus,
+.stChatInput input:focus,
+input[data-baseweb="input"]:focus {
+  border: 2px solid #ffd166 !important;
+  outline: none !important;
+  box-shadow: 0 0 0 2px #ffd16666;
+}
+[data-testid="stChatInput"] {
+  border: 2px solid #406496 !important;
+  border-radius: 12px !important;
+  background: #fff !important;
+  box-shadow: 0 2px 10px rgba(30,50,100,0.09);
+  padding: 0 !important;
+}
+[data-testid="stChatInput"] input,
+.stChatInput input,
+input[data-baseweb="input"] {
+  border: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  color: #222 !important;
+  font-size: 1.08rem !important;
+}
+[data-testid="stChatInput"]:focus-within {
+  border: 2px solid #FFD166 !important;
+  box-shadow: 0 0 0 2px #ffd16633;
+}
+div[data-testid="stSpinner"] > div {
+    color: #111 !important;
+    font-weight: 600;
+}
+.project-title {
   text-align: center;
-}
-.award-year {
-  font-size: 0.85rem;
-  color: #ffd166;
-  margin-bottom: 4px;
-}
-.award-title {
+  margin-top: 8px;
   font-weight: bold;
-  font-size: 1rem;
-  margin-bottom: 4px;
+  color: #ffffff;
 }
-.award-sub {
-  font-size: 0.9rem;
-  opacity: 0.8;
-}
-.skills-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-  gap: 8px;
-  margin: 8px 0 12px;
-}
-.skill-card {
-  background: rgba(255,255,255,0.15);
-  padding: 6px;
-  border-radius: 6px;
-  font-size: 0.9rem;
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  opacity: 0;
+  transition: opacity .3s ease;
+  font-size: 1.2rem;
+  color: #ffffff;
+  padding: 0 8px;
 }
 </style>
-''', unsafe_allow_html=True)
+''', unsafe_allow_html=True
+)
 
 # --- Load resume bullets ---
 def load_resume_df(url):
@@ -244,7 +287,7 @@ projects = [
     {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
     {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
     {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
     {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
     {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
@@ -253,7 +296,7 @@ projects = [
 # --- Layout ---
 left_col, mid_col, right_col = st.columns([1,2,1], gap="small")
 
-# --- Left Pane ---
+# --- Left Pane (profile, contact, education, certs, awards) ---
 with left_col:
     st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
     st.markdown('''
@@ -368,11 +411,39 @@ with left_col:
         </div>
       </div>
     </div>
+    <style>
+      .awards-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+        margin-top: 12px;
+      }
+      .award-badge {
+        background: rgba(255,255,255,0.1);
+        padding: 12px;
+        border-radius: 8px;
+        text-align: center;
+      }
+      .award-year {
+        font-size: 0.85rem;
+        color: #ffd166;
+        margin-bottom: 4px;
+      }
+      .award-title {
+        font-weight: bold;
+        font-size: 1rem;
+        margin-bottom: 4px;
+      }
+      .award-sub {
+        font-size: 0.9rem;
+        opacity: 0.8;
+      }
+    </style>
     ''',
     unsafe_allow_html=True
 )
 
-# --- Right Pane ---
+# --- Right Pane (Experience, Skills) ---
 with right_col:
     st.markdown('<a id="professional-experience"></a>', unsafe_allow_html=True)
     st.markdown("""
@@ -529,6 +600,27 @@ with right_col:
         </div>
       </details>
     </div>
+    <style>
+      .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 8px;
+        margin: 8px 0 12px;
+      }
+      .skill-card {
+        background: rgba(255,255,255,0.15);
+        padding: 6px;
+        border-radius: 6px;
+        font-size: 0.9rem;
+        text-align: center;
+      }
+      details summary {
+        list-style: none;
+      }
+      details summary::-webkit-details-marker {
+        display: none;
+      }
+    </style>
     ''',
     unsafe_allow_html=True
 )
@@ -668,3 +760,5 @@ with mid_col:
         )
     grid_html += '</div>'
     st.markdown(grid_html, unsafe_allow_html=True)
+
+    

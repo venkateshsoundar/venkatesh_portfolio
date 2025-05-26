@@ -323,61 +323,70 @@ with left_col:
 
     st.markdown("""
 <style>
-.edu-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-top: 14px;
+.edu-list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  margin-top: 10px;
 }
-.edu-card {
+.edu-card-h {
   background: linear-gradient(135deg, #34495E 0%, #406496 100%);
   border-radius: 14px;
   box-shadow: 0 2px 10px rgba(30,50,80,0.10);
-  padding: 22px 14px 14px 14px;
+  padding: 18px 24px;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  min-height: 210px;
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+  min-height: 110px;
   border: 2px solid #40649622;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
 }
-.edu-card:hover {
-  transform: translateY(-7px) scale(1.03);
-  box-shadow: 0 8px 18px rgba(20,40,80,0.17);
+.edu-card-h:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 6px 16px rgba(20,40,80,0.18);
   background: linear-gradient(135deg, #406496 0%, #34495E 100%);
 }
-.edu-logo {
-  width: 54px;
-  height: 54px;
+.edu-logo-h {
+  width: 56px;
+  height: 56px;
   object-fit: contain;
-  border-radius: 11px;
+  border-radius: 10px;
   background: #fff;
-  margin-bottom: 10px;
-  box-shadow: 0 1px 8px rgba(44,62,80,0.08);
+  margin-right: 20px;
+  box-shadow: 0 2px 8px rgba(44,62,80,0.10);
   border: 1.5px solid #eee;
 }
-.edu-degree { font-weight: bold; font-size: 1.05rem; margin-bottom: 2px;}
+.edu-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.edu-degree { font-weight: bold; font-size: 1.08rem; margin-bottom: 2px;}
 .edu-uni { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
 .edu-dates { color: #ffd166; font-size: 0.96rem;}
 </style>
 <div class="card hover-zoom">
   <div class="section-title" style="background:#34495E;">Education</div>
-  <div class="edu-grid">
-    <div class="edu-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-logo"/>
-      <div class="edu-degree">Masters in Data Science and Analytics</div>
-      <div class="edu-uni">University of Calgary, Alberta, Canada</div>
-      <div class="edu-dates">September 2024 – Present</div>
+  <div class="edu-list">
+    <div class="edu-card-h">
+      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-logo-h"/>
+      <div class="edu-info">
+        <div class="edu-degree">Masters in Data Science and Analytics</div>
+        <div class="edu-uni">University of Calgary, Alberta, Canada</div>
+        <div class="edu-dates">September 2024 – Present</div>
+      </div>
     </div>
-    <div class="edu-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-logo"/>
-      <div class="edu-degree">Bachelor of Engineering</div>
-      <div class="edu-uni">Anna University, Chennai, India</div>
-      <div class="edu-dates">August 2009 – May 2013</div>
+    <div class="edu-card-h">
+      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-logo-h"/>
+      <div class="edu-info">
+        <div class="edu-degree">Bachelor of Engineering</div>
+        <div class="edu-uni">Anna University, Chennai, India</div>
+        <div class="edu-dates">August 2009 – May 2013</div>
+      </div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 

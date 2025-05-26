@@ -483,37 +483,68 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- 2-Column Layout: Left Profile / Right About ---
-col1, col2 = st.columns([1, 2], gap="large")
+st.markdown("""
+<style>
+.profile-pic-square {
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 4px solid #ffd166;
+    box-shadow: 0 0 14px rgba(255, 209, 102, 0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-pic-square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
+}
+.profile-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.profile-left {
+    flex: 0 0 180px;
+    text-align: center;
+}
+.profile-right {
+    flex: 1;
+}
+</style>
+""", unsafe_allow_html=True)
 
-with col1:
-    st.markdown(
-        """
-        <div class="card hover-zoom" style="text-align:center;">
-            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
-            <h2 style="color:#fff; margin-bottom: 5px;">Venkatesh Soundararajan</h2>
-            <p style="color:#ADD8E6; font-size: 16px;">
-                <strong>Software Development Intern</strong><br>Data Engineering
-            </p>
-            <p style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></p>
+st.markdown(
+    """
+    <div class="card hover-zoom">
+      <div class="section-title">👤 Profile & About Me</div>
+      <div class="profile-card-wrapper">
+        <div class="profile-left">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
+          <h3 style="color:#fff; margin: 10px 0 5px;">Venkatesh Soundararajan</h3>
+          <p style="color:#ADD8E6; font-size: 15px; margin: 0;">
+            <strong>Software Development Intern</strong><br>
+            Data Engineering
+          </p>
+          <p style="color:#ffd166; margin-top: 6px;">
+            🍁 Calgary, AB, Canada
+          </p>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-with col2:
-    st.markdown(
-        """
-        <div class="card hover-zoom" style="background:linear-gradient(135deg, #34495E 0%, #406496 100%);">
-            <div class="section-title">About Me</div>
-            <div style="font-size:1.05rem; color:#fff; line-height:1.6;">
-                I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics. 
-                I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure. 
-                I’m passionate about solving business problems and delivering impactful, data-driven solutions.
-            </div>
+        <div class="profile-right">
+          <div style="font-size:1.05rem; color:#fff; line-height:1.6; margin-top: 4px;">
+            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics.
+            I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure.
+            <br><br>
+            I'm currently pursuing my Master's in Data Science and Analytics at the University of Calgary. My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+          </div>
         </div>
-        """,
-        unsafe_allow_html=True
-    )
+      </div>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
 
 # --- Spacer before next section ---
     st.markdown("<br><hr style='border:1px solid #666;'><br>", unsafe_allow_html=True)

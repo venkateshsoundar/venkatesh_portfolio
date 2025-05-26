@@ -456,7 +456,7 @@ with right_col:
   margin-bottom: 20px;
 }
 .exp-card {
-  background: linear-gradient(135deg, #22304A 0%, #34495E 100%);
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
   border-radius: 15px;
   padding: 22px 14px 16px 14px;
   box-shadow: 0 2px 10px rgba(30,50,80,0.13);
@@ -470,6 +470,7 @@ with right_col:
 .exp-card:hover {
   transform: translateY(-7px) scale(1.03);
   box-shadow: 0 8px 18px rgba(20,40,80,0.19);
+  background: linear-gradient(135deg, #406496 0%, #34495E 100%);
 }
 .exp-card-logo {
   width: 56px;
@@ -527,6 +528,7 @@ with right_col:
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
     st.markdown('<a id="core-skills-tools"></a>', unsafe_allow_html=True)

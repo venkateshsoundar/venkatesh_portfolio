@@ -382,49 +382,92 @@ with left_col:
 </div>
 """, unsafe_allow_html=True)
 
-
-
-
     st.markdown(
     """
+    <style>
+    .cert-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-top: 18px;
+      margin-bottom: 2px;
+    }
+    .cert-card {
+      background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+      border-radius: 12px;
+      box-shadow: 0 4px 18px rgba(60,100,160,0.07);
+      padding: 18px 18px 14px 18px;
+      min-height: 80px;
+      transition: transform .17s, box-shadow .17s;
+      border: 1.5px solid #40649644;
+      text-align: left;
+      position: relative;
+    }
+    .cert-card:hover {
+      transform: translateY(-4px) scale(1.03);
+      box-shadow: 0 8px 24px rgba(20,60,120,0.15);
+      background: linear-gradient(135deg, #22304A 0%, #406496 88%);
+    }
+    .cert-title { 
+      font-weight: bold; 
+      font-size: 1.07rem; 
+      color: #ffd166;
+      margin-bottom: 2px;
+      margin-top: 0;
+    }
+    .cert-provider { 
+      font-size: 0.99rem; 
+      color: #ADD8E6;
+      margin-bottom: 2px;
+    }
+    .cert-year { 
+      font-size: 0.97rem; 
+      color: #fff; 
+      position: absolute; 
+      right: 18px; 
+      bottom: 10px;
+      opacity: 0.8;
+    }
+    </style>
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
-      <div style="text-align:left; margin-left:10px;">
-        <p>
-          <b>Insurance &amp; Guidewire Suite Analyst 10.0</b><br>
-          <span style="color:#ADD8E6;">Jasper – Guidewire Education</span><br>
-          <span style="color:#ffd166;">2024</span>
-        </p>
-        <p>
-          <b>Karate DSL</b><br>
-          <span style="color:#ADD8E6;">Udemy</span><br>
-          <span style="color:#ffd166;">2023</span>
-        </p>
-        <p>
-          <b>Rest API Automation</b><br>
-          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
-          <span style="color:#ffd166;">2023</span>
-        </p>
-        <p>
-          <b>Selenium WebDriver</b><br>
-          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
-          <span style="color:#ffd166;">2022</span>
-        </p>
-        <p>
-          <b>SQL for Data Science</b><br>
-          <span style="color:#ADD8E6;">Coursera</span><br>
-          <span style="color:#ffd166;">2020</span>
-        </p>
-        <p>
-          <b>SDET</b><br>
-          <span style="color:#ADD8E6;">Capgemini</span><br>
-          <span style="color:#ffd166;">2020</span>
-        </p>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-title">Guidewire Insurance Suite Analyst 10.0</div>
+          <div class="cert-provider">Jasper – Guidewire Education</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Karate DSL</div>
+          <div class="cert-provider">Udemy</div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Rest API Automation</div>
+          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Selenium WebDriver</div>
+          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+          <div class="cert-year">2022</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">SQL for Data Science</div>
+          <div class="cert-provider">Coursera</div>
+          <div class="cert-year">2020</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">SDET</div>
+          <div class="cert-provider">Capgemini</div>
+          <div class="cert-year">2020</div>
+        </div>
       </div>
     </div>
     """,
     unsafe_allow_html=True
 )
+
     st.markdown(
     '''
     <div class="card hover-zoom">

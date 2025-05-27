@@ -944,20 +944,43 @@ st.markdown(
 )
 
 
-# --- CSS and header ---
+import streamlit as st
+
+# --- Your projects list goes here (use the same list as above) ---
+
 st.markdown("""
 <style>
+.card.projects-gallery-pane {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px rgba(44,62,80,0.14);
+  padding: 22px 18px 28px 18px;
+  margin-bottom: 36px;
+  max-width: 1250px;
+  margin-left: auto;
+  margin-right: auto;
+}
+.section-title {
+  font-size: 1.35rem;
+  font-weight: bold;
+  margin-bottom: 22px;
+  color: #ffd166;
+  background:#2C3E50;
+  padding: 12px 0 12px 0;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 1px 8px #22304A22;
+}
 .projects-4col-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 24px;
-  margin: 0 auto 36px auto;
-  max-width: 1200px;
+  margin: 0 auto;
   justify-content: center;
   align-items: stretch;
 }
 .project-main-card {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  background: linear-gradient(135deg, #202C41 0%, #324665 100%);
   border-radius: 14px;
   box-shadow: 0 2px 12px rgba(44,62,80,0.10);
   display: flex;
@@ -1069,16 +1092,18 @@ st.markdown("""
   .projects-4col-grid {grid-template-columns: 1fr;}
 }
 </style>
-<div class="card hover-zoom" style="margin-bottom:10px;">
-  <div class="section-title" style="background:#2C3E50;">Projects Gallery</div>
-</div>
 """, unsafe_allow_html=True)
 
-# --- Projects Grid ---
-grid_html = '<div class="projects-4col-grid">'
+# --- One unified pane: header and projects in one card ---
+projects_html = '''
+<div class="card projects-gallery-pane hover-zoom">
+  <div class="section-title">Projects Gallery</div>
+  <div class="projects-4col-grid">
+'''
+
 for proj in projects:
     tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
-    grid_html += (
+    projects_html += (
         f'<div class="project-main-card hover-zoom">'
         f'<div class="project-img-holder">'
         f'<div class="project-img-inner">'
@@ -1091,9 +1116,11 @@ for proj in projects:
         f'<div class="project-card-link"><a href="{proj["url"]}" target="_blank">View on GitHub &rarr;</a></div>'
         f'</div></div>'
     )
-grid_html += '</div>'
 
-st.markdown(grid_html, unsafe_allow_html=True)
+projects_html += '</div></div>'
+
+st.markdown(projects_html, unsafe_allow_html=True)
+
 
 
 

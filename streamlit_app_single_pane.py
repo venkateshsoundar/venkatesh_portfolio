@@ -816,7 +816,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-
+st.markdown('<a name="Education"></a>', unsafe_allow_html=True)
 # --- Spacer before next section ---
 st.markdown(
     """

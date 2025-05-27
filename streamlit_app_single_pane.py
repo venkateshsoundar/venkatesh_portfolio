@@ -910,120 +910,104 @@ with project_container:
 
 st.markdown("""
 <style>
-.skill-badges-section {
+.skills-scroll-section {
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 22px;
-  box-shadow: 0 8px 38px rgba(30,50,90,0.15);
-  padding: 34px 26px 30px 26px;
+  box-shadow: 0 8px 38px rgba(30,50,90,0.12);
+  padding: 28px 18px 16px 18px;
   margin-bottom: 34px;
-  animation: fadeInUp 0.7s cubic-bezier(.4,1.6,.6,1) both;
+  overflow-x: auto;
 }
-.badge-cluster {
-  margin-bottom: 18px;
-}
-.badge-category {
-  font-size: 1.08rem;
+.skills-scroll-title {
+  font-size: 1.31rem;
   color: #ffd166;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 18px;
+  text-align: left;
+}
+.skills-scroll-container {
   display: flex;
+  flex-direction: row;
+  gap: 18px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+  scrollbar-width: thin;
+}
+.skill-card-hz {
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+  border-radius: 13px;
+  box-shadow: 0 4px 16px rgba(44,62,80,0.11);
+  display: flex;
+  flex-direction: column;
   align-items: center;
-  gap: 10px;
-}
-.badge-category img {
-  width: 22px; height: 22px;
-  filter: drop-shadow(0 1px 4px #ffd16644);
-}
-.skill-badges-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 12px;
-}
-.skill-badge {
-  background: linear-gradient(90deg, #406496 40%, #ffd16699 140%);
-  color: #fff;
-  border-radius: 17px;
-  padding: 7px 19px 7px 14px;
-  font-size: 1.03rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-  box-shadow: 0 2px 10px #ffd16619;
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  border: none;
-  transition: transform .21s, box-shadow .22s;
+  min-width: 120px;
+  max-width: 130px;
+  padding: 18px 6px 14px 6px;
+  text-align: center;
+  transition: transform .18s, box-shadow .18s, background .18s;
+  border: 2px solid #40649633;
   cursor: pointer;
-  opacity: 0.95;
+  flex-shrink: 0;
 }
-.skill-badge:hover {
-  transform: translateY(-4px) scale(1.05);
-  box-shadow: 0 8px 18px #ffd16644;
-  background: linear-gradient(90deg, #ffd166 30%, #22304A 170%);
-  color: #324665;
+.skill-card-hz:hover {
+  transform: translateY(-5px) scale(1.07);
+  box-shadow: 0 10px 20px #ffd16622;
+  background: linear-gradient(135deg, #406496 0%, #ffd166 100%);
+  color: #22304A !important;
 }
-@keyframes fadeInUp {
-  0% {opacity: 0; transform: translateY(24px);}
-  100% {opacity: 1; transform: none;}
+.skill-icon-card-hz {
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+  filter: drop-shadow(0 1px 4px #ffd16633);
+}
+.skill-label-card-hz {
+  font-size: 1.01rem;
+  font-weight: 600;
+  color: #ffd166;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 700px) {
+  .skills-scroll-section {padding: 12px 1px;}
+  .skills-scroll-container {gap: 10px;}
+  .skill-card-hz {min-width: 90px;max-width:110px;padding:12px 2px 10px 2px;}
 }
 </style>
-<div class="skill-badges-section">
-  <div class="section-title" style="background:#22304A;">My Technical Stack</div>
-  <div class="badge-cluster">
-    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg"/> Programming</div>
-    <div class="skill-badges-list">
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" width="17"/>Python</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/r.svg" width="17"/>R</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/java.svg" width="17"/>Java</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vba.svg" width="17"/>VBA</span>
-    </div>
-  </div>
-  <div class="badge-cluster">
-    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/database.svg"/> Databases</div>
-    <div class="skill-badges-list">
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg" width="17"/>MySQL</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/oracle.svg" width="17"/>Oracle</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg" width="17"/>NoSQL</span>
-    </div>
-  </div>
-  <div class="badge-cluster">
-    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg"/> Data Analysis</div>
-    <div class="skill-badges-list">
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg" width="17"/>Pandas</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/numpy.svg" width="17"/>NumPy</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/matplotlib.svg" width="17"/>Matplotlib</span>
-    </div>
-  </div>
-  <div class="badge-cluster">
-    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg"/> Visualization</div>
-    <div class="skill-badges-list">
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg" width="17"/>Power BI</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftexcel.svg" width="17"/>Excel</span>
-    </div>
-  </div>
-  <div class="badge-cluster">
-    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg"/> Automation</div>
-    <div class="skill-badges-list">
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg" width="17"/>Selenium</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/guidewire.svg" width="17"/>Guidewire</span>
-    </div>
-  </div>
-  <div class="badge-cluster">
-    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg"/> Version Control</div>
-    <div class="skill-badges-list">
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg" width="17"/>Git</span>
-    </div>
-  </div>
-  <div class="badge-cluster">
-    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg"/> Project Management</div>
-    <div class="skill-badges-list">
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg" width="17"/>JIRA</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/alm.svg" width="17"/>ALM</span>
-      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/rally.svg" width="17"/>Rally</span>
-    </div>
+
+<div class="skills-scroll-section">
+  <div class="skills-scroll-title">Core Skills & Tools</div>
+  
+  <div class="skills-scroll-container">
+    <!-- Programming -->
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg"/><span class="skill-label-card-hz">Python</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/r.svg"/><span class="skill-label-card-hz">R</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/sqlite.svg"/><span class="skill-label-card-hz">SQL</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/java.svg"/><span class="skill-label-card-hz">Java</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vba.svg"/><span class="skill-label-card-hz">VBA Macro</span></div>
+    <!-- Data Analysis -->
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg"/><span class="skill-label-card-hz">Pandas</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/numpy.svg"/><span class="skill-label-card-hz">NumPy</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/matplotlib.svg"/><span class="skill-label-card-hz">Matplotlib</span></div>
+    <!-- Visualization -->
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg"/><span class="skill-label-card-hz">Power BI</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftexcel.svg"/><span class="skill-label-card-hz">Excel</span></div>
+    <!-- DB -->
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg"/><span class="skill-label-card-hz">MySQL</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/oracle.svg"/><span class="skill-label-card-hz">Oracle</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg"/><span class="skill-label-card-hz">NoSQL</span></div>
+    <!-- Version Control -->
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg"/><span class="skill-label-card-hz">Git</span></div>
+    <!-- Project Management -->
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg"/><span class="skill-label-card-hz">JIRA</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/alm.svg"/><span class="skill-label-card-hz">ALM</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/rally.svg"/><span class="skill-label-card-hz">Rally</span></div>
+    <!-- Automation -->
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg"/><span class="skill-label-card-hz">Selenium</span></div>
+    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/guidewire.svg"/><span class="skill-label-card-hz">Guidewire</span></div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 

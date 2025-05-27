@@ -642,7 +642,7 @@ with chat_container:
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
 
-
+st.markdown('<a name="about"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
 .hero-card {
@@ -785,6 +785,7 @@ st.markdown("""
   .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
 }
 </style>
+
 <div class="hero-card">
   <div class="hero-left">
     <div class="hero-pic-glow">

@@ -533,35 +533,81 @@ for proj in projects:
 grid_html += '</div>'
 st.markdown(grid_html, unsafe_allow_html=True)
 
-st.markdown(
-    """
-    <div class="card hover-zoom">
-      <div class="section-title">👤 Profile & About Me</div>
-      <div class="profile-card-wrapper">
-        <div class="profile-left">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
-          <h3 style="color:#fff; margin: 10px 0 5px;">Venkatesh Soundararajan</h3>
-          <p style="color:#ADD8E6; font-size: 15px; margin: 0;">
-            <strong>Software Development Intern</strong><br>
-            Data Engineering
-          </p>
-          <p style="color:#ffd166; margin-top: 6px;">
-            🍁 Calgary, AB, Canada
-          </p>
-        </div>
-        <div class="profile-right">
-          <div style="font-size:1.05rem; color:#fff; line-height:1.6; margin-top: 4px;">
-            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics.
-            I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure.
-            <br><br>
-            I'm currently pursuing my Master's in Data Science and Analytics at the University of Calgary. My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
-          </div>
-        </div>
-      </div>
+<style>
+.profile-row {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 30px;
+}
+.profile-card, .about-card {
+  flex: 1 1 0px;
+  min-width: 250px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 16px;
+  padding: 32px 18px 24px 18px;
+  box-shadow: 0 3px 16px rgba(44,62,80,0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeUpCard .85s cubic-bezier(.5,1.6,.4,1) both;
+}
+.profile-card {
+  max-width: 340px;
+  justify-content: flex-start;
+}
+.profile-pic-square {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 2.5px solid #fff;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 10px rgba(44,62,80,0.17);
+}
+.about-card {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+@media (max-width: 900px) {
+  .profile-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .about-card, .profile-card {
+    min-width: 0;
+    width: 100%;
+  }
+}
+</style>
+
+st.markdown("""
+<div class="profile-row">
+  <div class="profile-card" style="animation-delay:0.08s;">
+    <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
+    <h3 style="color:#fff; margin: 14px 0 5px;">Venkatesh Soundararajan</h3>
+    <p style="color:#ADD8E6; font-size: 15px; margin: 0;">
+      <strong>Software Development Intern</strong><br>
+      Data Engineering
+    </p>
+    <p style="color:#ffd166; margin-top: 10px;">
+      🍁 Calgary, AB, Canada
+    </p>
+  </div>
+  <div class="about-card" style="animation-delay:0.15s;">
+    <div style="font-size:1.07rem; color:#fff; line-height:1.7;">
+      <span style="font-weight:600; color:#ffd166; font-size:1.13rem;">About Me</span>
+      <br><br>
+      I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics.<br><br>
+      I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure.
+      <br><br>
+      I'm currently pursuing my Master's in Data Science and Analytics at the University of Calgary. My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
     </div>
-    """,
-    unsafe_allow_html=True
-)
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
 
 # --- Spacer before next section ---
 st.markdown(

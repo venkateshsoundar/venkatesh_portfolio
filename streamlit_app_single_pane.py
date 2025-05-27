@@ -564,6 +564,141 @@ with chat_container:
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
 
+<<<<<<< HEAD
+# -- About Me --
+st.markdown('<a id="about"></a>', unsafe_allow_html=True)
+st.markdown("""
+<style>
+.profile-row {
+  display: flex;
+  gap: 38px;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 32px;
+  margin-top: 14px;
+}
+.profile-card-fancy, .about-card-fancy {
+  flex: 1 1 0px;
+  min-width: 260px;
+  background: linear-gradient(135deg, #253451 0%, #334869 100%);
+  border-radius: 26px;
+  padding: 38px 28px 28px 28px;
+  box-shadow: 0 7px 28px rgba(20,30,55,0.20), 0 2px 14px rgba(44,62,80,0.09);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+  animation: fadeUpCard .9s cubic-bezier(.5,1.6,.4,1) both;
+}
+.profile-card-fancy {
+  max-width: 400px;
+  justify-content: flex-start;
+  text-align: center;
+  align-items: center;
+}
+.profile-glow {
+  width: 145px;
+  height: 145px;
+  border-radius: 24px;
+  margin-bottom: 18px;
+  box-shadow: 0 0 0 6px #ffd16688, 0 0 22px 8px #ffd16655, 0 2px 14px rgba(44,62,80,0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+.profile-pic-square {
+  width: 135px;
+  height: 135px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 2.5px solid #fff;
+  background: #fff;
+}
+.profile-card-fancy h2 {
+  color: #fff;
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 14px 0 8px 0;
+}
+.profile-title {
+  color: #ADD8E6;
+  font-size: 1.07rem;
+  margin-bottom: 2px;
+}
+.profile-role {
+  color: #c6e6ff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+.profile-location {
+  color: #ffd166;
+  font-weight: 600;
+  margin-top: 11px;
+  font-size: 1.11rem;
+  letter-spacing: 0.04em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.about-card-fancy {
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  padding-left: 44px;
+  padding-right: 36px;
+}
+.about-title {
+  font-weight: 700;
+  font-size: 1.22rem;
+  color: #ffd166;
+  margin-bottom: 16px;
+  margin-top: 0;
+  letter-spacing: .01em;
+}
+.about-body {
+  font-size: 1.11rem;
+  color: #f9f9f9;
+  line-height: 1.85;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 1100px) {
+  .about-card-fancy {padding-left:24px;padding-right:16px;}
+  .profile-card-fancy {padding:28px 14px 18px;}
+}
+@media (max-width: 900px) {
+  .profile-row {flex-direction: column;gap: 18px;}
+  .about-card-fancy, .profile-card-fancy {width: 100%;min-width: 0;}
+  .about-card-fancy {padding-left:18px;padding-right:14px;}
+}
+</style>
+<div class="profile-row">
+  <div class="profile-card-fancy" style="animation-delay:0.08s;">
+    <div class="profile-glow">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
+    </div>
+    <h2>Venkatesh<br>Soundararajan</h2>
+    <div class="profile-title">Software Development Intern</div>
+    <div class="profile-role">Data Engineering</div>
+    <div class="profile-location">
+      <span style="font-size:1.23rem;">&#127799;</span>
+      Calgary, AB, Canada
+    </div>
+  </div>
+  <div class="about-card-fancy" style="animation-delay:0.16s;">
+    <div class="about-title">About Me</div>
+    <div class="about-body">
+      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.<br><br>
+      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.<br><br>
+      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.<br>
+      My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+=======
+>>>>>>> fa1b44b811d49d71151711000fdb854478b661a8
 
 st.markdown("""
 <div class="profile-row">

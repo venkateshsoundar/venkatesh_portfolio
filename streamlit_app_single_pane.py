@@ -267,6 +267,52 @@ st.markdown("""
   font-weight: 500;
   border: 1.5px solid #40649633;
 }
+.profile-row {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 30px;
+}
+.profile-card, .about-card {
+  flex: 1 1 0px;
+  min-width: 250px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 16px;
+  padding: 32px 18px 24px 18px;
+  box-shadow: 0 3px 16px rgba(44,62,80,0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeUpCard .85s cubic-bezier(.5,1.6,.4,1) both;
+}
+.profile-card {
+  max-width: 340px;
+  justify-content: flex-start;
+}
+.profile-pic-square {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 2.5px solid #fff;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 10px rgba(44,62,80,0.17);
+}
+.about-card {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+@media (max-width: 900px) {
+  .profile-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .about-card, .profile-card {
+    min-width: 0;
+    width: 100%;
+  }
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -533,54 +579,7 @@ for proj in projects:
 grid_html += '</div>'
 st.markdown(grid_html, unsafe_allow_html=True)
 
-<style>
-.profile-row {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
-  align-items: stretch;
-  margin-bottom: 30px;
-}
-.profile-card, .about-card {
-  flex: 1 1 0px;
-  min-width: 250px;
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  border-radius: 16px;
-  padding: 32px 18px 24px 18px;
-  box-shadow: 0 3px 16px rgba(44,62,80,0.16);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  animation: fadeUpCard .85s cubic-bezier(.5,1.6,.4,1) both;
-}
-.profile-card {
-  max-width: 340px;
-  justify-content: flex-start;
-}
-.profile-pic-square {
-  width: 130px;
-  height: 130px;
-  object-fit: cover;
-  border-radius: 24px;
-  border: 2.5px solid #fff;
-  margin-bottom: 18px;
-  box-shadow: 0 2px 10px rgba(44,62,80,0.17);
-}
-.about-card {
-  align-items: flex-start;
-  justify-content: flex-start;
-}
-@media (max-width: 900px) {
-  .profile-row {
-    flex-direction: column;
-    gap: 18px;
-  }
-  .about-card, .profile-card {
-    min-width: 0;
-    width: 100%;
-  }
-}
-</style>
+
 
 st.markdown("""
 <div class="profile-row">

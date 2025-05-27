@@ -419,7 +419,7 @@ projects = [
 
 
 # ---- TABS ----
-tabs = st.tabs(["Home", "Projects", "Experience", "Skills", "Contact"])
+tabs = st.tabs(["Home", "Education", "Experience","Certifications","Recognitions","Projects Gallery,""Skills"])
 
 # ---- ABOUT TAB ----
 st.markdown("""
@@ -450,6 +450,34 @@ st.markdown("""
     color: #fff;
 }
 </style>
+""", unsafe_allow_html=True)
+
+# ---- NAVIGATION BAR ----
+st.markdown("""
+<style>
+.navbar {
+    display: flex; gap: 28px; justify-content: center; background: #1F2A44;
+    padding: 12px 0 10px 0; border-radius: 0 0 18px 18px;
+    margin-bottom: 32px; position: sticky; top: 0; z-index: 100;
+}
+.navbar a {
+    color: #ffd166; font-weight: bold; font-size: 1.08rem;
+    text-decoration: none; transition: color .18s;
+    padding: 7px 22px; border-radius: 8px;
+}
+.navbar a:hover {
+    background: #ffd16633; color: #fff;
+}
+</style>
+<div class="navbar">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#recognitions">Recognitions</a>
+    <a href="#projects">Projects Gallery</a>
+    <a href="#skills">Skills</a>
+</div>
 """, unsafe_allow_html=True)
 
 # --- Custom Styling ---

@@ -8,8 +8,7 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# ---- PAGE CONFIG & CSS ----
-st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
+
 st.markdown("""
 <style>
 .stApp { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat; background-attachment: fixed; color: #ffffff; font-family: 'Poppins', sans-serif;}

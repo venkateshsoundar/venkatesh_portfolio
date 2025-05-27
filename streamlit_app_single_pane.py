@@ -336,18 +336,85 @@ resume_df = load_resume_df(resume_url)
 resume_json = resume_df.to_json(orient='records')
 
 projects = [
-    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
-    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
-    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
-    {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
-    {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
-    {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
+    {
+        "title": "Canadian Quality of Life Analysis",
+        "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
+        "tools": ["Python", "Pandas", "Seaborn", "Tableau"],
+        "desc": "Analyzed Canadian provinces' quality of life using demographic data and advanced data visualization."
+    },
+    {
+        "title": "Alberta Wildfire Analysis",
+        "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
+        "tools": ["Python", "GeoPandas", "Power BI"],
+        "desc": "Mapped and predicted wildfire trends in Alberta with geospatial analysis and interactive dashboards."
+    },
+    {
+        "title": "Toronto Crime Drivers",
+        "url": "https://github.com/venkateshsoundar/toronto-crime-drivers",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg",
+        "tools": ["Python", "Pandas", "Matplotlib"],
+        "desc": "Investigated drivers of crime across Toronto neighborhoods to reveal actionable urban insights."
+    },
+    {
+        "title": "Weight Change Regression Analysis",
+        "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg",
+        "tools": ["Python", "Scikit-learn", "Seaborn"],
+        "desc": "Built regression models to predict weight changes based on lifestyle and demographic data."
+    },
+    {
+        "title": "Calgary Childcare Compliance",
+        "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg",
+        "tools": ["Python", "Pandas", "Plotly"],
+        "desc": "Assessed childcare center compliance in Calgary through data-driven dashboards."
+    },
+    {
+        "title": "Social Media Purchase Influence",
+        "url": "https://github.com/venkateshsoundar/social-media-purchase-influence",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg",
+        "tools": ["Python", "Scikit-learn", "Power BI"],
+        "desc": "Modeled and visualized the impact of social media on consumer purchase behavior."
+    },
+    {
+        "title": "Obesity Level Estimation",
+        "url": "https://github.com/venkateshsoundar/obesity-level-estimation",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg",
+        "tools": ["Python", "Logistic Regression", "Pandas"],
+        "desc": "Predicted obesity levels from health and lifestyle features using classification algorithms."
+    },
+    {
+        "title": "Weather Data Pipeline (AWS)",
+        "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg",
+        "tools": ["AWS", "Python", "Streamlit"],
+        "desc": "Automated weather data ingestion, storage, and visualization on AWS cloud with Streamlit dashboard."
+    },
+    {
+        "title": "Gmail Sentimental Analysis",
+        "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg",
+        "tools": ["Python", "NLTK", "Gmail API"],
+        "desc": "Classified and visualized sentiment of Gmail emails using NLP techniques."
+    },
+    {
+        "title": "Penguin Species Prediction Chatbot",
+        "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg",
+        "tools": ["Python", "Scikit-learn", "Streamlit"],
+        "desc": "Developed an interactive chatbot to predict penguin species from morphological features."
+    },
+    {
+        "title": "Uber Ride Prediction",
+        "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg",
+        "tools": ["Python", "XGBoost", "Matplotlib"],
+        "desc": "Predicted Uber ride durations using machine learning and explained predictions with visualizations."
+    }
 ]
+
 
 
 

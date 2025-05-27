@@ -944,20 +944,19 @@ st.markdown(
 )
 
 
+# --- PROJECTS GRID SECTION (COPY-PASTE READY) ---
+
 st.markdown("""
 <style>
-/* Container for 4-column grid */
 .projects-4col-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);   /* <-- Add this line! */
+  grid-template-columns: repeat(4, 1fr);
   gap: 24px;
   margin: 0 auto 36px auto;
   max-width: 1200px;
   justify-content: center;
   align-items: stretch;
 }
-
-/* Each project card */
 .project-main-card {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   border-radius: 14px;
@@ -976,8 +975,6 @@ st.markdown("""
   box-shadow: 0 12px 32px #ffd1661c, 0 2px 8px #22304A19;
   z-index: 2;
 }
-
-/* Image area, always square, smaller, centered */
 .project-img-holder {
   width: 100%;
   background: #222E40;
@@ -1008,7 +1005,6 @@ st.markdown("""
 .project-main-card:hover .project-img-inner img {
   transform: scale(1.07);
 }
-
 .project-card-info {
   flex: 1 1 0;
   display: flex;
@@ -1078,15 +1074,10 @@ st.markdown("""
 <div class="card hover-zoom" style="margin-bottom:10px;">
   <div class="section-title" style="background:#2C3E50;">Projects Gallery</div>
 </div>
-<div class="projects-4col-grid">
 """, unsafe_allow_html=True)
 
-# Start grid container
-grid_html = """
-<div class="projects-4col-grid">
-"""
-
-# Loop: add each card to the grid HTML string
+# --- BUILD THE GRID HTML ---
+grid_html = '<div class="projects-4col-grid">'
 for proj in projects:
     tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
     grid_html += f"""
@@ -1104,12 +1095,10 @@ for proj in projects:
       </div>
     </div>
     """
-
-# End grid container
 grid_html += "</div>"
 
-# Output the WHOLE grid at ONCE!
 st.markdown(grid_html, unsafe_allow_html=True)
+
 
 
 

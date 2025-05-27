@@ -943,21 +943,25 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---- Projects Gallery Section ----
-# ---- Projects Gallery Section ----
+
 st.markdown("""
 <style>
 .projects-4col-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 32px;
+  grid-template-columns: repeat(4, 260px);
+  gap: 28px;
+  justify-content: center;
   margin-bottom: 36px;
-  margin-top: 12px;
+  margin-top: 16px;
+  max-width: 1152px;
+  margin-left: auto;
+  margin-right: auto;
 }
 .project-square-card {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   border-radius: 18px;
   box-shadow: 0 8px 28px rgba(44,62,80,0.17);
+  width: 260px;
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -991,7 +995,7 @@ st.markdown("""
   transform: scale(1.06);
 }
 .project-card-content {
-  padding: 18px 18px 13px 18px;
+  padding: 16px 16px 11px 16px;
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
@@ -1000,31 +1004,31 @@ st.markdown("""
 .project-card-title {
   color: #ffd166;
   font-weight: 700;
-  font-size: 1.13rem;
-  margin-bottom: 8px;
-  min-height: 38px;
+  font-size: 1.07rem;
+  margin-bottom: 7px;
+  min-height: 36px;
 }
 .project-card-tools {
   margin-bottom: 7px;
   display: flex;
   flex-wrap: wrap;
-  gap: 8px;
+  gap: 7px;
 }
 .project-card-tool-badge {
   background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
   color: #22304A;
-  font-size: 0.96rem;
-  border-radius: 13px;
-  padding: 3px 12px 2px 12px;
+  font-size: 0.94rem;
+  border-radius: 11px;
+  padding: 3px 10px 2px 10px;
   font-weight: 500;
   margin-bottom: 2px;
   box-shadow: 0 1px 3px #22304A18;
 }
 .project-card-desc {
   color: #fff;
-  font-size: 1.02rem;
-  margin-bottom: 14px;
-  margin-top: 3px;
+  font-size: 0.99rem;
+  margin-bottom: 10px;
+  margin-top: 2px;
   flex: 1 1 0;
 }
 .project-card-link {
@@ -1032,7 +1036,7 @@ st.markdown("""
 }
 .project-card-link a {
   color: #ADD8E6;
-  font-size: 1.01rem;
+  font-size: 0.97rem;
   text-decoration: underline;
   font-weight: 600;
   transition: color 0.14s;
@@ -1040,20 +1044,17 @@ st.markdown("""
 .project-card-link a:hover {
   color: #ffd166;
 }
-/* Responsive tweaks */
-@media (max-width: 1300px) {
-  .projects-4col-grid {grid-template-columns: repeat(3, 1fr);}
+@media (max-width: 1152px) {
+  .projects-4col-grid {grid-template-columns: repeat(3, 260px);max-width: 864px;}
 }
-@media (max-width: 950px) {
-  .projects-4col-grid {grid-template-columns: repeat(2, 1fr);}
+@media (max-width: 864px) {
+  .projects-4col-grid {grid-template-columns: repeat(2, 260px);max-width: 556px;}
 }
-@media (max-width: 650px) {
-  .projects-4col-grid {grid-template-columns: 1fr;}
+@media (max-width: 556px) {
+  .projects-4col-grid {grid-template-columns: 1fr;max-width: 98vw;}
+  .project-square-card {width: 96vw;}
 }
 </style>
-<div class="card hover-zoom" style="margin-bottom:10px;">
-  <div class="section-title" style="background:#2C3E50;">Projects Gallery</div>
-</div>
 <div class="projects-4col-grid">
 """, unsafe_allow_html=True)
 
@@ -1078,8 +1079,6 @@ for proj in projects:
 projects_cards_html += "</div>"
 
 st.markdown(projects_cards_html, unsafe_allow_html=True)
-
-
 
 
 

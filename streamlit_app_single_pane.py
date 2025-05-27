@@ -944,8 +944,7 @@ st.markdown(
 )
 
 
-# --- PROJECTS GRID SECTION (COPY-PASTE READY) ---
-
+# --- CSS and header ---
 st.markdown("""
 <style>
 .projects-4col-grid {
@@ -1060,7 +1059,6 @@ st.markdown("""
 .project-card-link a:hover {
   color: #ffd166;
 }
-/* Responsive */
 @media (max-width: 1200px) {
   .projects-4col-grid {grid-template-columns: repeat(3, 1fr);}
 }
@@ -1076,31 +1074,26 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# --- BUILD THE GRID HTML ---
+# --- Projects Grid ---
 grid_html = '<div class="projects-4col-grid">'
 for proj in projects:
     tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
-    grid_html += f"""
-    <div class="project-main-card hover-zoom">
-      <div class="project-img-holder">
-        <div class="project-img-inner">
-          <img src="{proj['image']}" alt="{proj['title']}"/>
-        </div>
-      </div>
-      <div class="project-card-info">
-        <div class="project-title">{proj['title']}</div>
-        <div class="project-desc">{proj['desc']}</div>
-        <div class="project-tools-list">{tools_html}</div>
-        <div class="project-card-link"><a href="{proj['url']}" target="_blank">View on GitHub &rarr;</a></div>
-      </div>
-    </div>
-    """
-grid_html += "</div>"
+    grid_html += (
+        f'<div class="project-main-card hover-zoom">'
+        f'<div class="project-img-holder">'
+        f'<div class="project-img-inner">'
+        f'<img src="{proj["image"]}" alt="{proj["title"]}"/>'
+        f'</div></div>'
+        f'<div class="project-card-info">'
+        f'<div class="project-title">{proj["title"]}</div>'
+        f'<div class="project-desc">{proj["desc"]}</div>'
+        f'<div class="project-tools-list">{tools_html}</div>'
+        f'<div class="project-card-link"><a href="{proj["url"]}" target="_blank">View on GitHub &rarr;</a></div>'
+        f'</div></div>'
+    )
+grid_html += '</div>'
 
-# This line is critical!
 st.markdown(grid_html, unsafe_allow_html=True)
-
-
 
 
 
@@ -1266,156 +1259,7 @@ st.markdown("""
 
 
 
-# --- CSS and header ---
-st.markdown("""
-<style>
-.projects-4col-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-  margin: 0 auto 36px auto;
-  max-width: 1200px;
-  justify-content: center;
-  align-items: stretch;
-}
-.project-main-card {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  border-radius: 14px;
-  box-shadow: 0 2px 12px rgba(44,62,80,0.10);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 0;
-  transition: transform 0.18s, box-shadow 0.18s;
-  border: 1.5px solid #22304A2A;
-  height: 100%;
-  overflow: hidden;
-}
-.project-main-card:hover {
-  transform: translateY(-4px) scale(1.024);
-  box-shadow: 0 12px 32px #ffd1661c, 0 2px 8px #22304A19;
-  z-index: 2;
-}
-.project-img-holder {
-  width: 100%;
-  background: #222E40;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding-top: 20px;
-  padding-bottom: 10px;
-}
-.project-img-inner {
-  width: 90px;
-  height: 90px;
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 2px 10px #22304A11;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.project-img-inner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .18s cubic-bezier(.4,1.6,.6,1);
-  border-radius: 12px;
-}
-.project-main-card:hover .project-img-inner img {
-  transform: scale(1.07);
-}
-.project-card-info {
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 100%;
-  padding: 8px 16px 16px 16px;
-}
-.project-title {
-  font-size: 1.07rem;
-  font-weight: bold;
-  color: #ffd166;
-  margin-bottom: 6px;
-  margin-top: 2px;
-  text-align: center;
-  min-height: 38px;
-}
-.project-desc {
-  color: #fff;
-  font-size: 0.98rem;
-  margin-bottom: 10px;
-  text-align: center;
-  flex: 1 1 0;
-}
-.project-tools-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-  margin-bottom: 7px;
-  justify-content: center;
-}
-.project-tool-badge {
-  background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
-  color: #22304A;
-  font-size: 0.88rem;
-  border-radius: 9px;
-  padding: 2px 9px 1.5px 9px;
-  font-weight: 500;
-  margin-bottom: 2px;
-  box-shadow: 0 1px 3px #22304A13;
-}
-.project-card-link {
-  text-align: center;
-  margin-top: 6px;
-}
-.project-card-link a {
-  color: #ADD8E6;
-  font-size: 0.97rem;
-  text-decoration: underline;
-  font-weight: 600;
-  transition: color 0.13s;
-}
-.project-card-link a:hover {
-  color: #ffd166;
-}
-@media (max-width: 1200px) {
-  .projects-4col-grid {grid-template-columns: repeat(3, 1fr);}
-}
-@media (max-width: 900px) {
-  .projects-4col-grid {grid-template-columns: repeat(2, 1fr);}
-}
-@media (max-width: 600px) {
-  .projects-4col-grid {grid-template-columns: 1fr;}
-}
-</style>
-<div class="card hover-zoom" style="margin-bottom:10px;">
-  <div class="section-title" style="background:#2C3E50;">Projects Gallery</div>
-</div>
-""", unsafe_allow_html=True)
 
-# --- Projects Grid ---
-grid_html = '<div class="projects-4col-grid">'
-for proj in projects:
-    tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
-    grid_html += (
-        f'<div class="project-main-card hover-zoom">'
-        f'<div class="project-img-holder">'
-        f'<div class="project-img-inner">'
-        f'<img src="{proj["image"]}" alt="{proj["title"]}"/>'
-        f'</div></div>'
-        f'<div class="project-card-info">'
-        f'<div class="project-title">{proj["title"]}</div>'
-        f'<div class="project-desc">{proj["desc"]}</div>'
-        f'<div class="project-tools-list">{tools_html}</div>'
-        f'<div class="project-card-link"><a href="{proj["url"]}" target="_blank">View on GitHub &rarr;</a></div>'
-        f'</div></div>'
-    )
-grid_html += '</div>'
-
-st.markdown(grid_html, unsafe_allow_html=True)
 
 
 

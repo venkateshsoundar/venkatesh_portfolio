@@ -418,6 +418,121 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+st.markdown(
+      f"""
+      <style>
+        .welcome-card {{
+          background: url("{gif_url}") center/cover no-repeat;
+          border-radius: 16px;
+          padding: 3rem;
+          color: white;
+          min-height: 180px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          margin-bottom:24px;
+        }}
+      </style>
+      """,
+      unsafe_allow_html=True,
+  )
+st.markdown(
+      """
+      <div class="welcome-card">
+        <div>
+          <h1>Hello and Welcome...</h1>
+          <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
+        </div>
+      </div>
+      """,
+      unsafe_allow_html=True,
+  )
+  
+ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+st.markdown(
+      f"""
+      <style>
+        .welcome-card2 {{
+          background: url("{ai_url}") center/cover no-repeat;
+          border-radius: 16px;
+          padding: 0;
+          color: white;
+          height: 200px;
+          position: relative;
+          overflow: hidden;
+          margin-bottom: 32px;
+        }}
+        .welcome-card2 .text-container {{
+          position: absolute;
+          top: 70%;
+          right: 2rem;
+          transform: translateY(-50%);
+          text-align: right;
+        }}
+        .welcome-card2 h2 {{
+          margin: 0;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 700;
+          font-size: 1.8rem;
+        }}
+      </style>
+      """,
+      unsafe_allow_html=True,
+  )
+
+st.markdown(
+      """
+      <div class="welcome-card2">
+        <div class="text-container">
+          <h2>Ask Buddy Bot!</h2>
+        </div>
+      </div>
+      """,
+      unsafe_allow_html=True,
+  )
+  
+api_key = st.secrets["DEEPSEEK_API_KEY"]
+client = openai.OpenAI(
+      base_url="https://openrouter.ai/api/v1",
+      api_key=api_key,
+  )
+chat_container = st.container()
+with chat_container:
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.chat_message("user").write(user_input)
+        prompt = (
+            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+            + user_input
+        )
+        with st.spinner("Assistant is typing..."):
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat-v3-0324",
+                messages=[
+                    {"role": "system", "content": prompt}
+                ]
+            )
+            reply = response.choices[0].message.content
+        st.chat_message("assistant").write(reply)
+
+  
+st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+grid_html = '<div class="grid-container">'
+for proj in projects:
+    grid_html += (
+        f'<div class="project-item hover-zoom">'
+        f'  <a href="{proj["url"]}" target="_blank">'
+        f'    <img src="{proj["image"]}" class="card-img"/>'
+        f'    <div class="overlay">{proj["title"]}</div>'
+        f'  </a>'
+        f'</div>'
+    )
+grid_html += '</div>'
+st.markdown(grid_html, unsafe_allow_html=True)
+
 st.markdown(
     """
     <div class="card hover-zoom">
@@ -538,120 +653,7 @@ st.markdown(
 )
 
    # ---- WELCOME & CHATBOT ----
-gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
-st.markdown(
-      f"""
-      <style>
-        .welcome-card {{
-          background: url("{gif_url}") center/cover no-repeat;
-          border-radius: 16px;
-          padding: 3rem;
-          color: white;
-          min-height: 180px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          margin-bottom:24px;
-        }}
-      </style>
-      """,
-      unsafe_allow_html=True,
-  )
-st.markdown(
-      """
-      <div class="welcome-card">
-        <div>
-          <h1>Hello and Welcome...</h1>
-          <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-        </div>
-      </div>
-      """,
-      unsafe_allow_html=True,
-  )
-  
-ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-st.markdown(
-      f"""
-      <style>
-        .welcome-card2 {{
-          background: url("{ai_url}") center/cover no-repeat;
-          border-radius: 16px;
-          padding: 0;
-          color: white;
-          height: 200px;
-          position: relative;
-          overflow: hidden;
-          margin-bottom: 32px;
-        }}
-        .welcome-card2 .text-container {{
-          position: absolute;
-          top: 70%;
-          right: 2rem;
-          transform: translateY(-50%);
-          text-align: right;
-        }}
-        .welcome-card2 h2 {{
-          margin: 0;
-          font-family: 'Poppins', sans-serif;
-          font-weight: 700;
-          font-size: 1.8rem;
-        }}
-      </style>
-      """,
-      unsafe_allow_html=True,
-  )
 
-st.markdown(
-      """
-      <div class="welcome-card2">
-        <div class="text-container">
-          <h2>Ask Buddy Bot!</h2>
-        </div>
-      </div>
-      """,
-      unsafe_allow_html=True,
-  )
-  
-api_key = st.secrets["DEEPSEEK_API_KEY"]
-client = openai.OpenAI(
-      base_url="https://openrouter.ai/api/v1",
-      api_key=api_key,
-  )
-chat_container = st.container()
-with chat_container:
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat-v3-0324",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
-
-  
-st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-grid_html = '<div class="grid-container">'
-for proj in projects:
-    grid_html += (
-        f'<div class="project-item hover-zoom">'
-        f'  <a href="{proj["url"]}" target="_blank">'
-        f'    <img src="{proj["image"]}" class="card-img"/>'
-        f'    <div class="overlay">{proj["title"]}</div>'
-        f'  </a>'
-        f'</div>'
-    )
-grid_html += '</div>'
-st.markdown(grid_html, unsafe_allow_html=True)
 
 
 st.markdown("""

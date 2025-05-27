@@ -640,19 +640,19 @@ with tabs[1]:
           st.chat_message("assistant").write(reply)
 
   
-    st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-    grid_html = '<div class="grid-container">'
-    for proj in projects:
-        grid_html += (
-            f'<div class="project-item hover-zoom">'
-            f'  <a href="{proj["url"]}" target="_blank">'
-            f'    <img src="{proj["image"]}" class="card-img"/>'
-            f'    <div class="overlay">{proj["title"]}</div>'
-            f'  </a>'
-            f'</div>'
-        )
-    grid_html += '</div>'
-    st.markdown(grid_html, unsafe_allow_html=True)
+          st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+          grid_html = '<div class="grid-container">'
+          for proj in projects:
+              grid_html += (
+                  f'<div class="project-item hover-zoom">'
+                  f'  <a href="{proj["url"]}" target="_blank">'
+                  f'    <img src="{proj["image"]}" class="card-img"/>'
+                  f'    <div class="overlay">{proj["title"]}</div>'
+                  f'  </a>'
+                  f'</div>'
+              )
+          grid_html += '</div>'
+          st.markdown(grid_html, unsafe_allow_html=True)
 
 # ---- EXPERIENCE TAB ----
 with tabs[2]:

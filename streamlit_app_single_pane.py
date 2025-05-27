@@ -466,35 +466,45 @@ st.markdown("""
 
 gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
 st.markdown(
-      f"""
-      <style>
-        .welcome-card {{
-          background: url("{gif_url}") center/cover no-repeat;
-          border-radius: 16px;
-          padding: 3rem;
-          color: white;
-          min-height: 180px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          margin-bottom:24px;
-        }}
-      </style>
-      """,
-      unsafe_allow_html=True,
-  )
+    f"""
+    <style>
+      .welcome-card {{
+        background: url("{gif_url}") center/cover no-repeat;
+        border-radius: 16px;
+        padding: 3rem;
+        color: white;
+        min-height: 180px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        margin-bottom:24px;
+        box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
+        transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
+        position: relative;
+        cursor: pointer;
+      }}
+      .welcome-card:hover {{
+        transform: scale(1.035) translateY(-7px);
+        box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.17);
+        z-index: 4;
+      }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 st.markdown(
-      """
-      <div class="welcome-card">
-        <div>
-          <h1>Hello and Welcome...</h1>
-          <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-        </div>
+    """
+    <div class="welcome-card">
+      <div>
+        <h1>Hello and Welcome...</h1>
+        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
       </div>
-      """,
-      unsafe_allow_html=True,
-  )
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
   
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(
@@ -736,11 +746,6 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-
-
-
-
-
 
 
 # --- Spacer before next section ---

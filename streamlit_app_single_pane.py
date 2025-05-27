@@ -971,19 +971,20 @@ st.markdown("""
 .project-img-area {
   width: 100%;
   aspect-ratio: 1/1;
-  background: #1F2A44;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: #222;
   overflow: hidden;
+  position: relative;
 }
 .project-img-area img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .22s cubic-bezier(.4,1.6,.6,1);
   border-radius: 0;
 }
+
 .project-card:hover .project-img-area img {
   transform: scale(1.07);
 }

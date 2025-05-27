@@ -909,22 +909,26 @@ with project_container:
   st.markdown(grid_html, unsafe_allow_html=True)
 
 # --- Header Card for Skills Section ---
-st.markdown('''
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#2C3E50;">Core Skills and Tools</div>
-</div>
-''', unsafe_allow_html=True)
-
-# --- Skills Section: Each Category as a Card ---
 st.markdown("""
 <style>
-.skills-section-main-pane {
+.card.skills-pane-main {
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
-  border-radius: 18px;
-  box-shadow: 0 8px 28px rgba(30,50,90,0.10);
-  padding: 22px 14px 18px 14px;
+  border-radius: 28px;
+  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
+  padding: 36px 18px 32px 18px;
   margin-bottom: 36px;
-  margin-top: 10px;
+}
+.skills-header-title {
+  font-size: 1.55rem;
+  font-weight: bold;
+  color: #fff;
+  background: #2C3E50;
+  border-radius: 14px;
+  padding: 18px 0 18px 0;
+  margin-bottom: 32px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1px 12px rgba(20,30,55,0.06);
 }
 .skills-categories-grid {
   display: grid;
@@ -949,10 +953,10 @@ st.markdown("""
   color: #22304A !important;
 }
 .skill-category-title {
-  font-size: 1.03rem;
+  font-size: 1.07rem;
   color: #ffd166;
   font-weight: 700;
-  margin-bottom: 9px;
+  margin-bottom: 11px;
   letter-spacing: 0.01em;
 }
 .skill-list {
@@ -967,7 +971,7 @@ st.markdown("""
   display: flex;
   align-items: center;
   gap: 9px;
-  font-size: 1.01rem;
+  font-size: 1.02rem;
   color: #fff;
   font-weight: 500;
 }
@@ -981,11 +985,12 @@ st.markdown("""
 }
 @media (max-width: 600px) {
   .skills-categories-grid {grid-template-columns: 1fr;}
-  .skills-section-main-pane {padding: 6px 1px 2px 1px;}
+  .card.skills-pane-main {padding: 10px 1px 6px 1px;}
   .skill-category-card {padding: 8px 4px 7px 4px;}
 }
 </style>
-<div class="skills-section-main-pane">
+<div class="card skills-pane-main">
+  <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skills-categories-grid">
     <div class="skill-category-card">
       <div class="skill-category-title">Programming Languages</div>
@@ -1044,6 +1049,7 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 

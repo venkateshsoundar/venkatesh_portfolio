@@ -418,7 +418,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-  st.markdown(
+st.markdown(
     """
     <div class="card hover-zoom">
       <div class="section-title">👤 Profile & About Me</div>
@@ -449,7 +449,7 @@ st.markdown("""
 )
 
 # --- Spacer before next section ---
-  st.markdown(
+st.markdown(
     """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Education</div>
@@ -538,8 +538,8 @@ st.markdown("""
 )
 
    # ---- WELCOME & CHATBOT ----
-  gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
-  st.markdown(
+gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+st.markdown(
       f"""
       <style>
         .welcome-card {{
@@ -558,7 +558,7 @@ st.markdown("""
       """,
       unsafe_allow_html=True,
   )
-  st.markdown(
+st.markdown(
       """
       <div class="welcome-card">
         <div>
@@ -570,8 +570,8 @@ st.markdown("""
       unsafe_allow_html=True,
   )
   
-  ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-  st.markdown(
+ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+st.markdown(
       f"""
       <style>
         .welcome-card2 {{
@@ -601,7 +601,8 @@ st.markdown("""
       """,
       unsafe_allow_html=True,
   )
-  st.markdown(
+
+st.markdown(
       """
       <div class="welcome-card2">
         <div class="text-container">
@@ -612,160 +613,160 @@ st.markdown("""
       unsafe_allow_html=True,
   )
   
-  api_key = st.secrets["DEEPSEEK_API_KEY"]
-  client = openai.OpenAI(
+api_key = st.secrets["DEEPSEEK_API_KEY"]
+client = openai.OpenAI(
       base_url="https://openrouter.ai/api/v1",
       api_key=api_key,
   )
-  chat_container = st.container()
-  with chat_container:
-      user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-      if user_input:
-          st.chat_message("user").write(user_input)
-          prompt = (
-              "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-              "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-              + user_input
-          )
-          with st.spinner("Assistant is typing..."):
-              response = client.chat.completions.create(
-                  model="deepseek/deepseek-chat-v3-0324",
-                  messages=[
-                      {"role": "system", "content": prompt}
-                  ]
-              )
-              reply = response.choices[0].message.content
-          st.chat_message("assistant").write(reply)
+chat_container = st.container()
+with chat_container:
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.chat_message("user").write(user_input)
+        prompt = (
+            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+            + user_input
+        )
+        with st.spinner("Assistant is typing..."):
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat-v3-0324",
+                messages=[
+                    {"role": "system", "content": prompt}
+                ]
+            )
+            reply = response.choices[0].message.content
+        st.chat_message("assistant").write(reply)
 
   
-  st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-  grid_html = '<div class="grid-container">'
-  for proj in projects:
-      grid_html += (
-          f'<div class="project-item hover-zoom">'
-          f'  <a href="{proj["url"]}" target="_blank">'
-          f'    <img src="{proj["image"]}" class="card-img"/>'
-          f'    <div class="overlay">{proj["title"]}</div>'
-          f'  </a>'
-          f'</div>'
-      )
-  grid_html += '</div>'
-  st.markdown(grid_html, unsafe_allow_html=True)
+st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+grid_html = '<div class="grid-container">'
+for proj in projects:
+    grid_html += (
+        f'<div class="project-item hover-zoom">'
+        f'  <a href="{proj["url"]}" target="_blank">'
+        f'    <img src="{proj["image"]}" class="card-img"/>'
+        f'    <div class="overlay">{proj["title"]}</div>'
+        f'  </a>'
+        f'</div>'
+    )
+grid_html += '</div>'
+st.markdown(grid_html, unsafe_allow_html=True)
 
 
-  st.markdown("""
-  <div class="card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-cards-grid">
-  <div class="exp-card">
-    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-    <div class="exp-card-title">Software Developer Intern</div>
-    <div class="exp-card-company">Tech Insights Inc, Canada</div>
-    <div class="exp-card-date">May 2025 – Present</div>
-  </div>
-  <div class="exp-card">
-    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
-    <div class="exp-card-title">Senior Consultant</div>
-    <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
-    <div class="exp-card-date">October 2021 – August 2024</div>
-  </div>
-  <div class="exp-card">
-    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
-    <div class="exp-card-title">Consultant</div>
-    <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
-    <div class="exp-card-date">May 2018 – October 2021</div>
-  </div>
-  <div class="exp-card">
-    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
-    <div class="exp-card-title">Associate</div>
-    <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
-    <div class="exp-card-date">Sep 2013 – May 2018</div>
-  </div>
-  </div>
-  </div>
-  """, unsafe_allow_html=True)
+st.markdown("""
+<div class="card hover-zoom">
+<div class="section-title" style="background:#34495E;">Professional Experience</div>
+<div class="exp-cards-grid">
+<div class="exp-card">
+  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+  <div class="exp-card-title">Software Developer Intern</div>
+  <div class="exp-card-company">Tech Insights Inc, Canada</div>
+  <div class="exp-card-date">May 2025 – Present</div>
+</div>
+<div class="exp-card">
+  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+  <div class="exp-card-title">Senior Consultant</div>
+  <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+  <div class="exp-card-date">October 2021 – August 2024</div>
+</div>
+<div class="exp-card">
+  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+  <div class="exp-card-title">Consultant</div>
+  <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+  <div class="exp-card-date">May 2018 – October 2021</div>
+</div>
+<div class="exp-card">
+  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+  <div class="exp-card-title">Associate</div>
+  <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+  <div class="exp-card-date">Sep 2013 – May 2018</div>
+</div>
+</div>
+</div>
+""", unsafe_allow_html=True)
 
 # ---- SKILLS TAB ----
-  st.markdown(
-  '''
-  <div class="card hover-zoom">
-    <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-    <div class="skills-category">
-      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" class="skill-icon"/> Programming Languages</div>
-      <div class="skills-chips">
-        <span class="skill-chip">Python</span>
-        <span class="skill-chip">R</span>
-        <span class="skill-chip">SQL</span>
-        <span class="skill-chip">Java</span>
-        <span class="skill-chip">VBA Macro</span>
-      </div>
-    </div>
-    <div class="skills-category">
-      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg" class="skill-icon"/> Data Analysis</div>
-      <div class="skills-chips">
-        <span class="skill-chip">Pandas</span>
-        <span class="skill-chip">NumPy</span>
-        <span class="skill-chip">Matplotlib</span>
-      </div>
-    </div>
-    <div class="skills-category">
-      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg" class="skill-icon"/> Data Visualization</div>
-      <div class="skills-chips">
-        <span class="skill-chip">Power BI</span>
-        <span class="skill-chip">Excel</span>
-      </div>
-    </div>
-    <div class="skills-category">
-      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg" class="skill-icon"/> Database Management</div>
-      <div class="skills-chips">
-        <span class="skill-chip">MySQL</span>
-        <span class="skill-chip">Oracle</span>
-        <span class="skill-chip">NoSQL</span>
-      </div>
-    </div>
-    <div class="skills-category">
-      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg" class="skill-icon"/> Version Control</div>
-      <div class="skills-chips">
-        <span class="skill-chip">Git</span>
-      </div>
-    </div>
-    <div class="skills-category">
-      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg" class="skill-icon"/> Project Management</div>
-      <div class="skills-chips">
-        <span class="skill-chip">JIRA</span>
-        <span class="skill-chip">ALM</span>
-        <span class="skill-chip">Rally</span>
-      </div>
-    </div>
-    <div class="skills-category">
-      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg" class="skill-icon"/> Automation & Insurance Suite</div>
-      <div class="skills-chips">
-        <span class="skill-chip">Selenium WebDriver</span>
-        <span class="skill-chip">Guidewire</span>
-      </div>
+st.markdown(
+'''
+<div class="card hover-zoom">
+  <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
+  <div class="skills-category">
+    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" class="skill-icon"/> Programming Languages</div>
+    <div class="skills-chips">
+      <span class="skill-chip">Python</span>
+      <span class="skill-chip">R</span>
+      <span class="skill-chip">SQL</span>
+      <span class="skill-chip">Java</span>
+      <span class="skill-chip">VBA Macro</span>
     </div>
   </div>
-  ''',
-  unsafe_allow_html=True
+  <div class="skills-category">
+    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg" class="skill-icon"/> Data Analysis</div>
+    <div class="skills-chips">
+      <span class="skill-chip">Pandas</span>
+      <span class="skill-chip">NumPy</span>
+      <span class="skill-chip">Matplotlib</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg" class="skill-icon"/> Data Visualization</div>
+    <div class="skills-chips">
+      <span class="skill-chip">Power BI</span>
+      <span class="skill-chip">Excel</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg" class="skill-icon"/> Database Management</div>
+    <div class="skills-chips">
+      <span class="skill-chip">MySQL</span>
+      <span class="skill-chip">Oracle</span>
+      <span class="skill-chip">NoSQL</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg" class="skill-icon"/> Version Control</div>
+    <div class="skills-chips">
+      <span class="skill-chip">Git</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg" class="skill-icon"/> Project Management</div>
+    <div class="skills-chips">
+      <span class="skill-chip">JIRA</span>
+      <span class="skill-chip">ALM</span>
+      <span class="skill-chip">Rally</span>
+    </div>
+  </div>
+  <div class="skills-category">
+    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg" class="skill-icon"/> Automation & Insurance Suite</div>
+    <div class="skills-chips">
+      <span class="skill-chip">Selenium WebDriver</span>
+      <span class="skill-chip">Guidewire</span>
+    </div>
+  </div>
+</div>
+''',
+unsafe_allow_html=True
 )
 
 
-  st.markdown(
-      '''
-      <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Contact</div>
-      <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
-      <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
-      <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
-      <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
-      <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
-      </div>
-      <br>
-      <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
-      Calgary, AB, Canada<br>
-      Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
-      </div>
-      </div>
-      ''',
-      unsafe_allow_html=True
-  )
+st.markdown(
+    '''
+    <div class="card hover-zoom">
+    <div class="section-title" style="background:#34495E;">Contact</div>
+    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
+    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
+    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
+    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
+    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
+    </div>
+    <br>
+    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
+    Calgary, AB, Canada<br>
+    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
+    </div>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)

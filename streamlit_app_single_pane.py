@@ -910,22 +910,18 @@ with project_container:
 
 st.markdown("""
 <style>
-/* Horizontal card row for categories */
-.skills-hz-cards-row {
+.skills-main-wrapgrid {
   display: flex;
-  flex-direction: row;
-  gap: 24px;
-  overflow-x: auto;
-  padding-bottom: 8px;
-  margin-bottom: 14px;
-  scrollbar-width: thin;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: flex-start;
+  margin-bottom: 16px;
 }
-/* Category card style */
 .skills-category-card {
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 18px;
-  min-width: 250px;
-  max-width: 270px;
+  min-width: 220px;
+  max-width: 240px;
   box-shadow: 0 6px 22px rgba(40,60,90,0.13);
   padding: 28px 18px 22px 18px;
   display: flex;
@@ -933,8 +929,8 @@ st.markdown("""
   align-items: flex-start;
   transition: transform .17s, box-shadow .15s;
   border: 2px solid #40649633;
-  flex-shrink: 0;
   position: relative;
+  flex: 1 1 220px;
 }
 .skills-category-card:hover {
   transform: translateY(-8px) scale(1.05);
@@ -987,8 +983,8 @@ st.markdown("""
   color: #ffd166;
   letter-spacing: 0.01em;
 }
-@media (max-width: 900px) {
-  .skills-hz-cards-row {gap: 11px;}
+@media (max-width: 1200px) {
+  .skills-main-wrapgrid {gap: 14px;}
   .skills-category-card {min-width:165px;max-width:185px;padding:10px 4px 7px 4px;}
   .skills-cat-vert-list {gap:5px;}
   .skill-card-vt {gap:7px;padding:5px 2px 3px 2px;}
@@ -1005,7 +1001,7 @@ st.markdown("""
 </style>
 
 <div class="skills-header-main">Core Skills &amp; Tools</div>
-<div class="skills-hz-cards-row">
+<div class="skills-main-wrapgrid">
 
   <div class="skills-category-card">
     <div class="skills-cat-title">Programming Languages</div>
@@ -1070,6 +1066,7 @@ st.markdown("""
 
 </div>
 """, unsafe_allow_html=True)
+
 
 
 

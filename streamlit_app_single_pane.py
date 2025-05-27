@@ -716,7 +716,7 @@ st.markdown("""
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
     <div class="hero-role">Software Development Intern</div>
     <div class="hero-subrole">Data Engineering</div>
-    <div class="hero-location">&#127799; Calgary, AB, Canada</div>
+    <div class="hero-location">🍁 Calgary, AB, Canada</div>
   </div>
   <div class="hero-main-content">
     <div class="hero-about-title">About Me</div>
@@ -734,10 +734,6 @@ st.markdown("""
         <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"/></a>
         <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg"/></a>
       </div>
-    </div>
-    <div class="hero-footer">
-      Calgary, AB, Canada<br>
-      Email: <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank">venkatesh.balusoundar@gmail.com</a>
     </div>
   </div>
 </div>

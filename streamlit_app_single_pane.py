@@ -422,7 +422,7 @@ st.markdown("""
 .navbar {
     display: flex; gap: 28px; justify-content: center; background: #1F2A44;
     padding: 12px 0 10px 0; border-radius: 0 0 18px 18px;
-    margin-bottom: 32px; position: sticky; top: 0; z-index: 100;
+    margin-bottom: 20px; position: sticky; top: 0; z-index: 100;
 }
 .navbar a {
     color: #ffd166; font-weight: bold; font-size: 1.08rem;

@@ -508,46 +508,55 @@ st.markdown(
   
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(
-      f"""
-      <style>
-        .welcome-card2 {{
-          background: url("{ai_url}") center/cover no-repeat;
-          border-radius: 16px;
-          padding: 0;
-          color: white;
-          height: 200px;
-          position: relative;
-          overflow: hidden;
-          margin-bottom: 32px;
-        }}
-        .welcome-card2 .text-container {{
-          position: absolute;
-          top: 70%;
-          right: 2rem;
-          transform: translateY(-50%);
-          text-align: right;
-        }}
-        .welcome-card2 h2 {{
-          margin: 0;
-          font-family: 'Poppins', sans-serif;
-          font-weight: 700;
-          font-size: 1.8rem;
-        }}
-      </style>
-      """,
-      unsafe_allow_html=True,
-  )
+    f"""
+    <style>
+      .welcome-card2 {{
+        background: url("{ai_url}") center/cover no-repeat;
+        border-radius: 16px;
+        padding: 0;
+        color: white;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+        margin-bottom: 32px;
+        box-shadow: 0 6px 24px 0 rgba(60,100,180,0.09), 0 1.5px 8px 0 rgba(60,60,90,0.08);
+        transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
+        cursor: pointer;
+      }}
+      .welcome-card2:hover {{
+        transform: scale(1.035) translateY(-7px);
+        box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.16);
+        z-index: 4;
+      }}
+      .welcome-card2 .text-container {{
+        position: absolute;
+        top: 70%;
+        right: 2rem;
+        transform: translateY(-50%);
+        text-align: right;
+      }}
+      .welcome-card2 h2 {{
+        margin: 0;
+        font-family: 'Poppins', sans-serif;
+        font-weight: 700;
+        font-size: 1.8rem;
+      }}
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
 
 st.markdown(
-      """
-      <div class="welcome-card2">
-        <div class="text-container">
-          <h2>Ask Buddy Bot!</h2>
-        </div>
+    """
+    <div class="welcome-card2">
+      <div class="text-container">
+        <h2>Ask Buddy Bot!</h2>
       </div>
-      """,
-      unsafe_allow_html=True,
-  )
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
+
   
 api_key = st.secrets["DEEPSEEK_API_KEY"]
 client = openai.OpenAI(

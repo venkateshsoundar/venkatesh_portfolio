@@ -1265,7 +1265,8 @@ st.markdown("""
 
 
 
-# ---- CSS and Header ----
+
+# --- CSS and header ---
 st.markdown("""
 <style>
 .projects-4col-grid {
@@ -1395,28 +1396,27 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# ---- PROJECTS GRID (NO LEADING NEWLINE!) ----
+# --- Projects Grid ---
 grid_html = '<div class="projects-4col-grid">'
 for proj in projects:
     tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
-    grid_html += f'''
-    <div class="project-main-card hover-zoom">
-      <div class="project-img-holder">
-        <div class="project-img-inner">
-          <img src="{proj['image']}" alt="{proj['title']}"/>
-        </div>
-      </div>
-      <div class="project-card-info">
-        <div class="project-title">{proj['title']}</div>
-        <div class="project-desc">{proj['desc']}</div>
-        <div class="project-tools-list">{tools_html}</div>
-        <div class="project-card-link"><a href="{proj['url']}" target="_blank">View on GitHub &rarr;</a></div>
-      </div>
-    </div>
-    '''
+    grid_html += (
+        f'<div class="project-main-card hover-zoom">'
+        f'<div class="project-img-holder">'
+        f'<div class="project-img-inner">'
+        f'<img src="{proj["image"]}" alt="{proj["title"]}"/>'
+        f'</div></div>'
+        f'<div class="project-card-info">'
+        f'<div class="project-title">{proj["title"]}</div>'
+        f'<div class="project-desc">{proj["desc"]}</div>'
+        f'<div class="project-tools-list">{tools_html}</div>'
+        f'<div class="project-card-link"><a href="{proj["url"]}" target="_blank">View on GitHub &rarr;</a></div>'
+        f'</div></div>'
+    )
 grid_html += '</div>'
 
 st.markdown(grid_html, unsafe_allow_html=True)
+
 
 
 

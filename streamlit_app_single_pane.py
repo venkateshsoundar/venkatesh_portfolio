@@ -570,37 +570,48 @@ st.markdown("""
 .hero-card {
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  gap: 38px;
+  align-items: stretch;
+  gap: 0;
   background: linear-gradient(135deg, #253451 0%, #324665 100%);
-  border-radius: 28px;
-  box-shadow: 0 8px 34px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.09);
-  padding: 48px 44px 38px 44px;
-  margin-bottom: 34px;
-  min-height: 335px;
+  border-radius: 24px;
+  box-shadow: 0 6px 26px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.08);
+  margin-bottom: 32px;
+  min-height: 330px;
   position: relative;
+  overflow: hidden;
+  transition: transform .33s cubic-bezier(.37,1.7,.7,1), box-shadow .33s;
 }
-.hero-profile-pic-area {
+.hero-card:hover {
+  transform: translateY(-7px) scale(1.016);
+  box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
+}
+.hero-left {
+  flex: 1 1 0px;
+  min-width: 260px;
+  max-width: 340px;
+  background: linear-gradient(135deg, #253451 70%, #ffd16610 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-right: 18px;
-  min-width: 220px;
+  justify-content: flex-start;
+  padding: 38px 0 26px 0;
+  box-shadow: 2px 0 18px 0 #ffd16609;
+  z-index: 1;
 }
 .hero-pic-glow {
-  width: 148px;
-  height: 148px;
+  width: 130px;
+  height: 130px;
   border-radius: 50%;
-  margin-bottom: 14px;
-  box-shadow: 0 0 0 5px #ffd16699, 0 0 16px 7px #ffd16655, 0 2px 14px rgba(44,62,80,0.09);
+  margin-bottom: 17px;
+  box-shadow: 0 0 0 4px #ffd16699, 0 0 16px 7px #ffd16644, 0 2px 14px rgba(44,62,80,0.09);
   display: flex;
   align-items: center;
   justify-content: center;
   background: none;
 }
 .hero-pic-glow img {
-  width: 136px;
-  height: 136px;
+  width: 116px;
+  height: 116px;
   border-radius: 50%;
   object-fit: cover;
   border: 3px solid #fff;
@@ -608,74 +619,72 @@ st.markdown("""
 }
 .hero-name {
   color: #fff;
-  font-size: 2.13rem;
+  font-size: 1.44rem;
   font-weight: 800;
   text-align: center;
-  margin: 9px 0 4px 0;
-  line-height: 1.15;
+  margin: 6px 0 0 0;
+  line-height: 1.17;
+  letter-spacing: 0.01em;
 }
 .hero-role {
   color: #ADD8E6;
-  font-size: 1.11rem;
-  margin-bottom: 2px;
-  text-align: center;
-}
-.hero-subrole {
-  color: #c6e6ff;
-  font-size: 1.01rem;
-  font-weight: 500;
+  font-size: 1.03rem;
+  margin-top: 3px;
+  margin-bottom: 0px;
   text-align: center;
 }
 .hero-location {
   color: #ffd166;
   font-weight: 600;
   margin-top: 8px;
-  font-size: 1.08rem;
+  font-size: 1.01rem;
   text-align: center;
 }
-.hero-main-content {
+
+.hero-right {
   flex: 2 1 0px;
+  padding: 38px 38px 16px 38px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: flex-start;
-  min-width: 280px;
+  background: none;
 }
 .hero-about-title {
-  font-size: 1.20rem;
+  font-size: 1.13rem;
   color: #ffd166;
   font-weight: 700;
-  margin-bottom: 8px;
+  margin-bottom: 12px;
+  letter-spacing: .01em;
 }
 .hero-about-body {
   font-size: 1.09rem;
   color: #fff;
   line-height: 1.7;
-  margin-bottom: 18px;
+  margin-bottom: 26px;
 }
 .hero-contact-bar {
   width: 100%;
-  margin-top: 10px;
-  margin-bottom: 12px;
-  background: rgba(90, 130, 160, 0.13);
-  border-radius: 12px;
-  padding: 11px 0;
+  margin-top: 6px;
+  background: rgba(90, 130, 160, 0.12);
+  border-radius: 13px;
+  padding: 12px 0 6px 0;
   text-align: center;
+  box-shadow: 0 2px 14px rgba(255,209,102,0.04);
 }
 .hero-contact-bar-title {
   color: #fff;
   font-weight: 600;
-  font-size: 1.11rem;
-  margin-bottom: 10px;
+  font-size: 1.10rem;
+  margin-bottom: 5px;
   letter-spacing: 0.01em;
 }
 .hero-contact-icons {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 22px;
-  margin-top: 5px;
-  margin-bottom: 6px;
+  gap: 24px;
+  margin-top: 7px;
+  margin-bottom: 3px;
 }
 .hero-contact-icons a {
   display: inline-block;
@@ -688,37 +697,26 @@ st.markdown("""
   transform: translateY(-2px) scale(1.11);
 }
 .hero-contact-icons img {
-  width: 34px;
-  height: 34px;
+  width: 30px;
+  height: 30px;
   filter: invert(100%);
 }
-.hero-footer {
-  text-align: center;
-  color: #fff;
-  margin-top: 6px;
-  font-size: 1.05rem;
-}
-.hero-footer a {
-  color: #ffd166;
-  text-decoration: underline;
-  font-weight: 500;
-}
+
 @media (max-width: 900px) {
-  .hero-card {flex-direction: column;align-items: center;padding:28px 12px 16px;}
-  .hero-main-content {align-items:center;text-align:center;}
+  .hero-card {flex-direction: column;align-items: center;}
+  .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
 }
 </style>
 <div class="hero-card">
-  <div class="hero-profile-pic-area">
+  <div class="hero-left">
     <div class="hero-pic-glow">
       <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
     </div>
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
-    <div class="hero-role">Software Development Intern</div>
-    <div class="hero-subrole">Data Engineering</div>
+    <div class="hero-role">Software Development Intern<br>Data Engineering</div>
     <div class="hero-location">🍁 Calgary, AB, Canada</div>
   </div>
-  <div class="hero-main-content">
+  <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">
       I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.<br><br>
@@ -738,6 +736,7 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 

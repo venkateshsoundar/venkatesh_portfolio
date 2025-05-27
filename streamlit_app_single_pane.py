@@ -976,52 +976,52 @@ st.markdown("""
 >
 <div class="skills-main-vert-section">
   <div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Core Skills and Tools </div></div
-  <div class="skills-category-title">Programming Languages</div>
-  <div class="skills-scroll-container">
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg"/><span class="skill-label-card-hz">Python</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/r.svg"/><span class="skill-label-card-hz">R</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/sqlite.svg"/><span class="skill-label-card-hz">SQL</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/java.svg"/><span class="skill-label-card-hz">Java</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vba.svg"/><span class="skill-label-card-hz">VBA Macro</span></div>
-  </div>
+    <div class="skills-category-title">Programming Languages</div>
+    <div class="skills-scroll-container">
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg"/><span class="skill-label-card-hz">Python</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/r.svg"/><span class="skill-label-card-hz">R</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/sqlite.svg"/><span class="skill-label-card-hz">SQL</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/java.svg"/><span class="skill-label-card-hz">Java</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vba.svg"/><span class="skill-label-card-hz">VBA Macro</span></div>
+    </div>
 
-  <div class="skills-category-title">Data Analysis & Scientific Computing</div>
-  <div class="skills-scroll-container">
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg"/><span class="skill-label-card-hz">Pandas</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/numpy.svg"/><span class="skill-label-card-hz">NumPy</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/matplotlib.svg"/><span class="skill-label-card-hz">Matplotlib</span></div>
-  </div>
+    <div class="skills-category-title">Data Analysis & Scientific Computing</div>
+    <div class="skills-scroll-container">
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg"/><span class="skill-label-card-hz">Pandas</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/numpy.svg"/><span class="skill-label-card-hz">NumPy</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/matplotlib.svg"/><span class="skill-label-card-hz">Matplotlib</span></div>
+    </div>
 
-  <div class="skills-category-title">Data Visualization</div>
-  <div class="skills-scroll-container">
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg"/><span class="skill-label-card-hz">Power BI</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftexcel.svg"/><span class="skill-label-card-hz">Excel</span></div>
-  </div>
+    <div class="skills-category-title">Data Visualization</div>
+    <div class="skills-scroll-container">
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg"/><span class="skill-label-card-hz">Power BI</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftexcel.svg"/><span class="skill-label-card-hz">Excel</span></div>
+    </div>
 
-  <div class="skills-category-title">Database Management</div>
-  <div class="skills-scroll-container">
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg"/><span class="skill-label-card-hz">MySQL</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/oracle.svg"/><span class="skill-label-card-hz">Oracle</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg"/><span class="skill-label-card-hz">NoSQL</span></div>
-  </div>
+    <div class="skills-category-title">Database Management</div>
+    <div class="skills-scroll-container">
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg"/><span class="skill-label-card-hz">MySQL</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/oracle.svg"/><span class="skill-label-card-hz">Oracle</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg"/><span class="skill-label-card-hz">NoSQL</span></div>
+    </div>
 
-  <div class="skills-category-title">Version Control</div>
-  <div class="skills-scroll-container">
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg"/><span class="skill-label-card-hz">Git</span></div>
-  </div>
+    <div class="skills-category-title">Version Control</div>
+    <div class="skills-scroll-container">
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg"/><span class="skill-label-card-hz">Git</span></div>
+    </div>
 
-  <div class="skills-category-title">Project Management</div>
-  <div class="skills-scroll-container">
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg"/><span class="skill-label-card-hz">JIRA</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/alm.svg"/><span class="skill-label-card-hz">ALM</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/rally.svg"/><span class="skill-label-card-hz">Rally</span></div>
-  </div>
+    <div class="skills-category-title">Project Management</div>
+    <div class="skills-scroll-container">
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg"/><span class="skill-label-card-hz">JIRA</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/alm.svg"/><span class="skill-label-card-hz">ALM</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/rally.svg"/><span class="skill-label-card-hz">Rally</span></div>
+    </div>
 
-  <div class="skills-category-title">QA Automation & Insurance Suite</div>
-  <div class="skills-scroll-container">
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg"/><span class="skill-label-card-hz">Selenium</span></div>
-    <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/guidewire.svg"/><span class="skill-label-card-hz">Guidewire</span></div>
-  </div>
+    <div class="skills-category-title">QA Automation & Insurance Suite</div>
+    <div class="skills-scroll-container">
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg"/><span class="skill-label-card-hz">Selenium</span></div>
+      <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/guidewire.svg"/><span class="skill-label-card-hz">Guidewire</span></div>
+    </div>
 
 </div>
 """, unsafe_allow_html=True)

@@ -638,7 +638,7 @@ st.markdown("""
 }
 .hero-name {
   color: #fff;
-  font-size: 1.44rem;
+  font-size: 2.44rem;
   font-weight: 800;
   text-align: center;
   margin: 6px 0 0 0;

@@ -948,129 +948,126 @@ st.markdown("""
 <style>
 .projects-4col-grid {
   display: grid;
-  grid-template-columns: repeat(4, 260px);
+  grid-template-columns: repeat(4, 1fr);
   gap: 28px;
+  margin: 0 auto 36px auto;
+  max-width: 1200px;
   justify-content: center;
-  margin-bottom: 36px;
-  margin-top: 16px;
-  max-width: 1152px;
-  margin-left: auto;
-  margin-right: auto;
 }
-.project-square-card {
+.project-main-card {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   border-radius: 18px;
-  box-shadow: 0 8px 28px rgba(44,62,80,0.17);
-  width: 260px;
+  box-shadow: 0 8px 28px rgba(44,62,80,0.13);
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  transition: transform 0.18s, box-shadow 0.18s;
-  position: relative;
-  border: 2px solid #22304A38;
+  border: 1.5px solid #22304A33;
   min-width: 0;
+  height: 100%;
+  transition: transform 0.18s, box-shadow 0.18s;
 }
-.project-square-card:hover {
-  transform: translateY(-6px) scale(1.033);
-  box-shadow: 0 14px 42px #ffd16626, 0 2px 18px #22304A19;
-  z-index: 9;
+.project-main-card:hover {
+  transform: translateY(-7px) scale(1.035);
+  box-shadow: 0 16px 44px #ffd1661c, 0 2px 18px #22304A14;
+  z-index: 10;
 }
-.project-img-square {
+.project-img-holder {
   width: 100%;
-  aspect-ratio: 1/1;
-  background: #22304A;
+  aspect-ratio: 1 / 1;
+  background: #222E40;
+  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
-  overflow: hidden;
+  border-bottom: 2px solid #22304A33;
 }
-.project-img-square img {
+.project-img-holder img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .22s cubic-bezier(.4,1.6,.6,1);
   border-radius: 0;
+  transition: transform .21s cubic-bezier(.4,1.6,.6,1);
 }
-.project-square-card:hover .project-img-square img {
-  transform: scale(1.06);
+.project-main-card:hover .project-img-holder img {
+  transform: scale(1.045);
 }
-.project-card-content {
-  padding: 16px 16px 11px 16px;
-  flex: 1 1 0;
+.project-card-info {
+  padding: 17px 17px 10px 17px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  flex: 1 1 0;
 }
-.project-card-title {
+.project-title {
+  font-size: 1.09rem;
+  font-weight: bold;
   color: #ffd166;
-  font-weight: 700;
-  font-size: 1.07rem;
   margin-bottom: 7px;
   min-height: 36px;
 }
-.project-card-tools {
-  margin-bottom: 7px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 7px;
-}
-.project-card-tool-badge {
-  background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
-  color: #22304A;
-  font-size: 0.94rem;
-  border-radius: 11px;
-  padding: 3px 10px 2px 10px;
-  font-weight: 500;
-  margin-bottom: 2px;
-  box-shadow: 0 1px 3px #22304A18;
-}
-.project-card-desc {
+.project-desc {
   color: #fff;
-  font-size: 0.99rem;
-  margin-bottom: 10px;
+  font-size: 1.01rem;
+  margin-bottom: 11px;
   margin-top: 2px;
   flex: 1 1 0;
 }
+.project-tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 9px;
+}
+.project-tool-badge {
+  background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
+  color: #22304A;
+  font-size: 0.92rem;
+  border-radius: 10px;
+  padding: 2px 10px 1.5px 10px;
+  font-weight: 500;
+  box-shadow: 0 1px 3px #22304A15;
+}
 .project-card-link {
   text-align: right;
+  margin-top: 6px;
 }
 .project-card-link a {
   color: #ADD8E6;
   font-size: 0.97rem;
   text-decoration: underline;
   font-weight: 600;
-  transition: color 0.14s;
+  transition: color 0.15s;
 }
 .project-card-link a:hover {
   color: #ffd166;
 }
-@media (max-width: 1152px) {
-  .projects-4col-grid {grid-template-columns: repeat(3, 260px);max-width: 864px;}
+@media (max-width: 1200px) {
+  .projects-4col-grid {grid-template-columns: repeat(3, 1fr);}
 }
-@media (max-width: 864px) {
-  .projects-4col-grid {grid-template-columns: repeat(2, 260px);max-width: 556px;}
+@media (max-width: 900px) {
+  .projects-4col-grid {grid-template-columns: repeat(2, 1fr);}
 }
-@media (max-width: 556px) {
-  .projects-4col-grid {grid-template-columns: 1fr;max-width: 98vw;}
-  .project-square-card {width: 96vw;}
+@media (max-width: 600px) {
+  .projects-4col-grid {grid-template-columns: 1fr;}
 }
 </style>
+<div class="card hover-zoom" style="margin-bottom:10px;">
+  <div class="section-title" style="background:#2C3E50;">Projects Gallery</div>
+</div>
 <div class="projects-4col-grid">
 """, unsafe_allow_html=True)
 
-# Build project cards in HTML
 projects_cards_html = ""
 for proj in projects:
-    tools_html = ''.join(f'<span class="project-card-tool-badge">{tool}</span>' for tool in proj["tools"])
+    tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
     projects_cards_html += f"""
-    <div class="project-square-card hover-zoom">
-      <div class="project-img-square">
+    <div class="project-main-card hover-zoom">
+      <div class="project-img-holder">
         <img src="{proj['image']}" alt="{proj['title']}"/>
       </div>
-      <div class="project-card-content">
-        <div class="project-card-title">{proj['title']}</div>
-        <div class="project-card-tools">{tools_html}</div>
-        <div class="project-card-desc">{proj['desc']}</div>
+      <div class="project-card-info">
+        <div class="project-title">{proj['title']}</div>
+        <div class="project-desc">{proj['desc']}</div>
+        <div class="project-tools-list">{tools_html}</div>
         <div class="project-card-link"><a href="{proj['url']}" target="_blank">View on GitHub &rarr;</a></div>
       </div>
     </div>
@@ -1079,6 +1076,7 @@ for proj in projects:
 projects_cards_html += "</div>"
 
 st.markdown(projects_cards_html, unsafe_allow_html=True)
+
 
 
 

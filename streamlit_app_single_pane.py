@@ -1081,10 +1081,15 @@ st.markdown("""
 <div class="projects-4col-grid">
 """, unsafe_allow_html=True)
 
-projects_cards_html = ""
+# Start grid container
+grid_html = """
+<div class="projects-4col-grid">
+"""
+
+# Loop: add each card to the grid HTML string
 for proj in projects:
     tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
-    projects_cards_html += f"""
+    grid_html += f"""
     <div class="project-main-card hover-zoom">
       <div class="project-img-holder">
         <div class="project-img-inner">
@@ -1100,9 +1105,12 @@ for proj in projects:
     </div>
     """
 
-projects_cards_html += "</div>"
+# End grid container
+grid_html += "</div>"
 
-st.markdown(projects_cards_html, unsafe_allow_html=True)
+# Output the WHOLE grid at ONCE!
+st.markdown(grid_html, unsafe_allow_html=True)
+
 
 
 

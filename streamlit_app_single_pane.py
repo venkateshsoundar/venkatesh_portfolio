@@ -698,10 +698,10 @@ st.markdown(
         </div>
       </div>
     </div>
+    
     """,
     unsafe_allow_html=True
 )
-
 
 st.markdown("""
 <div class="card hover-zoom">
@@ -734,6 +734,7 @@ st.markdown("""
 </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 # ---- SKILLS TAB ----
 st.markdown(

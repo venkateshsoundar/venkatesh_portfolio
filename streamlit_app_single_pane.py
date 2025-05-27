@@ -943,137 +943,144 @@ st.markdown(
     unsafe_allow_html=True
 )
 
+# ---- Projects Gallery Section ----
 st.markdown("""
 <style>
-.projects-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 30px;
-  margin-top: 10px;
-  margin-bottom: 32px;
+.projects-flex-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  justify-content: flex-start;
+  margin-bottom: 36px;
 }
-.project-card {
-  background: linear-gradient(135deg, #26334d 0%, #324665 100%);
-  border-radius: 16px;
-  box-shadow: 0 8px 22px rgba(44,62,80,0.16);
-  overflow: hidden;
+.project-square-card {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 28px rgba(44,62,80,0.17);
+  width: 310px;
+  min-width: 250px;
+  max-width: 340px;
+  margin-bottom: 0;
   display: flex;
   flex-direction: column;
-  min-height: 355px;
-  transition: transform .19s, box-shadow .18s;
+  overflow: hidden;
+  transition: transform 0.18s, box-shadow 0.18s;
   position: relative;
+  border: 2px solid #22304A38;
 }
-.project-card:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 14px 30px #ffd16628, 0 2px 14px #22304A14;
-  z-index: 11;
+.project-square-card:hover {
+  transform: translateY(-6px) scale(1.033);
+  box-shadow: 0 14px 42px #ffd16626, 0 2px 18px #22304A19;
+  z-index: 9;
 }
-.project-img-area {
+.project-img-square {
   width: 100%;
   aspect-ratio: 1/1;
+  background: #22304A;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: #222;
   overflow: hidden;
-  position: relative;
 }
-.project-img-area img {
+.project-img-square img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .22s cubic-bezier(.4,1.6,.6,1);
   border-radius: 0;
 }
-
-.project-card:hover .project-img-area img {
-  transform: scale(1.07);
+.project-square-card:hover .project-img-square img {
+  transform: scale(1.06);
 }
-.project-content-area {
-  padding: 16px 16px 12px 16px;
+.project-card-content {
+  padding: 18px 18px 13px 18px;
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 }
-.project-title {
+.project-card-title {
   color: #ffd166;
   font-weight: 700;
-  font-size: 1.12rem;
+  font-size: 1.13rem;
   margin-bottom: 8px;
-  min-height: 36px;
+  min-height: 38px;
 }
-.project-tools-list {
+.project-card-tools {
   margin-bottom: 7px;
   display: flex;
   flex-wrap: wrap;
-  gap: 7px;
+  gap: 8px;
 }
-.tool-badge {
+.project-card-tool-badge {
   background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
   color: #22304A;
-  font-size: 0.94rem;
-  border-radius: 12px;
-  padding: 3px 11px 2px 11px;
+  font-size: 0.96rem;
+  border-radius: 13px;
+  padding: 3px 12px 2px 12px;
   font-weight: 500;
   margin-bottom: 2px;
-  box-shadow: 0 1px 3px #22304A19;
+  box-shadow: 0 1px 3px #22304A18;
 }
-.project-desc {
+.project-card-desc {
   color: #fff;
-  font-size: 1.01rem;
-  margin-bottom: 13px;
+  font-size: 1.02rem;
+  margin-bottom: 14px;
   margin-top: 3px;
   flex: 1 1 0;
 }
-.project-link {
+.project-card-link {
   text-align: right;
 }
-.project-link a {
+.project-card-link a {
   color: #ADD8E6;
-  font-size: 0.98rem;
+  font-size: 1.01rem;
   text-decoration: underline;
   font-weight: 600;
-  transition: color 0.15s;
+  transition: color 0.14s;
 }
-.project-link a:hover {
+.project-card-link a:hover {
   color: #ffd166;
 }
-@media (max-width: 1200px) {
-  .projects-gallery-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+@media (max-width: 1150px) {
+  .projects-flex-row {justify-content: center;}
 }
-@media (max-width: 750px) {
-  .projects-gallery-grid {
-    grid-template-columns: 1fr;
-  }
+@media (max-width: 900px) {
+  .projects-flex-row {gap: 18px;}
+  .project-square-card {width: 97vw;max-width: 420px;}
+}
+@media (max-width: 500px) {
+  .project-square-card {width: 99vw;max-width: 99vw;}
 }
 </style>
+<div class="card hover-zoom" style="margin-bottom:10px;">
+  <div class="section-title" style="background:#2C3E50;">Projects Gallery</div>
+</div>
+<div class="projects-flex-row">
 """, unsafe_allow_html=True)
 
-# ---- Projects Gallery Section ----
-st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-
-projects_html = '<div class="projects-gallery-grid">'
+# Build project cards in HTML
+projects_cards_html = ""
 for proj in projects:
-    tools_html = ''.join(f'<span class="tool-badge">{tool}</span>' for tool in proj["tools"])
-    projects_html += f"""
-    <div class="project-card hover-zoom">
-      <div class="project-img-area">
+    tools_html = ''.join(f'<span class="project-card-tool-badge">{tool}</span>' for tool in proj["tools"])
+    projects_cards_html += f"""
+    <div class="project-square-card hover-zoom">
+      <div class="project-img-square">
         <img src="{proj['image']}" alt="{proj['title']}"/>
       </div>
-      <div class="project-content-area">
-        <div class="project-title">{proj['title']}</div>
-        <div class="project-tools-list">{tools_html}</div>
-        <div class="project-desc">{proj['desc']}</div>
-        <div class="project-link"><a href="{proj['url']}" target="_blank">View on GitHub &rarr;</a></div>
+      <div class="project-card-content">
+        <div class="project-card-title">{proj['title']}</div>
+        <div class="project-card-tools">{tools_html}</div>
+        <div class="project-card-desc">{proj['desc']}</div>
+        <div class="project-card-link"><a href="{proj['url']}" target="_blank">View on GitHub &rarr;</a></div>
       </div>
     </div>
     """
-projects_html += '</div>'
 
-# ---- THIS IS CORRECT ----
-st.markdown(projects_html, unsafe_allow_html=True)
+projects_cards_html += "</div>"
+
+st.markdown(projects_cards_html, unsafe_allow_html=True)
+
 
 
 

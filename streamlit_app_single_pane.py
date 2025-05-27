@@ -908,8 +908,6 @@ with project_container:
   grid_html += '</div>'
   st.markdown(grid_html, unsafe_allow_html=True)
 
-st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Core Skills and Tools </div></div>', unsafe_allow_html=True)
-
 st.markdown("""
 <style>
 .skills-main-vert-section {
@@ -975,7 +973,7 @@ st.markdown("""
   .skill-card-hz {min-width: 82px;max-width:100px;padding:10px 2px 8px 2px;}
 }
 </style>
-
+<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Core Skills and Tools </div></div>
 <div class="skills-main-vert-section">
 
   <div class="skills-category-title">Programming Languages</div>

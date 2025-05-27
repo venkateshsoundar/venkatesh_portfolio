@@ -891,94 +891,22 @@ projects = [
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
 ]
 
-# --- CSS for Animated Project Cards ---
-st.markdown("""
-<style>
-.project-gallery-title {
-  font-size: 1.6rem;
-  font-weight: 700;
-  margin: 18px 0 15px 0;
-  color: #ffd166;
-  letter-spacing: .02em;
-  text-align: left;
-}
-.projects-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-  gap: 30px;
-  margin-bottom: 20px;
-}
-.project-card-anim {
-  background: linear-gradient(135deg, #243552 0%, #34495E 100%);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 0 6px 22px rgba(44,62,80,0.13);
-  transition: transform .33s cubic-bezier(.3,1.45,.57,1.1), box-shadow .27s;
-  cursor: pointer;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  min-height: 245px;
-}
-.project-card-anim:hover {
-  transform: translateY(-9px) scale(1.055);
-  box-shadow: 0 16px 42px 0 #ffd1662c, 0 2px 14px rgba(44,62,80,0.17);
-  z-index: 3;
-}
-.project-img-area {
-  width: 100%;
-  aspect-ratio: 4/3;
-  overflow: hidden;
-  background: #22293d;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.project-img-area img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1);
-  border-top-left-radius: 16px;
-  border-top-right-radius: 16px;
-}
-.project-card-anim:hover .project-img-area img {
-  transform: scale(1.055);
-}
-.project-card-title {
-  font-weight: bold;
-  color: #ffd166;
-  font-size: 1.13rem;
-  text-align: left;
-  margin: 18px 14px 6px 14px;
-}
-.project-card-link {
-  text-decoration: none;
-  color: inherit;
-}
-.project-card-title:hover { text-decoration: underline; }
-</style>
-""", unsafe_allow_html=True)
-
-# --- Project Gallery HTML ---
-project_grid_html = '<div class="project-gallery-title">Projects Gallery</div>'
-project_grid_html += '<div class="projects-grid">'
-for proj in projects:
-    project_grid_html += f'''
-    <a class="project-card-link" href="{proj["url"]}" target="_blank">
-      <div class="project-card-anim">
-        <div class="project-img-area">
-          <img src="{proj["image"]}" loading="lazy" />
-        </div>
-        <div class="project-card-title">{proj["title"]}</div>
-      </div>
-    </a>
-    '''
-project_grid_html += '</div>'
-
-st.markdown(project_grid_html, unsafe_allow_html=True)
-
-
+project_container = st.container()
+    # --- Projects Showcase ---
+with project_container:
+  st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+  grid_html = '<div class="grid-container">'
+  for proj in projects:
+      grid_html += (
+          f'<div class="project-item hover-zoom">'
+          f'  <a href="{proj["url"]}" target="_blank">'
+          f'    <img src="{proj["image"]}" class="card-img"/>'
+          f'    <div class="overlay">{proj["title"]}</div>'
+          f'  </a>'
+          f'</div>'
+      )
+  grid_html += '</div>'
+  st.markdown(grid_html, unsafe_allow_html=True)
 
 # ---- SKILLS TAB ----
 st.markdown(

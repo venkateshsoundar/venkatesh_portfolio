@@ -620,7 +620,7 @@ st.markdown("""
 .hero-pic-glow {
   width: 130px;
   height: 130px;
-  border-radius: 50%;
+  border-radius: 20%;
   margin-bottom: 17px;
   box-shadow: 0 0 0 4px #ffd16699, 0 0 16px 7px #ffd16644, 0 2px 14px rgba(44,62,80,0.09);
   display: flex;

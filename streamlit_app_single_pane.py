@@ -416,42 +416,6 @@ projects = [
 ]
 
 
-
-
-# ---- TABS ----
-tabs = st.tabs(["Home", "Education", "Experience","Certifications","Recognitions","Projects Gallery,""Skills"])
-
-# ---- ABOUT TAB ----
-st.markdown("""
-<style>
-.profile-pic-popout {
-    width: 180px;
-    border-radius: 50%;
-    border: 4px solid #ffd166;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.4);
-    margin-bottom: 12px;
-}
-.card {
-    background: #1F2A44;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
-.hover-zoom:hover {
-    transform: scale(1.02);
-}
-.section-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 12px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    color: #fff;
-}
-</style>
-""", unsafe_allow_html=True)
-
 # ---- NAVIGATION BAR ----
 st.markdown("""
 <style>

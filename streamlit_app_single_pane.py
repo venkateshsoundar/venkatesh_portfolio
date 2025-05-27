@@ -8,9 +8,7 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# ---- ANIMATION CSS ----
 st.markdown("""
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
@@ -18,39 +16,30 @@ st.markdown("""
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
-.nav-bar {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    background: rgba(44,62,80,0.96);
-    padding: 14px 0 10px 0;
-    border-radius: 0 0 20px 20px;
-    position: sticky;
-    top: 0;
-    z-index: 999;
-    margin-bottom: 35px;
+.stTabs [data-baseweb="tab-list"] {
+    gap: 10px;
+    border-bottom: 3px solid #22304A;
 }
-.nav-link {
+.stTabs [data-baseweb="tab"] {
     background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
     color: #ffd166 !important;
-    text-decoration: none;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 16px 36px !important;
+    font-size: 1.14rem;
     font-weight: bold;
-    font-size: 1.11rem;
-    letter-spacing: 1px;
-    padding: 11px 30px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(44,62,80,0.12);
-    transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s, background .18s;
-    display: inline-block;
-    margin-bottom: 0;
-    scroll-behavior: smooth;
+    margin-bottom: -3px !important;
+    transition: all .25s;
 }
-.nav-link:hover, .nav-link:focus {
-    transform: translateY(-4px) scale(1.05);
-    box-shadow: 0 8px 16px rgba(0,0,0,0.22);
-    background: linear-gradient(135deg, #406496 0%, #22304A 100%);
+.stTabs [data-baseweb="tab"]:hover {
     color: #fff !important;
-    text-decoration: none;
+    background: linear-gradient(135deg, #406496 0%, #22304A 100%);
+}
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, #22304A 0%, #ffd166 150%) !important;
+    color: #222 !important;
+    border-bottom: 4px solid #ffd166 !important;
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 6px 22px rgba(44,62,80,0.13);
 }
 .card {
   width: 100% !important;
@@ -122,8 +111,22 @@ st.markdown("""
   top: 20px;
   z-index: 10;
 }
-/* Add all .edu-card, .exp-card, .cert-card, .skills-chips, etc., CSS from previous file here... */
-/* --- Education Cards --- */
+.profile-card-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+.profile-card-content {
+  padding-top: 200px;
+}
+.contact-icon {
+  width: 32px;
+  height: 32px;
+  filter: invert(100%);
+  color:#ADD8E6;
+  margin: 0 8px;
+  vertical-align: middle;
+}
 .edu-cards-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -161,6 +164,7 @@ st.markdown("""
 .edu-card-degree { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px; color: #ffd166;}
 .edu-card-univ { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
 .edu-card-date { color: #fff; font-size: 0.98rem;}
+/* Awards/Certifications */
 .cert-grid, .awards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -191,6 +195,7 @@ st.markdown("""
 .cert-provider, .award-sub { font-size: 0.99rem; color: #ADD8E6; margin-bottom: 2px;}
 .cert-year, .award-year { font-size: 0.97rem; color: #fff; opacity: 0.8;}
 .award-year {margin-bottom: 2px;}
+/* Experience */
 .exp-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -228,6 +233,7 @@ st.markdown("""
 .exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
 .exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
 .exp-card-date { color: #ffd166; font-size: 0.98rem;}
+/* Skills */
 .skills-category {
   margin-bottom: 14px;
 }
@@ -261,13 +267,51 @@ st.markdown("""
   font-weight: 500;
   border: 1.5px solid #40649633;
 }
-.contact-icon {
-  width: 32px;
-  height: 32px;
-  filter: invert(100%);
-  color:#ADD8E6;
-  margin: 0 8px;
-  vertical-align: middle;
+.profile-row {
+  display: flex;
+  gap: 32px;
+  justify-content: center;
+  align-items: stretch;
+  margin-bottom: 30px;
+}
+.profile-card, .about-card {
+  flex: 1 1 0px;
+  min-width: 250px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 16px;
+  padding: 32px 18px 24px 18px;
+  box-shadow: 0 3px 16px rgba(44,62,80,0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeUpCard .85s cubic-bezier(.5,1.6,.4,1) both;
+}
+.profile-card {
+  max-width: 340px;
+  justify-content: flex-start;
+}
+.profile-pic-square {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 2.5px solid #fff;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 10px rgba(44,62,80,0.17);
+}
+.about-card {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+@media (max-width: 900px) {
+  .profile-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .about-card, .profile-card {
+    min-width: 0;
+    width: 100%;
+  }
 }
 </style>
 """, unsafe_allow_html=True)
@@ -299,62 +343,207 @@ projects = [
     {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
     {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
     {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
     {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
     {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
 ]
 
-# ---- NAVIGATION BAR ----
+
+
+# ---- TABS ----
+tabs = st.tabs(["Home", "Projects", "Experience", "Skills", "Contact"])
+
+# ---- ABOUT TAB ----
 st.markdown("""
-<div class="nav-bar">
-    <a class="nav-link" href="#welcome">Home</a>
-    <a class="nav-link" href="#about">About</a>
-    <a class="nav-link" href="#education">Education</a>
-    <a class="nav-link" href="#certifications">Certifications</a>
-    <a class="nav-link" href="#awards">Awards</a>
-    <a class="nav-link" href="#projects">Projects</a>
-    <a class="nav-link" href="#experience">Experience</a>
-    <a class="nav-link" href="#skills">Skills</a>
-    <a class="nav-link" href="#contact">Contact</a>
-</div>
+<style>
+.profile-pic-popout {
+    width: 180px;
+    border-radius: 50%;
+    border: 4px solid #ffd166;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.4);
+    margin-bottom: 12px;
+}
+.card {
+    background: #1F2A44;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+.hover-zoom:hover {
+    transform: scale(1.02);
+}
+.section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    color: #fff;
+}
+</style>
 """, unsafe_allow_html=True)
 
-# ---- SECTIONS ----
+# --- Custom Styling ---
+st.markdown("""
+<style>
+/* Square profile pic with animation */
+.profile-pic-square {
+    width: 180px;
+    height: 180px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 4px solid #ffd166;
+    box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
+    margin: 0 auto 20px auto;
+    display: block;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-pic-square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
+}
 
-# -- Welcome --
-st.markdown('<a id="welcome"></a>', unsafe_allow_html=True)
+/* Card styling */
+.card {
+    background: #1F2A44;
+    padding: 20px;
+    border-radius: 16px;
+    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
+    transition: transform 0.3s ease;
+}
+.hover-zoom:hover {
+    transform: scale(1.02);
+}
+
+/* Title style */
+.section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    color: #fff;
+    background:#22304A;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- 2-Column Layout: Left Profile / Right About ---
+st.markdown("""
+<style>
+.profile-pic-square {
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 4px solid #ffd166;
+    box-shadow: 0 0 14px rgba(255, 209, 102, 0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-pic-square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
+}
+.profile-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.profile-left {
+    flex: 0 0 180px;
+    text-align: center;
+}
+.profile-right {
+    flex: 1;
+}
+</style>
+""", unsafe_allow_html=True)
+
 gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
 st.markdown(
-    f"""
-    <div class="welcome-card animate__animated animate__fadeInUp" style="background: url('{gif_url}') center/cover no-repeat;">
-      <div>
-        <h1>Hello and Welcome...</h1>
-        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-# -- Chatbot (animated) --
-ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-st.markdown('<a id="chatbot"></a>', unsafe_allow_html=True)
+      f"""
+      <style>
+        .welcome-card {{
+          background: url("{gif_url}") center/cover no-repeat;
+          border-radius: 16px;
+          padding: 3rem;
+          color: white;
+          min-height: 180px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          text-align: center;
+          margin-bottom:24px;
+        }}
+      </style>
+      """,
+      unsafe_allow_html=True,
+  )
 st.markdown(
-    f"""
-    <div class="welcome-card2 animate__animated animate__fadeInUp" style="background: url('{ai_url}') center/cover no-repeat;">
-      <div class="text-container" style="position: absolute; top: 70%; right: 2rem; transform: translateY(-50%); text-align: right;">
-        <h2>Ask Buddy Bot!</h2>
+      """
+      <div class="welcome-card">
+        <div>
+          <h1>Hello and Welcome...</h1>
+          <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
+        </div>
       </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+      """,
+      unsafe_allow_html=True,
+  )
+  
+ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+st.markdown(
+      f"""
+      <style>
+        .welcome-card2 {{
+          background: url("{ai_url}") center/cover no-repeat;
+          border-radius: 16px;
+          padding: 0;
+          color: white;
+          height: 200px;
+          position: relative;
+          overflow: hidden;
+          margin-bottom: 32px;
+        }}
+        .welcome-card2 .text-container {{
+          position: absolute;
+          top: 70%;
+          right: 2rem;
+          transform: translateY(-50%);
+          text-align: right;
+        }}
+        .welcome-card2 h2 {{
+          margin: 0;
+          font-family: 'Poppins', sans-serif;
+          font-weight: 700;
+          font-size: 1.8rem;
+        }}
+      </style>
+      """,
+      unsafe_allow_html=True,
+  )
+
+st.markdown(
+      """
+      <div class="welcome-card2">
+        <div class="text-container">
+          <h2>Ask Buddy Bot!</h2>
+        </div>
+      </div>
+      """,
+      unsafe_allow_html=True,
+  )
+  
 api_key = st.secrets["DEEPSEEK_API_KEY"]
 client = openai.OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=api_key,
-)
+      base_url="https://openrouter.ai/api/v1",
+      api_key=api_key,
+  )
 chat_container = st.container()
 with chat_container:
     user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
@@ -375,293 +564,181 @@ with chat_container:
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
 
-# -- About Me --
-st.markdown('<a id="about"></a>', unsafe_allow_html=True)
+
 st.markdown("""
-<style>
-.profile-row {
-  display: flex;
-  gap: 38px;
-  justify-content: center;
-  align-items: stretch;
-  margin-bottom: 32px;
-  margin-top: 14px;
-}
-.profile-card-fancy, .about-card-fancy {
-  flex: 1 1 0px;
-  min-width: 260px;
-  background: linear-gradient(135deg, #253451 0%, #334869 100%);
-  border-radius: 26px;
-  padding: 38px 28px 28px 28px;
-  box-shadow: 0 7px 28px rgba(20,30,55,0.20), 0 2px 14px rgba(44,62,80,0.09);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  position: relative;
-  animation: fadeUpCard .9s cubic-bezier(.5,1.6,.4,1) both;
-}
-.profile-card-fancy {
-  max-width: 400px;
-  justify-content: flex-start;
-  text-align: center;
-  align-items: center;
-}
-.profile-glow {
-  width: 145px;
-  height: 145px;
-  border-radius: 24px;
-  margin-bottom: 18px;
-  box-shadow: 0 0 0 6px #ffd16688, 0 0 22px 8px #ffd16655, 0 2px 14px rgba(44,62,80,0.09);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
-}
-.profile-pic-square {
-  width: 135px;
-  height: 135px;
-  object-fit: cover;
-  border-radius: 20px;
-  border: 2.5px solid #fff;
-  background: #fff;
-}
-.profile-card-fancy h2 {
-  color: #fff;
-  font-size: 2rem;
-  font-weight: 700;
-  margin: 14px 0 8px 0;
-}
-.profile-title {
-  color: #ADD8E6;
-  font-size: 1.07rem;
-  margin-bottom: 2px;
-}
-.profile-role {
-  color: #c6e6ff;
-  font-size: 1rem;
-  font-weight: 500;
-}
-.profile-location {
-  color: #ffd166;
-  font-weight: 600;
-  margin-top: 11px;
-  font-size: 1.11rem;
-  letter-spacing: 0.04em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px;
-}
-.about-card-fancy {
-  align-items: flex-start;
-  justify-content: flex-start;
-  text-align: left;
-  padding-left: 44px;
-  padding-right: 36px;
-}
-.about-title {
-  font-weight: 700;
-  font-size: 1.22rem;
-  color: #ffd166;
-  margin-bottom: 16px;
-  margin-top: 0;
-  letter-spacing: .01em;
-}
-.about-body {
-  font-size: 1.11rem;
-  color: #f9f9f9;
-  line-height: 1.85;
-  letter-spacing: 0.01em;
-}
-@media (max-width: 1100px) {
-  .about-card-fancy {padding-left:24px;padding-right:16px;}
-  .profile-card-fancy {padding:28px 14px 18px;}
-}
-@media (max-width: 900px) {
-  .profile-row {flex-direction: column;gap: 18px;}
-  .about-card-fancy, .profile-card-fancy {width: 100%;min-width: 0;}
-  .about-card-fancy {padding-left:18px;padding-right:14px;}
-}
-</style>
 <div class="profile-row">
-  <div class="profile-card-fancy" style="animation-delay:0.08s;">
-    <div class="profile-glow">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
-    </div>
-    <h2>Venkatesh<br>Soundararajan</h2>
-    <div class="profile-title">Software Development Intern</div>
-    <div class="profile-role">Data Engineering</div>
-    <div class="profile-location">
-      <span style="font-size:1.23rem;">&#127799;</span>
-      Calgary, AB, Canada
-    </div>
+  <div class="profile-card" style="animation-delay:0.08s;">
+    <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
+    <h3 style="color:#fff; margin: 14px 0 5px;">Venkatesh Soundararajan</h3>
+    <p style="color:#ADD8E6; font-size: 15px; margin: 0;">
+      <strong>Software Development Intern</strong><br>
+      Data Engineering
+    </p>
+    <p style="color:#ffd166; margin-top: 10px;">
+      🍁 Calgary, AB, Canada
+    </p>
   </div>
-  <div class="about-card-fancy" style="animation-delay:0.16s;">
-    <div class="about-title">About Me</div>
-    <div class="about-body">
-      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.<br><br>
-      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.<br><br>
-      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.<br>
-      My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
-
-
-# -- Education --
-st.markdown('<a id="education"></a>', unsafe_allow_html=True)
-st.markdown("""
-<div class="card hover-zoom animate__animated animate__fadeInUp">
-  <div class="section-title" style="background:#34495E;">Education</div>
-  <div class="edu-cards-grid">
-    <div class="edu-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo"/>
-      <div class="edu-card-degree">Masters in Data Science and Analytics</div>
-      <div class="edu-card-univ">University of Calgary, Alberta, Canada</div>
-      <div class="edu-card-date">September 2024 – Present</div>
-    </div>
-    <div class="edu-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-card-logo"/>
-      <div class="edu-card-degree">Bachelor of Engineering</div>
-      <div class="edu-card-univ">Anna University, Chennai, India</div>
-      <div class="edu-card-date">August 2009 – May 2013</div>
+  <div class="about-card" style="animation-delay:0.15s;">
+    <div style="font-size:1.07rem; color:#fff; line-height:1.7;">
+      <span style="font-weight:600; color:#ffd166; font-size:1.13rem;">About Me</span>
+      <br><br>
+      I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics.<br><br>
+      I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure.
+      <br><br>
+      I'm currently pursuing my Master's in Data Science and Analytics at the University of Calgary. My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-# -- Certifications --
-st.markdown('<a id="certifications"></a>', unsafe_allow_html=True)
-st.markdown("""
-<div class="card hover-zoom animate__animated animate__fadeInUp">
-  <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
-  <div class="cert-grid">
-    <div class="cert-card">
-      <div class="cert-title">Guidewire Insurance Suite Analyst 10.0</div>
-      <div class="cert-provider">Jasper – Guidewire Education</div>
-      <div class="cert-year">2024</div>
+st.markdown(
+    '''
+    <div class="card hover-zoom">
+    <div class="section-title" style="background:#34495E;">Contact</div>
+    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
+    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
+    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
+    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
+    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
     </div>
-    <div class="cert-card">
-      <div class="cert-title">Karate DSL</div>
-      <div class="cert-provider">Udemy</div>
-      <div class="cert-year">2023</div>
+    <br>
+    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
+    Calgary, AB, Canada<br>
+    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
     </div>
-    <div class="cert-card">
-      <div class="cert-title">Rest API Automation</div>
-      <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
-      <div class="cert-year">2023</div>
     </div>
-    <div class="cert-card">
-      <div class="cert-title">Selenium WebDriver</div>
-      <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
-      <div class="cert-year">2022</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-title">SQL for Data Science</div>
-      <div class="cert-provider">Coursera</div>
-      <div class="cert-year">2020</div>
-    </div>
-    <div class="cert-card">
-      <div class="cert-title">SDET</div>
-      <div class="cert-provider">Capgemini</div>
-      <div class="cert-year">2020</div>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
+    ''',
+    unsafe_allow_html=True
+)
+  
 
-# -- Awards & Recognitions --
-st.markdown('<a id="awards"></a>', unsafe_allow_html=True)
-st.markdown("""
-<div class="card hover-zoom animate__animated animate__fadeInUp">
-  <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
-  <div class="awards-grid">
-    <div class="award-card">
-      <div class="award-title">Spot Award</div>
-      <div class="award-year">2022 & 2023</div>
-      <div class="award-sub">InsurCloud – Deloitte, Canada</div>
-    </div>
-    <div class="award-card">
-      <div class="award-title">Best Contributor</div>
-      <div class="award-year">2018</div>
-      <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
-    </div>
-    <div class="award-card">
-      <div class="award-title">QE & A Maestro</div>
-      <div class="award-year">2017</div>
-      <div class="award-sub">Centene by Cognizant QE&A, USA</div>
->>>>>>> b2b15f39c91e321f8c81eeaf895f924908c3be40
-    </div>
-    <div class="award-card">
-      <div class="award-title">Pride of the Quarter</div>
-      <div class="award-year">Q1 2017</div>
-      <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-    </div>
-    <div class="award-card">
-      <div class="award-title">Pillar of the Month</div>
-      <div class="award-year">May 2014 & Aug 2015</div>
-      <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
 
-# -- Projects Gallery --
-st.markdown('<a id="projects"></a>', unsafe_allow_html=True)
-st.markdown('<div class="card hover-zoom animate__animated animate__fadeInUp"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-grid_html = '<div class="grid-container">'
-for proj in projects:
-    grid_html += (
-        f'<div class="project-item hover-zoom">'
-        f'  <a href="{proj["url"]}" target="_blank">'
-        f'    <img src="{proj["image"]}" class="card-img"/>'
-        f'    <div class="overlay">{proj["title"]}</div>'
-        f'  </a>'
-        f'</div>'
-    )
-grid_html += '</div>'
-st.markdown(grid_html, unsafe_allow_html=True)
+# --- Spacer before next section ---
+st.markdown(
+    """
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Education</div>
+      <div class="edu-cards-grid">
+        <div class="edu-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo"/>
+          <div class="edu-card-degree">Masters in Data Science and Analytics</div>
+          <div class="edu-card-univ">University of Calgary, Alberta, Canada</div>
+          <div class="edu-card-date">September 2024 – Present</div>
+        </div>
+        <div class="edu-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-card-logo"/>
+          <div class="edu-card-degree">Bachelor of Engineering</div>
+          <div class="edu-card-univ">Anna University, Chennai, India</div>
+          <div class="edu-card-date">August 2009 – May 2013</div>
+        </div>
+      </div>
+    </div>
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Professional Experience</div>
+      <div class="exp-cards-grid">
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Software Developer Intern</div>
+          <div class="exp-card-company">Tech Insights Inc, Canada</div>
+          <div class="exp-card-date">May 2025 – Present</div>
+        </div>
+      <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Senior Consultant</div>
+          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+          <div class="exp-card-date">October 2021 – August 2024</div>
+      </div>
+      <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Consultant</div>
+          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+          <div class="exp-card-date">May 2018 – October 2021</div>
+      </div>
+      <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Associate</div>
+          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+          <div class="exp-card-date">Sep 2013 – May 2018</div>
+      </div>
+    </div>
+    </div>
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-title">Guidewire Insurance Suite Analyst 10.0</div>
+          <div class="cert-provider">Jasper – Guidewire Education</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Karate DSL</div>
+          <div class="cert-provider">Udemy</div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Rest API Automation</div>
+          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Selenium WebDriver</div>
+          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+          <div class="cert-year">2022</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">SQL for Data Science</div>
+          <div class="cert-provider">Coursera</div>
+          <div class="cert-year">2020</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">SDET</div>
+          <div class="cert-provider">Capgemini</div>
+          <div class="cert-year">2020</div>
+        </div>
+      </div>
+    </div>
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
+      <div class="awards-grid">
+        <div class="award-card">
+          <div class="award-title">Spot Award</div>
+          <div class="award-year">2022 & 2023</div>
+          <div class="award-sub">InsurCloud – Deloitte, Canada</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">Best Contributor</div>
+          <div class="award-year">2018</div>
+          <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">QE & A Maestro</div>
+          <div class="award-year">2017</div>
+          <div class="award-sub">Centene by Cognizant QE&A, USA</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">Pride of the Quarter</div>
+          <div class="award-year">Q1 2017</div>
+          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">Pillar of the Month</div>
+          <div class="award-year">May 2014 & Aug 2015</div>
+          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+        </div>
+      </div>
+    </div>
+    
+    """,
+    unsafe_allow_html=True
+)
 
-# -- Experience --
-st.markdown('<a id="experience"></a>', unsafe_allow_html=True)
-st.markdown("""
-<div class="card hover-zoom animate__animated animate__fadeInUp">
-  <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-cards-grid">
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Software Developer Intern</div>
-      <div class="exp-card-company">Tech Insights Inc, Canada</div>
-      <div class="exp-card-date">May 2025 – Present</div>
-    </div>
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Senior Consultant</div>
-      <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-card-date">October 2021 – August 2024</div>
-    </div>
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Consultant</div>
-      <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
-      <div class="exp-card-date">May 2018 – October 2021</div>
-    </div>
-    <div class="exp-card">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
-      <div class="exp-card-title">Associate</div>
-      <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-card-date">Sep 2013 – May 2018</div>
-    </div>
-  </div>
-</div>
-""", unsafe_allow_html=True)
 
-# -- Skills --
-st.markdown('<a id="skills"></a>', unsafe_allow_html=True)
+
+
+# ---- SKILLS TAB ----
 st.markdown(
 '''
-<div class="card hover-zoom animate__animated animate__fadeInUp">
+<div class="card hover-zoom">
   <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
   <div class="skills-category">
     <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" class="skill-icon"/> Programming Languages</div>
@@ -722,24 +799,5 @@ st.markdown(
 unsafe_allow_html=True
 )
 
-# -- Contact --
-st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
-st.markdown(
-    '''
-    <div class="card hover-zoom animate__animated animate__fadeInUp">
-    <div class="section-title" style="background:#34495E;">Contact</div>
-    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
-    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
-    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
-    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
-    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
-    </div>
-    <br>
-    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
-    Calgary, AB, Canada<br>
-    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
-    </div>
-    </div>
-    ''',
-    unsafe_allow_html=True
-)
+
+

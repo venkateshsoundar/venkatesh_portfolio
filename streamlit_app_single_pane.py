@@ -688,88 +688,86 @@ with tabs[1]:
   """, unsafe_allow_html=True)
 
 # ---- SKILLS TAB ----
-with tabs[3]:
-    st.markdown(
-    '''
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-      <div class="skills-category">
-        <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" class="skill-icon"/> Programming Languages</div>
-        <div class="skills-chips">
-          <span class="skill-chip">Python</span>
-          <span class="skill-chip">R</span>
-          <span class="skill-chip">SQL</span>
-          <span class="skill-chip">Java</span>
-          <span class="skill-chip">VBA Macro</span>
-        </div>
-      </div>
-      <div class="skills-category">
-        <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg" class="skill-icon"/> Data Analysis</div>
-        <div class="skills-chips">
-          <span class="skill-chip">Pandas</span>
-          <span class="skill-chip">NumPy</span>
-          <span class="skill-chip">Matplotlib</span>
-        </div>
-      </div>
-      <div class="skills-category">
-        <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg" class="skill-icon"/> Data Visualization</div>
-        <div class="skills-chips">
-          <span class="skill-chip">Power BI</span>
-          <span class="skill-chip">Excel</span>
-        </div>
-      </div>
-      <div class="skills-category">
-        <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg" class="skill-icon"/> Database Management</div>
-        <div class="skills-chips">
-          <span class="skill-chip">MySQL</span>
-          <span class="skill-chip">Oracle</span>
-          <span class="skill-chip">NoSQL</span>
-        </div>
-      </div>
-      <div class="skills-category">
-        <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg" class="skill-icon"/> Version Control</div>
-        <div class="skills-chips">
-          <span class="skill-chip">Git</span>
-        </div>
-      </div>
-      <div class="skills-category">
-        <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg" class="skill-icon"/> Project Management</div>
-        <div class="skills-chips">
-          <span class="skill-chip">JIRA</span>
-          <span class="skill-chip">ALM</span>
-          <span class="skill-chip">Rally</span>
-        </div>
-      </div>
-      <div class="skills-category">
-        <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg" class="skill-icon"/> Automation & Insurance Suite</div>
-        <div class="skills-chips">
-          <span class="skill-chip">Selenium WebDriver</span>
-          <span class="skill-chip">Guidewire</span>
-        </div>
+  st.markdown(
+  '''
+  <div class="card hover-zoom">
+    <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
+    <div class="skills-category">
+      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" class="skill-icon"/> Programming Languages</div>
+      <div class="skills-chips">
+        <span class="skill-chip">Python</span>
+        <span class="skill-chip">R</span>
+        <span class="skill-chip">SQL</span>
+        <span class="skill-chip">Java</span>
+        <span class="skill-chip">VBA Macro</span>
       </div>
     </div>
-    ''',
-    unsafe_allow_html=True
+    <div class="skills-category">
+      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg" class="skill-icon"/> Data Analysis</div>
+      <div class="skills-chips">
+        <span class="skill-chip">Pandas</span>
+        <span class="skill-chip">NumPy</span>
+        <span class="skill-chip">Matplotlib</span>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg" class="skill-icon"/> Data Visualization</div>
+      <div class="skills-chips">
+        <span class="skill-chip">Power BI</span>
+        <span class="skill-chip">Excel</span>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg" class="skill-icon"/> Database Management</div>
+      <div class="skills-chips">
+        <span class="skill-chip">MySQL</span>
+        <span class="skill-chip">Oracle</span>
+        <span class="skill-chip">NoSQL</span>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg" class="skill-icon"/> Version Control</div>
+      <div class="skills-chips">
+        <span class="skill-chip">Git</span>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg" class="skill-icon"/> Project Management</div>
+      <div class="skills-chips">
+        <span class="skill-chip">JIRA</span>
+        <span class="skill-chip">ALM</span>
+        <span class="skill-chip">Rally</span>
+      </div>
+    </div>
+    <div class="skills-category">
+      <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg" class="skill-icon"/> Automation & Insurance Suite</div>
+      <div class="skills-chips">
+        <span class="skill-chip">Selenium WebDriver</span>
+        <span class="skill-chip">Guidewire</span>
+      </div>
+    </div>
+  </div>
+  ''',
+  unsafe_allow_html=True
 )
 
-# ---- CONTACT TAB ----
-with tabs[4]:
-    st.markdown(
-        '''
-        <div class="card hover-zoom">
-        <div class="section-title" style="background:#34495E;">Contact</div>
-        <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
-        <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
-        <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
-        <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
-        <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
-        </div>
-        <br>
-        <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
-        Calgary, AB, Canada<br>
-        Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
-        </div>
-        </div>
-        ''',
-        unsafe_allow_html=True
-    )
+
+  st.markdown(
+      '''
+      <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Contact</div>
+      <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
+      <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
+      <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
+      <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
+      <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
+      </div>
+      <br>
+      <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
+      Calgary, AB, Canada<br>
+      Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
+      </div>
+      </div>
+      ''',
+      unsafe_allow_html=True
+  )

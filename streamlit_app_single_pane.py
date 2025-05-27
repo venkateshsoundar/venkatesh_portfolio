@@ -1070,7 +1070,10 @@ for proj in projects:
     </div>
     """
 projects_html += '</div>'
+
+# ---- THIS IS CORRECT ----
 st.markdown(projects_html, unsafe_allow_html=True)
+
 
 
 

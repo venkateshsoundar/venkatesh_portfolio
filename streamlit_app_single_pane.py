@@ -8,67 +8,6 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-
-st.markdown("""
-<style>
-.stApp { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat; background-attachment: fixed; color: #ffffff; font-family: 'Poppins', sans-serif;}
-/* --- Animated Cards --- */
-@keyframes fadeUpCard { 0% { opacity: 0; transform: translateY(60px) scale(.97);} 100% { opacity: 1; transform: translateY(0) scale(1);} }
-.card, .hover-zoom { animation: fadeUpCard .8s cubic-bezier(.5,1.6,.4,1) both; }
-.stTabs [data-baseweb="tab-list"] { gap: 10px; border-bottom: 3px solid #22304A;}
-.stTabs [data-baseweb="tab"] { background: linear-gradient(135deg, #1F2A44 0%, #324665 100%); color: #ffd166 !important; border-radius: 12px 12px 0 0 !important; padding: 16px 36px !important; font-size: 1.14rem; font-weight: bold; margin-bottom: -3px !important; transition: all .25s;}
-.stTabs [data-baseweb="tab"]:hover { color: #fff !important; background: linear-gradient(135deg, #406496 0%, #22304A 100%);}
-.stTabs [aria-selected="true"] { background: linear-gradient(135deg, #22304A 0%, #ffd166 150%) !important; color: #222 !important; border-bottom: 4px solid #ffd166 !important; transform: scale(1.06) translateY(-2px); box-shadow: 0 6px 22px rgba(44,62,80,0.13);}
-.card { width: 100% !important; border-radius: 12px; padding: 20px; margin-bottom: 32px; background: linear-gradient(135deg, #1F2A44 0%, #324665 100%); transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s; text-align: center; opacity: 0; animation-delay: .1s; animation-fill-mode: forwards;}
-.card.animated { opacity: 1; }
-.section-title { font-size: 1.6rem; font-weight: bold; margin-bottom: 12px; padding: 8px; border-radius: 6px;}
-.grid-container { display: grid; grid-template-columns: repeat(3, 1fr); gap: 32px; margin-bottom: 32px;}
-.project-item { position: relative; aspect-ratio: 1/1; overflow: hidden; border-radius: 12px; transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;}
-.card-img { width: 100%; height: 100%; object-fit: cover; transition: transform .3s cubic-bezier(.4,1.6,.6,1);}
-.project-item:hover .card-img { transform: scale(1.05);}
-.overlay { position: absolute; inset: 0; background: rgba(0,0,0,0.6); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .3s ease; font-size: 1.2rem; color: #ffffff;}
-.project-item:hover .overlay { opacity: 1;}
-/* --- Welcome Card Responsive Sizing --- */
-.welcome-card { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif') center center/contain no-repeat, linear-gradient(135deg,#1f2a44 0%,#324665 100%); border-radius: 18px; min-height: 320px; max-height: 450px; display: flex; align-items: center; justify-content: center; color: #fff; text-align: center; margin-bottom:32px; box-shadow: 0 3px 18px rgba(0,0,0,0.13);}
-.welcome-card > div { background: rgba(20,32,60,0.32); padding: 2rem 1.5rem; border-radius: 14px;}
-/* --- Chatbot Card --- */
-.welcome-card2 { background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif') center center/cover no-repeat, linear-gradient(135deg,#22304A 0%,#406496 100%); border-radius: 16px; height: 230px; position: relative; overflow: hidden; margin-bottom: 32px; display: flex; align-items: end;}
-.welcome-card2 .text-container { width: 100%; text-align: right; padding: 1.5rem 2.2rem; background: linear-gradient(90deg,rgba(30,42,78,0) 40%,rgba(30,42,78,0.72) 100%);}
-.welcome-card2 h2 { margin: 0; font-family: 'Poppins', sans-serif; font-weight: 700; font-size: 1.7rem;}
-/* The rest is unchanged ... */
-.profile-pic-popout { width: 160px; height: 160px; object-fit: cover; border-radius: 50%; border: 2px solid #fff; box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18); position: absolute; left: 50%; transform: translateX(-50%); top: 20px; z-index: 10;}
-.profile-card-container { position: relative; width: 100%; margin-bottom: 20px;}
-.profile-card-content { padding-top: 200px;}
-.contact-icon { width: 32px; height: 32px; filter: invert(100%); color:#ADD8E6; margin: 0 8px; vertical-align: middle;}
-.edu-cards-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 20px; margin-bottom: 18px;}
-.edu-card { background: linear-gradient(135deg, #34495E 0%, #406496 100%); border-radius: 15px; padding: 22px 14px 16px 14px; box-shadow: 0 2px 10px rgba(30,50,80,0.13); display: flex; flex-direction: column; align-items: center; min-height: 170px; transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s; border: 2px solid #40649622;}
-.edu-card:hover { transform: translateY(-7px) scale(1.03); box-shadow: 0 8px 18px rgba(20,40,80,0.19); background: linear-gradient(135deg, #406496 0%, #34495E 100%);}
-.edu-card-logo { width: 56px; height: 56px; object-fit: contain; border-radius: 11px; background: #fff; margin-bottom: 10px; box-shadow: 0 1px 8px rgba(44,62,80,0.09); border: 1.5px solid #eee;}
-.edu-card-degree { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px; color: #ffd166;}
-.edu-card-univ { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
-.edu-card-date { color: #fff; font-size: 0.98rem;}
-.cert-grid, .awards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; margin-top: 18px; margin-bottom: 2px;}
-.cert-card, .award-card { background: linear-gradient(135deg, #34495E 0%, #406496 100%); border-radius: 12px; box-shadow: 0 4px 18px rgba(60,100,160,0.07); padding: 18px 18px 14px 18px; min-height: 80px; transition: transform .17s, box-shadow .17s; border: 1.5px solid #40649644; text-align: left; position: relative; display: flex; flex-direction: column; justify-content: flex-start;}
-.cert-card:hover, .award-card:hover { transform: translateY(-4px) scale(1.03); box-shadow: 0 8px 24px rgba(20,60,120,0.15); background: linear-gradient(135deg, #22304A 0%, #406496 88%);}
-.cert-title, .award-title { font-weight: bold; font-size: 1.07rem; color: #ffd166; margin-bottom: 2px; margin-top: 0;}
-.cert-provider, .award-sub { font-size: 0.99rem; color: #ADD8E6; margin-bottom: 2px;}
-.cert-year, .award-year { font-size: 0.97rem; color: #fff; opacity: 0.8;}
-.award-year {margin-bottom: 2px;}
-.exp-cards-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 18px; margin-top: 20px; margin-bottom: 20px;}
-.exp-card { background: linear-gradient(135deg, #34495E 0%, #406496 100%); border-radius: 15px; padding: 22px 14px 16px 14px; box-shadow: 0 2px 10px rgba(30,50,80,0.13); display: flex; flex-direction: column; align-items: center; min-height: 215px; transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s; border: 2px solid #40649622;}
-.exp-card:hover { transform: translateY(-7px) scale(1.03); box-shadow: 0 8px 18px rgba(20,40,80,0.19); background: linear-gradient(135deg, #406496 0%, #34495E 100%);}
-.exp-card-logo { width: 56px; height: 56px; object-fit: contain; border-radius: 11px; background: #fff; margin-bottom: 10px; box-shadow: 0 1px 8px rgba(44,62,80,0.09); border: 1.5px solid #eee;}
-.exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
-.exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
-.exp-card-date { color: #ffd166; font-size: 0.98rem;}
-.skills-category { margin-bottom: 14px;}
-.skills-header { font-size: 1.04rem; color: #ffd166; font-weight: 600; margin-bottom: 4px; display: flex; align-items: center; gap: 8px;}
-.skill-icon { width: 20px; height: 20px; vertical-align: middle; filter: brightness(0.95) invert(0.09) sepia(1) hue-rotate(165deg) saturate(6);}
-.skills-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2px;}
-.skill-chip { background: rgba(255,255,255,0.12); padding: 6px 14px; border-radius: 16px; font-size: 0.97rem; color: #fff; font-weight: 500; border: 1.5px solid #40649633;}
-</style>
-""", unsafe_allow_html=True)
-
 # ---- ANIMATION CSS ----
 st.markdown("""
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
@@ -464,29 +403,6 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-# -- Contact --
-st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
-st.markdown(
-    '''
-    <div class="card hover-zoom animate__animated animate__fadeInUp">
-    <div class="section-title" style="background:#34495E;">Contact</div>
-    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
-    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
-    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
-    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
-    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
-    </div>
-    <br>
-    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
-    Calgary, AB, Canada<br>
-    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
-    </div>
-    </div>
-    ''',
-    unsafe_allow_html=True
-)
-
-
 # -- Education --
 st.markdown('<a id="education"></a>', unsafe_allow_html=True)
 st.markdown("""
@@ -699,4 +615,24 @@ st.markdown(
 unsafe_allow_html=True
 )
 
-
+# -- Contact --
+st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
+st.markdown(
+    '''
+    <div class="card hover-zoom animate__animated animate__fadeInUp">
+    <div class="section-title" style="background:#34495E;">Contact</div>
+    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
+    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
+    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
+    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
+    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
+    </div>
+    <br>
+    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
+    Calgary, AB, Canada<br>
+    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
+    </div>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)

@@ -566,24 +566,178 @@ with chat_container:
 
 
 st.markdown("""
-    <div class="profile-card-container">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
-           class="profile-pic-popout" />
-      <div class="card profile-card-content hover-zoom">
-        <h2>Venkatesh Soundararajan</h2>
-        <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
-        <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
+<style>
+.hero-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 38px;
+  background: linear-gradient(135deg, #253451 0%, #324665 100%);
+  border-radius: 28px;
+  box-shadow: 0 8px 34px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.09);
+  padding: 48px 44px 38px 44px;
+  margin-bottom: 34px;
+  min-height: 335px;
+  position: relative;
+}
+.hero-profile-pic-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 18px;
+  min-width: 220px;
+}
+.hero-pic-glow {
+  width: 148px;
+  height: 148px;
+  border-radius: 50%;
+  margin-bottom: 14px;
+  box-shadow: 0 0 0 5px #ffd16699, 0 0 16px 7px #ffd16655, 0 2px 14px rgba(44,62,80,0.09);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+}
+.hero-pic-glow img {
+  width: 136px;
+  height: 136px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid #fff;
+  background: #fff;
+}
+.hero-name {
+  color: #fff;
+  font-size: 2.13rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 9px 0 4px 0;
+  line-height: 1.15;
+}
+.hero-role {
+  color: #ADD8E6;
+  font-size: 1.11rem;
+  margin-bottom: 2px;
+  text-align: center;
+}
+.hero-subrole {
+  color: #c6e6ff;
+  font-size: 1.01rem;
+  font-weight: 500;
+  text-align: center;
+}
+.hero-location {
+  color: #ffd166;
+  font-weight: 600;
+  margin-top: 8px;
+  font-size: 1.08rem;
+  text-align: center;
+}
+.hero-main-content {
+  flex: 2 1 0px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  min-width: 280px;
+}
+.hero-about-title {
+  font-size: 1.20rem;
+  color: #ffd166;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+.hero-about-body {
+  font-size: 1.09rem;
+  color: #fff;
+  line-height: 1.7;
+  margin-bottom: 18px;
+}
+.hero-contact-bar {
+  width: 100%;
+  margin-top: 10px;
+  margin-bottom: 12px;
+  background: rgba(90, 130, 160, 0.13);
+  border-radius: 12px;
+  padding: 11px 0;
+  text-align: center;
+}
+.hero-contact-bar-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.11rem;
+  margin-bottom: 10px;
+  letter-spacing: 0.01em;
+}
+.hero-contact-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin-top: 5px;
+  margin-bottom: 6px;
+}
+.hero-contact-icons a {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 3px;
+  transition: background 0.15s, transform 0.15s;
+}
+.hero-contact-icons a:hover {
+  background: #ffd16633;
+  transform: translateY(-2px) scale(1.11);
+}
+.hero-contact-icons img {
+  width: 34px;
+  height: 34px;
+  filter: invert(100%);
+}
+.hero-footer {
+  text-align: center;
+  color: #fff;
+  margin-top: 6px;
+  font-size: 1.05rem;
+}
+.hero-footer a {
+  color: #ffd166;
+  text-decoration: underline;
+  font-weight: 500;
+}
+@media (max-width: 900px) {
+  .hero-card {flex-direction: column;align-items: center;padding:28px 12px 16px;}
+  .hero-main-content {align-items:center;text-align:center;}
+}
+</style>
+<div class="hero-card">
+  <div class="hero-profile-pic-area">
+    <div class="hero-pic-glow">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
+    </div>
+    <div class="hero-name">Venkatesh<br>Soundararajan</div>
+    <div class="hero-role">Software Development Intern</div>
+    <div class="hero-subrole">Data Engineering</div>
+    <div class="hero-location">&#127799; Calgary, AB, Canada</div>
+  </div>
+  <div class="hero-main-content">
+    <div class="hero-about-title">About Me</div>
+    <div class="hero-about-body">
+      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.<br><br>
+      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.<br><br>
+      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.<br>
+      My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+    </div>
+    <div class="hero-contact-bar">
+      <div class="hero-contact-bar-title">Contact</div>
+      <div class="hero-contact-icons">
+        <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg"/></a>
+        <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg"/></a>
+        <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"/></a>
+        <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg"/></a>
       </div>
     </div>
-    ''', unsafe_allow_html=True)
-  <div class="about-card" style="animation-delay:0.15s;">
-    <div style="font-size:1.07rem; color:#fff; line-height:1.7;">
-      <span style="font-weight:600; color:#ffd166; font-size:1.13rem;">About Me</span>
-      <br><br>
-      I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics.<br><br>
-      I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure.
-      <br><br>
-      I'm currently pursuing my Master's in Data Science and Analytics at the University of Calgary. My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+    <div class="hero-footer">
+      Calgary, AB, Canada<br>
+      Email: <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank">venkatesh.balusoundar@gmail.com</a>
     </div>
   </div>
 </div>

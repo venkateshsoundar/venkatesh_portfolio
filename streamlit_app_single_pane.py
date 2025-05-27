@@ -949,7 +949,7 @@ st.markdown("""
 /* Container for 4-column grid */
 .projects-4col-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);   /* <-- Add this line! */
   gap: 24px;
   margin: 0 auto 36px auto;
   max-width: 1200px;

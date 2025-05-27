@@ -985,10 +985,8 @@ st.markdown("""
   .skill-category-card {padding: 8px 4px 7px 4px;}
 }
 </style>
-
 <div class="skills-section-main-pane">
   <div class="skills-categories-grid">
-
     <div class="skill-category-card">
       <div class="skill-category-title">Programming Languages</div>
       <div class="skill-list">
@@ -999,7 +997,6 @@ st.markdown("""
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vba.svg"/>VBA Macro</div>
       </div>
     </div>
-
     <div class="skill-category-card">
       <div class="skill-category-title">Data Analysis & Scientific</div>
       <div class="skill-list">
@@ -1008,7 +1005,6 @@ st.markdown("""
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/matplotlib.svg"/>Matplotlib</div>
       </div>
     </div>
-
     <div class="skill-category-card">
       <div class="skill-category-title">Data Visualization</div>
       <div class="skill-list">
@@ -1016,7 +1012,6 @@ st.markdown("""
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftexcel.svg"/>Excel</div>
       </div>
     </div>
-
     <div class="skill-category-card">
       <div class="skill-category-title">Database Management</div>
       <div class="skill-list">
@@ -1032,7 +1027,6 @@ st.markdown("""
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg"/>Git</div>
       </div>
     </div>
-
     <div class="skill-category-card">
       <div class="skill-category-title">Project Management</div>
       <div class="skill-list">
@@ -1041,7 +1035,6 @@ st.markdown("""
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/rally.svg"/>Rally</div>
       </div>
     </div>
-
     <div class="skill-category-card">
       <div class="skill-category-title">QA Automation & Insurance</div>
       <div class="skill-list">
@@ -1049,7 +1042,6 @@ st.markdown("""
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/guidewire.svg"/>Guidewire</div>
       </div>
     </div>
-
   </div>
 </div>
 """, unsafe_allow_html=True)

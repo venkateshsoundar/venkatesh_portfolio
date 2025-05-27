@@ -908,69 +908,123 @@ with project_container:
   grid_html += '</div>'
   st.markdown(grid_html, unsafe_allow_html=True)
 
-# ---- SKILLS TAB ----
-st.markdown(
-'''
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-  <div class="skills-category">
-    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" class="skill-icon"/> Programming Languages</div>
-    <div class="skills-chips">
-      <span class="skill-chip">Python</span>
-      <span class="skill-chip">R</span>
-      <span class="skill-chip">SQL</span>
-      <span class="skill-chip">Java</span>
-      <span class="skill-chip">VBA Macro</span>
+st.markdown("""
+<style>
+.skill-badges-section {
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  border-radius: 22px;
+  box-shadow: 0 8px 38px rgba(30,50,90,0.15);
+  padding: 34px 26px 30px 26px;
+  margin-bottom: 34px;
+  animation: fadeInUp 0.7s cubic-bezier(.4,1.6,.6,1) both;
+}
+.badge-cluster {
+  margin-bottom: 18px;
+}
+.badge-category {
+  font-size: 1.08rem;
+  color: #ffd166;
+  font-weight: 700;
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.badge-category img {
+  width: 22px; height: 22px;
+  filter: drop-shadow(0 1px 4px #ffd16644);
+}
+.skill-badges-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.skill-badge {
+  background: linear-gradient(90deg, #406496 40%, #ffd16699 140%);
+  color: #fff;
+  border-radius: 17px;
+  padding: 7px 19px 7px 14px;
+  font-size: 1.03rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: 0 2px 10px #ffd16619;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  border: none;
+  transition: transform .21s, box-shadow .22s;
+  cursor: pointer;
+  opacity: 0.95;
+}
+.skill-badge:hover {
+  transform: translateY(-4px) scale(1.05);
+  box-shadow: 0 8px 18px #ffd16644;
+  background: linear-gradient(90deg, #ffd166 30%, #22304A 170%);
+  color: #324665;
+}
+@keyframes fadeInUp {
+  0% {opacity: 0; transform: translateY(24px);}
+  100% {opacity: 1; transform: none;}
+}
+</style>
+<div class="skill-badges-section">
+  <div class="section-title" style="background:#22304A;">My Technical Stack</div>
+  <div class="badge-cluster">
+    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg"/> Programming</div>
+    <div class="skill-badges-list">
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" width="17"/>Python</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/r.svg" width="17"/>R</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/java.svg" width="17"/>Java</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/vba.svg" width="17"/>VBA</span>
     </div>
   </div>
-  <div class="skills-category">
-    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg" class="skill-icon"/> Data Analysis</div>
-    <div class="skills-chips">
-      <span class="skill-chip">Pandas</span>
-      <span class="skill-chip">NumPy</span>
-      <span class="skill-chip">Matplotlib</span>
+  <div class="badge-cluster">
+    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/database.svg"/> Databases</div>
+    <div class="skill-badges-list">
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg" width="17"/>MySQL</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/oracle.svg" width="17"/>Oracle</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg" width="17"/>NoSQL</span>
     </div>
   </div>
-  <div class="skills-category">
-    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg" class="skill-icon"/> Data Visualization</div>
-    <div class="skills-chips">
-      <span class="skill-chip">Power BI</span>
-      <span class="skill-chip">Excel</span>
+  <div class="badge-cluster">
+    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg"/> Data Analysis</div>
+    <div class="skill-badges-list">
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/pandas.svg" width="17"/>Pandas</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/numpy.svg" width="17"/>NumPy</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/matplotlib.svg" width="17"/>Matplotlib</span>
     </div>
   </div>
-  <div class="skills-category">
-    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mysql.svg" class="skill-icon"/> Database Management</div>
-    <div class="skills-chips">
-      <span class="skill-chip">MySQL</span>
-      <span class="skill-chip">Oracle</span>
-      <span class="skill-chip">NoSQL</span>
+  <div class="badge-cluster">
+    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg"/> Visualization</div>
+    <div class="skill-badges-list">
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/powerbi.svg" width="17"/>Power BI</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/microsoftexcel.svg" width="17"/>Excel</span>
     </div>
   </div>
-  <div class="skills-category">
-    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg" class="skill-icon"/> Version Control</div>
-    <div class="skills-chips">
-      <span class="skill-chip">Git</span>
+  <div class="badge-cluster">
+    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg"/> Automation</div>
+    <div class="skill-badges-list">
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg" width="17"/>Selenium</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/guidewire.svg" width="17"/>Guidewire</span>
     </div>
   </div>
-  <div class="skills-category">
-    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg" class="skill-icon"/> Project Management</div>
-    <div class="skills-chips">
-      <span class="skill-chip">JIRA</span>
-      <span class="skill-chip">ALM</span>
-      <span class="skill-chip">Rally</span>
+  <div class="badge-cluster">
+    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg"/> Version Control</div>
+    <div class="skill-badges-list">
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/git.svg" width="17"/>Git</span>
     </div>
   </div>
-  <div class="skills-category">
-    <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/selenium.svg" class="skill-icon"/> Automation & Insurance Suite</div>
-    <div class="skills-chips">
-      <span class="skill-chip">Selenium WebDriver</span>
-      <span class="skill-chip">Guidewire</span>
+  <div class="badge-cluster">
+    <div class="badge-category"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg"/> Project Management</div>
+    <div class="skill-badges-list">
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/jira.svg" width="17"/>JIRA</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/alm.svg" width="17"/>ALM</span>
+      <span class="skill-badge"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/rally.svg" width="17"/>Rally</span>
     </div>
   </div>
 </div>
-''',
-unsafe_allow_html=True
-)
+""", unsafe_allow_html=True)
+
 
 
 

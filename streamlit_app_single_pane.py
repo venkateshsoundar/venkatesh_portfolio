@@ -973,9 +973,9 @@ st.markdown("""
   .skill-card-hz {min-width: 82px;max-width:100px;padding:10px 2px 8px 2px;}
 }
 </style>
-<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Core Skills and Tools </div></div>
+>
 <div class="skills-main-vert-section">
-
+  <div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Core Skills and Tools </div></div
   <div class="skills-category-title">Programming Languages</div>
   <div class="skills-scroll-container">
     <div class="skill-card-hz"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg"/><span class="skill-label-card-hz">Python</span></div>

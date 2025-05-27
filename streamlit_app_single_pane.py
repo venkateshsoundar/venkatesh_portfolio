@@ -566,18 +566,16 @@ with chat_container:
 
 
 st.markdown("""
-<div class="profile-row">
-  <div class="profile-card" style="animation-delay:0.08s;">
-    <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
-    <h3 style="color:#fff; margin: 14px 0 5px;">Venkatesh Soundararajan</h3>
-    <p style="color:#ADD8E6; font-size: 15px; margin: 0;">
-      <strong>Software Development Intern</strong><br>
-      Data Engineering
-    </p>
-    <p style="color:#ffd166; margin-top: 10px;">
-      🍁 Calgary, AB, Canada
-    </p>
-  </div>
+    <div class="profile-card-container">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
+           class="profile-pic-popout" />
+      <div class="card profile-card-content hover-zoom">
+        <h2>Venkatesh Soundararajan</h2>
+        <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
+        <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
+      </div>
+    </div>
+    ''', unsafe_allow_html=True)
   <div class="about-card" style="animation-delay:0.15s;">
     <div style="font-size:1.07rem; color:#fff; line-height:1.7;">
       <span style="font-weight:600; color:#ffd166; font-size:1.13rem;">About Me</span>
@@ -590,6 +588,10 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+
+
+
 
 st.markdown(
     '''

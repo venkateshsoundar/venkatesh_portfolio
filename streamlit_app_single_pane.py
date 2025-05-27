@@ -911,6 +911,17 @@ with project_container:
 # --- Header Card for Skills Section ---
 st.markdown("""
 <style>
+/* Universal hover-zoom effect */
+.hover-zoom {
+  transition: transform 0.19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
+}
+.hover-zoom:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 28px #ffd16645, 0 3px 16px #22304A33;
+  z-index: 9;
+}
+
+/* Main pane and header styling */
 .card.skills-pane-main {
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 28px;
@@ -929,7 +940,10 @@ st.markdown("""
   text-align: center;
   letter-spacing: 0.04em;
   box-shadow: 0 1px 12px rgba(20,30,55,0.06);
+  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
 }
+
+/* Skill cards grid */
 .skills-categories-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
@@ -989,8 +1003,8 @@ st.markdown("""
   .skill-category-card {padding: 8px 4px 7px 4px;}
 }
 </style>
-<div class="card skills-pane-main">
-  <div class="skills-header-title">Core Skills and Tools</div>
+<div class="card skills-pane-main hover-zoom">
+  <div class="skills-header-title hover-zoom">Core Skills and Tools</div>
   <div class="skills-categories-grid">
     <div class="skill-category-card">
       <div class="skill-category-title">Programming Languages</div>

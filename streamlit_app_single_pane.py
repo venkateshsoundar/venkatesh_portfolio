@@ -1097,7 +1097,9 @@ for proj in projects:
     """
 grid_html += "</div>"
 
+# This line is critical!
 st.markdown(grid_html, unsafe_allow_html=True)
+
 
 
 

@@ -418,7 +418,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.markdown(
+  st.markdown(
     """
     <div class="card hover-zoom">
       <div class="section-title">👤 Profile & About Me</div>
@@ -449,7 +449,7 @@ st.markdown(
 )
 
 # --- Spacer before next section ---
-st.markdown(
+  st.markdown(
     """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Education</div>
@@ -537,9 +537,7 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# ---- PROJECTS TAB ----
-with tabs[1]:
-    # ---- WELCOME & CHATBOT ----
+   # ---- WELCOME & CHATBOT ----
   gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
   st.markdown(
       f"""

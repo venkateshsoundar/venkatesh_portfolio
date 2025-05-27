@@ -8,7 +8,9 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
+# ---- ANIMATION CSS ----
 st.markdown("""
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 <style>
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
@@ -16,7 +18,6 @@ st.markdown("""
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
-/* Sticky Navbar */
 .nav-bar {
     display: flex;
     justify-content: center;
@@ -42,6 +43,7 @@ st.markdown("""
     transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s, background .18s;
     display: inline-block;
     margin-bottom: 0;
+    scroll-behavior: smooth;
 }
 .nav-link:hover, .nav-link:focus {
     transform: translateY(-4px) scale(1.05);
@@ -70,7 +72,6 @@ st.markdown("""
   padding: 8px;
   border-radius: 6px;
 }
-/* ... (keep all your original CSS here unchanged!) ... */
 .grid-container {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -121,8 +122,153 @@ st.markdown("""
   top: 20px;
   z-index: 10;
 }
-/* ... Rest of your original CSS unchanged ... */
-/* Copy/paste all your .edu-card, .exp-card, .cert-card, .skills-chips, etc., blocks here */
+/* Add all .edu-card, .exp-card, .cert-card, .skills-chips, etc., CSS from previous file here... */
+/* --- Education Cards --- */
+.edu-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 20px;
+  margin-bottom: 18px;
+}
+.edu-card {
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+  border-radius: 15px;
+  padding: 22px 14px 16px 14px;
+  box-shadow: 0 2px 10px rgba(30,50,80,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 170px;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+  border: 2px solid #40649622;
+}
+.edu-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(20,40,80,0.19);
+  background: linear-gradient(135deg, #406496 0%, #34495E 100%);
+}
+.edu-card-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 11px;
+  background: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 8px rgba(44,62,80,0.09);
+  border: 1.5px solid #eee;
+}
+.edu-card-degree { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px; color: #ffd166;}
+.edu-card-univ { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
+.edu-card-date { color: #fff; font-size: 0.98rem;}
+.cert-grid, .awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+  margin-bottom: 2px;
+}
+.cert-card, .award-card {
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(60,100,160,0.07);
+  padding: 18px 18px 14px 18px;
+  min-height: 80px;
+  transition: transform .17s, box-shadow .17s;
+  border: 1.5px solid #40649644;
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.cert-card:hover, .award-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(20,60,120,0.15);
+  background: linear-gradient(135deg, #22304A 0%, #406496 88%);
+}
+.cert-title, .award-title { font-weight: bold; font-size: 1.07rem; color: #ffd166; margin-bottom: 2px; margin-top: 0;}
+.cert-provider, .award-sub { font-size: 0.99rem; color: #ADD8E6; margin-bottom: 2px;}
+.cert-year, .award-year { font-size: 0.97rem; color: #fff; opacity: 0.8;}
+.award-year {margin-bottom: 2px;}
+.exp-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.exp-card {
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+  border-radius: 15px;
+  padding: 22px 14px 16px 14px;
+  box-shadow: 0 2px 10px rgba(30,50,80,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 215px;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+  border: 2px solid #40649622;
+}
+.exp-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(20,40,80,0.19);
+  background: linear-gradient(135deg, #406496 0%, #34495E 100%);
+}
+.exp-card-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 11px;
+  background: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 8px rgba(44,62,80,0.09);
+  border: 1.5px solid #eee;
+}
+.exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
+.exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
+.exp-card-date { color: #ffd166; font-size: 0.98rem;}
+.skills-category {
+  margin-bottom: 14px;
+}
+.skills-header {
+  font-size: 1.04rem;
+  color: #ffd166;
+  font-weight: 600;
+  margin-bottom: 4px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.skill-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  filter: brightness(0.95) invert(0.09) sepia(1) hue-rotate(165deg) saturate(6);
+}
+.skills-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.skill-chip {
+  background: rgba(255,255,255,0.12);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.97rem;
+  color: #fff;
+  font-weight: 500;
+  border: 1.5px solid #40649633;
+}
+.contact-icon {
+  width: 32px;
+  height: 32px;
+  filter: invert(100%);
+  color:#ADD8E6;
+  margin: 0 8px;
+  vertical-align: middle;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -153,7 +299,7 @@ projects = [
     {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
     {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
     {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
+    {"title": "Weather Data Pipeline (AWS)", "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
     {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
     {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
@@ -181,7 +327,7 @@ st.markdown('<a id="welcome"></a>', unsafe_allow_html=True)
 gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
 st.markdown(
     f"""
-    <div class="welcome-card" style="background: url('{gif_url}') center/cover no-repeat;">
+    <div class="welcome-card animate__animated animate__fadeInUp" style="background: url('{gif_url}') center/cover no-repeat;">
       <div>
         <h1>Hello and Welcome...</h1>
         <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
@@ -191,12 +337,12 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# -- Chatbot --
+# -- Chatbot (animated) --
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown('<a id="chatbot"></a>', unsafe_allow_html=True)
 st.markdown(
     f"""
-    <div class="welcome-card2" style="background: url('{ai_url}') center/cover no-repeat;">
+    <div class="welcome-card2 animate__animated animate__fadeInUp" style="background: url('{ai_url}') center/cover no-repeat;">
       <div class="text-container" style="position: absolute; top: 70%; right: 2rem; transform: translateY(-50%); text-align: right;">
         <h2>Ask Buddy Bot!</h2>
       </div>
@@ -232,7 +378,7 @@ with chat_container:
 # -- About Me --
 st.markdown('<a id="about"></a>', unsafe_allow_html=True)
 st.markdown("""
-<div class="card hover-zoom">
+<div class="card hover-zoom animate__animated animate__fadeInUp">
   <div class="section-title">👤 Profile & About Me</div>
   <div class="profile-card-wrapper" style="display:flex; flex-direction: row; gap: 30px; align-items: flex-start; justify-content: flex-start; flex-wrap: wrap;">
     <div class="profile-left" style="flex: 0 0 180px; text-align: center;">
@@ -260,7 +406,7 @@ st.markdown("""
 # -- Education --
 st.markdown('<a id="education"></a>', unsafe_allow_html=True)
 st.markdown("""
-<div class="card hover-zoom">
+<div class="card hover-zoom animate__animated animate__fadeInUp">
   <div class="section-title" style="background:#34495E;">Education</div>
   <div class="edu-cards-grid">
     <div class="edu-card">
@@ -282,7 +428,7 @@ st.markdown("""
 # -- Certifications --
 st.markdown('<a id="certifications"></a>', unsafe_allow_html=True)
 st.markdown("""
-<div class="card hover-zoom">
+<div class="card hover-zoom animate__animated animate__fadeInUp">
   <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
   <div class="cert-grid">
     <div class="cert-card">
@@ -322,7 +468,7 @@ st.markdown("""
 # -- Awards & Recognitions --
 st.markdown('<a id="awards"></a>', unsafe_allow_html=True)
 st.markdown("""
-<div class="card hover-zoom">
+<div class="card hover-zoom animate__animated animate__fadeInUp">
   <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
   <div class="awards-grid">
     <div class="award-card">
@@ -356,7 +502,7 @@ st.markdown("""
 
 # -- Projects Gallery --
 st.markdown('<a id="projects"></a>', unsafe_allow_html=True)
-st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+st.markdown('<div class="card hover-zoom animate__animated animate__fadeInUp"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
 grid_html = '<div class="grid-container">'
 for proj in projects:
     grid_html += (
@@ -373,7 +519,7 @@ st.markdown(grid_html, unsafe_allow_html=True)
 # -- Experience --
 st.markdown('<a id="experience"></a>', unsafe_allow_html=True)
 st.markdown("""
-<div class="card hover-zoom">
+<div class="card hover-zoom animate__animated animate__fadeInUp">
   <div class="section-title" style="background:#34495E;">Professional Experience</div>
   <div class="exp-cards-grid">
     <div class="exp-card">
@@ -408,7 +554,7 @@ st.markdown("""
 st.markdown('<a id="skills"></a>', unsafe_allow_html=True)
 st.markdown(
 '''
-<div class="card hover-zoom">
+<div class="card hover-zoom animate__animated animate__fadeInUp">
   <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
   <div class="skills-category">
     <div class="skills-header"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/python.svg" class="skill-icon"/> Programming Languages</div>
@@ -473,7 +619,7 @@ unsafe_allow_html=True
 st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
 st.markdown(
     '''
-    <div class="card hover-zoom">
+    <div class="card hover-zoom animate__animated animate__fadeInUp">
     <div class="section-title" style="background:#34495E;">Contact</div>
     <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
     <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
@@ -490,4 +636,3 @@ st.markdown(
     ''',
     unsafe_allow_html=True
 )
-

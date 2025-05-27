@@ -1268,10 +1268,10 @@ st.markdown("""
 projects = [
       {
         "title": "Canadian Quality of Life Analysis",
-        "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
         "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
+        "desc": "Analyzed Canadian provinces' quality of life using demographic data and advanced data visualization.",
         "tools": ["Python", "Pandas", "Seaborn", "Tableau"],
-        "desc": "Analyzed Canadian provinces' quality of life using demographic data and advanced data visualization."
+        "url": "https://github.com/venkateshsoundar/canadian-qol-analysis" 
     },
     {
         "title": "Alberta Wildfire Analysis",

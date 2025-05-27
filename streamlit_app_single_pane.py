@@ -1053,11 +1053,107 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# -- Projects Showcase --
+# --- Project Cards Gallery ---
+st.markdown("""
+<style>
+.projects-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 10px;
+  margin-bottom: 32px;
+}
+.project-card {
+  background: linear-gradient(135deg, #26334d 0%, #324665 100%);
+  border-radius: 18px;
+  box-shadow: 0 8px 22px rgba(44,62,80,0.17);
+  overflow: hidden;
+  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .18s;
+  display: flex;
+  flex-direction: column;
+  min-height: 372px;
+  position: relative;
+}
+.project-card:hover {
+  transform: translateY(-7px) scale(1.04);
+  box-shadow: 0 18px 32px #ffd16623, 0 2px 14px #22304A19;
+  z-index: 9;
+}
+.project-img-area {
+  width: 100%;
+  height: 162px;
+  overflow: hidden;
+  background: #1F2A44;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-img-area img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1);
+}
+.project-card:hover .project-img-area img {
+  transform: scale(1.06);
+}
+.project-content-area {
+  padding: 18px 18px 12px 18px;
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.project-title {
+  color: #ffd166;
+  font-weight: 700;
+  font-size: 1.13rem;
+  margin-bottom: 7px;
+}
+.project-desc {
+  color: #fff;
+  font-size: 1.02rem;
+  margin-bottom: 12px;
+  min-height: 36px;
+}
+.project-tools-list {
+  margin-bottom: 6px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.tool-badge {
+  background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
+  color: #22304A;
+  font-size: 0.93rem;
+  border-radius: 12px;
+  padding: 3px 11px 2px 11px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  box-shadow: 0 1px 3px #22304A22;
+}
+.project-link {
+  margin-top: 8px;
+  text-align: right;
+}
+.project-link a {
+  color: #ADD8E6;
+  font-size: 0.98rem;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.15s;
+}
+.project-link a:hover {
+  color: #ffd166;
+}
+</style>
+""", unsafe_allow_html=True)
+
 st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
 
 projects_html = '<div class="projects-gallery-grid">'
 for proj in projects:
+    # This will NOT fail if every project has 'tools' and 'desc'
     tools_html = ''.join(f'<span class="tool-badge">{tool}</span>' for tool in proj["tools"])
     projects_html += f"""
     <div class="project-card hover-zoom">
@@ -1074,6 +1170,7 @@ for proj in projects:
     """
 projects_html += '</div>'
 st.markdown(projects_html, unsafe_allow_html=True)
+
 
 
 # --- Header Card for Skills Section ---

@@ -164,7 +164,6 @@ st.markdown("""
 .edu-card-degree { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px; color: #ffd166;}
 .edu-card-univ { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
 .edu-card-date { color: #fff; font-size: 0.98rem;}
-/* Awards/Certifications */
 .cert-grid, .awards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -195,7 +194,6 @@ st.markdown("""
 .cert-provider, .award-sub { font-size: 0.99rem; color: #ADD8E6; margin-bottom: 2px;}
 .cert-year, .award-year { font-size: 0.97rem; color: #fff; opacity: 0.8;}
 .award-year {margin-bottom: 2px;}
-/* Experience */
 .exp-cards-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
@@ -233,7 +231,6 @@ st.markdown("""
 .exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
 .exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
 .exp-card-date { color: #ffd166; font-size: 0.98rem;}
-/* Skills */
 .skills-category {
   margin-bottom: 14px;
 }
@@ -303,337 +300,245 @@ projects = [
     {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
 ]
 
-# ---- WELCOME & CHATBOT ----
-gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
-st.markdown(
-    f"""
-    <style>
-      .welcome-card {{
-        background: url("{gif_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 3rem;
-        color: white;
-        min-height: 180px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        margin-bottom:24px;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-st.markdown(
-    """
-    <div class="welcome-card">
-      <div>
-        <h1>Hello and Welcome...</h1>
-        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-st.markdown(
-    f"""
-    <style>
-      .welcome-card2 {{
-        background: url("{ai_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 0;
-        color: white;
-        height: 200px;
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 32px;
-      }}
-      .welcome-card2 .text-container {{
-        position: absolute;
-        top: 70%;
-        right: 2rem;
-        transform: translateY(-50%);
-        text-align: right;
-      }}
-      .welcome-card2 h2 {{
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-st.markdown(
-    """
-    <div class="welcome-card2">
-      <div class="text-container">
-        <h2>Ask Buddy Bot!</h2>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-api_key = st.secrets["DEEPSEEK_API_KEY"]
-client = openai.OpenAI(
-    base_url="https://openrouter.ai/api/v1",
-    api_key=api_key,
-)
-chat_container = st.container()
-with chat_container:
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat-v3-0324",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
-
 # ---- TABS ----
 tabs = st.tabs(["Home", "Projects", "Experience", "Skills", "Contact"])
 
-# ---- ABOUT TAB ----
-st.markdown("""
-<style>
-.profile-pic-popout {
-    width: 180px;
-    border-radius: 50%;
-    border: 4px solid #ffd166;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.4);
-    margin-bottom: 12px;
-}
-.card {
-    background: #1F2A44;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
-.hover-zoom:hover {
-    transform: scale(1.02);
-}
-.section-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 12px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    color: #fff;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# --- Custom Styling ---
-st.markdown("""
-<style>
-/* Square profile pic with animation */
-.profile-pic-square {
-    width: 180px;
-    height: 180px;
-    border-radius: 20px;
-    object-fit: cover;
-    border: 4px solid #ffd166;
-    box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
-    margin: 0 auto 20px auto;
-    display: block;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.profile-pic-square:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
-}
-
-/* Card styling */
-.card {
-    background: #1F2A44;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
-.hover-zoom:hover {
-    transform: scale(1.02);
-}
-
-/* Title style */
-.section-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 12px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    color: #fff;
-    background:#22304A;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# --- 2-Column Layout: Left Profile / Right About ---
-st.markdown("""
-<style>
-.profile-pic-square {
-    width: 160px;
-    height: 160px;
-    border-radius: 20px;
-    object-fit: cover;
-    border: 4px solid #ffd166;
-    box-shadow: 0 0 14px rgba(255, 209, 102, 0.6);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.profile-pic-square:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
-}
-.profile-card-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
-.profile-left {
-    flex: 0 0 180px;
-    text-align: center;
-}
-.profile-right {
-    flex: 1;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown(
-    """
-    <div class="card hover-zoom">
-      <div class="section-title">👤 Profile & About Me</div>
-      <div class="profile-card-wrapper">
-        <div class="profile-left">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" />
-          <h3 style="color:#fff; margin: 10px 0 5px;">Venkatesh Soundararajan</h3>
-          <p style="color:#ADD8E6; font-size: 15px; margin: 0;">
-            <strong>Software Development Intern</strong><br>
-            Data Engineering
-          </p>
-          <p style="color:#ffd166; margin-top: 6px;">
-            🍁 Calgary, AB, Canada
-          </p>
-        </div>
-        <div class="profile-right">
-          <div style="font-size:1.05rem; color:#fff; line-height:1.6; margin-top: 4px;">
-            I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics.
-            I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure.
-            <br><br>
-            I'm currently pursuing my Master's in Data Science and Analytics at the University of Calgary. My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+# ---- HOME TAB ----
+with tabs[0]:
+    # --- Welcome Card ---
+    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+    st.markdown(
+        f"""
+        <style>
+          .welcome-card {{
+            background: url("{gif_url}") center/cover no-repeat;
+            border-radius: 16px;
+            padding: 3rem;
+            color: white;
+            min-height: 180px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-bottom:24px;
+          }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+        <div class="welcome-card">
+          <div>
+            <h1>Hello and Welcome...</h1>
+            <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
           </div>
         </div>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        """,
+        unsafe_allow_html=True,
+    )
 
-# --- Spacer before next section ---
-st.markdown(
-    """
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Education</div>
-      <div class="edu-cards-grid">
-        <div class="edu-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo"/>
-          <div class="edu-card-degree">Masters in Data Science and Analytics</div>
-          <div class="edu-card-univ">University of Calgary, Alberta, Canada</div>
-          <div class="edu-card-date">September 2024 – Present</div>
+    # --- Ask Buddy Bot Banner ---
+    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+    st.markdown(
+        f"""
+        <style>
+          .welcome-card2 {{
+            background: url("{ai_url}") center/cover no-repeat;
+            border-radius: 16px;
+            padding: 0;
+            color: white;
+            height: 200px;
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 32px;
+          }}
+          .welcome-card2 .text-container {{
+            position: absolute;
+            top: 70%;
+            right: 2rem;
+            transform: translateY(-50%);
+            text-align: right;
+          }}
+          .welcome-card2 h2 {{
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            font-weight: 700;
+            font-size: 1.8rem;
+          }}
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        """
+        <div class="welcome-card2">
+          <div class="text-container">
+            <h2>Ask Buddy Bot!</h2>
+          </div>
         </div>
-        <div class="edu-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-card-logo"/>
-          <div class="edu-card-degree">Bachelor of Engineering</div>
-          <div class="edu-card-univ">Anna University, Chennai, India</div>
-          <div class="edu-card-date">August 2009 – May 2013</div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Chatbot input/output (replace with your key handling)
+    api_key = st.secrets["DEEPSEEK_API_KEY"]
+    client = openai.OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+    )
+    chat_container = st.container()
+    with chat_container:
+        user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+        if user_input:
+            st.chat_message("user").write(user_input)
+            prompt = (
+                "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+                "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+                + user_input
+            )
+            with st.spinner("Assistant is typing..."):
+                response = client.chat.completions.create(
+                    model="deepseek/deepseek-chat-v3-0324",
+                    messages=[
+                        {"role": "system", "content": prompt}
+                    ]
+                )
+                reply = response.choices[0].message.content
+            st.chat_message("assistant").write(reply)
+
+    # ---- Profile & About Section ----
+    st.markdown(
+        """
+        <div class="card hover-zoom">
+          <div class="section-title">👤 Profile & About Me</div>
+          <div class="profile-card-wrapper" style="display:flex; flex-direction: row; gap: 30px; align-items: flex-start; justify-content: flex-start; flex-wrap: wrap;">
+            <div class="profile-left" style="flex: 0 0 180px; text-align: center;">
+              <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" class="profile-pic-square" style="width: 160px; height: 160px; border-radius: 20px; object-fit: cover; border: 4px solid #ffd166; box-shadow: 0 0 14px rgba(255, 209, 102, 0.6);" />
+              <h3 style="color:#fff; margin: 10px 0 5px;">Venkatesh Soundararajan</h3>
+              <p style="color:#ADD8E6; font-size: 15px; margin: 0;">
+                <strong>Software Development Intern</strong><br>
+                Data Engineering
+              </p>
+              <p style="color:#ffd166; margin-top: 6px;">
+                🍁 Calgary, AB, Canada
+              </p>
+            </div>
+            <div class="profile-right" style="flex: 1;">
+              <div style="font-size:1.05rem; color:#fff; line-height:1.6; margin-top: 4px;">
+                I’m Venkatesh, a Data Scientist and Software Developer with 8+ years of experience in quality engineering, business intelligence, and analytics.<br>
+                I specialize in building scalable ETL pipelines, predictive models, and interactive dashboards using cloud platforms like AWS and Azure.<br><br>
+                I'm currently pursuing my Master's in Data Science and Analytics at the University of Calgary. My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-    </div>
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
-      <div class="cert-grid">
-        <div class="cert-card">
-          <div class="cert-title">Guidewire Insurance Suite Analyst 10.0</div>
-          <div class="cert-provider">Jasper – Guidewire Education</div>
-          <div class="cert-year">2024</div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # ---- Education ----
+    st.markdown(
+        """
+        <div class="card hover-zoom">
+          <div class="section-title" style="background:#34495E;">Education</div>
+          <div class="edu-cards-grid">
+            <div class="edu-card">
+              <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo"/>
+              <div class="edu-card-degree">Masters in Data Science and Analytics</div>
+              <div class="edu-card-univ">University of Calgary, Alberta, Canada</div>
+              <div class="edu-card-date">September 2024 – Present</div>
+            </div>
+            <div class="edu-card">
+              <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-card-logo"/>
+              <div class="edu-card-degree">Bachelor of Engineering</div>
+              <div class="edu-card-univ">Anna University, Chennai, India</div>
+              <div class="edu-card-date">August 2009 – May 2013</div>
+            </div>
+          </div>
         </div>
-        <div class="cert-card">
-          <div class="cert-title">Karate DSL</div>
-          <div class="cert-provider">Udemy</div>
-          <div class="cert-year">2023</div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # ---- Certifications ----
+    st.markdown(
+        """
+        <div class="card hover-zoom">
+          <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
+          <div class="cert-grid">
+            <div class="cert-card">
+              <div class="cert-title">Guidewire Insurance Suite Analyst 10.0</div>
+              <div class="cert-provider">Jasper – Guidewire Education</div>
+              <div class="cert-year">2024</div>
+            </div>
+            <div class="cert-card">
+              <div class="cert-title">Karate DSL</div>
+              <div class="cert-provider">Udemy</div>
+              <div class="cert-year">2023</div>
+            </div>
+            <div class="cert-card">
+              <div class="cert-title">Rest API Automation</div>
+              <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+              <div class="cert-year">2023</div>
+            </div>
+            <div class="cert-card">
+              <div class="cert-title">Selenium WebDriver</div>
+              <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+              <div class="cert-year">2022</div>
+            </div>
+            <div class="cert-card">
+              <div class="cert-title">SQL for Data Science</div>
+              <div class="cert-provider">Coursera</div>
+              <div class="cert-year">2020</div>
+            </div>
+            <div class="cert-card">
+              <div class="cert-title">SDET</div>
+              <div class="cert-provider">Capgemini</div>
+              <div class="cert-year">2020</div>
+            </div>
+          </div>
         </div>
-        <div class="cert-card">
-          <div class="cert-title">Rest API Automation</div>
-          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
-          <div class="cert-year">2023</div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # ---- Awards ----
+    st.markdown(
+        """
+        <div class="card hover-zoom">
+          <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
+          <div class="awards-grid">
+            <div class="award-card">
+              <div class="award-title">Spot Award</div>
+              <div class="award-year">2022 & 2023</div>
+              <div class="award-sub">InsurCloud – Deloitte, Canada</div>
+            </div>
+            <div class="award-card">
+              <div class="award-title">Best Contributor</div>
+              <div class="award-year">2018</div>
+              <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
+            </div>
+            <div class="award-card">
+              <div class="award-title">QE & A Maestro</div>
+              <div class="award-year">2017</div>
+              <div class="award-sub">Centene by Cognizant QE&A, USA</div>
+            </div>
+            <div class="award-card">
+              <div class="award-title">Pride of the Quarter</div>
+              <div class="award-year">Q1 2017</div>
+              <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+            </div>
+            <div class="award-card">
+              <div class="award-title">Pillar of the Month</div>
+              <div class="award-year">May 2014 & Aug 2015</div>
+              <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+            </div>
+          </div>
         </div>
-        <div class="cert-card">
-          <div class="cert-title">Selenium WebDriver</div>
-          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
-          <div class="cert-year">2022</div>
-        </div>
-        <div class="cert-card">
-          <div class="cert-title">SQL for Data Science</div>
-          <div class="cert-provider">Coursera</div>
-          <div class="cert-year">2020</div>
-        </div>
-        <div class="cert-card">
-          <div class="cert-title">SDET</div>
-          <div class="cert-provider">Capgemini</div>
-          <div class="cert-year">2020</div>
-        </div>
-      </div>
-    </div>
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
-      <div class="awards-grid">
-        <div class="award-card">
-          <div class="award-title">Spot Award</div>
-          <div class="award-year">2022 & 2023</div>
-          <div class="award-sub">InsurCloud – Deloitte, Canada</div>
-        </div>
-        <div class="award-card">
-          <div class="award-title">Best Contributor</div>
-          <div class="award-year">2018</div>
-          <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
-        </div>
-        <div class="award-card">
-          <div class="award-title">QE & A Maestro</div>
-          <div class="award-year">2017</div>
-          <div class="award-sub">Centene by Cognizant QE&A, USA</div>
-        </div>
-        <div class="award-card">
-          <div class="award-title">Pride of the Quarter</div>
-          <div class="award-year">Q1 2017</div>
-          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-        </div>
-        <div class="award-card">
-          <div class="award-title">Pillar of the Month</div>
-          <div class="award-year">May 2014 & Aug 2015</div>
-          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-        </div>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
+        """,
+        unsafe_allow_html=True
+    )
 
 # ---- PROJECTS TAB ----
 with tabs[1]:

@@ -564,22 +564,6 @@ with chat_container:
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
 
-  
-st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-grid_html = '<div class="grid-container">'
-for proj in projects:
-    grid_html += (
-        f'<div class="project-item hover-zoom">'
-        f'  <a href="{proj["url"]}" target="_blank">'
-        f'    <img src="{proj["image"]}" class="card-img"/>'
-        f'    <div class="overlay">{proj["title"]}</div>'
-        f'  </a>'
-        f'</div>'
-    )
-grid_html += '</div>'
-st.markdown(grid_html, unsafe_allow_html=True)
-
-
 
 st.markdown("""
 <div class="profile-row">
@@ -606,6 +590,27 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+st.markdown(
+    '''
+    <div class="card hover-zoom">
+    <div class="section-title" style="background:#34495E;">Contact</div>
+    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
+    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
+    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
+    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
+    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
+    </div>
+    <br>
+    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
+    Calgary, AB, Canada<br>
+    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
+    </div>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
+  
 
 
 # --- Spacer before next section ---
@@ -696,9 +701,6 @@ st.markdown(
     """,
     unsafe_allow_html=True
 )
-
-   # ---- WELCOME & CHATBOT ----
-
 
 
 st.markdown("""
@@ -798,22 +800,4 @@ unsafe_allow_html=True
 )
 
 
-st.markdown(
-    '''
-    <div class="card hover-zoom">
-    <div class="section-title" style="background:#34495E;">Contact</div>
-    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
-    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
-    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
-    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
-    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
-    </div>
-    <br>
-    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
-    Calgary, AB, Canada<br>
-    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
-    </div>
-    </div>
-    ''',
-    unsafe_allow_html=True
-)
+

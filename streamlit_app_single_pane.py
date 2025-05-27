@@ -1020,7 +1020,6 @@ st.markdown("""
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/mongodb.svg"/>NoSQL</div>
       </div>
     </div>
-
     <div class="skill-category-card">
       <div class="skill-category-title">Version Control</div>
       <div class="skill-list">

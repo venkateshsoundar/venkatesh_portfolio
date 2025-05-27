@@ -591,6 +591,7 @@ st.markdown("""
       <div class="award-title">QE & A Maestro</div>
       <div class="award-year">2017</div>
       <div class="award-sub">Centene by Cognizant QE&A, USA</div>
+>>>>>>> b2b15f39c91e321f8c81eeaf895f924908c3be40
     </div>
     <div class="award-card">
       <div class="award-title">Pride of the Quarter</div>

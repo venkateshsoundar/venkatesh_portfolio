@@ -908,6 +908,8 @@ with project_container:
   grid_html += '</div>'
   st.markdown(grid_html, unsafe_allow_html=True)
 
+st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Core Skills and Tools </div></div>', unsafe_allow_html=True)
+
 st.markdown("""
 <style>
 .skills-main-vert-section {

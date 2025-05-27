@@ -943,52 +943,52 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-
 st.markdown("""
 <style>
 .projects-gallery-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 30px;
   margin-top: 10px;
   margin-bottom: 32px;
 }
 .project-card {
   background: linear-gradient(135deg, #26334d 0%, #324665 100%);
-  border-radius: 18px;
-  box-shadow: 0 8px 22px rgba(44,62,80,0.17);
+  border-radius: 16px;
+  box-shadow: 0 8px 22px rgba(44,62,80,0.16);
   overflow: hidden;
-  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .18s;
   display: flex;
   flex-direction: column;
-  min-height: 372px;
+  min-height: 355px;
+  transition: transform .19s, box-shadow .18s;
   position: relative;
 }
 .project-card:hover {
-  transform: translateY(-7px) scale(1.04);
-  box-shadow: 0 18px 32px #ffd16623, 0 2px 14px #22304A19;
-  z-index: 9;
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 14px 30px #ffd16628, 0 2px 14px #22304A14;
+  z-index: 11;
 }
 .project-img-area {
   width: 100%;
-  height: 162px;
-  overflow: hidden;
+  aspect-ratio: 1/1;
   background: #1F2A44;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
 }
 .project-img-area img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1);
+  transition: transform .22s cubic-bezier(.4,1.6,.6,1);
+  border-radius: 0;
 }
 .project-card:hover .project-img-area img {
-  transform: scale(1.06);
+  transform: scale(1.07);
 }
 .project-content-area {
-  padding: 18px 18px 12px 18px;
+  padding: 16px 16px 12px 16px;
   flex: 1 1 0;
   display: flex;
   flex-direction: column;
@@ -997,33 +997,34 @@ st.markdown("""
 .project-title {
   color: #ffd166;
   font-weight: 700;
-  font-size: 1.13rem;
-  margin-bottom: 7px;
-}
-.project-desc {
-  color: #fff;
-  font-size: 1.02rem;
-  margin-bottom: 12px;
+  font-size: 1.12rem;
+  margin-bottom: 8px;
   min-height: 36px;
 }
 .project-tools-list {
-  margin-bottom: 6px;
+  margin-bottom: 7px;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 7px;
 }
 .tool-badge {
   background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
   color: #22304A;
-  font-size: 0.93rem;
+  font-size: 0.94rem;
   border-radius: 12px;
   padding: 3px 11px 2px 11px;
   font-weight: 500;
   margin-bottom: 2px;
-  box-shadow: 0 1px 3px #22304A22;
+  box-shadow: 0 1px 3px #22304A19;
+}
+.project-desc {
+  color: #fff;
+  font-size: 1.01rem;
+  margin-bottom: 13px;
+  margin-top: 3px;
+  flex: 1 1 0;
 }
 .project-link {
-  margin-top: 8px;
   text-align: right;
 }
 .project-link a {
@@ -1036,121 +1037,35 @@ st.markdown("""
 .project-link a:hover {
   color: #ffd166;
 }
-</style>
-""", unsafe_allow_html=True)
-
-# --- Project Cards Gallery ---
-st.markdown("""
-<style>
-.projects-gallery-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 32px;
-  margin-top: 10px;
-  margin-bottom: 32px;
+@media (max-width: 1200px) {
+  .projects-gallery-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
-.project-card {
-  background: linear-gradient(135deg, #26334d 0%, #324665 100%);
-  border-radius: 18px;
-  box-shadow: 0 8px 22px rgba(44,62,80,0.17);
-  overflow: hidden;
-  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .18s;
-  display: flex;
-  flex-direction: column;
-  min-height: 372px;
-  position: relative;
-}
-.project-card:hover {
-  transform: translateY(-7px) scale(1.04);
-  box-shadow: 0 18px 32px #ffd16623, 0 2px 14px #22304A19;
-  z-index: 9;
-}
-.project-img-area {
-  width: 100%;
-  height: 162px;
-  overflow: hidden;
-  background: #1F2A44;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.project-img-area img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1);
-}
-.project-card:hover .project-img-area img {
-  transform: scale(1.06);
-}
-.project-content-area {
-  padding: 18px 18px 12px 18px;
-  flex: 1 1 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-}
-.project-title {
-  color: #ffd166;
-  font-weight: 700;
-  font-size: 1.13rem;
-  margin-bottom: 7px;
-}
-.project-desc {
-  color: #fff;
-  font-size: 1.02rem;
-  margin-bottom: 12px;
-  min-height: 36px;
-}
-.project-tools-list {
-  margin-bottom: 6px;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.tool-badge {
-  background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
-  color: #22304A;
-  font-size: 0.93rem;
-  border-radius: 12px;
-  padding: 3px 11px 2px 11px;
-  font-weight: 500;
-  margin-bottom: 2px;
-  box-shadow: 0 1px 3px #22304A22;
-}
-.project-link {
-  margin-top: 8px;
-  text-align: right;
-}
-.project-link a {
-  color: #ADD8E6;
-  font-size: 0.98rem;
-  text-decoration: underline;
-  font-weight: 600;
-  transition: color 0.15s;
-}
-.project-link a:hover {
-  color: #ffd166;
+@media (max-width: 750px) {
+  .projects-gallery-grid {
+    grid-template-columns: 1fr;
+  }
 }
 </style>
 """, unsafe_allow_html=True)
 
+# ---- Projects Gallery Section ----
 st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
 
 projects_html = '<div class="projects-gallery-grid">'
 for proj in projects:
-    # This will NOT fail if every project has 'tools' and 'desc'
     tools_html = ''.join(f'<span class="tool-badge">{tool}</span>' for tool in proj["tools"])
     projects_html += f"""
     <div class="project-card hover-zoom">
       <div class="project-img-area">
-        <img src="{proj["image"]}" alt="{proj["title"]}"/>
+        <img src="{proj['image']}" alt="{proj['title']}"/>
       </div>
       <div class="project-content-area">
-        <div class="project-title">{proj["title"]}</div>
+        <div class="project-title">{proj['title']}</div>
         <div class="project-tools-list">{tools_html}</div>
-        <div class="project-desc">{proj["desc"]}</div>
-        <div class="project-link"><a href="{proj["url"]}" target="_blank">View on GitHub →</a></div>
+        <div class="project-desc">{proj['desc']}</div>
+        <div class="project-link"><a href="{proj['url']}" target="_blank">View on GitHub &rarr;</a></div>
       </div>
     </div>
     """

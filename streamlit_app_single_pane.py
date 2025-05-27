@@ -944,29 +944,27 @@ st.markdown(
 )
 
 # ---- Projects Gallery Section ----
+# ---- Projects Gallery Section ----
 st.markdown("""
 <style>
-.projects-flex-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 28px;
-  justify-content: flex-start;
+.projects-4col-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 32px;
   margin-bottom: 36px;
+  margin-top: 12px;
 }
 .project-square-card {
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   border-radius: 18px;
   box-shadow: 0 8px 28px rgba(44,62,80,0.17);
-  width: 310px;
-  min-width: 250px;
-  max-width: 340px;
-  margin-bottom: 0;
   display: flex;
   flex-direction: column;
   overflow: hidden;
   transition: transform 0.18s, box-shadow 0.18s;
   position: relative;
   border: 2px solid #22304A38;
+  min-width: 0;
 }
 .project-square-card:hover {
   transform: translateY(-6px) scale(1.033);
@@ -1042,21 +1040,21 @@ st.markdown("""
 .project-card-link a:hover {
   color: #ffd166;
 }
-@media (max-width: 1150px) {
-  .projects-flex-row {justify-content: center;}
+/* Responsive tweaks */
+@media (max-width: 1300px) {
+  .projects-4col-grid {grid-template-columns: repeat(3, 1fr);}
 }
-@media (max-width: 900px) {
-  .projects-flex-row {gap: 18px;}
-  .project-square-card {width: 97vw;max-width: 420px;}
+@media (max-width: 950px) {
+  .projects-4col-grid {grid-template-columns: repeat(2, 1fr);}
 }
-@media (max-width: 500px) {
-  .project-square-card {width: 99vw;max-width: 99vw;}
+@media (max-width: 650px) {
+  .projects-4col-grid {grid-template-columns: 1fr;}
 }
 </style>
 <div class="card hover-zoom" style="margin-bottom:10px;">
   <div class="section-title" style="background:#2C3E50;">Projects Gallery</div>
 </div>
-<div class="projects-flex-row">
+<div class="projects-4col-grid">
 """, unsafe_allow_html=True)
 
 # Build project cards in HTML
@@ -1080,6 +1078,7 @@ for proj in projects:
 projects_cards_html += "</div>"
 
 st.markdown(projects_cards_html, unsafe_allow_html=True)
+
 
 
 

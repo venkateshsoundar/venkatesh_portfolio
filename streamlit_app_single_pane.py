@@ -631,7 +631,7 @@ st.markdown("""
 .hero-pic-glow img {
   width: 116px;
   height: 116px;
-  border-radius: 50%;
+  border-radius: 20%;
   object-fit: cover;
   border: 3px solid #fff;
   background: #fff;

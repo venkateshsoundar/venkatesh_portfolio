@@ -1397,24 +1397,29 @@ st.markdown("""
 # ---- PROJECTS GRID (NO LEADING NEWLINE!) ----
 grid_html = '<div class="projects-4col-grid">'
 for proj in projects:
-    tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
+    # Defensive default fallback to avoid KeyError!
+    title = proj.get("title", "No Title")
+    image = proj.get("image", "")
+    desc = proj.get("desc", "")
+    url = proj.get("url", "#")
+    tools = proj.get("tools", [])
+    tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in tools)
     grid_html += f'''
     <div class="project-main-card hover-zoom">
       <div class="project-img-holder">
         <div class="project-img-inner">
-          <img src="{proj['image']}" alt="{proj['title']}"/>
+          <img src="{image}" alt="{title}"/>
         </div>
       </div>
       <div class="project-card-info">
-        <div class="project-title">{proj['title']}</div>
-        <div class="project-desc">{proj['desc']}</div>
+        <div class="project-title">{title}</div>
+        <div class="project-desc">{desc}</div>
         <div class="project-tools-list">{tools_html}</div>
-        <div class="project-card-link"><a href="{proj['url']}" target="_blank">View on GitHub &rarr;</a></div>
+        <div class="project-card-link"><a href="{url}" target="_blank">View on GitHub &rarr;</a></div>
       </div>
     </div>
     '''
 grid_html += '</div>'
-
 st.markdown(grid_html, unsafe_allow_html=True)
 
 

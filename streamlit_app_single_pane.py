@@ -403,6 +403,29 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+# -- Contact --
+st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
+st.markdown(
+    '''
+    <div class="card hover-zoom animate__animated animate__fadeInUp">
+    <div class="section-title" style="background:#34495E;">Contact</div>
+    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
+    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
+    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
+    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
+    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
+    </div>
+    <br>
+    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
+    Calgary, AB, Canada<br>
+    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
+    </div>
+    </div>
+    ''',
+    unsafe_allow_html=True
+)
+
+
 # -- Education --
 st.markdown('<a id="education"></a>', unsafe_allow_html=True)
 st.markdown("""
@@ -615,24 +638,4 @@ st.markdown(
 unsafe_allow_html=True
 )
 
-# -- Contact --
-st.markdown('<a id="contact"></a>', unsafe_allow_html=True)
-st.markdown(
-    '''
-    <div class="card hover-zoom animate__animated animate__fadeInUp">
-    <div class="section-title" style="background:#34495E;">Contact</div>
-    <div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">
-    <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon" /></a>
-    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon" /></a>
-    <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon" /></a>
-    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon" /></a>
-    </div>
-    <br>
-    <div style="color:#fff;font-size:1.1rem;margin-top:12px;">
-    Calgary, AB, Canada<br>
-    Email: <a href="mailto:venkatesh.balusoundar@gmail.com" style="color:#ffd166;">venkatesh.balusoundar@gmail.com</a>
-    </div>
-    </div>
-    ''',
-    unsafe_allow_html=True
-)
+

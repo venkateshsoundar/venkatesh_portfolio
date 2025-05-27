@@ -640,52 +640,52 @@ with tabs[1]:
           st.chat_message("assistant").write(reply)
 
   
-st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-grid_html = '<div class="grid-container">'
-for proj in projects:
-    grid_html += (
-        f'<div class="project-item hover-zoom">'
-        f'  <a href="{proj["url"]}" target="_blank">'
-        f'    <img src="{proj["image"]}" class="card-img"/>'
-        f'    <div class="overlay">{proj["title"]}</div>'
-        f'  </a>'
-        f'</div>'
-    )
-grid_html += '</div>'
-st.markdown(grid_html, unsafe_allow_html=True)
+  st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+  grid_html = '<div class="grid-container">'
+  for proj in projects:
+      grid_html += (
+          f'<div class="project-item hover-zoom">'
+          f'  <a href="{proj["url"]}" target="_blank">'
+          f'    <img src="{proj["image"]}" class="card-img"/>'
+          f'    <div class="overlay">{proj["title"]}</div>'
+          f'  </a>'
+          f'</div>'
+      )
+  grid_html += '</div>'
+  st.markdown(grid_html, unsafe_allow_html=True)
 
 
-st.markdown("""
-<div class="card hover-zoom">
-<div class="section-title" style="background:#34495E;">Professional Experience</div>
-<div class="exp-cards-grid">
-<div class="exp-card">
-  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-  <div class="exp-card-title">Software Developer Intern</div>
-  <div class="exp-card-company">Tech Insights Inc, Canada</div>
-  <div class="exp-card-date">May 2025 – Present</div>
-</div>
-<div class="exp-card">
-  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
-  <div class="exp-card-title">Senior Consultant</div>
-  <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
-  <div class="exp-card-date">October 2021 – August 2024</div>
-</div>
-<div class="exp-card">
-  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
-  <div class="exp-card-title">Consultant</div>
-  <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
-  <div class="exp-card-date">May 2018 – October 2021</div>
-</div>
-<div class="exp-card">
-  <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
-  <div class="exp-card-title">Associate</div>
-  <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
-  <div class="exp-card-date">Sep 2013 – May 2018</div>
-</div>
-</div>
-</div>
-""", unsafe_allow_html=True)
+  st.markdown("""
+  <div class="card hover-zoom">
+  <div class="section-title" style="background:#34495E;">Professional Experience</div>
+  <div class="exp-cards-grid">
+  <div class="exp-card">
+    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+    <div class="exp-card-title">Software Developer Intern</div>
+    <div class="exp-card-company">Tech Insights Inc, Canada</div>
+    <div class="exp-card-date">May 2025 – Present</div>
+  </div>
+  <div class="exp-card">
+    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+    <div class="exp-card-title">Senior Consultant</div>
+    <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+    <div class="exp-card-date">October 2021 – August 2024</div>
+  </div>
+  <div class="exp-card">
+    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+    <div class="exp-card-title">Consultant</div>
+    <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+    <div class="exp-card-date">May 2018 – October 2021</div>
+  </div>
+  <div class="exp-card">
+    <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+    <div class="exp-card-title">Associate</div>
+    <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+    <div class="exp-card-date">Sep 2013 – May 2018</div>
+  </div>
+  </div>
+  </div>
+  """, unsafe_allow_html=True)
 
 # ---- SKILLS TAB ----
 with tabs[3]:

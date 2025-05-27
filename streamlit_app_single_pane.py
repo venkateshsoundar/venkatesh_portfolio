@@ -1264,17 +1264,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-# Example data, use your own!
-projects = [
-    {
-        "title": "Alberta Wildfire Analysis",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
-        "desc": "Mapped and predicted wildfire trends in Alberta with geospatial analysis and interactive dashboards.",
-        "tools": ["Python", "GeoPandas", "Power BI"],
-        "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis"
-    }
-]
-
 # ---- CSS and Header ----
 st.markdown("""
 <style>

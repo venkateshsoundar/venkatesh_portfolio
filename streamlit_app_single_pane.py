@@ -869,6 +869,11 @@ st.markdown(
         </div>
       </div>
     </div>
+    """, unsafe_allow_html=True)
+
+st.markdown('<a name="experience"></a>', unsafe_allow_html=True)
+st.markdown(
+    """  
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Professional Experience</div>
       <div class="exp-cards-grid">
@@ -898,6 +903,9 @@ st.markdown(
       </div>
     </div>
     </div>
+    """, unsafe_allow_html=True)
+st.markdown(
+    """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
       <div class="cert-grid">
@@ -932,7 +940,9 @@ st.markdown(
           <div class="cert-year">2020</div>
         </div>
       </div>
-    </div>
+    </div>""", unsafe_allow_html=True)
+st.markdown(
+    """
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
       <div class="awards-grid">
@@ -962,8 +972,7 @@ st.markdown(
           <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
         </div>
       </div>
-    </div>
-    
+    </div>    
     """,
     unsafe_allow_html=True
 )

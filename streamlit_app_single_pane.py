@@ -981,7 +981,7 @@ st.markdown(
 
 
 # --- Your projects list goes here (use the same list as above) ---
-
+st.markdown('<a name="projects"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
 .card.projects-gallery-pane {

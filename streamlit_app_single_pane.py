@@ -990,9 +990,7 @@ st.markdown("""
   box-shadow: 0 4px 28px rgba(44,62,80,0.14);
   padding: 22px 18px 28px 18px;
   margin-bottom: 36px;
-  max-width: 1250px;
-  margin-left: auto;
-  margin-right: auto;
+  /* Remove max-width and margin auto for full width like other sections */
 }
 .section-title {
   font-size: 1.35rem;

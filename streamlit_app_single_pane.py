@@ -942,6 +942,7 @@ st.markdown(
         </div>
       </div>
     </div>""", unsafe_allow_html=True)
+st.markdown('<a name="recognitions"></a>', unsafe_allow_html=True)
 st.markdown(
     """
     <div class="card hover-zoom">

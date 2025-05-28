@@ -416,36 +416,6 @@ projects = [
 ]
 
 
-st.markdown("""
-    <style>
-    /* Style the sidebar */
-    [data-testid="stSidebar"] {
-        background: #1F2A44;
-        border-radius: 0 24px 24px 0;
-        padding-top: 24px;
-    }
-    .sidebar-title {
-        color: #ffd166;
-        font-size: 1.24rem;
-        font-weight: bold;
-        margin-bottom: 25px;
-        text-align: center;
-        letter-spacing: .02em;
-    }
-    .sidebar-radio label {
-        color: #ffd166 !important;
-        font-weight: bold;
-        font-size: 1.11rem;
-        border-radius: 8px;
-        padding: 7px 16px 7px 16px;
-        transition: background 0.18s, color 0.18s;
-    }
-    .sidebar-radio label[data-selected="true"] {
-        background: #ffd166;
-        color: #22304A !important;
-    }
-    </style>
-""", unsafe_allow_html=True)
 
 
 # ---- NAVIGATION BAR ----

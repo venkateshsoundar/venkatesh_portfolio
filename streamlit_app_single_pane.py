@@ -987,7 +987,7 @@ st.markdown(
 
 
 # --- Your projects list goes here (use the same list as above) ---
-
+st.markdown('<a name="Experience"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
 .card.projects-gallery-pane {
@@ -1160,12 +1160,6 @@ for proj in projects:
 projects_html += '</div></div>'
 
 st.markdown(projects_html, unsafe_allow_html=True)
-
-
-
-
-
-
 
 # --- Header Card for Skills Section ---
 st.markdown("""

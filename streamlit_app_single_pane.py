@@ -986,8 +986,6 @@ st.markdown(
 )
 
 
-import streamlit as st
-
 # --- Your projects list goes here (use the same list as above) ---
 
 st.markdown("""

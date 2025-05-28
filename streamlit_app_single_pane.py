@@ -987,7 +987,7 @@ st.markdown(
 
 
 # --- Your projects list goes here (use the same list as above) ---
-st.markdown('<a name="Experience"></a>', unsafe_allow_html=True)
+
 st.markdown("""
 <style>
 .card.projects-gallery-pane {
@@ -1135,6 +1135,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 # --- One unified pane: header and projects in one card ---
+st.markdown('<a name="Projects Gallery"></a>', unsafe_allow_html=True)
 projects_html = '''
 <div class="card projects-gallery-pane hover-zoom">
   <div class="section-title">Projects Gallery</div>

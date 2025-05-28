@@ -447,23 +447,6 @@ st.markdown("""
     </style>
 """, unsafe_allow_html=True)
 
-st.sidebar.markdown('<div class="sidebar-title">Navigate</div>', unsafe_allow_html=True)
-
-section = st.sidebar.radio(
-    "",
-    [
-        "About",
-        "Education",
-        "Experience",
-        "Certifications",
-        "Recognitions",
-        "Projects Gallery",
-        "Skills"
-    ],
-    key="sidebar_radio"
-)
-
-
 
 # ---- NAVIGATION BAR ----
 st.markdown("""

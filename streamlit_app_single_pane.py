@@ -830,9 +830,9 @@ st.markdown("""
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">
-      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.<br><br>
-      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.<br><br>
-      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.<br>
+      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.
+      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.
+      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.
       My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
     </div>
     <div class="hero-contact-bar">

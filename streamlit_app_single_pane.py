@@ -313,12 +313,6 @@ st.markdown("""
     width: 100%;
   }
 }
-.section-pane {
-  margin-bottom: 36px;
-}
-.card {
-  margin-bottom: 0;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -450,12 +444,6 @@ st.markdown("""
         background: #ffd166;
         color: #22304A !important;
     }
-    .section-pane {
-  margin-bottom: 36px;
-}
-.card {
-  margin-bottom: 0;
-}
     </style>
 """, unsafe_allow_html=True)
 
@@ -475,12 +463,6 @@ st.markdown("""
 }
 .navbar a:hover {
     background: #ffd16633; color: #fff;
-}
-.section-pane {
-  margin-bottom: 36px;
-}
-.card {
-  margin-bottom: 0;
 }
 </style>
 <div class="navbar">
@@ -570,12 +552,6 @@ st.markdown("""
 .profile-right {
     flex: 1;
 }
-.section-pane {
-  margin-bottom: 36px;
-}
-.card {
-  margin-bottom: 0;
-}
 </style>
 """, unsafe_allow_html=True)
 
@@ -656,12 +632,6 @@ st.markdown(
         font-weight: 700;
         font-size: 1.8rem;
       }}
-      .section-pane {
-  margin-bottom: 36px;
-}
-.card {
-  margin-bottom: 0;
-}
     </style>
     """,
     unsafe_allow_html=True,
@@ -845,12 +815,6 @@ st.markdown("""
 @media (max-width: 900px) {
   .hero-card {flex-direction: column;align-items: center;}
   .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
-}
-.section-pane {
-  margin-bottom: 36px;
-}
-.card {
-  margin-bottom: 0;
 }
 </style>
 

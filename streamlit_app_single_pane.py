@@ -313,6 +313,12 @@ st.markdown("""
     width: 100%;
   }
 }
+.section-pane {
+  margin-bottom: 36px;
+}
+.card {
+  margin-bottom: 0;
+}
 </style>
 """, unsafe_allow_html=True)
 

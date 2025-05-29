@@ -1138,134 +1138,166 @@ st.markdown("""
   box-shadow: 0 12px 28px #ffd16645, 0 3px 16px #22304A33;
   z-index: 9;
 }
-/* Main pane and header styling */
 .card.skills-pane-main {
-  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
-  border-radius: 28px;
-  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
-  padding: 36px 18px 32px 18px;
+  background: none;
+  box-shadow: none;
+  padding: 0;
   margin-bottom: 36px;
 }
 .skills-header-title {
   font-size: 1.55rem;
   font-weight: bold;
   color: #fff;
-  background: #2C3E50;
+  background: none;
   border-radius: 14px;
   padding: 18px 0 18px 0;
   margin-bottom: 32px;
   text-align: center;
   letter-spacing: 0.04em;
-  box-shadow: 0 1px 12px rgba(20,30,55,0.06);
-  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
 }
-/* Skill cards grid */
 .skills-categories-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
-  gap: 22px;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 32px;
   width: 100%;
 }
 .skill-category-card {
-  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
-  border-radius: 15px;
-  box-shadow: 0 4px 14px rgba(44,62,80,0.11);
-  padding: 16px 8px 10px 8px;
-  text-align: center;
-  transition: transform .15s, box-shadow .17s;
-  border: 2px solid #40649644;
-  min-height: 142px;
+  background: linear-gradient(135deg, #334565 0%, #466089 100%);
+  border-radius: 20px;
+  box-shadow: 0 4px 24px #22304A22;
+  border: 3px solid #fff3;   /* Visible border */
+  padding: 28px 20px 18px 20px;
+  text-align: left;
+  min-height: 165px;
+  transition: box-shadow .18s, border .17s, background .19s;
 }
 .skill-category-card:hover {
-  transform: translateY(-5px) scale(1.04);
-  box-shadow: 0 8px 20px #ffd16623;
-  background: linear-gradient(135deg, #406496 0%, #ffd166 100%);
+  box-shadow: 0 10px 36px #ffd16635;
+  border: 3px solid #ffd166;
+  background: linear-gradient(135deg, #ffe082 0%, #406496 90%);
   color: #22304A !important;
 }
 .skill-category-title {
-  font-size: 1.07rem;
+  font-size: 1.22rem;
   color: #ffd166;
   font-weight: 700;
-  margin-bottom: 11px;
+  margin-bottom: 13px;
   letter-spacing: 0.01em;
 }
 .skill-list {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 7px;
+  gap: 10px;
   margin-top: 7px;
-  margin-left: 13px;
+  margin-left: 7px;
 }
 .skill-row-item {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-size: 1.02rem;
+  gap: 11px;
+  font-size: 1.11rem;
   color: #fff;
   font-weight: 500;
 }
 .skill-icon-card-hz {
-  width: 24px;
-  height: 24px;
+  width: 25px;
+  height: 25px;
   filter: drop-shadow(0 1px 4px #ffd16622);
+  border-radius: 7px;
 }
-@media (max-width: 850px) {
+@media (max-width: 1000px) {
   .skills-categories-grid {grid-template-columns: 1fr 1fr;}
 }
-@media (max-width: 600px) {
+@media (max-width: 700px) {
   .skills-categories-grid {grid-template-columns: 1fr;}
-  .card.skills-pane-main {padding: 10px 1px 6px 1px;}
+  .card.skills-pane-main {padding: 2px;}
   .skill-category-card {padding: 8px 4px 7px 4px;}
 }
 </style>
 <div class="card skills-pane-main hover-zoom">
   <div class="skills-header-title hover-zoom">Core Skills and Tools</div>
   <div class="skills-categories-grid">
+
     <div class="skill-category-card">
       <div class="skill-category-title">Programming Languages</div>
       <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png"/>R</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png"/>Java</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"/>Excel VBA</div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png"/>Python
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png"/>R
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png"/>Java
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"/>Excel VBA
+        </div>
       </div>
     </div>
+
     <div class="skill-category-card">
       <div class="skill-category-title">Cloud & Data</div>
       <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png"/>AWS</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png"/>MySQL</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png"/>Oracle</div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png"/>AWS
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png"/>MySQL
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png"/>Oracle
+        </div>
       </div>
     </div>
+
     <div class="skill-category-card">
       <div class="skill-category-title">Data Visualization & BI</div>
       <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png"/>Power BI</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"/>Excel</div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png"/>Power BI
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"/>Excel
+        </div>
       </div>
     </div>
+
     <div class="skill-category-card">
       <div class="skill-category-title">Version Control & Dev Tools</div>
       <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png"/>Git</div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png"/>Git
+        </div>
       </div>
     </div>
+
     <div class="skill-category-card">
       <div class="skill-category-title">Project Management</div>
       <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png"/>JIRA</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png"/>HP ALM</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/rally-software.png"/>Rally</div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png"/>JIRA
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png"/>HP ALM
+        </div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/rally-software.png"/>Rally
+        </div>
       </div>
     </div>
+
     <div class="skill-category-card">
       <div class="skill-category-title">Insurance & QA</div>
       <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png"/>Guidewire</div>
+        <div class="skill-row-item">
+          <img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png"/>Guidewire
+        </div>
       </div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 

@@ -1128,28 +1128,25 @@ st.markdown(projects_html, unsafe_allow_html=True)
 # Anchor for navigation
 st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
 
-# HTML + CSS with flip card logic
 st.markdown("""
 <style>
-/* Flip card container */
 .skill-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 20px;
-  padding: 20px 0;
+  gap: 24px;
+  padding: 30px 0;
 }
 .flip-card {
   background-color: transparent;
-  width: 200px;
-  height: 220px;
+  width: 240px;
+  height: 260px;
   perspective: 1000px;
 }
 .flip-card-inner {
   position: relative;
   width: 100%;
   height: 100%;
-  text-align: center;
   transition: transform 0.8s;
   transform-style: preserve-3d;
 }
@@ -1161,93 +1158,144 @@ st.markdown("""
   width: 100%;
   height: 100%;
   backface-visibility: hidden;
-  border-radius: 12px;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
-  padding: 16px;
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.15);
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 1.05rem;
   font-weight: bold;
+  text-align: center;
+  padding: 18px;
 }
 .flip-card-front {
   background: linear-gradient(135deg, #22304A, #324665);
   color: white;
+  font-size: 1.1rem;
+  transition: transform 0.19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
+}
+.flip-card-front:hover {
+  transform: translateY(-6px) scale(1.03);
+  box-shadow: 0 12px 28px #ffd16645, 0 3px 16px #22304A33;
+  z-index: 9;
 }
 .flip-card-back {
-  background: #ffd166;
+  background: #fff3d6;
   color: #22304A;
   transform: rotateY(180deg);
-  flex-direction: column;
-  font-size: 0.92rem;
+  font-size: 0.9rem;
+  padding-top: 20px;
+  gap: 12px;
 }
-.skills-header-title {
-  font-size: 1.55rem;
-  font-weight: bold;
-  color: #fff;
-  background: #2C3E50;
-  border-radius: 14px;
-  padding: 18px 0;
-  margin-bottom: 32px;
-  text-align: center;
-  letter-spacing: 0.04em;
-  box-shadow: 0 1px 12px rgba(20,30,55,0.06);
+.flip-icons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 10px;
+}
+.flip-icons img {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: rgba(255,255,255,0.15);
+  padding: 5px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 </style>
 
-<!-- Title -->
 <div class="skills-header-title">Core Skills and Tools</div>
-
-<!-- Skill Cards -->
 <div class="skill-grid">
   <div class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">Programming Languages</div>
+      <div class="flip-card-front hover-zoom">Programming Languages</div>
       <div class="flip-card-back">
-        Python<br>R<br>Java<br>Excel VBA
+        <div class="flip-icons">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png">
+        </div>
       </div>
     </div>
   </div>
+
   <div class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">Cloud & Data</div>
+      <div class="flip-card-front hover-zoom">Cloud & Data</div>
       <div class="flip-card-back">
-        AWS<br>MySQL<br>Oracle
+        <div class="flip-icons">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png">
+        </div>
       </div>
     </div>
   </div>
+
   <div class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">Data Visualization & BI</div>
+      <div class="flip-card-front hover-zoom">Data Viz & BI</div>
       <div class="flip-card-back">
-        Power BI<br>Excel<br>Tableau
+        <div class="flip-icons">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/tableau.png">
+        </div>
       </div>
     </div>
   </div>
+
   <div class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">Version Control & Dev Tools</div>
+      <div class="flip-card-front hover-zoom">Dev Tools</div>
       <div class="flip-card-back">
-        Git
+        <div class="flip-icons">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png">
+        </div>
       </div>
     </div>
   </div>
+
   <div class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">Project Management</div>
+      <div class="flip-card-front hover-zoom">Project Management</div>
       <div class="flip-card-back">
-        JIRA<br>HP ALM<br>Rally
+        <div class="flip-icons">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/rally-software.png">
+        </div>
       </div>
     </div>
   </div>
+
   <div class="flip-card">
     <div class="flip-card-inner">
-      <div class="flip-card-front">Insurance & QA</div>
+      <div class="flip-card-front hover-zoom">Insurance & QA</div>
       <div class="flip-card-back">
-        Guidewire
+        <div class="flip-icons">
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front hover-zoom">Other Knowledge</div>
+      <div class="flip-card-back">
+        <div class="flip-icons">
+          <img src="https://img.icons8.com/ios-filled/50/data-configuration.png">
+          <img src="https://img.icons8.com/ios-filled/50/api-settings.png">
+          <img src="https://img.icons8.com/ios-filled/50/process.png">
+        </div>
       </div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+    }
+  ]
+}
 

@@ -419,23 +419,34 @@ projects = [
 
 
 # ---- NAVIGATION BAR ----
-# ---- NAVIGATION BAR ----
 st.markdown("""
 <style>
+/* Force body and html to allow sticky nav */
+html, body, .stApp {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
 /* Sticky Navigation Bar */
-.navbar {
-    position: -webkit-sticky;
-    position: sticky;
+.navbar-container {
+    position: fixed;
     top: 0;
-    z-index: 999;
+    left: 0;
+    width: 100%;
+    z-index: 9999;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    border-radius: 0 0 18px 18px;
+}
+
+/* Navbar Flex Items */
+.navbar {
     display: flex;
     gap: 28px;
     justify-content: center;
     align-items: center;
-    background: #1F2A44;
-    padding: 12px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 /* Navigation Links */
@@ -453,9 +464,16 @@ st.markdown("""
     background: #ffd16633;
     color: #ffffff;
 }
+
+/* Prevent content overlap */
+.main-content {
+    padding-top: 80px;
+}
 </style>
 
-<div class="navbar">
+<!-- Sticky Navigation HTML -->
+<div class="navbar-container">
+  <div class="navbar">
     <a href="#about">About</a>
     <a href="#education">Education</a>
     <a href="#experience">Experience</a>
@@ -463,8 +481,13 @@ st.markdown("""
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
+  </div>
 </div>
+
+<!-- Add padding to prevent overlapping -->
+<div class="main-content"></div>
 """, unsafe_allow_html=True)
+
 
 # --- Custom Styling ---
 st.markdown("""

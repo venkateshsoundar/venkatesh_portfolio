@@ -1208,8 +1208,8 @@ st.markdown("""
   margin-top: 10px;
 }
 .flip-icons img {
-  width: 52px;
-  height: 52px;
+  width: 64px;
+  height: 64px;
   border-radius: 12px;
   background: rgba(255,255,255,0.15);
   padding: 6px;

@@ -487,7 +487,7 @@ html, body, .stApp {
 <!-- Add padding to prevent overlapping -->
 <div class="main-content"></div>
 """, unsafe_allow_html=True)
-
+st.markdown("""<div style="margin-top: 90px;"></div>""", unsafe_allow_html=True)
 
 # --- Custom Styling ---
 st.markdown("""

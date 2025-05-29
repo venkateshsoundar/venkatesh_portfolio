@@ -72,6 +72,15 @@ st.markdown("""
 
 st.markdown("""
 <style>
+/* Prevent sections from being hidden behind the sticky nav */
+.section-anchor {
+  scroll-margin-top: 90px;  /* Adjust based on navbar + Streamlit top padding */
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown("""
+<style>
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
   background-attachment: fixed;

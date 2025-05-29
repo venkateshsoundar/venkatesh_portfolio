@@ -534,6 +534,8 @@ html, body, .stApp {
 <div class="main-content"></div>
 """, unsafe_allow_html=True)
 
+st.markdown('<div style="margin-top: 70px;"></div>', unsafe_allow_html=True)
+
 # --- Custom Styling ---
 st.markdown("""
 <style>

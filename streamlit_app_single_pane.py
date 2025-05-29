@@ -1139,7 +1139,7 @@ st.markdown("""
 .skills-header-title {
   font-size: 1.55rem;
   font-weight: bold;
-  color: #fff;
+  color: #ffd166;
   background: linear-gradient(135deg, #1F2A44, #324665);
   border-radius: 14px;
   padding: 18px 0;
@@ -1167,14 +1167,9 @@ st.markdown("""
   width: 100%;
   height: 100%;
   transform-style: preserve-3d;
-  animation: flipAuto 6s infinite ease-in-out;
-}
-@keyframes flipAuto {
-  0%, 50%, 100% { transform: rotateY(0deg); }
-  25%, 75% { transform: rotateY(180deg); }
+  transition: transform 0.8s;
 }
 .flip-card:hover .flip-card-inner {
-  animation-play-state: paused;
   transform: rotateY(180deg);
 }
 .flip-card-front, .flip-card-back {

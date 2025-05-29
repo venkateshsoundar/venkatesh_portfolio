@@ -1225,6 +1225,7 @@ st.markdown("""
     <div class="skill-category-card">
       <div class="skill-category-title">Programming Languages</div>
       <div class="skill-list">
+        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png"/>R</div>
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png"/>R</div>
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png"/>Java</div>
         <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"/>Excel VBA</div>

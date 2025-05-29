@@ -1129,12 +1129,32 @@ st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
 
 st.markdown("""
 <style>
+.skills-section {
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  border-radius: 28px;
+  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
+  padding: 36px 18px 32px 18px;
+  margin-bottom: 36px;
+}
+.skills-header-title {
+  font-size: 1.55rem;
+  font-weight: bold;
+  color: #fff;
+  background: #2C3E50;
+  border-radius: 14px;
+  padding: 18px 0;
+  margin-bottom: 32px;
+  text-align: center;
+  letter-spacing: 0.04em;
+  box-shadow: 0 1px 12px rgba(20,30,55,0.06);
+  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
+}
 .skill-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 24px;
-  padding: 30px 0;
+  padding: 0 0 20px 0;
 }
 .flip-card {
   background-color: transparent;
@@ -1203,94 +1223,94 @@ st.markdown("""
 }
 </style>
 
-<div class="skills-header-title">Core Skills and Tools</div>
-<div class="skill-grid">
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front hover-zoom">Programming Languages</div>
-      <div class="flip-card-back">
-        <div class="flip-icons">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png">
+<div class="skills-section">
+  <div class="skills-header-title hover-zoom">Core Skills and Tools</div>
+  <div class="skill-grid">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">Programming Languages</div>
+        <div class="flip-card-back">
+          <div class="flip-icons">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front hover-zoom">Cloud & Data</div>
-      <div class="flip-card-back">
-        <div class="flip-icons">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">Cloud & Data</div>
+        <div class="flip-card-back">
+          <div class="flip-icons">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front hover-zoom">Data Viz & BI</div>
-      <div class="flip-card-back">
-        <div class="flip-icons">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/tableau.png">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">Data Viz & BI</div>
+        <div class="flip-card-back">
+          <div class="flip-icons">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/tableau.png">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front hover-zoom">Dev Tools</div>
-      <div class="flip-card-back">
-        <div class="flip-icons">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">Dev Tools</div>
+        <div class="flip-card-back">
+          <div class="flip-icons">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front hover-zoom">Project Management</div>
-      <div class="flip-card-back">
-        <div class="flip-icons">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/rally-software.png">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">Project Management</div>
+        <div class="flip-card-back">
+          <div class="flip-icons">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/rally-software.png">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front hover-zoom">Insurance & QA</div>
-      <div class="flip-card-back">
-        <div class="flip-icons">
-          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">Insurance & QA</div>
+        <div class="flip-card-back">
+          <div class="flip-icons">
+            <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png">
+          </div>
         </div>
       </div>
     </div>
-  </div>
-
-  <div class="flip-card">
-    <div class="flip-card-inner">
-      <div class="flip-card-front hover-zoom">Other Knowledge</div>
-      <div class="flip-card-back">
-        <div class="flip-icons">
-          <img src="https://img.icons8.com/ios-filled/50/data-configuration.png">
-          <img src="https://img.icons8.com/ios-filled/50/api-settings.png">
-          <img src="https://img.icons8.com/ios-filled/50/process.png">
+    <div class="flip-card">
+      <div class="flip-card-inner">
+        <div class="flip-card-front">Other Knowledge</div>
+        <div class="flip-card-back">
+          <div class="flip-icons">
+            <img src="https://img.icons8.com/ios-filled/50/data-configuration.png">
+            <img src="https://img.icons8.com/ios-filled/50/api-settings.png">
+            <img src="https://img.icons8.com/ios-filled/50/process.png">
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+    }
+  ]
+}
+

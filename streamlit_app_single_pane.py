@@ -1125,26 +1125,61 @@ projects_html += '</div></div>'
 st.markdown(projects_html, unsafe_allow_html=True)
 
 
+# Anchor for navigation
 st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
 
+# HTML + CSS with flip card logic
 st.markdown("""
 <style>
-/* Universal hover-zoom effect */
-.hover-zoom {
-  transition: transform 0.19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
+/* Flip card container */
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  padding: 20px 0;
 }
-.hover-zoom:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 12px 28px #ffd16645, 0 3px 16px #22304A33;
-  z-index: 9;
+.flip-card {
+  background-color: transparent;
+  width: 200px;
+  height: 220px;
+  perspective: 1000px;
 }
-/* Main pane and header styling */
-.card.skills-pane-main {
-  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
-  border-radius: 28px;
-  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
-  padding: 36px 18px 32px 18px;
-  margin-bottom: 36px;
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+.flip-card:hover .flip-card-inner {
+  transform: rotateY(180deg);
+}
+.flip-card-front, .flip-card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  backface-visibility: hidden;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.05rem;
+  font-weight: bold;
+}
+.flip-card-front {
+  background: linear-gradient(135deg, #22304A, #324665);
+  color: white;
+}
+.flip-card-back {
+  background: #ffd166;
+  color: #22304A;
+  transform: rotateY(180deg);
+  flex-direction: column;
+  font-size: 0.92rem;
 }
 .skills-header-title {
   font-size: 1.55rem;
@@ -1152,125 +1187,67 @@ st.markdown("""
   color: #fff;
   background: #2C3E50;
   border-radius: 14px;
-  padding: 18px 0 18px 0;
+  padding: 18px 0;
   margin-bottom: 32px;
   text-align: center;
   letter-spacing: 0.04em;
   box-shadow: 0 1px 12px rgba(20,30,55,0.06);
-  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
-}
-/* Skill cards grid */
-.skills-categories-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(185px, 1fr));
-  gap: 22px;
-  width: 100%;
-}
-.skill-category-card {
-  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
-  border-radius: 15px;
-  box-shadow: 0 4px 14px rgba(44,62,80,0.11);
-  padding: 16px 8px 10px 8px;
-  text-align: center;
-  transition: transform .15s, box-shadow .17s;
-  border: 2px solid #40649644;
-  min-height: 142px;
-}
-.skill-category-card:hover {
-  transform: translateY(-5px) scale(1.04);
-  box-shadow: 0 8px 20px #ffd16623;
-  background: linear-gradient(135deg, #406496 0%, #ffd166 100%);
-  color: #22304A !important;
-}
-.skill-category-title {
-  font-size: 1.07rem;
-  color: #ffd166;
-  font-weight: 700;
-  margin-bottom: 11px;
-  letter-spacing: 0.01em;
-}
-.skill-list {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 7px;
-  margin-top: 7px;
-  margin-left: 13px;
-}
-.skill-row-item {
-  display: flex;
-  align-items: center;
-  gap: 9px;
-  font-size: 1.02rem;
-  color: #fff;
-  font-weight: 500;
-}
-.skill-icon-card-hz {
-  width: 36px;
-  height: 36px;
-  background-color: #ffffff;
-  border-radius: 8px;
-  padding: 4px;
-  object-fit: cover;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
-  display: inline-block;
-}
-@media (max-width: 850px) {
-  .skills-categories-grid {grid-template-columns: 1fr 1fr;}
-}
-@media (max-width: 600px) {
-  .skills-categories-grid {grid-template-columns: 1fr;}
-  .card.skills-pane-main {padding: 10px 1px 6px 1px;}
-  .skill-category-card {padding: 8px 4px 7px 4px;}
 }
 </style>
-<div class="card skills-pane-main hover-zoom">
-  <div class="skills-header-title hover-zoom">Core Skills and Tools</div>
-  <div class="skills-categories-grid">
-    <div class="skill-category-card">
-      <div class="skill-category-title">Programming Languages</div>
-      <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png"/>Python</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png"/>R</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png"/>Java</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"/>Excel VBA</div>
+
+<!-- Title -->
+<div class="skills-header-title">Core Skills and Tools</div>
+
+<!-- Skill Cards -->
+<div class="skill-grid">
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">Programming Languages</div>
+      <div class="flip-card-back">
+        Python<br>R<br>Java<br>Excel VBA
       </div>
     </div>
-    <div class="skill-category-card">
-      <div class="skill-category-title">Cloud & Data</div>
-      <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png"/>AWS</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png"/>MySQL</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png"/>Oracle</div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">Cloud & Data</div>
+      <div class="flip-card-back">
+        AWS<br>MySQL<br>Oracle
       </div>
     </div>
-    <div class="skill-category-card">
-      <div class="skill-category-title">Data Visualization & BI</div>
-      <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png"/>Power BI</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"/>Excel</div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">Data Visualization & BI</div>
+      <div class="flip-card-back">
+        Power BI<br>Excel<br>Tableau
       </div>
     </div>
-    <div class="skill-category-card">
-      <div class="skill-category-title">Version Control & Dev Tools</div>
-      <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png"/>Git</div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">Version Control & Dev Tools</div>
+      <div class="flip-card-back">
+        Git
       </div>
     </div>
-    <div class="skill-category-card">
-      <div class="skill-category-title">Project Management</div>
-      <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png"/>JIRA</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png"/>HP ALM</div>
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/rally-software.png"/>Rally</div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">Project Management</div>
+      <div class="flip-card-back">
+        JIRA<br>HP ALM<br>Rally
       </div>
     </div>
-    <div class="skill-category-card">
-      <div class="skill-category-title">Insurance & QA</div>
-      <div class="skill-list">
-        <div class="skill-row-item"><img class="skill-icon-card-hz" src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png"/>Guidewire</div>
+  </div>
+  <div class="flip-card">
+    <div class="flip-card-inner">
+      <div class="flip-card-front">Insurance & QA</div>
+      <div class="flip-card-back">
+        Guidewire
       </div>
     </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+

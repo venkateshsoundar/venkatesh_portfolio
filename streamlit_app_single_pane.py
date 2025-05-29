@@ -8,6 +8,52 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
+
+st.markdown("""
+<style>
+/* Sticky Navigation Bar */
+.navbar {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    display: flex;
+    justify-content: center;
+    gap: 28px;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.navbar a {
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    transition: color .18s;
+    padding: 7px 22px;
+    border-radius: 8px;
+}
+
+.navbar a:hover {
+    background: #ffd16633;
+    color: #fff;
+}
+</style>
+
+<div class="navbar">
+    <a href="#about">About</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#recognitions">Recognitions</a>
+    <a href="#projects">Projects Gallery</a>
+    <a href="#skills">Skills</a>
+</div>
+""", unsafe_allow_html=True)
+
+
 st.markdown("""
 <style>
 .stApp {

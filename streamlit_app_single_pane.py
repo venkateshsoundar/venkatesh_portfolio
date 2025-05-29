@@ -1,3 +1,5 @@
+
+
 import streamlit as st
 import requests
 import io
@@ -1165,7 +1167,7 @@ st.markdown("""
   background: linear-gradient(135deg, #334565 0%, #466089 100%);
   border-radius: 20px;
   box-shadow: 0 4px 24px #22304A22;
-  border: 3px solid #fff3;   /* Visible border */
+  border: 3px solid #fff3;
   padding: 28px 20px 18px 20px;
   text-align: left;
   min-height: 165px;
@@ -1299,5 +1301,6 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 

@@ -5,6 +5,8 @@ import PyPDF2
 import openai
 import pandas as pd
 
+# ---- PAGE CONFIG & GLOBAL CSS ----
+st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
 st.markdown("""
 <style>
@@ -51,12 +53,6 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown('<div style="margin-top: 70px;"></div>', unsafe_allow_html=True)
-
-
-# ---- PAGE CONFIG & GLOBAL CSS ----
-st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
-
-
 
 st.markdown("""
 <style>

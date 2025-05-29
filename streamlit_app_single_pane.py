@@ -8,40 +8,54 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
+# ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
-/* Sticky Navigation Bar */
-.navbar {
-    position: -webkit-sticky;
-    position: sticky;
+/* Fix navbar at top */
+.navbar-container {
+    position: fixed;
     top: 0;
-    z-index: 999;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
     background: #1F2A44;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     padding: 12px 0 10px 0;
-    display: flex;
-    justify-content: center;
-    gap: 28px;
     border-radius: 0 0 18px 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
 }
 
+/* Flex styling for links */
+.navbar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 28px;
+}
+
+/* Nav link styling */
 .navbar a {
     color: #ffd166;
     font-weight: bold;
     font-size: 1.08rem;
     text-decoration: none;
-    transition: color .18s;
     padding: 7px 22px;
     border-radius: 8px;
+    transition: color 0.18s, background 0.18s;
 }
-
 .navbar a:hover {
     background: #ffd16633;
     color: #fff;
 }
+
+/* Push content down to not be hidden */
+.sticky-spacer {
+    height: 75px;
+}
 </style>
 
-<div class="navbar">
+<!-- Sticky Nav HTML -->
+<div class="navbar-container">
+  <div class="navbar">
     <a href="#about">About</a>
     <a href="#education">Education</a>
     <a href="#experience">Experience</a>
@@ -49,7 +63,11 @@ st.markdown("""
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
+  </div>
 </div>
+
+<!-- Spacer so content isn't overlapped -->
+<div class="sticky-spacer"></div>
 """, unsafe_allow_html=True)
 
 st.markdown("""

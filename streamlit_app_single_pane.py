@@ -1206,9 +1206,13 @@ st.markdown("""
   font-weight: 500;
 }
 .skill-icon-card-hz {
-  width: 24px;
-  height: 24px;
-  filter: drop-shadow(0 1px 4px #ffd16622);
+  width: 34px;
+  height: 34px;
+  border-radius: 8px;
+  background-color: #fff;
+  padding: 4px;
+  object-fit: contain;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
 }
 @media (max-width: 850px) {
   .skills-categories-grid {grid-template-columns: 1fr 1fr;}

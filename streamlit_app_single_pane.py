@@ -1140,7 +1140,7 @@ st.markdown("""
   font-size: 1.55rem;
   font-weight: bold;
   color: #fff;
-  background: #2C3E50;
+  background: linear-gradient(135deg, #1F2A44, #324665);
   border-radius: 14px;
   padding: 18px 0;
   margin-bottom: 32px;
@@ -1166,10 +1166,15 @@ st.markdown("""
   position: relative;
   width: 100%;
   height: 100%;
-  transition: transform 0.8s;
   transform-style: preserve-3d;
+  animation: flipAuto 6s infinite ease-in-out;
+}
+@keyframes flipAuto {
+  0%, 50%, 100% { transform: rotateY(0deg); }
+  25%, 75% { transform: rotateY(180deg); }
 }
 .flip-card:hover .flip-card-inner {
+  animation-play-state: paused;
   transform: rotateY(180deg);
 }
 .flip-card-front, .flip-card-back {
@@ -1191,12 +1196,6 @@ st.markdown("""
   background: linear-gradient(135deg, #22304A, #324665);
   color: white;
   font-size: 1.1rem;
-  transition: transform 0.19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
-}
-.flip-card-front:hover {
-  transform: translateY(-6px) scale(1.03);
-  box-shadow: 0 12px 28px #ffd16645, 0 3px 16px #22304A33;
-  z-index: 9;
 }
 .flip-card-back {
   background: #fff3d6;
@@ -1210,21 +1209,21 @@ st.markdown("""
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 12px;
+  gap: 16px;
   margin-top: 10px;
 }
 .flip-icons img {
-  width: 38px;
-  height: 38px;
-  border-radius: 10px;
+  width: 52px;
+  height: 52px;
+  border-radius: 12px;
   background: rgba(255,255,255,0.15);
-  padding: 5px;
+  padding: 6px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
 </style>
 
 <div class="skills-section">
-  <div class="skills-header-title hover-zoom">Core Skills and Tools</div>
+  <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skill-grid">
     <div class="flip-card">
       <div class="flip-card-inner">

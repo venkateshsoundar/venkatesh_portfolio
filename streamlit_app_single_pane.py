@@ -419,22 +419,42 @@ projects = [
 
 
 # ---- NAVIGATION BAR ----
+# ---- NAVIGATION BAR ----
 st.markdown("""
 <style>
+/* Sticky Navigation Bar */
 .navbar {
-    display: flex; gap: 28px; justify-content: center; background: #1F2A44;
-    padding: 12px 0 10px 0; border-radius: 0 0 18px 18px;
-    margin-bottom: 20px; position: sticky; top: 0; z-index: 100;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 999;
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    align-items: center;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
+
+/* Navigation Links */
 .navbar a {
-    color: #ffd166; font-weight: bold; font-size: 1.08rem;
-    text-decoration: none; transition: color .18s;
-    padding: 7px 22px; border-radius: 8px;
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    transition: color 0.18s, background 0.18s;
+    padding: 7px 22px;
+    border-radius: 8px;
 }
+
 .navbar a:hover {
-    background: #ffd16633; color: #fff;
+    background: #ffd16633;
+    color: #ffffff;
 }
 </style>
+
 <div class="navbar">
     <a href="#about">About</a>
     <a href="#education">Education</a>

@@ -88,7 +88,7 @@ st.markdown("""
 <style>
 /* Prevent sections from being hidden behind the sticky nav */
 .section-anchor {
-  scroll-margin-top: 5px;  /* Adjust based on navbar + Streamlit top padding */
+  scroll-margin-top: 100px;  /* Adjust based on navbar + Streamlit top padding */
 }
 </style>
 """, unsafe_allow_html=True)

@@ -12,7 +12,7 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 st.markdown("""
 <style>
 .block-container {
-    padding-top: 10 !important;
+    padding-top: 5 !important;
     margin-top: 5 !important;
 }
 body {

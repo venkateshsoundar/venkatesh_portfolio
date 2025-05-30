@@ -130,7 +130,7 @@ st.markdown("""
   width: 100% !important;
   border-radius: 12px;
   padding: 20px;
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
   text-align: center;

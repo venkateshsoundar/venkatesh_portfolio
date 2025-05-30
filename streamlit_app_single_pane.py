@@ -525,13 +525,7 @@ st.markdown("""
 }
 
 /* Card styling */
-.card {
-    background: #1F2A44;
-    padding: 20px;
-    border-radius: 16px;
-    box-shadow: 0px 4px 16px rgba(0,0,0,0.2);
-    transition: transform 0.3s ease;
-}
+
 .hover-zoom:hover {
     transform: scale(1.02);
 }

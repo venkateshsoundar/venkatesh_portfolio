@@ -14,7 +14,7 @@ st.markdown("""
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 10;
+    top: 5;
     left: 0;
     width: 100%;
     z-index: 1000;

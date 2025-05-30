@@ -13,7 +13,7 @@ st.markdown("""
 <style>
 .block-container {
     padding-top: 10 !important;
-    margin-top: 10 !important;
+    margin-top: 5 !important;
 }
 body {
     margin-top: 10 !important;

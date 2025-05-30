@@ -29,7 +29,7 @@ st.markdown("""
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 28px;
+    gap: 0px;
 }
 
 /* Nav link styling */

@@ -1180,6 +1180,15 @@ st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=Tr
 
 st.markdown("""
 <style>
+.card {
+  transition: transform 0.25s cubic-bezier(.4,1.6,.6,1), box-shadow .23s;
+  will-change: transform, box-shadow;
+}
+.card:hover, .card.hover-zoom:hover {
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 12px 36px rgba(255,209,102,0.13), 0 8px 26px rgba(44,62,80,0.19);
+  z-index: 8;
+}
 .skills-section {
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 28px;

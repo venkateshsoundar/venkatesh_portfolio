@@ -16,8 +16,8 @@ st.markdown("""
     margin-top: 5 !important;
 }
 body {
-    margin-top: 10 !important;
-    padding-top: 10 !important;
+    margin-top: 5 !important;
+    padding-top: 5 !important;
 }
 /* Fix navbar at top */
 .navbar-container {

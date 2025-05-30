@@ -12,12 +12,12 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 st.markdown("""
 <style>
 .block-container {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+    padding-top: 10 !important;
+    margin-top: 10 !important;
 }
 body {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+    margin-top: 10 !important;
+    padding-top: 10 !important;
 }
 /* Fix navbar at top */
 .navbar-container {

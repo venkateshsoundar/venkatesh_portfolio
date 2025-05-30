@@ -1155,8 +1155,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --- One unified pane: header and projects in one card ---
-st.markdown('<a name="projects"></a>', unsafe_allow_html=True)
 projects_html = '''
 <div class="card projects-gallery-pane hover-zoom">
   <div class="section-title">Projects Gallery</div>

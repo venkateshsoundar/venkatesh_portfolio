@@ -63,7 +63,7 @@ body {
 
 /* Push content down to not be hidden */
 .sticky-spacer {
-    height: 75px;
+    height: 45px;
 }
 </style>
 

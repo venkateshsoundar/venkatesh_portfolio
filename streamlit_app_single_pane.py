@@ -1180,8 +1180,6 @@ st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=Tr
 
 st.markdown("""
 <style>
-st.markdown("""
-<style>
 .skills-section {
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 28px;

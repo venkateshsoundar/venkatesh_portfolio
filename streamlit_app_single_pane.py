@@ -32,10 +32,10 @@ st.markdown("""
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin: 0; /* Remove any top margin */
+    margin-bottom: 20px;
     position: sticky;
     top: 0;
-    z-index: 999;
+    z-index: 100;
 }
 
 /* Nav link styling */

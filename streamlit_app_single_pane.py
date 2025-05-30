@@ -1012,7 +1012,7 @@ st.markdown("""
   border-radius: 18px;
   box-shadow: 0 4px 28px rgba(44,62,80,0.14);
   padding: 22px 18px 28px 18px;
-  margin-bottom: 36px;
+  margin-bottom: 32px;
   /* Remove max-width and margin auto for full width like other sections */
 }
 .section-title {
@@ -1184,8 +1184,8 @@ st.markdown("""
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 28px;
   box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
-  padding: 36px 18px 32px 18px;
-  margin-bottom: 36px;
+  padding: 32px 18px 32px 18px;
+  margin-bottom: 32px;
 }
 .skills-header-title {
   font-size: 1.55rem;

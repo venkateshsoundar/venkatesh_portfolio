@@ -28,7 +28,7 @@ body {
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    padding: 1px 0 10px 0;
+    padding: 0px 0 0px 0;
     border-radius: 0 0 18px 18px;
 }
 

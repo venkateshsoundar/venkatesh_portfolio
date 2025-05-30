@@ -344,7 +344,7 @@ st.markdown("""
   margin-bottom: 2px;
 }
 .section-anchor {
-  scroll-margin-top: 95px; /* or 100px, depending on your navbar height */
+  scroll-margin-top: 120px; /* or 100px, depending on your navbar height */
 }
 .skill-chip {
   background: rgba(255,255,255,0.12);

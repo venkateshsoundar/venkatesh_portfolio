@@ -343,6 +343,9 @@ st.markdown("""
   gap: 8px;
   margin-bottom: 2px;
 }
+.section-anchor {
+  scroll-margin-top: 95px; /* or 100px, depending on your navbar height */
+}
 .skill-chip {
   background: rgba(255,255,255,0.12);
   padding: 6px 14px;
@@ -699,7 +702,7 @@ with chat_container:
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
 
-st.markdown('<a name="about"></a>', unsafe_allow_html=True)
+st.markdown('<a name="about" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
 .hero-card {
@@ -837,6 +840,7 @@ st.markdown("""
   filter: invert(100%);
 }
 
+
 @media (max-width: 900px) {
   .hero-card {flex-direction: column;align-items: center;}
   .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
@@ -873,7 +877,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<a name="education"></a>', unsafe_allow_html=True)
+st.markdown('<a name="education" class="section-anchor"></a>', unsafe_allow_html=True)
 # --- Spacer before next section ---
 st.markdown(
     """
@@ -896,7 +900,7 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown('<a name="experience"></a>', unsafe_allow_html=True)
+st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """  
     <div class="card hover-zoom">
@@ -929,7 +933,7 @@ st.markdown(
     </div>
     </div>
     """, unsafe_allow_html=True)
-st.markdown('<a name="certifications"></a>', unsafe_allow_html=True)
+st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """
     <div class="card hover-zoom">
@@ -967,7 +971,7 @@ st.markdown(
         </div>
       </div>
     </div>""", unsafe_allow_html=True)
-st.markdown('<a name="recognitions"></a>', unsafe_allow_html=True)
+st.markdown('<a name="recognitions" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """
     <div class="card hover-zoom">
@@ -1006,7 +1010,7 @@ st.markdown(
 
 
 # --- Your projects list goes here (use the same list as above) ---
-st.markdown('<a name="projects"></a>', unsafe_allow_html=True)
+st.markdown('<a name="projects" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
 .card.projects-gallery-pane {
@@ -1180,7 +1184,7 @@ projects_html += '</div></div>'
 st.markdown(projects_html, unsafe_allow_html=True)
 
 
-st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
+st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=True)
 
 st.markdown("""
 <style>

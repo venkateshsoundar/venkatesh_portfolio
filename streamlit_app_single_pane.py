@@ -22,7 +22,7 @@ body {
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 0.5;
+    top: 0.2;
     left: 0;
     width: 100%;
     z-index: 1000;

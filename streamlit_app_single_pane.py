@@ -27,9 +27,15 @@ st.markdown("""
 /* Flex styling for links */
 .navbar {
     display: flex;
+    gap: 28px;
     justify-content: center;
-    align-items: center;
-    gap: 0px;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    margin: 0; /* Remove any top margin */
+    position: sticky;
+    top: 0;
+    z-index: 999;
 }
 
 /* Nav link styling */

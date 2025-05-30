@@ -1180,25 +1180,25 @@ st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=Tr
 
 st.markdown("""
 <style>
+st.markdown("""
+<style>
 .skills-section {
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 28px;
   box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
-  padding: 32px 18px 32px 18px;
-  margin-bottom: 32px;
+  padding: 36px 18px 32px 18px;
+  margin-bottom: 36px;
 }
 .skills-header-title {
-  font-size: 1.55rem;
+  font-size: 1.35rem;
   font-weight: bold;
   color: #ffd166;
-  background: linear-gradient(135deg, #1F2A44, #324665);
-  border-radius: 14px;
-  padding: 18px 0;
-  margin-bottom: 32px;
+  background: #2C3E50;
+  border-radius: 10px;
+  padding: 12px 0 12px 0;
+  margin-bottom: 22px;
   text-align: center;
-  letter-spacing: 0.04em;
-  box-shadow: 0 1px 12px rgba(20,30,55,0.06);
-  transition: transform .19s cubic-bezier(.4,1.6,.6,1), box-shadow .19s;
+  box-shadow: 0 1px 8px #22304A22;
 }
 .skill-grid {
   display: flex;

@@ -1,4 +1,4 @@
-import streamlit as st
+ulimport streamlit as st
 import requests
 import io
 import PyPDF2
@@ -6,7 +6,7 @@ import openai
 import pandas as pd
 
 # ---- PAGE CONFIG & GLOBAL CSS ----
-st.set_page_config(page_title="Venkatesh Portfolio", layout="mobile")
+st.set_page_config(page_title="Venkatesh Portfolio", layout="default")
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""

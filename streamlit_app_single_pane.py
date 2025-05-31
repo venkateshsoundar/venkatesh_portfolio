@@ -1273,6 +1273,15 @@ st.markdown("""
   padding: 6px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
 }
+.card.hover-zoom, .card.hover-zoom:hover {
+  transition: transform 0.22s cubic-bezier(.45,1.65,.6,1), box-shadow .22s;
+  will-change: transform, box-shadow;
+}
+.card.hover-zoom:hover {
+  transform: translateY(-10px) scale(1.06);
+  box-shadow: 0 20px 44px #ffd16636, 0 6px 18px #22304A30;
+  z-index: 20;
+}
 </style>
 
 <div class="skills-section">

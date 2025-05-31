@@ -6,7 +6,7 @@ import openai
 import pandas as pd
 
 # ---- PAGE CONFIG & GLOBAL CSS ----
-st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
+st.set_page_config(page_title="Venkatesh Portfolio", layout="mobile")
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""

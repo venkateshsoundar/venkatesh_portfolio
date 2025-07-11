@@ -679,10 +679,10 @@ client = openai.OpenAI(
 
 st.markdown("""
 <style>
-/* Assistant message bubble with black text */
+/* Force assistant message text to black */
 div[data-testid="stChatMessageContent"] {
-  background-color: #fff8dc;
-  color: #000000;  /* <-- Black text */
+  background-color: #fff8dc !important;
+  color: #000000 !important;
   border-radius: 16px;
   padding: 14px 18px;
   margin: 10px 0;
@@ -692,15 +692,9 @@ div[data-testid="stChatMessageContent"] {
   border-left: 6px solid #ffd166;
   font-family: 'Segoe UI', sans-serif;
 }
-
-/* Optional: user message styling */
-div[data-testid="stChatMessage"] div:nth-child(2) {
-  color: #ffffff;
-  font-size: 1rem;
-  font-weight: 500;
-}
 </style>
 """, unsafe_allow_html=True)
+
 
 chat_container = st.container()
 with chat_container:

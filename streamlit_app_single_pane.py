@@ -1308,7 +1308,8 @@ st.markdown(
     """
     <div class="welcome-card2">
       <div class="text-container">
-        <h2>Ask Buddy Bot! Powered by <strong>DeepSeek Intelligence</strong> </h2>
+        <h2>Ask Buddy Bot! </h2>
+        Powered by <strong>DeepSeek Intelligence</strong> 
       </div>
     </div>
     """,

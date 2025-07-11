@@ -963,6 +963,109 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
+
+st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.expander-style > div {
+    background-color: #f9f9f9;
+    padding: 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    max-height: 300px;
+    overflow-y: auto;
+}
+.expander-style img {
+    display: block;
+    margin: 0 auto 16px auto;
+}
+.exp-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 8px;
+}
+.exp-header img {
+    width: 60px;
+    height: auto;
+    border-radius: 8px;
+}
+.exp-header-text {
+    display: flex;
+    flex-direction: column;
+}
+.exp-header-text .role {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+.exp-header-text .company {
+    font-size: 0.95rem;
+    color: #333;
+}
+.exp-header-text .dates {
+    font-size: 0.85rem;
+    color: #666;
+}
+</style>
+
+<div class="card hover-zoom">
+  <div class="section-title" style="background:#34495E;">Professional Experience</div>
+</div>
+""", unsafe_allow_html=True)
+
+with st.container():
+    with st.expander("Software Developer Intern | Tech Insights Inc, Canada (May 2025 – Present)", expanded=False):
+        st.markdown('<div class="expander-style">', unsafe_allow_html=True)
+        st.image("https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png", width=80)
+        st.markdown("""
+        • Developing a scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena) to enhance visibility across the data lifecycle.  
+        • Automated ETL workflows to trace data origin, transformations, and usage, supporting compliance and audit readiness.  
+        • Integrated metadata tracking and schema evolution to improve transparency, data governance, and operational efficiency.  
+        • Collaborated with data engineers and business stakeholders to define lineage use cases and deliver interactive dashboards using Power BI and AWS Quick Sight.  
+        • Strengthened data integrity and trust across analytics pipelines by implementing quality validation at key checkpoints.
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with st.expander("Senior Consultant | Deloitte Consulting India Pvt Ltd, India (Oct 2021 – Aug 2024)", expanded=False):
+        st.markdown('<div class="expander-style">', unsafe_allow_html=True)
+        st.image("https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png", width=80)
+        st.markdown("""
+        • Worked as a Functional Analyst for Personal Lines insurance projects, gathering and documenting business requirements with SMEs and product owners.  
+        • Participated in 3 Amigos sessions for defining clear acceptance criteria.  
+        • Supported client demos through walkthroughs of implemented functionalities.  
+        • Executed configuration tasks contributing to a 95% defect removal rate.  
+        • Developed an automated status dashboard, reducing manual effort by 50%.  
+        • Shared Daily Status Reports for clear communication with stakeholders.  
+        • Gained hands-on experience with AWS (EC2, DynamoDB, S3).
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with st.expander("Consultant | Capgemini Technology Services India Pvt Ltd, India (May 2018 – Oct 2021)", expanded=False):
+        st.markdown('<div class="expander-style">', unsafe_allow_html=True)
+        st.image("https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png", width=80)
+        st.markdown("""
+        • Conducted end-to-end testing of Guidewire-based Worker Compensation policies.  
+        • Balanced QA/BA responsibilities for insurance software projects.  
+        • Created real-time failure alert automation.  
+        • Reduced sprint carryover rate by 15%.  
+        • Mentored QA team members ensuring high productivity.
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+    with st.expander("Associate | Cognizant Technology Solutions India Pvt Ltd, India (Sep 2013 – May 2018)", expanded=False):
+        st.markdown('<div class="expander-style">', unsafe_allow_html=True)
+        st.image("https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png", width=80)
+        st.markdown("""
+        • Specialized in DB2 database and batch processing for healthcare IT.  
+        • Tracked key project metrics for $2M+ healthcare initiatives.  
+        • Reduced test environment setup time by 40%.  
+        • Conducted 10+ knowledge transfer sessions.  
+        • Supported live remediation (data patching, extraction, reporting).
+        """)
+        st.markdown('</div>', unsafe_allow_html=True)
+
+
 st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """

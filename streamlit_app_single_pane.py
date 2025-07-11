@@ -1213,7 +1213,6 @@ st.markdown("""
 <div class="skills-section hover-zoom">
   <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skill-grid">
-
 <div class="skill-card">
   <div class="skill-title">Programming Languages</div>
   <div class="skill-list">

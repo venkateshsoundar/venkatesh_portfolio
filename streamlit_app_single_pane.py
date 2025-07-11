@@ -676,6 +676,31 @@ client = openai.OpenAI(
       base_url="https://openrouter.ai/api/v1",
       api_key=api_key,
   )
+
+st.markdown("""
+<style>
+/* Assistant message bubble */
+div[data-testid="stChatMessageContent"] {
+  background-color: #fff8dc;
+  color: #22304A;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #ffd166;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+/* User message text */
+div[data-testid="stChatMessage"] div:nth-child(2) {
+  color: #ffffff;
+  font-size: 1rem;
+  font-weight: 500;
+}
+</style>
+""", unsafe_allow_html=True)
 chat_container = st.container()
 with chat_container:
     user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")

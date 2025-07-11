@@ -971,9 +971,6 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
-
-import streamlit as st
-
 st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
 
 with st.container():
@@ -1000,8 +997,13 @@ with st.container():
         font-size: 0.9rem;
         margin-top: 4px;
     }
-    .exp-expander {
+    .exp-responsibilities {
         margin-top: 10px;
+        padding-left: 16px;
+        font-size: 0.88rem;
+    }
+    .exp-responsibilities li {
+        margin-bottom: 6px;
     }
     </style>
     """, unsafe_allow_html=True)
@@ -1016,10 +1018,11 @@ with st.container():
                 <div class="exp-card-title">{title}</div>
                 <div class="exp-card-company">{company}</div>
                 <div class="exp-card-date">{date}</div>
+                <ul class="exp-responsibilities">
             """, unsafe_allow_html=True)
-            with st.expander("Click here to view responsibilities"):
-                st.markdown(responsibilities)
-            st.markdown("</div>", unsafe_allow_html=True)
+            for line in responsibilities.strip().split("\n"):
+                st.markdown(f"<li>{line[2:]}</li>", unsafe_allow_html=True)
+            st.markdown("</ul></div>", unsafe_allow_html=True)
 
     render_experience_card(
         "https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png",
@@ -1070,6 +1073,7 @@ with st.container():
         - Led test environment setup and delivered KT sessions
         """
     )
+
 
 
 

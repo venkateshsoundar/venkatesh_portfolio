@@ -1358,8 +1358,7 @@ st.markdown("""
 .exp-responsibilities-box {    
     padding: 12px 16px;
     border-radius: 10px;
-    margin-top: 14px;
-    color: #ECF0F1;
+    margin-top: 14px;    
     font-size: 13px;
     font-style: italic;
     line-height: 1.6;

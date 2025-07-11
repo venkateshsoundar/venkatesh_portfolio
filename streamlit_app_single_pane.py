@@ -1511,7 +1511,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 
-st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown('<a name="skills" class="skills-section hover-zoom"></a>', unsafe_allow_html=True)
 
 st.markdown("""
 <style>
@@ -1567,6 +1567,13 @@ st.markdown("""
 .skill-list p {
   margin: 0;
   padding: 2px 0;
+}
+.hover-zoom {
+  transition: transform 0.25s ease, box-shadow 0.25s;
+}
+.hover-zoom:hover {
+  transform: scale(1.015);
+  box-shadow: 0 14px 32px rgba(255,209,102,0.12), 0 8px 22px rgba(44,62,80,0.1);
 }
 </style>
 

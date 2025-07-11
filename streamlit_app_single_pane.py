@@ -720,8 +720,9 @@ with chat_container:
     if user_input:
         st.chat_message("user").write(user_input)
         prompt = (
-            "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+            "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "+
+            "Also answer needs to be crisp and clear in bullets"
             + user_input
         )
         with st.spinner("Assistant is typing..."):

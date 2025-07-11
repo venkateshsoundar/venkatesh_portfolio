@@ -937,41 +937,7 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
-st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
-st.markdown(
-    """  
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Professional Experience</div>
-      <div class="exp-cards-grid">
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
-          <div class="exp-card-company">Tech Insights Inc, Canada</div>
-          <div class="exp-card-date">May 2025 – Present</div>          
-        </div>
-      <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Senior Consultant</div>
-          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
-          <div class="exp-card-date">October 2021 – August 2024</div>
-      </div>
-      <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Consultant</div>
-          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
-          <div class="exp-card-date">May 2018 – October 2021</div>
-      </div>
-      <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Associate</div>
-          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
-          <div class="exp-card-date">Sep 2013 – May 2018</div>
-      </div>
-    </div>
-    </div>
-    """, unsafe_allow_html=True)
-
-
+import streamlit as st
 
 st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
 
@@ -1002,13 +968,11 @@ with st.container():
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown(
-        '<div class="section-title" style="background:#34495E; padding: 12px; border-radius: 8px; font-size: 1.2rem; color: white;">Professional Experience</div>',
-        unsafe_allow_html=True
-    )
+    st.markdown('<div class="section-title" style="background:#34495E; padding: 12px; border-radius: 8px; font-size: 1.2rem; color: white;">Professional Experience</div>', unsafe_allow_html=True)
 
     def render_experience_card(img_url, title, company, date, responsibilities):
         with st.container():
+            # Start HTML card
             st.markdown(f"""
             <div class="exp-card">
                 <img src="{img_url}" class="exp-card-logo"/>
@@ -1016,19 +980,24 @@ with st.container():
                 <div class="exp-card-company">{company}</div>
                 <div class="exp-card-date">{date}</div>
             """, unsafe_allow_html=True)
+            
+            # Expander inside card
             with st.expander("Click here to view responsibilities"):
                 st.markdown(responsibilities)
+
+            # End HTML card
             st.markdown("</div>", unsafe_allow_html=True)
 
+    # Call the cards
     render_experience_card(
         "https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png",
         "Software Developer Intern - Data Engineering",
         "Tech Insights Inc, Canada",
         "May 2025 – Present",
         """
-        - Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)
-        - Automated ETL workflows supporting compliance and audit readiness
-        - Interactive dashboards using Power BI and AWS QuickSight
+        - Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)  
+        - Automated ETL workflows supporting compliance and audit readiness  
+        - Interactive dashboards using Power BI and AWS QuickSight  
         - Implemented validation checkpoints for enhanced data integrity
         """
     )
@@ -1039,9 +1008,9 @@ with st.container():
         "Deloitte Consulting India Private Limited, India",
         "October 2021 – August 2024",
         """
-        - Worked as Functional Analyst for Personal Lines insurance projects
-        - Participated in 3 Amigos sessions for requirement clarification
-        - Developed automated dashboard to improve delivery efficiency
+        - Worked as Functional Analyst for Personal Lines insurance projects  
+        - Participated in 3 Amigos sessions for requirement clarification  
+        - Developed automated dashboard to improve delivery efficiency  
         - Used AWS EC2, DynamoDB, and S3 for cloud integration
         """
     )
@@ -1052,8 +1021,8 @@ with st.container():
         "Capgemini Technology Services India Private Limited, India",
         "May 2018 – October 2021",
         """
-        - End-to-end testing of Guidewire-based Worker Compensation policies
-        - Created automation tools for real-time failure alerts
+        - End-to-end testing of Guidewire-based Worker Compensation policies  
+        - Created automation tools for real-time failure alerts  
         - Mentored QA team and led agile initiatives
         """
     )
@@ -1064,11 +1033,12 @@ with st.container():
         "Cognizant Technology Solutions India Private Limited, India",
         "Sep 2013 – May 2018",
         """
-        - Specialized in DB2 database and batch processing testing
-        - Managed key metrics for $2M healthcare IT projects
+        - Specialized in DB2 database and batch processing testing  
+        - Managed key metrics for $2M healthcare IT projects  
         - Led test environment setup and delivered KT sessions
         """
     )
+
 
 
 

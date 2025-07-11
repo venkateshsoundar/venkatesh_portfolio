@@ -820,8 +820,7 @@ st.markdown("""
       padding: 14px 36px; 
       font-size: 1.1rem; 
       border: none; 
-      cursor: pointer;
-      box-shadow: 0 4px 12px rgba(255, 209, 102, 0.8);
+      cursor: pointer;      
       transition: background 0.25s ease;">
     <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">⬇️ Download Resume</a>
   </button>

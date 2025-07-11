@@ -948,8 +948,8 @@ st.markdown(
           <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
           <div class="exp-card-company">Tech Insights Inc, Canada</div>
           <div class="exp-card-date">May 2025 – Present</div>
-          <a class="toggle-link" onclick="toggleDetails('ti-details')">Click here to view responsibilities</a>
-          <div id="ti-details" class="exp-card-details">
+            <a class="toggle-link" onclick="toggleDetails('ti-details')">Click here to view responsibilities</a>
+            <div id="ti-details" class="exp-card-details">
             <ul>
               <li>Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)</li>
               <li>Automated ETL workflows supporting compliance and audit readiness</li>

@@ -1381,13 +1381,13 @@ st.markdown("""
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
   border-radius: 18px;
   box-shadow: 0 4px 28px rgba(44,62,80,0.14);
-  padding: 22px 18px 28px 18px;
+  padding: 32px 18px 36px 18px;
   margin-bottom: 32px;
   text-align: center;
   transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
   cursor: pointer;
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 1.4rem;
+  font-weight: 700;
   color: #ffd166;
   border: 1.5px solid #22304A2A;
 }
@@ -1400,12 +1400,13 @@ st.markdown("""
   background: #ffd166;
   color: #22304A;
   font-weight: 700;
-  border-radius: 12px;
-  padding: 12px 28px;
-  font-size: 1.05rem;
+  border-radius: 14px;
+  padding: 14px 36px;
+  font-size: 1.1rem;
   border: none;
   transition: background 0.25s ease;
-  margin-top: 18px;
+  margin-top: 22px;
+  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.8);
 }
 .download-button:hover {
   background: #ffc107cc;
@@ -1416,18 +1417,21 @@ st.markdown("""
 
 st.markdown('<div class="download-card">Download My Resume</div>', unsafe_allow_html=True)
 
+# Fetch resume bytes only once to avoid delay
 response = requests.get(resume_url)
 resume_bytes = response.content
 
+# Streamlit's download_button doesn't support custom classes or CSS styling directly,
+# so we inject styles via container above and rely on button defaults.
+# Use a key so it does not conflict if this runs multiple times.
 st.download_button(
-    label="Download Resume PDF",
+    label="⬇️ Download Resume PDF",
     data=resume_bytes,
     file_name="Venkateshwaran_Resume.pdf",
     mime="application/pdf",
     key="resume-download",
-    use_container_width=False,
     help="Click to download my professional resume",
-    # Apply custom class via kwargs is not supported directly,
-    # so style is mostly from surrounding container
+    # Set width smaller so it looks neat inside container
+    use_container_width=False,
 )
 

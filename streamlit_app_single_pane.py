@@ -1251,7 +1251,7 @@ st.markdown("""
   transition: transform 0.25s ease, box-shadow 0.25s;
 }
 .hover-zoom:hover {
-  transform: scale(1.015);
+  transform: scale(1.02);
   box-shadow: 0 14px 32px rgba(255,209,102,0.12), 0 8px 22px rgba(44,62,80,0.1);
 }
 </style>

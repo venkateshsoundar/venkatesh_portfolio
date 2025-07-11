@@ -1176,7 +1176,7 @@ st.markdown("""
 .skill-card {
   background: #1F2A44;
   color: white;
-  width: 220px;
+  width: 300px;
   padding: 20px 16px;
   border-radius: 16px;
   text-align: center;

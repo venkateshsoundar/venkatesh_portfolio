@@ -976,9 +976,6 @@ st.markdown(
 # Custom CSS styles
 st.markdown("""
 
-</style>
-""", unsafe_allow_html=True)
-
 # Section anchor and experience cards
 st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
 

@@ -409,6 +409,15 @@ st.markdown("""
     width: 100%;
   }
 }
+.exp-responsibilities-box {    
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-top: 14px;    
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.6;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
 
 </style>
 """, unsafe_allow_html=True)
@@ -948,30 +957,41 @@ st.markdown(
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
           <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
           <div class="exp-card-company">Tech Insights Inc, Canada</div>
-          <div class="exp-card-date">May 2025 – Present</div>          
+          <div class="exp-card-date">May 2025 – Present</div>
+          <div class="exp-responsibilities-box">
+            Developing a scalable Data Lineage framework using AWS (Glue, Lambda, S3, Athena), automating ETL workflows to support compliance and audit readiness. Built interactive dashboards with Power BI and AWS QuickSight, and implemented validation checkpoints to ensure data integrity.
+          </div>          
         </div>
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
           <div class="exp-card-title">Senior Consultant</div>
           <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
           <div class="exp-card-date">October 2021 – August 2024</div>
+           <div class="exp-responsibilities-box">
+            Functioned as a Business Analyst in Personal Lines insurance projects, actively engaging in 3 Amigos discussions to clarify requirements and define acceptance criteria. Developed an automated dashboard to reduce manual reporting effort and applied AWS cloud services including EC2, DynamoDB, and S3 for cloud-based components.
+          </div>
       </div>
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
           <div class="exp-card-title">Consultant</div>
           <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
           <div class="exp-card-date">May 2018 – October 2021</div>
+          <div class="exp-responsibilities-box">
+            Conducted end-to-end testing for Guidewire-based Worker Compensation policies. Created automation tools for alerting failures in real-time and mentored the QA team while leading agile practices to meet sprint targets.
+          </div>
       </div>
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
           <div class="exp-card-title">Associate</div>
           <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
           <div class="exp-card-date">Sep 2013 – May 2018</div>
+          <div class="exp-responsibilities-box">
+            Specialized in DB2 database and batch processing testing for healthcare IT projects. Managed key metrics for $2M initiatives, led test environment setup, and delivered knowledge transfer sessions to ensure smooth project transitions.
+          </div>
       </div>
     </div>
     </div>
     """, unsafe_allow_html=True)
-
 
 
 st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)
@@ -1348,68 +1368,3 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-
-
-
-# Custom CSS styles
-st.markdown("""
-<style>
-.exp-responsibilities-box {    
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-top: 14px;    
-    font-size: 13px;
-    font-style: italic;
-    line-height: 1.6;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-}
-</style>
-""", unsafe_allow_html=True)
-
-# Section anchor and experience cards
-st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
-
-st.markdown(
-    """  
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E; padding: 10px 20px; font-size: 20px; color: white; border-radius: 8px;">Professional Experience</div>
-      <div class="exp-cards-grid">
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
-          <div class="exp-card-company">Tech Insights Inc, Canada</div>
-          <div class="exp-card-date">May 2025 – Present</div> 
-          <div class="exp-responsibilities-box">
-            Developing a scalable Data Lineage framework using AWS (Glue, Lambda, S3, Athena), automating ETL workflows to support compliance and audit readiness. Built interactive dashboards with Power BI and AWS QuickSight, and implemented validation checkpoints to ensure data integrity.
-          </div>       
-        </div>
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Senior Consultant</div>
-          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
-          <div class="exp-card-date">October 2021 – August 2024</div>
-          <div class="exp-responsibilities-box">
-            Functioned as a Business Analyst in Personal Lines insurance projects, actively engaging in 3 Amigos discussions to clarify requirements and define acceptance criteria. Developed an automated dashboard to reduce manual reporting effort and applied AWS cloud services including EC2, DynamoDB, and S3 for cloud-based components.
-          </div>
-        </div>
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Consultant</div>
-          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
-          <div class="exp-card-date">May 2018 – October 2021</div>
-          <div class="exp-responsibilities-box">
-            Conducted end-to-end testing for Guidewire-based Worker Compensation policies. Created automation tools for alerting failures in real-time and mentored the QA team while leading agile practices to meet sprint targets.
-          </div>
-        </div>
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Associate</div>
-          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
-          <div class="exp-card-date">Sep 2013 – May 2018</div>
-          <div class="exp-responsibilities-box">
-            Specialized in DB2 database and batch processing testing for healthcare IT projects. Managed key metrics for $2M initiatives, led test environment setup, and delivered knowledge transfer sessions to ensure smooth project transitions.
-          </div>
-        </div>
-      </div>
-    </div>
-    """, unsafe_allow_html=True)

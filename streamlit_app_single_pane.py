@@ -949,6 +949,13 @@ st.markdown(
           <div class="exp-card-company">Tech Insights Inc, Canada</div>
           <div class="exp-card-date">May 2025 – Present</div>
         </div>
+        with st.expander("Click here to view responsibilities"):
+                st.markdown("""
+                - Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)
+                - Automated ETL workflows supporting compliance and audit readiness
+                - Interactive dashboards using Power BI and AWS QuickSight
+                - Implemented validation checkpoints for enhanced data integrity
+                """)
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
           <div class="exp-card-title">Senior Consultant</div>

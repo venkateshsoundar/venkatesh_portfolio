@@ -1621,20 +1621,12 @@ st.markdown("""
 <div class="skill-card">
   <div class="skill-title">Insurance & QA</div>
   <div class="skill-list">
-    <p>Guidewire</p>
-    <p>PolicyCenter</p>
-    <p>Testing Frameworks</p>
+    <p>Guidewire Insurance Suite</p>
+    <p>Functional Testing</p>
+    <p>Selenium Automation</p>
   </div>
 </div>
 
-<div class="skill-card">
-  <div class="skill-title">Other Knowledge</div>
-  <div class="skill-list">
-    <p>API Integration</p>
-    <p>ETL Workflows</p>
-    <p>Process Automation</p>
-  </div>
-</div>
 
   </div>
 </div>

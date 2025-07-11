@@ -883,6 +883,7 @@ st.markdown(
           <div class="exp-responsibilities-box">
             Led end-to-end testing for Guidewire-based Workers’ Compensation policies, ensuring comprehensive coverage across business scenarios and system workflows. Developed custom automation tools to enable real-time failure alerts and issue tracking, significantly improving test efficiency. Acted as a mentor to QA team members and drove agile ceremonies, consistently meeting sprint goals and delivery timelines.          
             </div>
+      </div>
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
           <div class="exp-card-title">Associate</div>

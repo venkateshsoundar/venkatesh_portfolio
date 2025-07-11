@@ -1355,8 +1355,7 @@ import streamlit as st
 # Custom CSS styles
 st.markdown("""
 <style>
-.exp-responsibilities-box {
-    background-color: #34495E;
+.exp-responsibilities-box {    
     padding: 12px 16px;
     border-radius: 10px;
     margin-top: 14px;

@@ -1374,12 +1374,60 @@ st.markdown("""
 
 
 st.markdown('<a name="download" class="section-anchor"></a>', unsafe_allow_html=True)
-st.markdown("## Download My Resume")
+
+st.markdown("""
+<style>
+.download-card {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px rgba(44,62,80,0.14);
+  padding: 22px 18px 28px 18px;
+  margin-bottom: 32px;
+  text-align: center;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+  cursor: pointer;
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #ffd166;
+  border: 1.5px solid #22304A2A;
+}
+.download-card:hover {
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 8px 16px rgba(255,209,102,0.6);
+  color: #fff;
+}
+.download-button {
+  background: #ffd166;
+  color: #22304A;
+  font-weight: 700;
+  border-radius: 12px;
+  padding: 12px 28px;
+  font-size: 1.05rem;
+  border: none;
+  transition: background 0.25s ease;
+  margin-top: 18px;
+}
+.download-button:hover {
+  background: #ffc107cc;
+  color: #1a2733;
+}
+</style>
+""", unsafe_allow_html=True)
+
+st.markdown('<div class="download-card">Download My Resume</div>', unsafe_allow_html=True)
+
 response = requests.get(resume_url)
 resume_bytes = response.content
+
 st.download_button(
     label="Download Resume PDF",
     data=resume_bytes,
     file_name="Venkateshwaran_Resume.pdf",
-    mime="application/pdf"
+    mime="application/pdf",
+    key="resume-download",
+    use_container_width=False,
+    help="Click to download my professional resume",
+    # Apply custom class via kwargs is not supported directly,
+    # so style is mostly from surrounding container
 )
+

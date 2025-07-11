@@ -879,7 +879,7 @@ st.markdown("""
       cursor: pointer;
       box-shadow: 0 4px 12px rgba(255, 209, 102, 0.8);
       transition: background 0.25s ease;">
-    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">⬇️ Download Resume PDF</a>
+    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">⬇️ Download Resume</a>
   </button>
 </div>
   </div>
@@ -1386,67 +1386,4 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-
-
-st.markdown('<a name="download" class="section-anchor"></a>', unsafe_allow_html=True)
-
-st.markdown("""
-<style>
-.download-card {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  border-radius: 18px;
-  box-shadow: 0 4px 28px rgba(44,62,80,0.14);
-  padding: 32px 18px 36px 18px;
-  margin-bottom: 32px;
-  text-align: center;
-  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
-  cursor: pointer;
-  font-size: 1.4rem;
-  font-weight: 700;
-  color: #ffd166;
-  border: 1.5px solid #22304A2A;
-}
-.download-card:hover {
-  transform: translateY(-5px) scale(1.04);
-  box-shadow: 0 8px 16px rgba(255,209,102,0.6);
-  color: #fff;
-}
-.download-button {
-  background: #ffd166;
-  color: #22304A;
-  font-weight: 700;
-  border-radius: 14px;
-  padding: 14px 36px;
-  font-size: 1.1rem;
-  border: none;
-  transition: background 0.25s ease;
-  margin-top: 22px;
-  box-shadow: 0 4px 12px rgba(255, 209, 102, 0.8);
-}
-.download-button:hover {
-  background: #ffc107cc;
-  color: #1a2733;
-}
-</style>
-""", unsafe_allow_html=True)
-
-st.markdown('<div class="download-card">Download My Resume</div>', unsafe_allow_html=True)
-
-# Fetch resume bytes only once to avoid delay
-response = requests.get(resume_url)
-resume_bytes = response.content
-
-# Streamlit's download_button doesn't support custom classes or CSS styling directly,
-# so we inject styles via container above and rely on button defaults.
-# Use a key so it does not conflict if this runs multiple times.
-st.download_button(
-    label="⬇️ Download Resume PDF",
-    data=resume_bytes,
-    file_name="Venkateshwaran_Resume.pdf",
-    mime="application/pdf",
-    key="resume-download",
-    help="Click to download my professional resume",
-    # Set width smaller so it looks neat inside container
-    use_container_width=False,
-)
 

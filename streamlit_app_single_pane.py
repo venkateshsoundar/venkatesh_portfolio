@@ -1365,13 +1365,6 @@ st.markdown("""
     line-height: 1.6;
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
 }
-.exp-cards-grid {
-    display: flex;
-    flex-direction: row;
-    gap: 20px;
-    overflow-x: auto;
-    padding-bottom: 10px;
-}
 </style>
 """, unsafe_allow_html=True)
 

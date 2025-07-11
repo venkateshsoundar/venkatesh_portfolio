@@ -1392,33 +1392,40 @@ st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=Tr
 
 st.markdown("""
 <style>
-.skills-horizontal-scroll {
-  display: flex;
-  flex-wrap: nowrap;
+.skills-section {
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  border-radius: 28px;
+  padding: 36px 24px;
+  margin-bottom: 36px;
+  box-shadow: 0 8px 24px rgba(44,62,80,0.14);
   overflow-x: auto;
-  gap: 22px;
-  padding-bottom: 12px;
 }
-.skills-horizontal-scroll::-webkit-scrollbar {
-  height: 8px;
+.skills-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffd166;
+  margin-bottom: 28px;
 }
-.skills-horizontal-scroll::-webkit-scrollbar-thumb {
-  background: #ffd166;
-  border-radius: 10px;
+.skill-row {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  padding-bottom: 10px;
 }
 .skill-card {
   flex: 0 0 auto;
-  min-width: 250px;
-  max-width: 300px;
+  min-width: 220px;
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  border-radius: 18px;
+  border-radius: 16px;
   padding: 20px;
-  box-shadow: 0 4px 20px rgba(44,62,80,0.14);
-  transition: transform .25s cubic-bezier(.45,1.65,.6,1), box-shadow .25s;
+  color: white;
+  box-shadow: 0 4px 14px rgba(44,62,80,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s;
 }
 .skill-card:hover {
-  transform: translateY(-5px) scale(1.04);
-  box-shadow: 0 12px 32px rgba(255,209,102,0.15), 0 4px 18px rgba(44,62,80,0.18);
+  transform: scale(1.04);
+  box-shadow: 0 12px 30px rgba(255,209,102,0.18), 0 6px 16px rgba(44,62,80,0.14);
 }
 .skill-card-title {
   font-size: 1.1rem;
@@ -1427,83 +1434,46 @@ st.markdown("""
   margin-bottom: 14px;
   text-align: center;
 }
-.icon-grid {
+.icon-list {
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
-  gap: 16px;
+  gap: 12px;
 }
-.icon-box {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 72px;
-}
-.icon-box img {
+.icon-list img {
   width: 44px;
   height: 44px;
+  border-radius: 8px;
   background: #fff;
-  border-radius: 10px;
   padding: 6px;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.1);
-}
-.icon-box span {
-  margin-top: 6px;
-  font-size: 0.82rem;
-  color: #fff;
-  text-align: center;
 }
 </style>
 
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Skills & Tools</div>
-  <div class="skills-horizontal-scroll">
+<div class="skills-section">
+  <div class="skills-title">Skills & Tools</div>
+  <div class="skill-row">
 
     <div class="skill-card">
       <div class="skill-card-title">Programming</div>
-      <div class="icon-grid">
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png"><span>Python</span></div>
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png"><span>Java</span></div>
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"><span>Excel VBA</span></div>
+      <div class="icon-list">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png" alt="Python">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png" alt="Java">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png" alt="Excel VBA">
       </div>
     </div>
 
     <div class="skill-card">
       <div class="skill-card-title">Cloud & Data</div>
-      <div class="icon-grid">
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png"><span>AWS</span></div>
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png"><span>MySQL</span></div>
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png"><span>Oracle</span></div>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-title">BI & Visualization</div>
-      <div class="icon-grid">
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png"><span>Power BI</span></div>
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/tableau.png"><span>Tableau</span></div>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-title">Dev & Project Tools</div>
-      <div class="icon-grid">
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png"><span>Git</span></div>
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png"><span>Jira</span></div>
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png"><span>HP ALM</span></div>
-      </div>
-    </div>
-
-    <div class="skill-card">
-      <div class="skill-card-title">Insurance & QA</div>
-      <div class="icon-grid">
-        <div class="icon-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png"><span>Guidewire</span></div>
+      <div class="icon-list">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png" alt="AWS">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png" alt="MySQL">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png" alt="Oracle">
       </div>
     </div>
 
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 

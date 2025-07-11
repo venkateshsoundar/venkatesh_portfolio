@@ -962,6 +962,138 @@ st.markdown(
     </div>
     </div>
     """, unsafe_allow_html=True)
+
+
+st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.timeline-section {
+  position: relative;
+  margin: 40px auto;
+  padding: 20px 20px;
+  border-radius: 12px;
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  color: #ecf0f1;
+  max-width: 800px;
+  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
+}
+.timeline-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ffd166;
+  text-align: center;
+  margin-bottom: 30px;
+}
+.timeline-entry {
+  position: relative;
+  padding-left: 30px;
+  margin-bottom: 30px;
+  border-left: 3px solid #ffd166;
+}
+.timeline-marker {
+  width: 14px;
+  height: 14px;
+  background: #ffd166;
+  border-radius: 50%;
+  position: absolute;
+  left: -8px;
+  top: 6px;
+  border: 2px solid #2C3E50;
+}
+.timeline-content h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #ffffff;
+}
+.timeline-content h4 {
+  margin: 4px 0 10px;
+  font-size: 1rem;
+  font-weight: normal;
+  color: #ffd166;
+}
+.timeline-content ul {
+  padding-left: 1rem;
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.6;
+}
+.timeline-date {
+  float: right;
+  font-size: 0.85rem;
+  color: #d3d3d3;
+}
+</style>
+
+<div class="timeline-section">
+  <div class="timeline-title">Professional Experience</div>
+
+  <div class="timeline-entry">
+    <div class="timeline-marker"></div>
+    <div class="timeline-content">
+      <h3>TechInsights Inc, Canada</h3>
+      <h4>Software Developer Intern <span class="timeline-date">May 2025 – Present</span></h4>
+      <ul>
+        <li>Developing a scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena) to enhance visibility across the data lifecycle.</li>
+        <li>Automated ETL workflows to trace data origin, transformations, and usage, supporting compliance and audit readiness.</li>
+        <li>Integrated metadata tracking and schema evolution to improve transparency, data governance, and operational efficiency.</li>
+        <li>Collaborated with data engineers and business stakeholders to define lineage use cases and deliver interactive dashboards using Power BI and AWS Quick Sight.</li>
+        <li>Strengthened data integrity and trust across analytics pipelines by implementing quality validation at key checkpoints.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline-entry">
+    <div class="timeline-marker"></div>
+    <div class="timeline-content">
+      <h3>Deloitte Consulting India Private Limited, India</h3>
+      <h4>Senior Consultant <span class="timeline-date">October 2021 – August 2024</span></h4>
+      <ul>
+        <li>Worked as a Functional Analyst for Personal Lines insurance projects, gathering and documenting business requirements with SMEs and product owners, translating them into detailed functional specs and JIRA user stories.</li>
+        <li>Participated in 3 Amigos sessions (QA, BA, Dev) for new enhancements, helping define clear acceptance criteria and reduce requirement ambiguities.</li>
+        <li>Supported client demos by walkthrough of implemented functionalities, enhancing client understanding and engagement.</li>
+        <li>Executed integration and configuration functionalities aligned with evolving requirements, contributing to a 95% defect removal rate before release.</li>
+        <li>Developed an automated status dashboard framework, reducing manual effort by 50% and improving project delivery efficiency.</li>
+        <li>Prepared and shared Daily Status Reports with stakeholders to ensure clear communication of project progress and issue tracking.</li>
+        <li>Gained hands-on experience with AWS cloud services including EC2, DynamoDB, and S3, supporting cloud-based project components and enhancing technical proficiency.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline-entry">
+    <div class="timeline-marker"></div>
+    <div class="timeline-content">
+      <h3>Capgemini Technology Services India Private Limited, India</h3>
+      <h4>Consultant <span class="timeline-date">May 2018 – October 2021</span></h4>
+      <ul>
+        <li>Conducted end-to-end testing of Guidewire-based Worker Compensation policies, validating Operational DataStore (ODS) data accuracy through ETL mapping verification from Customer Portal to Data Warehouse.</li>
+        <li>Transitioned from QA to a hybrid BA/QA role, balancing responsibilities in requirements gathering, analysis, and test automation for insurance software projects.</li>
+        <li>Created an automation tool that sent real-time failure alerts, improving response times to critical issues.</li>
+        <li>Actively participated in agile forums within a team of eight members, reducing the sprint carryover rate by 15% and helping the team consistently meet sprint goals.</li>
+        <li>Provided mentorship and leadership to the data QA team, fostering skill development and ensuring high standards of productivity and quality.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="timeline-entry">
+    <div class="timeline-marker"></div>
+    <div class="timeline-content">
+      <h3>Cognizant Technology Solutions India Private Limited, India</h3>
+      <h4>Associate <span class="timeline-date">Sep 2013 – May 2018</span></h4>
+      <ul>
+        <li>Joined as a fresher in the Mainframe Testing batch, specializing in DB2 database and batch processing testing within healthcare IT projects.</li>
+        <li>Managed and tracked key project metrics for healthcare initiatives valued at over $2M across all phases of the Software Testing Life Cycle (STLC), contributing to a 10% increase in process efficiency.</li>
+        <li>Led test environment management for continuous testing across three healthcare projects, driving automation and reducing test environment setup time by 40%.</li>
+        <li>Delivered 10+ knowledge transfer sessions to ensure smooth handover and retention of critical healthcare domain knowledge among team members and stakeholders.</li>
+        <li>Supported healthcare production remediation processes including ad hoc data extraction, reporting, data patching, and document re-triggering to resolve critical live system issues.</li>
+      </ul>
+    </div>
+  </div>
+
+</div>
+""", unsafe_allow_html=True)
+
+
 st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """

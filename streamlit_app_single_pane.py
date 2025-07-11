@@ -819,7 +819,7 @@ st.markdown("""
       border: none; 
       cursor: pointer;      
       transition: background 0.25s ease;">
-    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">⬇️ Download Resume</a>
+    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">Download Resume</a>
   </button>
 </div>
   </div>

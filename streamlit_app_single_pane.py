@@ -1559,11 +1559,9 @@ st.markdown("""
   margin-bottom: 12px;
   font-weight: bold;
 }
-.skill-list {
+.skill-list p {
+  margin: 4px 0;
   font-size: 0.9rem;
-  line-height: 1.5;
-  text-align: left;
-  padding-left: 10px;
 }
 </style>
 

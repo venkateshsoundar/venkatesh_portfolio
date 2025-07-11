@@ -70,7 +70,7 @@ body {
 <!-- Sticky Nav HTML -->
 <div class="navbar-container">
   <div class="navbar">
-    <a href="#about">About</a>
+    <a href="#about">About Me</a>
     <a href="#education">Education</a>
     <a href="#experience">Experience</a>
     <a href="#certifications">Certifications</a>

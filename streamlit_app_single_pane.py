@@ -1262,7 +1262,8 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<a name="Buddy bot" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown('<a name="Buddy bot"></a>', unsafe_allow_html=True)
+
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(
     f"""

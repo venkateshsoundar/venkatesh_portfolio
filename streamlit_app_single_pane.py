@@ -792,7 +792,7 @@ st.markdown("""
     </div>
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
     <div class="hero-role">Software Development Intern<br>Data Engineering</div>
-    <div class="hero-location">🍁 Calgary, AB, Canada</div>
+    <div class="hero-location">Calgary, AB, Canada</div>
   </div>
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>

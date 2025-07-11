@@ -1371,3 +1371,15 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+
+st.markdown('<a name="download" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown("## Download My Resume")
+response = requests.get(resume_url)
+resume_bytes = response.content
+st.download_button(
+    label="Download Resume PDF",
+    data=resume_bytes,
+    file_name="Venkateshwaran_Resume.pdf",
+    mime="application/pdf"
+)

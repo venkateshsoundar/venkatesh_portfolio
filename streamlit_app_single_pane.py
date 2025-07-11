@@ -77,6 +77,7 @@ body {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
+    <a href="#skills">Buddy Bot</a>
   </div>
 </div>
 

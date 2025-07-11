@@ -1355,37 +1355,6 @@ import streamlit as st
 # Custom CSS styles
 st.markdown("""
 <style>
-.exp-card {
-    background: #2C3E50;
-    color: #ECF0F1;
-    padding: 20px;
-    border-radius: 12px;
-    margin-right: 20px;
-    width: 300px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    flex-shrink: 0;
-}
-.exp-card-logo {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-}
-.exp-card-title {
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 4px;
-    color: #F9E79F;
-}
-.exp-card-company {
-    font-size: 14px;
-    color: #D5D8DC;
-}
-.exp-card-date {
-    font-size: 13px;
-    color: #F7DC6F;
-    margin-bottom: 16px;
-}
 .exp-responsibilities-box {
     background-color: #34495E;
     padding: 12px 16px;

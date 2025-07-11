@@ -968,13 +968,24 @@ st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_htm
 
 st.markdown("""
 <style>
+.card.hover-zoom {
+    transition: transform 0.25s cubic-bezier(.4,1.6,.6,1), box-shadow .23s;
+    will-change: transform, box-shadow;
+}
+.card.hover-zoom:hover {
+    transform: translateY(-6px) scale(1.03);
+    box-shadow: 0 12px 36px rgba(255,209,102,0.13), 0 8px 26px rgba(44,62,80,0.19);
+    z-index: 8;
+}
 .expander-style > div {
-    background-color: #f9f9f9;
+    background-color: #1F2A44;
+    color: white;
     padding: 16px;
     border-radius: 12px;
-    box-shadow: 0 4px 18px rgba(0,0,0,0.07);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
     max-height: 300px;
     overflow-y: auto;
+    transition: transform 0.25s ease, box-shadow 0.25s;
 }
 .expander-style img {
     display: block;
@@ -1001,20 +1012,33 @@ st.markdown("""
 }
 .exp-header-text .company {
     font-size: 0.95rem;
-    color: #333;
+    color: #ccc;
 }
 .exp-header-text .dates {
     font-size: 0.85rem;
-    color: #666;
+    color: #aaa;
+}
+.section-title {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: white;
+    text-align: center;
+    padding: 14px;
+    border-radius: 12px;
+    margin-bottom: 16px;
+    background:#34495E;
+    box-shadow: 0 6px 24px rgba(0,0,0,0.12);
 }
 </style>
 
 <div class="card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Professional Experience</div>
+  <div class="section-title">Professional Experience</div>
 </div>
 """, unsafe_allow_html=True)
 
 with st.container():
+    st.markdown("""<div style='display: flex; flex-direction: column; gap: 16px;'>""", unsafe_allow_html=True)
+
     with st.expander("Software Developer Intern | Tech Insights Inc, Canada (May 2025 – Present)", expanded=False):
         st.markdown('<div class="expander-style">', unsafe_allow_html=True)
         st.image("https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png", width=80)
@@ -1064,6 +1088,9 @@ with st.container():
         • Supported live remediation (data patching, extraction, reporting).
         """)
         st.markdown('</div>', unsafe_allow_html=True)
+
+    st.markdown("""</div>""", unsafe_allow_html=True)
+
 
 
 st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)

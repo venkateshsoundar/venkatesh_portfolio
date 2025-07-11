@@ -963,116 +963,134 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
-import streamlit as st
+st.markdown(
+    """  
+    <style>
+    .exp-cards-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .exp-card {
+      background-color: #2c3e50;
+      border-radius: 12px;
+      padding: 20px;
+      color: white;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+      position: relative;
+    }
+    .exp-card-logo {
+      width: 48px;
+      margin-bottom: 12px;
+    }
+    .exp-card-title {
+      font-weight: bold;
+      font-size: 1.1rem;
+      color: #ffd166;
+    }
+    .exp-card-company, .exp-card-date {
+      font-size: 0.9rem;
+      margin-top: 4px;
+    }
+    .exp-card-details {
+      margin-top: 12px;
+      display: none;
+      font-size: 0.87rem;
+      line-height: 1.5;
+      color: #f0f0f0;
+      background-color: #22304A;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .exp-card a.toggle-link {
+      display: inline-block;
+      color: #ffd166;
+      margin-top: 10px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    </style>
 
-st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
+    <script>
+    function toggleDetails(id) {
+      var element = document.getElementById(id);
+      if (element.style.display === "none") {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    }
+    </script>
 
-st.markdown("""
-<style>
-.exp-card {
-    background-color: #2c3e50;
-    border-radius: 16px;
-    padding: 16px;
-    margin-bottom: 20px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-}
-.exp-card:hover {
-    transform: translateY(-6px) scale(1.03);
-    box-shadow: 0 12px 28px rgba(255,209,102,0.15), 0 6px 16px rgba(44,62,80,0.12);
-}
-.exp-card-logo {
-    width: 80px;
-    display: block;
-    margin: auto;
-}
-.exp-card-title {
-    font-weight: bold;
-    font-size: 1.2rem;
-    color: #ffd166;
-    text-align: center;
-    margin-top: 10px;
-}
-.exp-card-company, .exp-card-date {
-    text-align: center;
-    color: #f0f0f0;
-    font-size: 0.95rem;
-}
-</style>
-""", unsafe_allow_html=True)
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Professional Experience</div>
+      <div class="exp-cards-grid">
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
+          <div class="exp-card-company">Tech Insights Inc, Canada</div>
+          <div class="exp-card-date">May 2025 – Present</div>
+          <a class="toggle-link" onclick="toggleDetails('ti-details')">Click here to view responsibilities</a>
+          <div id="ti-details" class="exp-card-details">
+            <ul>
+              <li>Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)</li>
+              <li>Automated ETL workflows supporting compliance and audit readiness</li>
+              <li>Interactive dashboards using Power BI and AWS QuickSight</li>
+              <li>Implemented validation checkpoints for enhanced data integrity</li>
+            </ul>
+          </div>
+        </div>
 
-# Function to create each experience card with expander
-def exp_card(logo_url, title, company, date, responsibilities):
-    st.markdown(f"""
-    <div class="exp-card hover-zoom">
-        <img src="{logo_url}" class="exp-card-logo"/>
-        <div class="exp-card-title">{title}</div>
-        <div class="exp-card-company">{company}</div>
-        <div class="exp-card-date">{date}</div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Senior Consultant</div>
+          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+          <div class="exp-card-date">October 2021 – August 2024</div>
+          <a class="toggle-link" onclick="toggleDetails('deloitte-details')">Click here to view responsibilities</a>
+          <div id="deloitte-details" class="exp-card-details">
+            <ul>
+              <li>Worked as Functional Analyst for Personal Lines insurance projects</li>
+              <li>Participated in 3 Amigos sessions for requirement clarification</li>
+              <li>Developed automated dashboard to improve delivery efficiency</li>
+              <li>Used AWS EC2, DynamoDB, and S3 for cloud integration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Consultant</div>
+          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+          <div class="exp-card-date">May 2018 – October 2021</div>
+          <a class="toggle-link" onclick="toggleDetails('capgemini-details')">Click here to view responsibilities</a>
+          <div id="capgemini-details" class="exp-card-details">
+            <ul>
+              <li>End-to-end testing of Guidewire-based Worker Compensation policies</li>
+              <li>Created automation tools for real-time failure alerts</li>
+              <li>Mentored QA team and led agile initiatives</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Associate</div>
+          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+          <div class="exp-card-date">Sep 2013 – May 2018</div>
+          <a class="toggle-link" onclick="toggleDetails('cts-details')">Click here to view responsibilities</a>
+          <div id="cts-details" class="exp-card-details">
+            <ul>
+              <li>Specialized in DB2 database and batch processing testing</li>
+              <li>Managed key metrics for $2M healthcare IT projects</li>
+              <li>Led test environment setup and delivered KT sessions</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
     </div>
     """, unsafe_allow_html=True)
-    
-    with st.expander("Click here to view responsibilities"):
-        for item in responsibilities:
-            st.markdown(f"- {item}")
 
-# Section title
-st.markdown("""
-<div class="section-title" style="background:#34495E; padding: 12px; text-align:center; border-radius: 12px; color: white; font-size: 1.4rem;">
-    Professional Experience
-</div>
-""", unsafe_allow_html=True)
-
-# Experience entries
-exp_card(
-    logo_url="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png",
-    title="Software Developer Intern - Data Engineering",
-    company="Tech Insights Inc, Canada",
-    date="May 2025 – Present",
-    responsibilities=[
-        "Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)",
-        "Automated ETL workflows supporting compliance and audit readiness",
-        "Interactive dashboards using Power BI and AWS QuickSight",
-        "Implemented validation checkpoints for enhanced data integrity"
-    ]
-)
-
-exp_card(
-    logo_url="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png",
-    title="Senior Consultant",
-    company="Deloitte Consulting India Private Limited, India",
-    date="October 2021 – August 2024",
-    responsibilities=[
-        "Worked as Functional Analyst for Personal Lines insurance projects",
-        "Participated in 3 Amigos sessions for requirement clarification",
-        "Developed automated dashboard to improve delivery efficiency",
-        "Used AWS EC2, DynamoDB, and S3 for cloud integration"
-    ]
-)
-
-exp_card(
-    logo_url="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png",
-    title="Consultant",
-    company="Capgemini Technology Services India Private Limited, India",
-    date="May 2018 – October 2021",
-    responsibilities=[
-        "End-to-end testing of Guidewire-based Worker Compensation policies",
-        "Created automation tools for real-time failure alerts",
-        "Mentored QA team and led agile initiatives"
-    ]
-)
-
-exp_card(
-    logo_url="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png",
-    title="Associate",
-    company="Cognizant Technology Solutions India Private Limited, India",
-    date="Sep 2013 – May 2018",
-    responsibilities=[
-        "Specialized in DB2 database and batch processing testing",
-        "Managed key metrics for $2M healthcare IT projects",
-        "Led test environment setup and delivered KT sessions"
-    ]
-)
 
 
 

@@ -1145,7 +1145,8 @@ projects_html += '</div></div>'
 
 st.markdown(projects_html, unsafe_allow_html=True)
 
-st.markdown('<a name="skills" class="skills-section hover-zoom"></a>', unsafe_allow_html=True)
+st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
+
 st.markdown("""
 <style>
 .skills-section {

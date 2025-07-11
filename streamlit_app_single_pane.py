@@ -1409,7 +1409,6 @@ st.markdown(
       <div class="section-title" style="background:#34495E; padding: 10px 20px; font-size: 20px; color: white; border-radius: 8px;">Professional Experience</div>
       <div class="exp-cards-inner-pane" style="max-height: 600px; overflow-y: auto; padding-right: 12px;">
         <div class="exp-cards-grid">
-
           <div class="exp-card">
             <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
             <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
@@ -1419,7 +1418,6 @@ st.markdown(
               Developing a scalable Data Lineage framework using AWS (Glue, Lambda, S3, Athena), automating ETL workflows to support compliance and audit readiness. Built interactive dashboards with Power BI and AWS QuickSight, and implemented validation checkpoints to ensure data integrity.
             </div>       
           </div>
-
           <div class="exp-card">
             <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
             <div class="exp-card-title">Senior Consultant</div>
@@ -1429,7 +1427,6 @@ st.markdown(
               Functioned as a Business Analyst in Personal Lines insurance projects, actively engaging in 3 Amigos discussions to clarify requirements and define acceptance criteria. Developed an automated dashboard to reduce manual reporting effort and applied AWS cloud services including EC2, DynamoDB, and S3 for cloud-based components.
             </div>
           </div>
-
           <div class="exp-card">
             <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
             <div class="exp-card-title">Consultant</div>
@@ -1439,7 +1436,6 @@ st.markdown(
               Conducted end-to-end testing for Guidewire-based Worker Compensation policies. Created automation tools for alerting failures in real-time and mentored the QA team while leading agile practices to meet sprint targets.
             </div>
           </div>
-
           <div class="exp-card">
             <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
             <div class="exp-card-title">Associate</div>
@@ -1449,7 +1445,6 @@ st.markdown(
               Specialized in DB2 database and batch processing testing for healthcare IT projects. Managed key metrics for $2M initiatives, led test environment setup, and delivered knowledge transfer sessions to ensure smooth project transitions.
             </div>
           </div>
-
         </div>
       </div>
     </div>

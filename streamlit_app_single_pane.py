@@ -937,6 +937,17 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
+<script>
+    function toggleDetails(id) {
+      var element = document.getElementById(id);
+      if (element.style.display === "none") {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    }
+</script>
+
 st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """  

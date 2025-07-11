@@ -1002,7 +1002,7 @@ st.markdown("""
 .exp-card-date {
     font-size: 13px;
     color: #F7DC6F;
-    margin-bottom: 10px;
+    margin-bottom: 16px;
 }
 .exp-responsibilities-box {
     background-color: #34495E;

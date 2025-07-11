@@ -1386,3 +1386,135 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+
+st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.skills-section {
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  border-radius: 28px;
+  padding: 36px 18px 32px 18px;
+  margin-bottom: 36px;
+  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
+}
+.skills-header-title {
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: #ffd166;
+  background: #2C3E50;
+  border-radius: 10px;
+  padding: 12px 0;
+  margin-bottom: 22px;
+  text-align: center;
+  box-shadow: 0 1px 8px #22304A22;
+}
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+.skill-card {
+  background: #1F2A44;
+  color: white;
+  width: 220px;
+  padding: 18px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s;
+}
+.skill-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(255,209,102,0.15), 0 6px 16px rgba(44,62,80,0.12);
+}
+.skill-title {
+  font-size: 1.1rem;
+  color: #ffd166;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+.icon-set {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+}
+.icon-set img {
+  width: 48px;
+  height: 48px;
+  background: rgba(255,255,255,0.08);
+  border-radius: 10px;
+  padding: 6px;
+}
+</style>
+
+<div class="skills-section">
+  <div class="skills-header-title">Core Skills and Tools</div>
+  <div class="skill-grid">
+
+    <div class="skill-card">
+      <div class="skill-title">Programming Languages</div>
+      <div class="icon-set">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png" title="Python">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png" title="R">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png" title="Java">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png" title="Excel VBA">
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Cloud & Data</div>
+      <div class="icon-set">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png" title="AWS">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png" title="MySQL">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png" title="Oracle">
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Data Viz & BI</div>
+      <div class="icon-set">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png" title="Power BI">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png" title="Excel VBA">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/tableau.png" title="Tableau">
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Dev Tools</div>
+      <div class="icon-set">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png" title="Git">
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Project Management</div>
+      <div class="icon-set">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png" title="JIRA">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png" title="HP ALM">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/rally-software.png" title="Rally">
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Insurance & QA</div>
+      <div class="icon-set">
+        <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png" title="Guidewire">
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Other Knowledge</div>
+      <div class="icon-set">
+        <img src="https://img.icons8.com/ios-filled/50/data-configuration.png" title="Data Config">
+        <img src="https://img.icons8.com/ios-filled/50/api-settings.png" title="API Settings">
+        <img src="https://img.icons8.com/ios-filled/50/process.png" title="Process Flow">
+      </div>
+    </div>
+
+  </div>
+</div>
+""", unsafe_allow_html=True)

@@ -963,6 +963,109 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
+st.markdown(
+    """  
+    <style>
+    .exp-card-details {
+      margin-top: 8px;
+      display: none;
+      font-size: 0.87rem;
+      line-height: 1.5;
+      color: #f0f0f0;
+      background-color: #2c3e50;
+      border-radius: 10px;
+      padding: 10px;
+    }
+    .exp-card a.toggle-link {
+      display: inline-block;
+      color: #ffd166;
+      margin-top: 6px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    </style>
+
+    <script>
+    function toggleDetails(id) {
+      var element = document.getElementById(id);
+      if (element.style.display === "none") {
+        element.style.display = "block";
+      } else {
+        element.style.display = "none";
+      }
+    }
+    </script>
+
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Professional Experience</div>
+      <div class="exp-cards-grid">
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
+          <div class="exp-card-company">Tech Insights Inc, Canada</div>
+          <div class="exp-card-date">May 2025 – Present</div>
+          <a class="toggle-link" onclick="toggleDetails('ti-details')">Click here to view responsibilities</a>
+          <div id="ti-details" class="exp-card-details">
+            <ul>
+              <li>Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)</li>
+              <li>Automated ETL workflows supporting compliance and audit readiness</li>
+              <li>Interactive dashboards using Power BI and AWS QuickSight</li>
+              <li>Implemented validation checkpoints for enhanced data integrity</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Senior Consultant</div>
+          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+          <div class="exp-card-date">October 2021 – August 2024</div>
+          <a class="toggle-link" onclick="toggleDetails('deloitte-details')">Click here to view responsibilities</a>
+          <div id="deloitte-details" class="exp-card-details">
+            <ul>
+              <li>Worked as Functional Analyst for Personal Lines insurance projects</li>
+              <li>Participated in 3 Amigos sessions for requirement clarification</li>
+              <li>Developed automated dashboard to improve delivery efficiency</li>
+              <li>Used AWS EC2, DynamoDB, and S3 for cloud integration</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Consultant</div>
+          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+          <div class="exp-card-date">May 2018 – October 2021</div>
+          <a class="toggle-link" onclick="toggleDetails('capgemini-details')">Click here to view responsibilities</a>
+          <div id="capgemini-details" class="exp-card-details">
+            <ul>
+              <li>End-to-end testing of Guidewire-based Worker Compensation policies</li>
+              <li>Created automation tools for real-time failure alerts</li>
+              <li>Mentored QA team and led agile initiatives</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Associate</div>
+          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+          <div class="exp-card-date">Sep 2013 – May 2018</div>
+          <a class="toggle-link" onclick="toggleDetails('cts-details')">Click here to view responsibilities</a>
+          <div id="cts-details" class="exp-card-details">
+            <ul>
+              <li>Specialized in DB2 database and batch processing testing</li>
+              <li>Managed key metrics for $2M healthcare IT projects</li>
+              <li>Led test environment setup and delivered KT sessions</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
 
 st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(

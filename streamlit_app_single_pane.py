@@ -714,7 +714,7 @@ st.markdown("""
   transition: transform .33s cubic-bezier(.37,1.7,.7,1), box-shadow .33s;
 }
 .hero-card:hover {
-  transform: translateY(-7px) scale(1.016);
+  transform: translateY(-7px) scale(1.02);
   box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
 }
 .hero-left {

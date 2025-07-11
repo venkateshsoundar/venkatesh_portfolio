@@ -972,6 +972,7 @@ st.markdown(
     """, unsafe_allow_html=True)
 
 
+
 st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
 
 with st.container():
@@ -998,13 +999,13 @@ with st.container():
         font-size: 0.9rem;
         margin-top: 4px;
     }
-    .exp-expander {
-        margin-top: 10px;
-    }
     </style>
     """, unsafe_allow_html=True)
 
-    st.markdown('<div class="section-title" style="background:#34495E; padding: 12px; border-radius: 8px; font-size: 1.2rem; color: white;">Professional Experience</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="section-title" style="background:#34495E; padding: 12px; border-radius: 8px; font-size: 1.2rem; color: white;">Professional Experience</div>',
+        unsafe_allow_html=True
+    )
 
     def render_experience_card(img_url, title, company, date, responsibilities):
         with st.container():
@@ -1068,6 +1069,7 @@ with st.container():
         - Led test environment setup and delivered KT sessions
         """
     )
+
 
 
 

@@ -1146,7 +1146,6 @@ projects_html += '</div></div>'
 st.markdown(projects_html, unsafe_allow_html=True)
 
 st.markdown('<a name="skills" class="skills-section hover-zoom"></a>', unsafe_allow_html=True)
-
 st.markdown("""
 <style>
 .skills-section {
@@ -1224,7 +1223,6 @@ st.markdown("""
     <p>Excel VBA</p>
   </div>
 </div>
-
 <div class="skill-card">
   <div class="skill-title">Cloud & Data</div>
   <div class="skill-list">
@@ -1233,7 +1231,6 @@ st.markdown("""
     <p>Oracle</p>
   </div>
 </div>
-
 <div class="skill-card">
   <div class="skill-title">Data Viz & BI</div>
   <div class="skill-list">
@@ -1242,14 +1239,12 @@ st.markdown("""
     <p>Excel Dashboards</p>
   </div>
 </div>
-
 <div class="skill-card">
   <div class="skill-title">Dev Tools</div>
   <div class="skill-list">
     <p>Git</p>
   </div>
 </div>
-
 <div class="skill-card">
   <div class="skill-title">Project Management</div>
   <div class="skill-list">
@@ -1258,7 +1253,6 @@ st.markdown("""
     <p>Rally</p>
   </div>
 </div>
-
 <div class="skill-card">
   <div class="skill-title">Insurance & QA</div>
   <div class="skill-list">
@@ -1267,14 +1261,11 @@ st.markdown("""
     <p>Selenium Automation</p>
   </div>
 </div>
-
   </div>
 </div>
 """, unsafe_allow_html=True)
 
-
 st.markdown('<a name="Buddy bot" class="section-anchor"></a>', unsafe_allow_html=True)
-
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(
     f"""
@@ -1325,14 +1316,12 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
   
 api_key = st.secrets["DEEPSEEK_API_KEY"]
 client = openai.OpenAI(
       base_url="https://openrouter.ai/api/v1",
       api_key=api_key,
   )
-
 st.markdown("""
 <style>
 /* Force assistant message text to black */
@@ -1350,7 +1339,6 @@ div[data-testid="stChatMessageContent"] {
 }
 </style>
 """, unsafe_allow_html=True)
-
 
 chat_container = st.container()
 with chat_container:

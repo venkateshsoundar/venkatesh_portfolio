@@ -1455,7 +1455,7 @@ st.markdown("""
   <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skill-grid">
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Programming Languages</div>
       <div class="icon-set">
         <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png" title="Python">
@@ -1465,7 +1465,7 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Cloud & Data</div>
       <div class="icon-set">
         <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png" title="AWS">
@@ -1474,7 +1474,7 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Data Viz & BI</div>
       <div class="icon-set">
         <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png" title="Power BI">
@@ -1483,14 +1483,14 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Dev Tools</div>
       <div class="icon-set">
         <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png" title="Git">
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Project Management</div>
       <div class="icon-set">
         <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png" title="JIRA">
@@ -1499,14 +1499,14 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Insurance & QA</div>
       <div class="icon-set">
         <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png" title="Guidewire">
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Other Knowledge</div>
       <div class="icon-set">
         <img src="https://img.icons8.com/ios-filled/50/data-configuration.png" title="Data Config">

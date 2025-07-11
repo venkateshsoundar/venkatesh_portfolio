@@ -980,7 +980,6 @@ st.markdown(
     <div class="card hover-zoom">
       <div class="section-title" style="background:#34495E;">Professional Experience</div>
       <div class="exp-timeline" style="display: flex; flex-direction: column; gap: 20px; padding: 20px; background: #2C3E50; border-radius: 10px; max-height: 600px; overflow-y: auto;">
-
         <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
           <div>
@@ -992,7 +991,6 @@ st.markdown(
             </div>
           </div>
         </div>
-
         <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
           <div>
@@ -1004,7 +1002,6 @@ st.markdown(
             </div>
           </div>
         </div>
-
         <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
           <div>
@@ -1016,7 +1013,6 @@ st.markdown(
             </div>
           </div>
         </div>
-
         <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
           <div>
@@ -1028,7 +1024,6 @@ st.markdown(
             </div>
           </div>
         </div>
-
       </div>
     </div>
     """, unsafe_allow_html=True)

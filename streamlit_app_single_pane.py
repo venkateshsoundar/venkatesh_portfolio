@@ -710,7 +710,7 @@ st.markdown("""
   text-align: center;
 }
 .hero-location {
-  color: #ffd166;
+  color: #FFFFE0;
   font-weight: 600;
   margin-top: 8px;
   font-size: 1.01rem;

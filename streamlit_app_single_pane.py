@@ -1018,6 +1018,12 @@ st.markdown("""
     display: flex;
     flex-direction: column;
     gap: 20px;
+.exp-responsibilities {
+    font-style: italic;
+    font-size: 13px;  /* smaller size */
+    color: #ECF0F1;   /* light grey for readability */
+    line-height: 1.5;
+}
 }
 </style>
 """, unsafe_allow_html=True)

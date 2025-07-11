@@ -867,6 +867,21 @@ st.markdown("""
         <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg"/></a>
       </div>
     </div>
+    <div style="text-align: center; margin-top: 20px;">
+  <button style="
+      background: #ffd166; 
+      color: #22304A; 
+      font-weight: 700; 
+      border-radius: 14px; 
+      padding: 14px 36px; 
+      font-size: 1.1rem; 
+      border: none; 
+      cursor: pointer;
+      box-shadow: 0 4px 12px rgba(255, 209, 102, 0.8);
+      transition: background 0.25s ease;">
+    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">⬇️ Download Resume PDF</a>
+  </button>
+</div>
   </div>
 </div>
 """, unsafe_allow_html=True)

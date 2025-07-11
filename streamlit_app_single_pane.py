@@ -1506,15 +1506,6 @@ st.markdown("""
       </div>
     </div>
 
-<div class="skill-card">
-      <div class="skill-title">Other Knowledge</div>
-      <div class="icon-set">
-        <img src="https://img.icons8.com/ios-filled/50/data-configuration.png" title="Data Config">
-        <img src="https://img.icons8.com/ios-filled/50/api-settings.png" title="API Settings">
-        <img src="https://img.icons8.com/ios-filled/50/process.png" title="Process Flow">
-      </div>
-    </div>
-
   </div>
 </div>
 """, unsafe_allow_html=True)

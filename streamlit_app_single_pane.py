@@ -947,15 +947,8 @@ st.markdown(
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
           <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
           <div class="exp-card-company">Tech Insights Inc, Canada</div>
-          <div class="exp-card-date">May 2025 – Present</div>
+          <div class="exp-card-date">May 2025 – Present</div>          
         </div>
-        with st.expander("Click here to view responsibilities"):
-                st.markdown("""
-                - Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)
-                - Automated ETL workflows supporting compliance and audit readiness
-                - Interactive dashboards using Power BI and AWS QuickSight
-                - Implemented validation checkpoints for enhanced data integrity
-                """)
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
           <div class="exp-card-title">Senior Consultant</div>
@@ -977,6 +970,106 @@ st.markdown(
     </div>
     </div>
     """, unsafe_allow_html=True)
+
+
+st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
+
+with st.container():
+    st.markdown("""
+    <style>
+    .exp-card {
+        background-color: #2c3e50;
+        border-radius: 12px;
+        padding: 20px;
+        color: white;
+        box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        margin-bottom: 20px;
+    }
+    .exp-card-logo {
+        width: 48px;
+        margin-bottom: 12px;
+    }
+    .exp-card-title {
+        font-weight: bold;
+        font-size: 1.1rem;
+        color: #ffd166;
+    }
+    .exp-card-company, .exp-card-date {
+        font-size: 0.9rem;
+        margin-top: 4px;
+    }
+    </style>
+    """, unsafe_allow_html=True)
+
+    st.markdown('<div class="section-title" style="background:#34495E; padding: 12px; border-radius: 8px; font-size: 1.2rem; color: white;">Professional Experience</div>', unsafe_allow_html=True)
+
+    with st.container():
+        with st.container():
+            st.markdown("""
+            <div class="exp-card">
+                <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+                <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
+                <div class="exp-card-company">Tech Insights Inc, Canada</div>
+                <div class="exp-card-date">May 2025 – Present</div>
+            </div>
+            """, unsafe_allow_html=True)
+            with st.expander("Click here to view responsibilities"):
+                st.markdown("""
+                - Developing scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena)
+                - Automated ETL workflows supporting compliance and audit readiness
+                - Interactive dashboards using Power BI and AWS QuickSight
+                - Implemented validation checkpoints for enhanced data integrity
+                """)
+
+        with st.container():
+            st.markdown("""
+            <div class="exp-card">
+                <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+                <div class="exp-card-title">Senior Consultant</div>
+                <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+                <div class="exp-card-date">October 2021 – August 2024</div>
+            </div>
+            """, unsafe_allow_html=True)
+            with st.expander("Click here to view responsibilities"):
+                st.markdown("""
+                - Worked as Functional Analyst for Personal Lines insurance projects
+                - Participated in 3 Amigos sessions for requirement clarification
+                - Developed automated dashboard to improve delivery efficiency
+                - Used AWS EC2, DynamoDB, and S3 for cloud integration
+                """)
+
+        with st.container():
+            st.markdown("""
+            <div class="exp-card">
+                <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+                <div class="exp-card-title">Consultant</div>
+                <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+                <div class="exp-card-date">May 2018 – October 2021</div>
+            </div>
+            """, unsafe_allow_html=True)
+            with st.expander("Click here to view responsibilities"):
+                st.markdown("""
+                - End-to-end testing of Guidewire-based Worker Compensation policies
+                - Created automation tools for real-time failure alerts
+                - Mentored QA team and led agile initiatives
+                """)
+
+        with st.container():
+            st.markdown("""
+            <div class="exp-card">
+                <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+                <div class="exp-card-title">Associate</div>
+                <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+                <div class="exp-card-date">Sep 2013 – May 2018</div>
+            </div>
+            """, unsafe_allow_html=True)
+            with st.expander("Click here to view responsibilities"):
+                st.markdown("""
+                - Specialized in DB2 database and batch processing testing
+                - Managed key metrics for $2M healthcare IT projects
+                - Led test environment setup and delivered KT sessions
+                """)
+
 
 
 st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)

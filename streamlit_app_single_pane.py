@@ -315,6 +315,14 @@ st.markdown("""
   box-shadow: 0 1px 8px rgba(44,62,80,0.09);
   border: 1.5px solid #eee;
 }
+.exp-card a.toggle-link {
+      display: block;
+      color: #ffd166;
+      margin-top: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: right;
+}
 .exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
 .exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
 .exp-card-date { color: #ffd166; font-size: 0.98rem;}

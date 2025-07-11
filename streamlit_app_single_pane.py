@@ -994,12 +994,14 @@ st.markdown("""
 
 <script>
 function toggleCardContent(index) {
-  var content = document.getElementById("collapsible-" + index);
-  if (content.style.display === "block") {
-    content.style.display = "none";
-  } else {
-    content.style.display = "block";
-  }
+  var contents = document.querySelectorAll('.collapsible-content');
+  contents.forEach(function(content, i) {
+    if (i + 1 === index) {
+      content.style.display = content.style.display === "block" ? "none" : "block";
+    } else {
+      content.style.display = "none";
+    }
+  });
 }
 </script>
 

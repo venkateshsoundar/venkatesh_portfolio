@@ -1150,7 +1150,7 @@ st.markdown("""
   background: linear-gradient(120deg, #22304A 0%, #324665 100%);
   border-radius: 28px;
   padding: 36px 18px 32px 18px;
-  margin-bottom: 36px;
+  margin-bottom: 22px;
   box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
 }
 .skills-header-title {

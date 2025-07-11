@@ -977,8 +977,7 @@ st.markdown(
           <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
           <div class="exp-card-date">May 2018 – October 2021</div>
           <div class="exp-responsibilities-box">
-            Conducted end-to-end testing for Guidewire-based Worker Compensation policies. Created automation tools for alerting failures in real-time and mentored the QA team while leading agile practices to meet sprint targets.
-          </div>
+            Led end-to-end testing for Guidewire-based Workers’ Compensation policies, ensuring comprehensive coverage across business scenarios and system workflows. Developed custom automation tools to enable real-time failure alerts and issue tracking, significantly improving test efficiency. Acted as a mentor to QA team members and drove agile ceremonies, consistently meeting sprint goals and delivery timelines.          </div>
       </div>
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
@@ -986,8 +985,7 @@ st.markdown(
           <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
           <div class="exp-card-date">Sep 2013 – May 2018</div>
           <div class="exp-responsibilities-box">
-            Specialized in DB2 database and batch processing testing for healthcare IT projects. Managed key metrics for $2M initiatives, led test environment setup, and delivered knowledge transfer sessions to ensure smooth project transitions.
-          </div>
+            Demonstrated expertise in DB2 database and batch processing validation for enterprise-scale healthcare IT projects. Managed end-to-end test environment setup and execution, monitored critical KPIs for initiatives exceeding $2M in scope, and led structured knowledge transfer sessions to ensure continuity and operational readiness across project teams.          </div>
       </div>
     </div>
     </div>

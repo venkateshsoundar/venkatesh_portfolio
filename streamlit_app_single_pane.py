@@ -409,6 +409,58 @@ st.markdown("""
     width: 100%;
   }
 }
+
+<style>
+.exp-card {
+    background: #2C3E50;
+    color: #ECF0F1;
+    padding: 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+.exp-card-logo {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 12px;
+    border-radius: 8px;
+}
+.exp-card-title {
+    font-weight: 700;
+    font-size: 16px;
+    margin-bottom: 4px;
+    color: #F9E79F;
+}
+.exp-card-company {
+    font-size: 14px;
+    color: #D5D8DC;
+}
+.exp-card-date {
+    font-size: 13px;
+    color: #F7DC6F;
+    margin-bottom: 16px;
+}
+.exp-responsibilities-box {
+    background-color: #34495E;
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-top: 14px;
+    color: #ECF0F1;
+    font-size: 14px;
+    line-height: 1.6;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+.exp-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+.exp-responsibilities {
+    font-style: italic;
+    font-size: 13px;  /* smaller size */
+    color: #ECF0F1;   /* light grey for readability */
+    line-height: 1.5;
+}
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -971,62 +1023,6 @@ st.markdown(
     </div>
     """, unsafe_allow_html=True)
 
-
-# Custom CSS styles
-st.markdown("""
-<style>
-.exp-card {
-    background: #2C3E50;
-    color: #ECF0F1;
-    padding: 20px;
-    border-radius: 12px;
-    margin-bottom: 20px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-}
-.exp-card-logo {
-    width: 50px;
-    height: 50px;
-    margin-bottom: 12px;
-    border-radius: 8px;
-}
-.exp-card-title {
-    font-weight: 700;
-    font-size: 16px;
-    margin-bottom: 4px;
-    color: #F9E79F;
-}
-.exp-card-company {
-    font-size: 14px;
-    color: #D5D8DC;
-}
-.exp-card-date {
-    font-size: 13px;
-    color: #F7DC6F;
-    margin-bottom: 16px;
-}
-.exp-responsibilities-box {
-    background-color: #34495E;
-    padding: 12px 16px;
-    border-radius: 10px;
-    margin-top: 14px;
-    color: #ECF0F1;
-    font-size: 14px;
-    line-height: 1.6;
-    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
-}
-.exp-cards-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-.exp-responsibilities {
-    font-style: italic;
-    font-size: 13px;  /* smaller size */
-    color: #ECF0F1;   /* light grey for readability */
-    line-height: 1.5;
-}
-}
-</style>
-""", unsafe_allow_html=True)
 
 # Section anchor and experience cards
 st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)

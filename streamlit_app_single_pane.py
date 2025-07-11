@@ -977,61 +977,62 @@ st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_htm
 
 st.markdown(
     """  
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-timeline" style="display: flex; flex-direction: column; gap: 20px; padding: 20px; background: #2C3E50; border-radius: 10px; max-height: 600px; overflow-y: auto;">
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Professional Experience</div>
+      <div class="exp-timeline" style="display: flex; flex-direction: column; gap: 20px; padding: 20px; background: #2C3E50; border-radius: 10px; max-height: 600px; overflow-y: auto;">
 
-    <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
-      <div>
-        <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Software Developer Intern - Data Engineering</div>
-        <div style="color: #D6DBDF;">Tech Insights Inc, Canada</div>
-        <div style="color: #F7DC6F; margin-bottom: 8px;">May 2025 – Present</div>
-        <div style="color: #ECF0F1;">
-          Developing a scalable Data Lineage framework using AWS (Glue, Lambda, S3, Athena), automating ETL workflows to support compliance and audit readiness. Built interactive dashboards with Power BI and AWS QuickSight, and implemented validation checkpoints to ensure data integrity.
+        <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
+          <div>
+            <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Software Developer Intern - Data Engineering</div>
+            <div style="color: #D6DBDF;">Tech Insights Inc, Canada</div>
+            <div style="color: #F7DC6F; margin-bottom: 8px;">May 2025 – Present</div>
+            <div style="color: #ECF0F1;">
+              Developing a scalable Data Lineage framework using AWS (Glue, Lambda, S3, Athena), automating ETL workflows to support compliance and audit readiness. Built interactive dashboards with Power BI and AWS QuickSight, and implemented validation checkpoints to ensure data integrity.
+            </div>
+          </div>
         </div>
+
+        <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
+          <div>
+            <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Senior Consultant</div>
+            <div style="color: #D6DBDF;">Deloitte Consulting India Private Limited, India</div>
+            <div style="color: #F7DC6F; margin-bottom: 8px;">October 2021 – August 2024</div>
+            <div style="color: #ECF0F1;">
+              Functioned as a Business Analyst in Personal Lines insurance projects, actively engaging in 3 Amigos discussions to clarify requirements and define acceptance criteria. Developed an automated dashboard to reduce manual reporting effort and applied AWS cloud services including EC2, DynamoDB, and S3 for cloud-based components.
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
+          <div>
+            <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Consultant</div>
+            <div style="color: #D6DBDF;">Capgemini Technology Services India Private Limited, India</div>
+            <div style="color: #F7DC6F; margin-bottom: 8px;">May 2018 – October 2021</div>
+            <div style="color: #ECF0F1;">
+              Conducted end-to-end testing for Guidewire-based Worker Compensation policies. Created automation tools for alerting failures in real-time and mentored the QA team while leading agile practices to meet sprint targets.
+            </div>
+          </div>
+        </div>
+
+        <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
+          <div>
+            <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Associate</div>
+            <div style="color: #D6DBDF;">Cognizant Technology Solutions India Private Limited, India</div>
+            <div style="color: #F7DC6F; margin-bottom: 8px;">Sep 2013 – May 2018</div>
+            <div style="color: #ECF0F1;">
+              Specialized in DB2 database and batch processing testing for healthcare IT projects. Managed key metrics for $2M initiatives, led test environment setup, and delivered knowledge transfer sessions to ensure smooth project transitions.
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
-
-    <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
-      <div>
-        <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Senior Consultant</div>
-        <div style="color: #D6DBDF;">Deloitte Consulting India Private Limited, India</div>
-        <div style="color: #F7DC6F; margin-bottom: 8px;">October 2021 – August 2024</div>
-        <div style="color: #ECF0F1;">
-          Functioned as a Business Analyst in Personal Lines insurance projects, actively engaging in 3 Amigos discussions to clarify requirements and define acceptance criteria. Developed an automated dashboard to reduce manual reporting effort and applied AWS cloud services including EC2, DynamoDB, and S3 for cloud-based components.
-        </div>
-      </div>
-    </div>
-
-    <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
-      <div>
-        <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Consultant</div>
-        <div style="color: #D6DBDF;">Capgemini Technology Services India Private Limited, India</div>
-        <div style="color: #F7DC6F; margin-bottom: 8px;">May 2018 – October 2021</div>
-        <div style="color: #ECF0F1;">
-          Conducted end-to-end testing for Guidewire-based Worker Compensation policies. Created automation tools for alerting failures in real-time and mentored the QA team while leading agile practices to meet sprint targets.
-        </div>
-      </div>
-    </div>
-
-    <div class="exp-entry" style="display: flex; gap: 20px; align-items: flex-start; background: #34495E; padding: 20px; border-radius: 12px;">
-      <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" style="width: 60px; height: 60px; border-radius: 8px;"/>
-      <div>
-        <div style="font-weight: bold; font-size: 18px; color: #F8F9F9;">Associate</div>
-        <div style="color: #D6DBDF;">Cognizant Technology Solutions India Private Limited, India</div>
-        <div style="color: #F7DC6F; margin-bottom: 8px;">Sep 2013 – May 2018</div>
-        <div style="color: #ECF0F1;">
-          Specialized in DB2 database and batch processing testing for healthcare IT projects. Managed key metrics for $2M initiatives, led test environment setup, and delivered knowledge transfer sessions to ensure smooth project transitions.
-        </div>
-      </div>
-    </div>
-
-  </div>
-</div>
     """, unsafe_allow_html=True)
+
 
 
 

@@ -1571,7 +1571,7 @@ st.markdown("""
   <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skill-grid">
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Programming</div>
       <div class="skill-list">
         <ul>
@@ -1583,7 +1583,7 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Cloud & Data</div>
       <div class="skill-list">
         <ul>
@@ -1594,7 +1594,7 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Data Viz & BI</div>
       <div class="skill-list">
         <ul>
@@ -1605,7 +1605,7 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Dev Tools</div>
       <div class="skill-list">
         <ul>
@@ -1614,7 +1614,7 @@ st.markdown("""
       </div>
     </div>
 
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Project Management</div>
       <div class="skill-list">
         <ul>
@@ -1624,8 +1624,7 @@ st.markdown("""
         </ul>
       </div>
     </div>
-
-    <div class="skill-card">
+<div class="skill-card">
       <div class="skill-title">Insurance & QA</div>
       <div class="skill-list">
         <ul>

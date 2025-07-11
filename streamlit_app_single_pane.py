@@ -937,7 +937,7 @@ st.markdown(
       <div class="exp-cards-grid">
         <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Software Developer Intern</div>
+          <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
           <div class="exp-card-company">Tech Insights Inc, Canada</div>
           <div class="exp-card-date">May 2025 – Present</div>
         </div>

@@ -814,7 +814,7 @@ st.markdown("""
     <div style="text-align: center; margin-top: 20px;">
   <button style="
       background: #ffd166; 
-      color: #22304A; 
+      color: #FFF9C4; 
       font-weight: 700; 
       border-radius: 14px; 
       padding: 14px 36px; 

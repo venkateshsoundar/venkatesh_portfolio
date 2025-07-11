@@ -1577,7 +1577,7 @@ st.markdown("""
 }
 </style>
 
-<div class="skills-section">
+<div class="skills-section hover-zoom">
   <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skill-grid">
 
@@ -1638,4 +1638,3 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-

@@ -637,8 +637,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-  
-
 
 st.markdown('<a name="about" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown("""
@@ -982,7 +980,7 @@ st.markdown("""
   border-radius: 18px;
   box-shadow: 0 4px 28px rgba(44,62,80,0.14);
   padding: 22px 18px 28px 18px;
-  margin-bottom: 32px;
+  margin-bottom: 22px;
   /* Remove max-width and margin auto for full width like other sections */
 }
 .section-title {

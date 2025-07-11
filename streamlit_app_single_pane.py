@@ -940,6 +940,13 @@ st.markdown(
           <div class="exp-card-title">Software Developer Intern</div>
           <div class="exp-card-company">Tech Insights Inc, Canada</div>
           <div class="exp-card-date">May 2025 – Present</div>
+          <div class="exp-card-responsibilities">
+        <p>• Developing a scalable Data Lineage framework using AWS services (Glue, Lambda, S3, Athena) to enhance visibility across the data lifecycle.</p>
+        <p>• Automated ETL workflows to trace data origin, transformations, and usage, supporting compliance and audit readiness.</p>
+        <p>• Integrated metadata tracking and schema evolution to improve transparency, data governance, and operational efficiency.</p>
+        <p>• Collaborated with data engineers and business stakeholders to define lineage use cases and deliver interactive dashboards using Power BI and AWS Quick Sight.</p>
+        <p>• Strengthened data integrity and trust across analytics pipelines by implementing quality validation at key checkpoints.</p>
+          </div>
         </div>
       <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>

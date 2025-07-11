@@ -1387,3 +1387,107 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
+
+st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.skills-clean-section {
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  border-radius: 24px;
+  padding: 32px 24px;
+  margin-bottom: 36px;
+  box-shadow: 0 6px 24px rgba(44,62,80,0.15);
+}
+.skills-title {
+  text-align: center;
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #ffd166;
+  margin-bottom: 28px;
+}
+.skill-category {
+  margin-bottom: 26px;
+}
+.skill-category-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #ADD8E6;
+  margin-bottom: 12px;
+}
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+}
+.skill-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 88px;
+}
+.skill-box img {
+  width: 48px;
+  height: 48px;
+  background: #fff;
+  border-radius: 10px;
+  padding: 6px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.skill-box span {
+  font-size: 0.85rem;
+  margin-top: 6px;
+  color: #fff;
+  text-align: center;
+}
+</style>
+
+<div class="skills-clean-section">
+  <div class="skills-title">Skills & Tools</div>
+
+  <div class="skill-category">
+    <div class="skill-category-title">Programming Languages</div>
+    <div class="skill-grid">
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/python.png"><span>Python</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/R.png"><span>R</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/java.png"><span>Java</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/excelvba.png"><span>Excel VBA</span></div>
+    </div>
+  </div>
+
+  <div class="skill-category">
+    <div class="skill-category-title">Cloud & Databases</div>
+    <div class="skill-grid">
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/aws.png"><span>AWS</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/mysqllogo.png"><span>MySQL</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/oracle.png"><span>Oracle</span></div>
+    </div>
+  </div>
+
+  <div class="skill-category">
+    <div class="skill-category-title">BI & Visualization</div>
+    <div class="skill-grid">
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/powerBI.png"><span>Power BI</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/tableau.png"><span>Tableau</span></div>
+    </div>
+  </div>
+
+  <div class="skill-category">
+    <div class="skill-category-title">Project & Dev Tools</div>
+    <div class="skill-grid">
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/jira.png"><span>Jira</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/HPALM.png"><span>HP ALM</span></div>
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/git.png"><span>Git</span></div>
+    </div>
+  </div>
+
+  <div class="skill-category">
+    <div class="skill-category-title">Insurance & QA</div>
+    <div class="skill-grid">
+      <div class="skill-box"><img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/guidewire.png"><span>Guidewire</span></div>
+    </div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+

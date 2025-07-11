@@ -1509,3 +1509,135 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+
+st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.skills-section {
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  border-radius: 28px;
+  padding: 36px 18px 32px 18px;
+  margin-bottom: 36px;
+  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
+}
+.skills-header-title {
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: #ffd166;
+  background: #2C3E50;
+  border-radius: 10px;
+  padding: 12px 0;
+  margin-bottom: 22px;
+  text-align: center;
+  box-shadow: 0 1px 8px #22304A22;
+}
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+.skill-card {
+  background: #1F2A44;
+  color: white;
+  width: 220px;
+  padding: 20px 16px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s;
+}
+.skill-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(255,209,102,0.15), 0 6px 16px rgba(44,62,80,0.12);
+}
+.skill-title {
+  font-size: 1.1rem;
+  color: #ffd166;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+.skill-list {
+  font-size: 0.9rem;
+  line-height: 1.5;
+  text-align: left;
+  padding-left: 10px;
+}
+</style>
+
+<div class="skills-section">
+  <div class="skills-header-title">Core Skills and Tools</div>
+  <div class="skill-grid">
+
+    <div class="skill-card">
+      <div class="skill-title">Programming</div>
+      <div class="skill-list">
+        <ul>
+          <li>Python</li>
+          <li>R</li>
+          <li>Java</li>
+          <li>Excel VBA</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Cloud & Data</div>
+      <div class="skill-list">
+        <ul>
+          <li>AWS</li>
+          <li>MySQL</li>
+          <li>Oracle</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Data Viz & BI</div>
+      <div class="skill-list">
+        <ul>
+          <li>Power BI</li>
+          <li>Tableau</li>
+          <li>Excel Dashboards</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Dev Tools</div>
+      <div class="skill-list">
+        <ul>
+          <li>Git</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Project Management</div>
+      <div class="skill-list">
+        <ul>
+          <li>JIRA</li>
+          <li>HP ALM</li>
+          <li>Rally</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="skill-card">
+      <div class="skill-title">Insurance & QA</div>
+      <div class="skill-list">
+        <ul>
+          <li>Guidewire</li>
+          <li>PolicyCenter</li>
+          <li>Testing Frameworks</li>
+        </ul>
+      </div>
+    </div>
+
+
+  </div>
+</div>
+""", unsafe_allow_html=True)
+

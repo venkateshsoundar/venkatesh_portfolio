@@ -1574,67 +1574,67 @@ st.markdown("""
   <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skill-grid">
 
-    <div class="skill-card">
-      <div class="skill-title">Programming Languages</div>
-      <div class="skill-list">
-        <p>Python</p>
-        <p>R</p>
-        <p>Java</p>
-        <p>Excel VBA</p>
-      </div>
-    </div>
+<div class="skill-card">
+  <div class="skill-title">Programming Languages</div>
+  <div class="skill-list">
+    <p>Python</p>
+    <p>R</p>
+    <p>Java</p>
+    <p>Excel VBA</p>
+  </div>
+</div>
 
-    <div class="skill-card">
-      <div class="skill-title">Cloud & Data</div>
-      <div class="skill-list">
-        <p>AWS</p>
-        <p>MySQL</p>
-        <p>Oracle</p>
-      </div>
-    </div>
+<div class="skill-card">
+  <div class="skill-title">Cloud & Data</div>
+  <div class="skill-list">
+    <p>AWS</p>
+    <p>MySQL</p>
+    <p>Oracle</p>
+  </div>
+</div>
 
-    <div class="skill-card">
-      <div class="skill-title">Data Viz & BI</div>
-      <div class="skill-list">
-        <p>Power BI</p>
-        <p>Tableau</p>
-        <p>Excel Dashboards</p>
-      </div>
-    </div>
+<div class="skill-card">
+  <div class="skill-title">Data Viz & BI</div>
+  <div class="skill-list">
+    <p>Power BI</p>
+    <p>Tableau</p>
+    <p>Excel Dashboards</p>
+  </div>
+</div>
 
-    <div class="skill-card">
-      <div class="skill-title">Dev Tools</div>
-      <div class="skill-list">
-        <p>Git</p>
-      </div>
-    </div>
+<div class="skill-card">
+  <div class="skill-title">Dev Tools</div>
+  <div class="skill-list">
+    <p>Git</p>
+  </div>
+</div>
 
-    <div class="skill-card">
-      <div class="skill-title">Project Management</div>
-      <div class="skill-list">
-        <p>JIRA</p>
-        <p>HP ALM</p>
-        <p>Rally</p>
-      </div>
-    </div>
+<div class="skill-card">
+  <div class="skill-title">Project Management</div>
+  <div class="skill-list">
+    <p>JIRA</p>
+    <p>HP ALM</p>
+    <p>Rally</p>
+  </div>
+</div>
 
-    <div class="skill-card">
-      <div class="skill-title">Insurance & QA</div>
-      <div class="skill-list">
-        <p>Guidewire</p>
-        <p>PolicyCenter</p>
-        <p>Testing Frameworks</p>
-      </div>
-    </div>
+<div class="skill-card">
+  <div class="skill-title">Insurance & QA</div>
+  <div class="skill-list">
+    <p>Guidewire</p>
+    <p>PolicyCenter</p>
+    <p>Testing Frameworks</p>
+  </div>
+</div>
 
-    <div class="skill-card">
-      <div class="skill-title">Other Knowledge</div>
-      <div class="skill-list">
-        <p>API Integration</p>
-        <p>ETL Workflows</p>
-        <p>Process Automation</p>
-      </div>
-    </div>
+<div class="skill-card">
+  <div class="skill-title">Other Knowledge</div>
+  <div class="skill-list">
+    <p>API Integration</p>
+    <p>ETL Workflows</p>
+    <p>Process Automation</p>
+  </div>
+</div>
 
   </div>
 </div>

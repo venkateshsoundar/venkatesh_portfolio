@@ -13,7 +13,7 @@ st.markdown("""
 <style>
 
 .navbar-spacer {
-    height: 20px;  /* Adjust this as needed */
+    height: 10px;  /* Adjust this as needed */
 }
 .block-container {
     padding-top: 5 !important;

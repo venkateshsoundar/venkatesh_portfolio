@@ -36,7 +36,7 @@ body {
     padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
-        }
+}
 
 /* Flex styling for links */
 .navbar {
@@ -103,43 +103,51 @@ body {
         flex-direction: column;
         align-items: center;
         gap: 14px;
+        display: none; /* Hide navbar links by default on mobile */
+        width: 100%;
+        background: #1F2A44;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        border-radius: 0 0 18px 18px;
     }
-
+    .navbar.show {
+        display: flex; /* Show navbar links when toggled */
+    }
     .navbar a {
         width: 100%;
         text-align: center;
-        padding: 10px;
+        padding: 10px 0;
         font-size: 1rem;
+    }
+    .mobile-nav-toggle {
+        display: block;
+        background: #1F2A44;
+        color: #ffd166;
+        font-weight: bold;
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: none;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: right;
     }
 }
 
-@media screen and (max-width: 768px) {
-  .navbar {
-    display: none; /* Hide default navbar on small screens */
-  }
-  .mobile-nav-toggle {
-    display: block;
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 10px;
-    background: #1F2A44;
-    color: #ffd166;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-}
+/* Hide toggle button on desktop */
 @media screen and (min-width: 769px) {
-  .mobile-nav-toggle-container {
-    display: none; /* Hide toggle for desktop */
-  }
+    .mobile-nav-toggle {
+        display: none;
+    }
 }
 
 </style>
 
 <!-- Sticky Nav HTML -->
 <div class="navbar-container">
-  <div class="navbar">
+  <button class="mobile-nav-toggle" onclick="toggleMenu()">☰ Menu</button>
+  <div class="navbar" id="navbarLinks">
     <a href="#about">About Me</a>
     <a href="#education">Education</a>
     <a href="#experience">Experience</a>
@@ -153,16 +161,19 @@ body {
 
 <!-- Spacer so content isn't overlapped -->
 <div class="sticky-spacer"></div>
+
+<script>
+function toggleMenu() {
+  const navbar = document.getElementById("navbarLinks");
+  if (navbar.classList.contains("show")) {
+    navbar.classList.remove("show");
+  } else {
+    navbar.classList.add("show");
+  }
+}
+</script>
 """, unsafe_allow_html=True)
 
-st.markdown("""
-<style>
-/* Prevent sections from being hidden behind the sticky nav */
-.section-anchor {
-  scroll-margin-top: 160px;  /* Adjust based on navbar + Streamlit top padding */
-}
-</style>
-""", unsafe_allow_html=True)
 
 st.markdown("""
 <style>
@@ -1435,115 +1446,5 @@ st.markdown("""
 
 <div style='text-align: center; font-size: 14px; color: grey;'>
     © 2025 Balu Soundararajan. All rights reserved.
-</div>
-""", unsafe_allow_html=True)
-
-
-
-# Use session state to keep track if menu is open or closed
-if "menu_open" not in st.session_state:
-    st.session_state.menu_open = False
-
-# CSS for navbar and toggle button
-st.markdown("""
-<style>
-/* Navbar container */
-.navbar-container {
-    background: #1F2A44;
-    border-radius: 0 0 18px 18px;
-    padding: 0;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 1000;
-}
-
-/* Navbar links */
-.navbar {
-    display: flex;
-    gap: 28px;
-    justify-content: center;
-    padding: 12px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-}
-
-/* Nav links style */
-.navbar a {
-    color: #ffd166;
-    font-weight: bold;
-    font-size: 1.08rem;
-    text-decoration: none;
-    padding: 7px 22px;
-    border-radius: 8px;
-    transition: color 0.18s, background 0.18s;
-    white-space: nowrap;
-}
-.navbar a:hover {
-    background: #ffd16633;
-    color: #fff;
-}
-
-/* Hamburger toggle button */
-.mobile-nav-toggle {
-    display: none;
-    background: #1F2A44;
-    border: none;
-    color: #ffd166;
-    font-size: 1.8rem;
-    padding: 12px 20px;
-    cursor: pointer;
-    border-radius: 10px;
-}
-
-/* Responsive Styles */
-@media screen and (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        gap: 14px;
-        padding: 10px 0;
-        display: none;  /* Hidden by default on mobile */
-        width: 100%;
-    }
-    .navbar.show {
-        display: flex; /* Show when toggle is on */
-    }
-    .mobile-nav-toggle {
-        display: block;
-        width: 100%;
-        text-align: right;
-        margin-bottom: 10px;
-    }
-    .navbar a {
-        width: 100%;
-        text-align: center;
-        padding: 14px 0;
-        font-size: 1.1rem;
-    }
-}
-</style>
-""", unsafe_allow_html=True)
-
-
-# Hamburger toggle button (only visible on mobile)
-toggle_label = "☰ Menu" if not st.session_state.menu_open else "✕ Close"
-if st.button(toggle_label, key="toggle_menu", help="Toggle navigation menu"):
-    st.session_state.menu_open = not st.session_state.menu_open
-
-
-# Navbar links container - add class 'show' if menu_open is True
-navbar_class = "navbar show" if st.session_state.menu_open else "navbar"
-
-st.markdown(f"""
-<div class="navbar-container">
-  <nav class="{navbar_class}">
-    <a href="#about">About Me</a>
-    <a href="#education">Education</a>
-    <a href="#experience">Experience</a>
-    <a href="#certifications">Certifications</a>
-    <a href="#recognitions">Recognitions</a>
-    <a href="#projects">Projects Gallery</a>
-    <a href="#skills">Skills</a>
-    <a href="#buddybot">Buddy Bot</a>
-  </nav>
 </div>
 """, unsafe_allow_html=True)

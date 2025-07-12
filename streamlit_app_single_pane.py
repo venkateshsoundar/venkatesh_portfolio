@@ -1410,26 +1410,27 @@ div[data-testid="stChatMessageContent"] {
 
 
 
-chat_container = st.container()
-with chat_container:
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "            
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            try:
-                response = client.chat.completions.create(
-                    model="deepseek/deepseek-chat:free",
-                    messages=[{"role": "system", "content": prompt}]
-                )
-                reply = response.choices[0].message.content
-                st.chat_message("assistant").write(reply)
-            except Exception as e:
-                st.error(f"API error: {e}")
+
+
+user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+
+if user_input:
+    st.chat_message("user").write(user_input)
+    prompt = (
+        "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
+        "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "            
+        + user_input
+    )
+    with st.spinner("Assistant is typing..."):
+        try:
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat:free",
+                messages=[{"role": "system", "content": prompt}]
+            )
+            reply = response.choices[0].message.content
+            st.chat_message("assistant").write(reply)
+        except Exception as e:
+            st.error(f"API error: {e}")
 
 
 

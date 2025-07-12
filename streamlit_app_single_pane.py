@@ -1387,7 +1387,8 @@ st.markdown(
 )
   
 api_key = st.secrets["DEEPSEEK_API_KEY"]
-openai.api_key = api_key
+client = OpenAI(api_key=api_key)
+#openai.api_key = api_key
 
 st.markdown("""
 <style>

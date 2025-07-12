@@ -258,7 +258,7 @@ st.markdown("""
   width: 160px;
   height: 200px;
   object-fit: cover;
-  border-radius: 50%;
+  border-radius: 0%;
   border: 2px solid #fff;
   box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
   position: absolute;
@@ -599,8 +599,8 @@ st.markdown("""
 /* Square profile pic with animation */
 .profile-pic-square {
     width: 180px;
-    height: 180px;
-    border-radius: 20px;
+    height: 200px;
+    border-radius: 0px;
     object-fit: cover;
     border: 4px solid #ffd166;
     box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);

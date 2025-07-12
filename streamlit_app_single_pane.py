@@ -13,19 +13,19 @@ st.markdown("""
 <style>
 /* Remove padding/margin from Streamlit container */
 .block-container, .main, .stApp {
-    padding: 0 !important;
+    padding: 5 !important;
     margin: 5 !important;
 }
 
 /* Remove padding from body too */
 body {
-    padding: 0 !important;
+    padding: 5 !important;
     margin: 5 !important;
 }
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 0rem;
+    top: 0;
     left: 0;
     width: 100vw;  /* Ensure full viewport width */
     z-index: 1000;

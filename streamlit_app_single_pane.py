@@ -743,9 +743,9 @@ st.markdown("""
   z-index: 1;
 }
 .hero-pic-glow {
-  width: 300px;
-  height: 300px;
-  border-radius: 20%;
+  width: 200px;
+  height: 200px;
+  border-radius: 12%;
   margin-bottom: 17px;
   display: flex;
   align-items: center;

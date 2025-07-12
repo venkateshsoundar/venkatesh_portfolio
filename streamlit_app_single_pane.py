@@ -927,8 +927,7 @@ st.markdown("""
       <div class="hero-role">Software Development Intern<br>Data Engineering</div>
       <div class="hero-location">Calgary, AB, Canada</div>
     </div>
-  </div>
-  </div>
+  </div>  <!-- moved this closing div here -->
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">
@@ -963,6 +962,7 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 st.markdown('<a name="education" class="section-anchor"></a>', unsafe_allow_html=True)
 # --- Spacer before next section ---

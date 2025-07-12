@@ -11,10 +11,6 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
-
-.navbar-spacer {
-    height: 10px;  /* Adjust this as needed */
-}
 .block-container {
     padding-top: 5 !important;
     margin-top: 5 !important;
@@ -44,6 +40,7 @@ body {
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -64,6 +61,11 @@ body {
     color: #fff;
 }
 
+/* Push content down to not be hidden */
+.sticky-spacer {
+    height: 10px;
+}
+
 /* Flex styling for links - desktop default */
 .navbar {
     display: flex;
@@ -72,6 +74,7 @@ body {
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -145,7 +148,7 @@ body {
 </div>
 
 <!-- Spacer so content isn't overlapped -->
-<div class="navbar-spacer"></div>
+<div class="sticky-spacer"></div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
@@ -667,7 +670,7 @@ st.markdown(
       .welcome-card {{
         background: url("{gif_url}") center/cover no-repeat;
         border-radius: 16px;
-        padding: 2rem;
+        padding: 3rem;
         color: white;
         min-height: 180px;
         display: flex;

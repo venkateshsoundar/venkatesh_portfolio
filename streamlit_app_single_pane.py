@@ -108,6 +108,29 @@ body {
     }
 }
 
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    display: none; /* Hide full navbar on small screen */
+  }
+  .mobile-nav-toggle {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+    background: #1F2A44;
+    color: #ffd166;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .mobile-nav-toggle-container {
+    display: none; /* Hide toggle on desktop */
+  }
+}
+
+
 </style>
 
 <!-- Sticky Nav HTML -->
@@ -123,6 +146,23 @@ body {
     <a href="#skills">Buddy Bot</a>
   </div>
 </div>
+
+# Mobile Toggle Menu
+st.markdown('<div class="mobile-nav-toggle-container"><div class="mobile-nav-toggle">☰ Menu</div></div>', unsafe_allow_html=True)
+
+with st.expander("Navigation Menu", expanded=False):
+    col1, col2 = st.columns(2)
+    with col1:
+        st.markdown("- [About Me](#about)", unsafe_allow_html=True)
+        st.markdown("- [Education](#education)", unsafe_allow_html=True)
+        st.markdown("- [Experience](#experience)", unsafe_allow_html=True)
+        st.markdown("- [Certifications](#certifications)", unsafe_allow_html=True)
+    with col2:
+        st.markdown("- [Recognitions](#recognitions)", unsafe_allow_html=True)
+        st.markdown("- [Projects](#projects)", unsafe_allow_html=True)
+        st.markdown("- [Skills](#skills)", unsafe_allow_html=True)
+        st.markdown("- [Buddy Bot](#buddybot)", unsafe_allow_html=True)
+
 
 <!-- Spacer so content isn't overlapped -->
 <div class="sticky-spacer"></div>

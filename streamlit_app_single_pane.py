@@ -147,7 +147,7 @@ body {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
-    <a href="#skills">Buddy Bot</a>
+    <a href="#buddybot">Buddy Bot</a>
   </div>
 </div>
 
@@ -1332,7 +1332,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<a name="Buddy bot"></a>', unsafe_allow_html=True)
+st.markdown('<a name="buddybot"></a>', unsafe_allow_html=True)
 
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(

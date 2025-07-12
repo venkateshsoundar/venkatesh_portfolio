@@ -769,32 +769,55 @@ st.markdown("""
   box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
 }
 .hero-left {
-  flex: 1 1 0px;
-  min-width: 260px;
-  max-width: 340px;
-  background: linear-gradient(135deg, #253451 70%, #ffd16610 100%);
+  position: relative;  /* So children absolute position are relative to this */
+  flex: 0 0 340px;
+  height: 100%;
+  background: none;  /* Remove background gradient, image covers it */
   display: flex;
-  flex-direction: column;
-  justify-content: center;  /* Center content vertically */
-  padding: 0;  /* Remove padding */
-  height: 100%;  /* Make it fill the full height */
+  align-items: center;
+  justify-content: center;
+  padding: 0;
   box-shadow: 2px 0 18px 0 #ffd16609;
-  z-index: 1;
+  overflow: hidden;
 }
 
 .hero-pic-glow {
-  flex-grow: 1;
-  display: flex !important;
-  justify-content: center !important;
-  align-items: center;  /* Center image vertically */
-  margin: 0;  /* Remove bottom margin */
+  width: 100%;
+  height: 100%;
 }
 
 .hero-pic-glow img {
   width: 100% !important;
   height: 100% !important;
-  border-radius: 0; /* Remove radius if you want it to fill fully */
-  object-fit: cover !important; /* Fill container proportionally */
+  object-fit: cover !important;
+  border-radius: 0 !important;
+  display: block;
+}
+
+.hero-overlay-text {
+  position: absolute;
+  top: 50%;  /* Center vertically */
+  left: 50%; /* Center horizontally */
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+  padding: 12px 20px;
+  background-color: rgba(0, 0, 0, 0.5); /* semi-transparent dark bg for readability */
+  border-radius: 12px;
+  width: 90%; /* or less, to keep text boxed */
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  font-family: 'Poppins', sans-serif;
+}
+
+.hero-overlay-text h1 {
+  margin: 0;
+  font-size: 1.8rem;
+  font-weight: 700;
+}
+
+.hero-overlay-text p {
+  margin: 4px 0 0 0;
+  font-size: 1rem;
 }
 
 .hero-name {
@@ -891,12 +914,13 @@ st.markdown("""
 
 <div class="hero-card">
   <div class="hero-left">
-    <div class="hero-pic-glow">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
-    </div>
-    <div class="hero-name">Venkatesh<br>Soundararajan</div>
-    <div class="hero-role">Software Development Intern<br>Data Engineering</div>
-    <div class="hero-location">Calgary, AB, Canada</div>
+  <div class="hero-pic-glow">
+    <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" />
+  </div>
+  <div class="hero-overlay-text">
+    <h1>Venkatesh<br>Soundararajan</h1>
+    <p>Software Development Intern<br>Data Engineering<br><strong>Calgary, AB, Canada</strong></p>
+  </div>
   </div>
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>

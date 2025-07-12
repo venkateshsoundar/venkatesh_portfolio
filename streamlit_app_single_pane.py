@@ -111,9 +111,6 @@ body {
 </div>
 """, unsafe_allow_html=True)
 
-<div class="sticky-spacer"></div>
-""", unsafe_allow_html=True)
-
 st.markdown("""
 <style>
 /* Prevent sections from being hidden behind the sticky nav */

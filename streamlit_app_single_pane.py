@@ -1394,6 +1394,31 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1"
 )
 
+
+st.markdown("""
+<style>
+/* Limit chat message container height and enable scrolling */
+[data-testid="stChatMessageList"] {
+    max-height: 60vh;
+    overflow-y: auto;
+    margin-bottom: 12px;
+}
+
+/* Remove any sticky/fixed positioning on chat input */
+[data-testid="stChatInput"] {
+    position: relative !important;
+    bottom: auto !important;
+    margin-bottom: 0 !important;
+}
+
+/* Footer spacing */
+hr {
+    margin-top: 40px !important;
+}
+</style>
+""", unsafe_allow_html=True)
+
+
 st.markdown("""
 <style>
 /* Force assistant message text to black */

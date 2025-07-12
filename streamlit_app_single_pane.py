@@ -160,6 +160,24 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+# Toggle icon only for mobile
+st.markdown('<div class="mobile-nav-toggle-container"><div class="mobile-nav-toggle">☰ Menu</div></div>', unsafe_allow_html=True)
+
+with st.expander("Navigation Menu", expanded=False):
+    st.markdown("""
+    <div style="text-align: center;">
+        <a href="#about">About Me</a> • 
+        <a href="#education">Education</a> • 
+        <a href="#experience">Experience</a> • 
+        <a href="#certifications">Certifications</a> • 
+        <a href="#recognitions">Recognitions</a> • 
+        <a href="#projects">Projects Gallery</a> • 
+        <a href="#skills">Skills</a> • 
+        <a href="#buddybot">Buddy Bot</a>
+    </div>
+    """, unsafe_allow_html=True)
+
+
 st.markdown("""
 <style>
 .stApp {

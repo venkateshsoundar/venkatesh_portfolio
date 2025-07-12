@@ -15,11 +15,9 @@ st.markdown("""
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'G-9TDXL1JB47');
 </script>
 """, unsafe_allow_html=True)
-
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""

@@ -25,7 +25,7 @@ body {
     top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;
-    height: 100px;
+    height: 50px;
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);

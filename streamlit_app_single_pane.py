@@ -32,11 +32,10 @@ body {
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;
-    padding-top: 200px;
+    padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: -100px;
-    }
+        }
 
 /* Flex styling for links */
 .navbar {

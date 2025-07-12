@@ -256,7 +256,7 @@ st.markdown("""
 }
 .profile-pic-popout {
   width: 160px;
-  height: 160px;
+  height: 200px;
   object-fit: cover;
   border-radius: 50%;
   border: 2px solid #fff;

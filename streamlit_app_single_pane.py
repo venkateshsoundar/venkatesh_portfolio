@@ -789,14 +789,14 @@ st.markdown("""
   margin-bottom: 20px !important;
 }
 .hero-pic-glow img {
-  width: 250px !important;
-  height: 250px !important;
-  border-radius: 20px !important;
+  width: 300px !important;         /* increased from 250px */
+  height: 300px !important;        /* increased from 250px */
+  border-radius: 40px !important;  /* more rounded corners */
   border: none !important;
   background: none !important;
   box-shadow: none !important;
-  object-fit: contain !important;  /* changed from cover to contain to zoom out */
-  object-position: center !important; /* center the image */
+  object-fit: contain !important;
+  object-position: center !important;
 }
 .hero-name {
   color: #fff;

@@ -8,16 +8,15 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-st.markdown("""
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
+
   gtag('config', 'G-9TDXL1JB47');
 </script>
-""", unsafe_allow_html=True)
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
@@ -754,6 +753,7 @@ st.markdown("""
   display: flex;
   flex-direction: row;
   align-items: stretch;
+  gap: 0;
   background: linear-gradient(135deg, #253451 0%, #324665 100%);
   border-radius: 24px;
   box-shadow: 0 6px 26px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.08);
@@ -768,55 +768,57 @@ st.markdown("""
   box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
 }
 .hero-left {
-  position: relative; 
   flex: 1 1 0px;
   min-width: 260px;
   max-width: 340px;
-  height: 100%;
+  background: linear-gradient(135deg, #253451 70%, #ffd16610 100%);
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  background: none;
+  justify-content: flex-start;
+  padding: 38px 0 26px 0;
+  box-shadow: 2px 0 18px 0 #ffd16609;
+  z-index: 1;
+}
+.hero-pic-glow {
+  display: flex !important;
+  justify-content: center !important;
+  margin-bottom: 20px !important;
 }
 .hero-pic-glow img {
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  border-radius: 0 !important;
-  display: block;
+  width: 200px !important;
+  height: 200px !important;
+  border-radius: 50px !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  object-fit: contain !important;  /* changed from cover to contain to zoom out */
+  object-position: center !important; /* center the image */
 }
-.hero-text-overlay {
-  position: absolute;
-  bottom: 30px;
-  left: 50%;
-  transform: translateX(-50%);
-  text-align: center;
-  width: 90%;
-  pointer-events: none;
-  z-index: 10;
-}
-.hero-text-overlay .hero-name {
+.hero-name {
   color: #fff;
   font-size: 2.44rem;
   font-weight: 800;
-  margin: 0;
+  text-align: center;
+  margin: 6px 0 0 0;
   line-height: 1.17;
   letter-spacing: 0.01em;
-  text-shadow: 0 0 6px rgba(0,0,0,0.7);
 }
-.hero-text-overlay .hero-role {
+.hero-role {
   color: #ADD8E6;
   font-size: 1.03rem;
-  margin-top: 6px;
-  margin-bottom: 0;
-  font-weight: normal;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  text-align: center;
 }
-.hero-text-overlay .hero-location {
+.hero-location {
   color: #FFFFE0;
   font-weight: 600;
   margin-top: 8px;
   font-size: 1.01rem;
+  text-align: center;
 }
+
 .hero-right {
   flex: 2 1 0px;
   padding: 38px 38px 16px 38px;
@@ -878,47 +880,21 @@ st.markdown("""
   filter: invert(100%);
 }
 
-@media (max-width: 900px) {
-  .hero-card {
-    flex-direction: column;
-    align-items: center;
-  }
-  .hero-right, .hero-left {
-    max-width: 100%;
-    padding: 28px 8vw 12px;
-  }
-}
 
-button.resume-button {
-  background: #FFFFE0;
-  color: #22304A;
-  font-weight: 700;
-  border-radius: 14px;
-  padding: 14px 36px;
-  font-size: 1.1rem;
-  border: none;
-  cursor: pointer;
-  transition: background 0.25s ease;
-}
-button.resume-button a {
-  color: #22304A;
-  text-decoration: none;
-}
-button.resume-button:hover {
-  background: #f0e68c;
+@media (max-width: 900px) {
+  .hero-card {flex-direction: column;align-items: center;}
+  .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
 }
 </style>
 
 <div class="hero-card">
   <div class="hero-left">
     <div class="hero-pic-glow">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" />
-      <div class="hero-text-overlay">
-        <div class="hero-name">Venkatesh<br>Soundararajan</div>
-        <div class="hero-role">Software Development Intern<br>Data Engineering</div>
-        <div class="hero-location">Calgary, AB, Canada</div>
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
     </div>
-    </div>
+    <div class="hero-name">Venkatesh<br>Soundararajan</div>
+    <div class="hero-role">Software Development Intern<br>Data Engineering</div>
+    <div class="hero-location">Calgary, AB, Canada</div>
   </div>
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
@@ -938,15 +914,22 @@ button.resume-button:hover {
       </div>
     </div>
     <div style="text-align: center; margin-top: 20px;">
-      <button class="resume-button">
-        <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download>Download Resume</a>
-      </button>
-    </div>
+  <button style="
+      background: #FFFFE0; 
+      color: #FFF9C4; 
+      font-weight: 700; 
+      border-radius: 14px; 
+      padding: 14px 36px; 
+      font-size: 1.1rem; 
+      border: none; 
+      cursor: pointer;      
+      transition: background 0.25s ease;">
+    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">Download Resume</a>
+  </button>
+</div>
   </div>
 </div>
 """, unsafe_allow_html=True)
-
-
 
 st.markdown('<a name="education" class="section-anchor"></a>', unsafe_allow_html=True)
 # --- Spacer before next section ---

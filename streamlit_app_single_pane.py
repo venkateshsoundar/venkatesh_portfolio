@@ -13,11 +13,11 @@ st.markdown("""
 <style>
 .block-container {
     padding-top: 0 !important;
-    margin-top: 0 !important;
+    margin-top: 5 !important;
 }
 body {
     margin-top: 5 !important;
-    padding-top: 5 !important;
+    padding-top: 0 !important;
 }
 /* Fix navbar at top */
 .navbar-container {

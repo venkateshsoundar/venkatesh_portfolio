@@ -8,6 +8,16 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9TDXL1JB47');
+</script>
+
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>

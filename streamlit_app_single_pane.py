@@ -146,6 +146,17 @@ body {
     .navbar-container {
         display: none !important;
     }
+      .block-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .sticky-spacer {
+    height: 0 !important;
+  }
 }
 
 </style>

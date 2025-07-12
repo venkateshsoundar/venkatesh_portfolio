@@ -25,11 +25,13 @@ body {
     top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;
+    height: 100px;
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
+    align-items: flex-end;
 }
 
 /* Flex styling for links */

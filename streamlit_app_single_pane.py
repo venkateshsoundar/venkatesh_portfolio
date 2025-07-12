@@ -21,8 +21,7 @@ body {
 }
 /* Fix navbar at top */
 .navbar-container {
-    position: fixed;
-    padding-top: 50px;
+    position: fixed;    
     top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;
@@ -33,6 +32,7 @@ body {
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;
+    padding-top: 200px;
     flex-direction: column;
     justify-content: flex-end;
     padding-bottom: -100px;

@@ -22,7 +22,7 @@ body {
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    top: 3.5rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;
     z-index: 1000;
@@ -65,75 +65,45 @@ body {
 .sticky-spacer {
     height: 10px;
 }
+</style>
 
-/* Flex styling for links - desktop default */
+st.markdown("""<style>
+.navbar-container {
+  width: 100%;
+  background-color: #22304A;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
 .navbar {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    background: #1F2A44;
-    padding: 12px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    gap: 28px;
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
 }
 
 .navbar a {
-    color: #ffd166;
-    font-weight: bold;
-    font-size: 1.08rem;
-    text-decoration: none;
-    padding: 7px 18px;
-    border-radius: 8px;
-    transition: color 0.18s, background 0.18s;
-    white-space: nowrap;
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  border-bottom: 1px solid #34495E;
 }
 
-/* Responsive tweaks for smaller screens */
-@media screen and (max-width: 768px) {
-    .navbar {
-        flex-direction: column;
-        align-items: center;
-        gap: 14px;
-    }
-
-    .navbar a {
-        width: 100%;
-        text-align: center;
-        padding: 10px;
-        font-size: 1rem;
-    }
-}
-
-@media screen and (max-width: 768px) {
-  .navbar-container {
-    display: none; /* Hide full navbar on small screen */
+@media(min-width: 768px) {
+  .navbar {
+    flex-direction: row;
+    justify-content: center;
+    flex-wrap: wrap;
   }
-  .mobile-nav-toggle {
-    display: block;
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 10px;
-    background: #1F2A44;
-    color: #ffd166;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 10px;
+
+  .navbar a {
+    border: none;
   }
 }
-@media screen and (min-width: 769px) {
-  .mobile-nav-toggle-container {
-    display: none; /* Hide toggle on desktop */
-  }
-}
-
-
 </style>
 
-<!-- Sticky Nav HTML -->
 <div class="navbar-container">
   <div class="navbar">
     <a href="#about">About Me</a>
@@ -143,9 +113,14 @@ body {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
-    <a href="#skills">Buddy Bot</a>
+    <a href="#buddybot">Buddy Bot</a>
   </div>
 </div>
+""", unsafe_allow_html=True)
+
+st.header("Welcome to My Portfolio")
+st.write("This is a sample responsive navbar embedded in Streamlit.")
+
 
 <!-- Spacer so content isn't overlapped -->
 <div class="sticky-spacer"></div>
@@ -159,7 +134,6 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-
 
 st.markdown("""
 <style>
@@ -677,7 +651,6 @@ st.markdown(
         align-items: center;
         justify-content: center;
         text-align: center;
-        margin-top:-60px;
         margin-bottom:24px;
         box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
         transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
@@ -861,11 +834,11 @@ st.markdown("""
   </div>
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
-    <div>
-  I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.  
-  I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS</b>.  
-  I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.  
-  My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+    <div class="hero-about-body">
+      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.
+      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.
+      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.
+      My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
     </div>
     <div class="hero-contact-bar">
       <div class="hero-contact-bar-title">Contact</div>

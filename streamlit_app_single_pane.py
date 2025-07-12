@@ -11,6 +11,10 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
+
+.navbar-spacer {
+    height: 20px;  /* Adjust this as needed */
+}
 .block-container {
     padding-top: 5 !important;
     margin-top: 5 !important;

@@ -17,7 +17,7 @@ st.markdown("""
 }
 .block-container {
     padding-top: 5 !important;
-    margin-top: 0 !important;
+    margin-top: 5 !important;
 }
 body {
     margin-top: 5 !important;

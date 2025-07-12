@@ -1,10 +1,8 @@
-
 import streamlit as st
 import requests
 import io
 import PyPDF2
 import openai
-from openai import OpenAI
 import pandas as pd
 
 # ---- PAGE CONFIG & GLOBAL CSS ----
@@ -1387,54 +1385,54 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-
+  
+api_key = st.secrets["DEEPSEEK_API_KEY"]
+client = openai.OpenAI(
+      base_url="https://openrouter.ai/api/v1",
+      api_key=api_key,
+  )
 st.markdown("""
 <style>
-/* Disable fixed positioning of chat input bar */
-[data-testid="stChatInput"] {
-    position: relative !important;
-    bottom: auto !important;
-    left: auto !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin-top: 8px;
-    box-shadow: 0 0 10px rgb(34 48 74 / 20%);
-    border-radius: 10px;
-    padding: 8px 12px;
+/* Force assistant message text to black */
+div[data-testid="stChatMessageContent"] {
+  background-color: #fff8dc !important;
+  color: #000000 !important;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #ffd166;
+  font-family: 'Segoe UI', sans-serif;
 }
 </style>
 """, unsafe_allow_html=True)
 
-  
-api_key = st.secrets["DEEPSEEK_API_KEY"]
-client = OpenAI(
-    api_key=api_key,
-    base_url="https://openrouter.ai/api/v1"
-)
-
-user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-
-if user_input:
-    st.chat_message("user").write(user_input)
-    prompt = (
-        "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
-        "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "            
-        + user_input
-    )
-    with st.spinner("Assistant is typing..."):
-        try:
+chat_container = st.container()
+with chat_container:
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.chat_message("user").write(user_input)
+        prompt = (
+            "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "            
+            + user_input
+        )
+        with st.spinner("Assistant is typing..."):
             response = client.chat.completions.create(
                 model="deepseek/deepseek-chat:free",
-                messages=[{"role": "system", "content": prompt}]
+                messages=[
+                    {"role": "system", "content": prompt}
+                ]
             )
             reply = response.choices[0].message.content
-            st.chat_message("assistant").write(reply)
-        except Exception as e:
-            st.error(f"API error: {e}")
+        st.chat_message("assistant").write(reply)
 
 
 st.markdown("""
 <hr style='border:1px solid #ddd; margin-top: 50px;' />
+
 <div style='text-align: center; font-size: 14px; color: grey;'>
     © 2025 Balu Soundararajan. All rights reserved.
 </div>

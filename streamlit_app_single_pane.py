@@ -775,27 +775,28 @@ st.markdown("""
   background: linear-gradient(135deg, #253451 70%, #ffd16610 100%);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  padding: 38px 0 26px 0;
+  justify-content: center;  /* Center content vertically */
+  padding: 0;  /* Remove padding */
+  height: 100%;  /* Make it fill the full height */
   box-shadow: 2px 0 18px 0 #ffd16609;
   z-index: 1;
 }
+
 .hero-pic-glow {
+  flex-grow: 1;
   display: flex !important;
   justify-content: center !important;
-  margin-bottom: 20px !important;
+  align-items: center;  /* Center image vertically */
+  margin: 0;  /* Remove bottom margin */
 }
+
 .hero-pic-glow img {
-  width: 200px !important;
-  height: 200px !important;
-  border-radius: 50px !important;
-  border: none !important;
-  background: none !important;
-  box-shadow: none !important;
-  object-fit: contain !important;  /* changed from cover to contain to zoom out */
-  object-position: center !important; /* center the image */
+  width: 100% !important;
+  height: 100% !important;
+  border-radius: 0; /* Remove radius if you want it to fill fully */
+  object-fit: cover !important; /* Fill container proportionally */
 }
+
 .hero-name {
   color: #fff;
   font-size: 2.44rem;

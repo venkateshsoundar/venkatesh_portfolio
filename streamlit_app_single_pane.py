@@ -22,9 +22,9 @@ body {
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    top: 1rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
-    width: 99%;
+    width: 100%;
     margin: 0 auto;
     z-index: 1000;
     background: #1F2A44;

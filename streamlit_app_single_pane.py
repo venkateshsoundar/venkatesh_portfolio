@@ -918,10 +918,12 @@ st.markdown("""
     <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" />
   </div>
   <div class="hero-overlay-text">
-    <h1>Venkatesh<br>Soundararajan</h1>
-    <p>Software Development Intern<br>Data Engineering<br><strong>Calgary, AB, Canada</strong></p>
+    <div class="hero-name">Venkatesh<br>Soundararajan</div>
+    <div class="hero-role">Software Development Intern<br>Data Engineering</div>
+    <div class="hero-location">Calgary, AB, Canada</div>
   </div>
-  </div>
+</div>
+
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">

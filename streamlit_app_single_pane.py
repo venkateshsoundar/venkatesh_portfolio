@@ -1409,7 +1409,6 @@ div[data-testid="stChatMessageContent"] {
 
 
 
-
 chat_container = st.container()
 with chat_container:
     user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
@@ -1422,7 +1421,7 @@ with chat_container:
         )
         with st.spinner("Assistant is typing..."):
             try:
-                response = openai.ChatCompletion.create(
+                response = client.chat.completions.create(
                     model="deepseek/deepseek-chat:free",
                     messages=[{"role": "system", "content": prompt}]
                 )
@@ -1430,6 +1429,7 @@ with chat_container:
                 st.chat_message("assistant").write(reply)
             except Exception as e:
                 st.error(f"API error: {e}")
+
 
 
 

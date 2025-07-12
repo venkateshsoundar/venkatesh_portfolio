@@ -772,8 +772,8 @@ st.markdown("""
 }
 .hero-left {
   flex: 1 1 0px;
-  min-width: 350px;
-  max-width: 500px;
+  min-width: 500px;
+  max-width: 600px;
   background: linear-gradient(135deg, #253451 70%, #ffd16610 100%);
   display: flex;
   flex-direction: column;

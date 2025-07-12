@@ -1387,6 +1387,24 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+st.markdown("""
+<style>
+/* Disable fixed positioning of chat input bar */
+[data-testid="stChatInput"] {
+    position: relative !important;
+    bottom: auto !important;
+    left: auto !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-top: 8px;
+    box-shadow: 0 0 10px rgb(34 48 74 / 20%);
+    border-radius: 10px;
+    padding: 8px 12px;
+}
+</style>
+""", unsafe_allow_html=True)
+
   
 api_key = st.secrets["DEEPSEEK_API_KEY"]
 client = OpenAI(

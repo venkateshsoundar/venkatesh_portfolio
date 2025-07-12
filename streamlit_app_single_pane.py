@@ -833,21 +833,18 @@ st.markdown("""
   font-size: 2.44rem;
   font-weight: 800;
   text-align: center;
-  margin: 6px 0 0 0;
   line-height: 1.17;
   letter-spacing: 0.01em;
 }
 .hero-role {
   color: #ADD8E6;
   font-size: 1.03rem;
-  margin-top: 3px;
   margin-bottom: 0px;
   text-align: center;
 }
 .hero-location {
   color: #FFFFE0;
   font-weight: 600;
-  margin-top: 8px;
   font-size: 1.01rem;
   text-align: center;
 }

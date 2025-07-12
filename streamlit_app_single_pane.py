@@ -753,12 +753,15 @@ st.markdown("""
   background: none;
 }
 .hero-pic-glow img {
-  width: 200px;
-  height: 200px;
-  border-radius: 5%;
-  object-fit: cover;
-  border: 3px solid #fff;
-  background: #fff;
+  width: 180px !important;
+  height: 240px !important;
+  border-radius: 12px !important;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  object-fit: cover !important;
+  display: block !important;
+  margin: 0 auto !important;
 }
 .hero-name {
   color: #fff;

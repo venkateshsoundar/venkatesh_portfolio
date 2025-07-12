@@ -11,28 +11,24 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
-/* Remove padding/margin from Streamlit container */
-.block-container, .main, .stApp {
-    padding: 5 !important;
-    margin: 5 !important;
+.block-container {
+    padding-top: 5 !important;
+    margin-top: 5 !important;
 }
-
-/* Remove padding from body too */
 body {
-    padding: 5 !important;
-    margin: 5 !important;
+    margin-top: 5 !important;
+    padding-top: 5 !important;
 }
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 0;
+    top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
-    width: 100vw;  /* Ensure full viewport width */
+    width: 100%;
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    padding: 0 !important;
-    margin: 0 !important;
+    padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
 }
 
@@ -44,7 +40,7 @@ body {
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -78,7 +74,7 @@ body {
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -159,7 +155,7 @@ st.markdown("""
 <style>
 /* Prevent sections from being hidden behind the sticky nav */
 .section-anchor {
-  scroll-margin-top: 90px;  /* Adjust based on navbar + Streamlit top padding */
+  scroll-margin-top: 120px;  /* Adjust based on navbar + Streamlit top padding */
 }
 </style>
 """, unsafe_allow_html=True)

@@ -753,15 +753,15 @@ st.markdown("""
   background: none;
 }
 .hero-pic-glow img {
-  width: 180px !important;
-  height: 240px !important;
+  width: 220px !important;
+  height: 300px !important;
   border-radius: 12px !important;
   border: none !important;
   background: none !important;
   box-shadow: none !important;
   object-fit: cover !important;
   display: block !important;
-  margin: 0 auto !important;
+  margin-bottom: 20px !important;
 }
 .hero-name {
   color: #fff;

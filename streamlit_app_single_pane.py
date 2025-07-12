@@ -111,8 +111,17 @@ body {
 </div>
 """, unsafe_allow_html=True)
 
-st.header("Welcome to My Portfolio")
+<div class="sticky-spacer"></div>
+""", unsafe_allow_html=True)
 
+st.markdown("""
+<style>
+/* Prevent sections from being hidden behind the sticky nav */
+.section-anchor {
+  scroll-margin-top: 120px;  /* Adjust based on navbar + Streamlit top padding */
+}
+</style>
+""", unsafe_allow_html=True)
 
 
 

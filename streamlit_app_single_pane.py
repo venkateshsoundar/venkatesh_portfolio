@@ -145,7 +145,7 @@ body {
 </div>
 
 <!-- Spacer so content isn't overlapped -->
-<div class="sticky-spacer"></div>
+<div class="navbar-spacer"></div>
 """, unsafe_allow_html=True)
 
 st.markdown("""

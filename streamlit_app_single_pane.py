@@ -11,13 +11,16 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
-.block-container {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
+/* Remove padding/margin from Streamlit container */
+.block-container, .main, .stApp {
+    padding: 0 !important;
+    margin: 0 !important;
 }
+
+/* Remove padding from body too */
 body {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
+    padding: 0 !important;
+    margin: 0 !important;
 }
 /* Fix navbar at top */
 .navbar-container {

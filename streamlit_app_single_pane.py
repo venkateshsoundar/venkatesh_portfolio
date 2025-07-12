@@ -31,8 +31,10 @@ body {
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
-    align-items: flex-end;
-}
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    }
 
 /* Flex styling for links */
 .navbar {

@@ -914,15 +914,15 @@ st.markdown("""
 
 <div class="hero-card">
   <div class="hero-left">
-  <div class="hero-pic-glow">
-    <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" />
-  </div>
-  <div class="hero-overlay-text">
+    <div class="hero-pic-glow">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
+    </div>
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
     <div class="hero-role">Software Development Intern<br>Data Engineering</div>
     <div class="hero-location">Calgary, AB, Canada</div>
   </div>
-</div>
+
+
 
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>

@@ -34,7 +34,7 @@ body {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-    padding-bottom: -60px;
+    padding-bottom: -100px;
     }
 
 /* Flex styling for links */

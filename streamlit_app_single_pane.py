@@ -43,7 +43,7 @@ body {
     display: flex;
     gap: 28px;
     justify-content: center;
-    background: #1F2A44;
+    background: rgba(255, 255, 255, 0); /* transparent background */
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
     margin-bottom: 20px;

@@ -43,7 +43,7 @@ body {
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
     margin-bottom: 10px;
-    position: sticky;
+    position: fixed;
     top: 0;
     z-index: 100;
 }

@@ -14,18 +14,18 @@ st.markdown("""
 /* Remove padding/margin from Streamlit container */
 .block-container, .main, .stApp {
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 5 !important;
 }
 
 /* Remove padding from body too */
 body {
     padding: 0 !important;
-    margin: 0 !important;
+    margin: 5 !important;
 }
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 3.5rem;
+    top: 0rem;
     left: 0;
     width: 100vw;  /* Ensure full viewport width */
     z-index: 1000;

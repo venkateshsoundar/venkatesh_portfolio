@@ -65,9 +65,6 @@ body {
 .sticky-spacer {
     height: 10px;
 }
-</style>
-
-st.markdown("""<style>
 .navbar-container {
   width: 100%;
   background-color: #22304A;
@@ -75,13 +72,11 @@ st.markdown("""<style>
   top: 0;
   z-index: 999;
 }
-
 .navbar {
   display: flex;
   flex-direction: column;
   padding: 12px;
 }
-
 .navbar a {
   color: white;
   padding: 10px;
@@ -90,14 +85,12 @@ st.markdown("""<style>
   display: block;
   border-bottom: 1px solid #34495E;
 }
-
 @media(min-width: 768px) {
   .navbar {
     flex-direction: row;
     justify-content: center;
     flex-wrap: wrap;
   }
-
   .navbar a {
     border: none;
   }
@@ -119,21 +112,10 @@ st.markdown("""<style>
 """, unsafe_allow_html=True)
 
 st.header("Welcome to My Portfolio")
-st.write("This is a sample responsive navbar embedded in Streamlit.")
 
 
-<!-- Spacer so content isn't overlapped -->
-<div class="sticky-spacer"></div>
-""", unsafe_allow_html=True)
 
-st.markdown("""
-<style>
-/* Prevent sections from being hidden behind the sticky nav */
-.section-anchor {
-  scroll-margin-top: 120px;  /* Adjust based on navbar + Streamlit top padding */
-}
-</style>
-""", unsafe_allow_html=True)
+
 
 st.markdown("""
 <style>

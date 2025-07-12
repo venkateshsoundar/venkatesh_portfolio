@@ -754,7 +754,6 @@ st.markdown("""
   display: flex;
   flex-direction: row;
   align-items: stretch;
-  gap: 0;
   background: linear-gradient(135deg, #253451 0%, #324665 100%);
   border-radius: 24px;
   box-shadow: 0 6px 26px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.08);
@@ -769,18 +768,16 @@ st.markdown("""
   box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
 }
 .hero-left {
-  position: relative; /* for absolute overlay */
+  position: relative; 
   flex: 1 1 0px;
   min-width: 260px;
   max-width: 340px;
   height: 100%;
-  padding: 0;
-  background: none;
   display: flex;
   align-items: center;
   justify-content: center;
+  background: none;
 }
-
 .hero-pic-glow img {
   width: 100% !important;
   height: 100% !important;
@@ -788,22 +785,16 @@ st.markdown("""
   border-radius: 0 !important;
   display: block;
 }
-
-/* Overlay text container */
 .hero-text-overlay {
   position: absolute;
-  bottom: 30px; /* Adjust vertical position */
+  bottom: 30px;
   left: 50%;
   transform: translateX(-50%);
   text-align: center;
   width: 90%;
-  color: inherit; /* inherit colors from children */
-  pointer-events: none; /* so image can still be interacted */
+  pointer-events: none;
   z-index: 10;
-  /* no background */
 }
-
-/* Use your existing hero-name, hero-role, hero-location styles exactly */
 .hero-text-overlay .hero-name {
   color: #fff;
   font-size: 2.44rem;
@@ -811,9 +802,8 @@ st.markdown("""
   margin: 0;
   line-height: 1.17;
   letter-spacing: 0.01em;
-  text-shadow: 0 0 6px rgba(0,0,0,0.7); /* optional for readability */
+  text-shadow: 0 0 6px rgba(0,0,0,0.7);
 }
-
 .hero-text-overlay .hero-role {
   color: #ADD8E6;
   font-size: 1.03rem;
@@ -821,34 +811,12 @@ st.markdown("""
   margin-bottom: 0;
   font-weight: normal;
 }
-
 .hero-text-overlay .hero-location {
   color: #FFFFE0;
   font-weight: 600;
   margin-top: 8px;
   font-size: 1.01rem;
 }
-.hero-name {
-  color: #fff;
-  font-size: 2.44rem;
-  font-weight: 800;
-  text-align: center;
-  line-height: 1.17;
-  letter-spacing: 0.01em;
-}
-.hero-role {
-  color: #ADD8E6;
-  font-size: 1.03rem;
-  margin-bottom: 0px;
-  text-align: center;
-}
-.hero-location {
-  color: #FFFFE0;
-  font-weight: 600;
-  font-size: 1.01rem;
-  text-align: center;
-}
-
 .hero-right {
   flex: 2 1 0px;
   padding: 38px 38px 16px 38px;
@@ -910,10 +878,34 @@ st.markdown("""
   filter: invert(100%);
 }
 
-
 @media (max-width: 900px) {
-  .hero-card {flex-direction: column;align-items: center;}
-  .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
+  .hero-card {
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-right, .hero-left {
+    max-width: 100%;
+    padding: 28px 8vw 12px;
+  }
+}
+
+button.resume-button {
+  background: #FFFFE0;
+  color: #22304A;
+  font-weight: 700;
+  border-radius: 14px;
+  padding: 14px 36px;
+  font-size: 1.1rem;
+  border: none;
+  cursor: pointer;
+  transition: background 0.25s ease;
+}
+button.resume-button a {
+  color: #22304A;
+  text-decoration: none;
+}
+button.resume-button:hover {
+  background: #f0e68c;
 }
 </style>
 
@@ -927,7 +919,7 @@ st.markdown("""
       <div class="hero-role">Software Development Intern<br>Data Engineering</div>
       <div class="hero-location">Calgary, AB, Canada</div>
     </div>
-  </div>  <!-- moved this closing div here -->
+  </div>
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">
@@ -946,22 +938,14 @@ st.markdown("""
       </div>
     </div>
     <div style="text-align: center; margin-top: 20px;">
-  <button style="
-      background: #FFFFE0; 
-      color: #FFF9C4; 
-      font-weight: 700; 
-      border-radius: 14px; 
-      padding: 14px 36px; 
-      font-size: 1.1rem; 
-      border: none; 
-      cursor: pointer;      
-      transition: background 0.25s ease;">
-    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">Download Resume</a>
-  </button>
-</div>
+      <button class="resume-button">
+        <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download>Download Resume</a>
+      </button>
+    </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
+
 
 
 st.markdown('<a name="education" class="section-anchor"></a>', unsafe_allow_html=True)

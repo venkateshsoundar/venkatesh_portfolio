@@ -24,9 +24,7 @@ body {
     position: fixed;
     top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
-    height: 100px;
     width: 100%;
-    margin: 0 auto;
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -39,12 +37,11 @@ body {
     display: flex;
     gap: 28px;
     justify-content: center;
-    text-align: center;
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 10px;
-    position: fixed;
+    margin-bottom: 20px;
+    position: sticky;
     top: 0;
     z-index: 100;
 }
@@ -62,6 +59,37 @@ body {
 .navbar a:hover {
     background: #ffd16633;
     color: #fff;
+}
+
+/* Push content down to not be hidden */
+.sticky-spacer {
+    height: 10px;
+}
+
+/* Flex styling for links - desktop default */
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 28px;
+}
+
+.navbar a {
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 7px 18px;
+    border-radius: 8px;
+    transition: color 0.18s, background 0.18s;
+    white-space: nowrap;
 }
 
 /* Responsive tweaks for smaller screens */

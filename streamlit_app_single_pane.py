@@ -65,6 +65,49 @@ body {
 .sticky-spacer {
     height: 10px;
 }
+
+/* Flex styling for links - desktop default */
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 28px;
+}
+
+.navbar a {
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 7px 18px;
+    border-radius: 8px;
+    transition: color 0.18s, background 0.18s;
+    white-space: nowrap;
+}
+
+/* Responsive tweaks for smaller screens */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .navbar a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
+
 </style>
 
 <!-- Sticky Nav HTML -->

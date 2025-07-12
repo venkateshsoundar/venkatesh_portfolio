@@ -131,7 +131,7 @@ body {
         border: none;
         margin-bottom: 10px;
         width: 100%;
-        text-align: right;
+        text-align: center;
     }
 }
 

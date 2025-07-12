@@ -24,7 +24,7 @@ body {
     position: fixed;
     top: 1rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
-    height: 150px;
+    height: 100px;
     width: 100%;
     margin: 0 auto;
     z-index: 1000;
@@ -42,7 +42,7 @@ body {
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     position: sticky;
     top: 0;
     z-index: 100;

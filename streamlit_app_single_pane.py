@@ -753,8 +753,8 @@ st.markdown("""
   background: none;
 }
 .hero-pic-glow img {
-  width: 130px;
-  height: 130px;
+  width: 200px;
+  height: 200px;
   border-radius: 5%;
   object-fit: cover;
   border: 3px solid #fff;

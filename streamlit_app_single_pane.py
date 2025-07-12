@@ -1412,50 +1412,6 @@ client = OpenAI(
     base_url="https://openrouter.ai/api/v1"
 )
 
-
-st.markdown("""
-<style>
-/* Limit chat message container height and enable scrolling */
-[data-testid="stChatMessageList"] {
-    max-height: 60vh;
-    overflow-y: auto;
-    margin-bottom: 12px;
-}
-
-/* Remove any sticky/fixed positioning on chat input */
-[data-testid="stChatInput"] {
-    position: relative !important;
-    bottom: auto !important;
-    margin-bottom: 0 !important;
-}
-
-/* Footer spacing */
-hr {
-    margin-top: 40px !important;
-}
-</style>
-""", unsafe_allow_html=True)
-
-
-st.markdown("""
-<style>
-/* Force assistant message text to black */
-div[data-testid="stChatMessageContent"] {
-  background-color: #fff8dc !important;
-  color: #000000 !important;
-  border-radius: 16px;
-  padding: 14px 18px;
-  margin: 10px 0;
-  font-size: 1rem;
-  line-height: 1.6;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  border-left: 6px solid #ffd166;
-  font-family: 'Segoe UI', sans-serif;
-}
-</style>
-""", unsafe_allow_html=True)
-
-
 user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
 
 if user_input:

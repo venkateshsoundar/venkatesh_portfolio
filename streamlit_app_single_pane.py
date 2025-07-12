@@ -147,23 +147,6 @@ body {
   </div>
 </div>
 
-# Mobile Toggle Menu
-st.markdown('<div class="mobile-nav-toggle-container"><div class="mobile-nav-toggle">☰ Menu</div></div>', unsafe_allow_html=True)
-
-with st.expander("Navigation Menu", expanded=False):
-    col1, col2 = st.columns(2)
-    with col1:
-        st.markdown("- [About Me](#about)", unsafe_allow_html=True)
-        st.markdown("- [Education](#education)", unsafe_allow_html=True)
-        st.markdown("- [Experience](#experience)", unsafe_allow_html=True)
-        st.markdown("- [Certifications](#certifications)", unsafe_allow_html=True)
-    with col2:
-        st.markdown("- [Recognitions](#recognitions)", unsafe_allow_html=True)
-        st.markdown("- [Projects](#projects)", unsafe_allow_html=True)
-        st.markdown("- [Skills](#skills)", unsafe_allow_html=True)
-        st.markdown("- [Buddy Bot](#buddybot)", unsafe_allow_html=True)
-
-
 <!-- Spacer so content isn't overlapped -->
 <div class="sticky-spacer"></div>
 """, unsafe_allow_html=True)

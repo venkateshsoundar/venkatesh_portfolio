@@ -140,7 +140,7 @@ body {
     .mobile-nav-toggle {
         display: none;
     }
-        .navbar-container {
+    .navbar-container {
         display: none !important;
     }
 }

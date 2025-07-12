@@ -33,7 +33,7 @@ body {
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;
-    padding-top: 50px;
+    padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
         }

@@ -672,7 +672,7 @@ st.markdown(
         border-radius: 16px;
         padding: 1rem;
         color: white;
-        min-height: 180px;
+        min-height: 200px;
         display: flex;
         align-items: center;
         justify-content: center;

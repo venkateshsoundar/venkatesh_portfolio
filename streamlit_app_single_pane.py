@@ -140,6 +140,9 @@ body {
     .mobile-nav-toggle {
         display: none;
     }
+}
+
+@media screen and (max-width: 768px) {
     .navbar-container {
         display: none !important;
     }

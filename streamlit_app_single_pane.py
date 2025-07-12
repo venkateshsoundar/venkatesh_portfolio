@@ -22,6 +22,7 @@ body {
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;
+    padding-top: 50px;
     top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;

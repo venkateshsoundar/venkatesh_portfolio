@@ -65,38 +65,9 @@ body {
 .sticky-spacer {
     height: 10px;
 }
-.navbar-container {
-  width: 100%;
-  background-color: #22304A;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
-.navbar {
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-}
-.navbar a {
-  color: white;
-  padding: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  display: block;
-  border-bottom: 1px solid #34495E;
-}
-@media(min-width: 768px) {
-  .navbar {
-    flex-direction: row;
-    justify-content: center;
-    flex-wrap: wrap;
-  }
-  .navbar a {
-    border: none;
-  }
-}
 </style>
 
+<!-- Sticky Nav HTML -->
 <div class="navbar-container">
   <div class="navbar">
     <a href="#about">About Me</a>
@@ -106,9 +77,12 @@ body {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
-    <a href="#buddybot">Buddy Bot</a>
+    <a href="#skills">Buddy Bot</a>
   </div>
 </div>
+
+<!-- Spacer so content isn't overlapped -->
+<div class="sticky-spacer"></div>
 """, unsafe_allow_html=True)
 
 st.markdown("""
@@ -119,9 +93,6 @@ st.markdown("""
 }
 </style>
 """, unsafe_allow_html=True)
-
-
-
 
 st.markdown("""
 <style>
@@ -1396,4 +1367,3 @@ st.markdown("""
     © 2025 Balu Soundararajan. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
-

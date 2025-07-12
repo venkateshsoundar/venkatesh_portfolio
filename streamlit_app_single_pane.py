@@ -67,52 +67,48 @@ body {
 }
 </style>
 
-<style>
-  .navbar-container {
-    width: 100%;
-    background-color: #22304A;
-  }
+import streamlit as st
 
+st.set_page_config(layout="wide")
+
+st.markdown("""
+<style>
+.navbar-container {
+  width: 100%;
+  background-color: #22304A;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+}
+
+.navbar {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+}
+
+.navbar a {
+  color: white;
+  padding: 10px;
+  text-decoration: none;
+  font-weight: bold;
+  display: block;
+  border-bottom: 1px solid #34495E;
+}
+
+@media(min-width: 768px) {
   .navbar {
-    display: flex;
-    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    flex-direction: row;
     justify-content: center;
-    padding: 10px;
+    flex-wrap: wrap;
   }
 
   .navbar a {
-    color: white;
-    padding: 10px 15px;
-    text-decoration: none;
-    font-weight: bold;
-    text-align: center;
-    transition: background-color 0.3s;
+    border: none;
   }
-
-  .navbar a:hover {
-    background-color: #444;
-    border-radius: 8px;
-  }
-
-  @media (max-width: 768px) {
-    .navbar {
-      justify-content: space-around;
-    }
-
-    .navbar a {
-      flex: 1 1 45%; /* Two per row */
-      margin: 5px 0;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .navbar a {
-      flex: 1 1 100%; /* One per row */
-    }
-  }
+}
 </style>
 
-<!-- Sticky Nav HTML -->
 <div class="navbar-container">
   <div class="navbar">
     <a href="#about">About Me</a>
@@ -122,9 +118,14 @@ body {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
-    <a href="#skills">Buddy Bot</a>
+    <a href="#buddybot">Buddy Bot</a>
   </div>
 </div>
+""", unsafe_allow_html=True)
+
+st.header("Welcome to My Portfolio")
+st.write("This is a sample responsive navbar embedded in Streamlit.")
+
 
 <!-- Spacer so content isn't overlapped -->
 <div class="sticky-spacer"></div>

@@ -8,37 +8,35 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# ---- FREEZED (FIXED) NAVIGATION BAR ----
+import streamlit as st
+
+# Initialize session state for menu toggle
+if 'menu_open' not in st.session_state:
+    st.session_state.menu_open = False
+
+def toggle_menu():
+    st.session_state.menu_open = not st.session_state.menu_open
+
+# Mobile toggle button
 st.markdown("""
 <style>
-.block-container {
-    padding-top: 5 !important;
-    margin-top: 5 !important;
-}
-body {
-    margin-top: 5 !important;
-    padding-top: 5 !important;
-}
-/* Fix navbar at top */
+/* Common navbar styles */
 .navbar-container {
     position: fixed;    
-    top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    top: 3rem;
     left: 0;
     width: 100%;
-    height: 50px;
     z-index: 1000;
-    background: #1F2A44;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     background: #ffffff;
-    padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    padding-top: 0;
     display: flex;
-    padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
 }
 
-/* Flex styling for links */
+/* Navbar links */
 .navbar {
     display: flex;
     gap: 28px;
@@ -46,46 +44,11 @@ body {
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
     margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-/* Nav link styling */
-.navbar a {
-    color: #ffd166;
-    font-weight: bold;
-    font-size: 1.08rem;
-    text-decoration: none;
-    padding: 7px 22px;
-    border-radius: 8px;
-    transition: color 0.18s, background 0.18s;
-}
-.navbar a:hover {
-    background: #ffd16633;
-    color: #fff;
-}
-
-/* Push content down to not be hidden */
-.sticky-spacer {
-    height: 10px;
-}
-
-/* Flex styling for links - desktop default */
-.navbar {
-    display: flex;
     flex-wrap: wrap;
-    justify-content: center;
     background: #1F2A44;
-    padding: 12px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    gap: 28px;
 }
 
+/* Navbar links styling */
 .navbar a {
     color: #ffd166;
     font-weight: bold;
@@ -93,25 +56,44 @@ body {
     text-decoration: none;
     padding: 7px 18px;
     border-radius: 8px;
-    transition: color 0.18s, background 0.18s;
     white-space: nowrap;
+    transition: color 0.18s, background 0.18s;
 }
 
-/* Responsive tweaks for smaller screens */
+.navbar a:hover {
+    background: #ffd16633;
+    color: #fff;
+}
+
+/* Mobile toggle button */
+.mobile-nav-toggle {
+    display: none; /* hidden by default */
+    background: #1F2A44;
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.5rem;
+    padding: 10px 20px;
+    border-radius: 10px;
+    cursor: pointer;
+    border: none;
+    width: 100%;
+    text-align: right;
+}
+
+/* Responsive adjustments */
 @media screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
         align-items: center;
         gap: 14px;
-        display: none; /* Hide navbar links by default on mobile */
-        width: 100%;
-        background: #1F2A44;
-        padding: 10px 0;
         margin-bottom: 10px;
         border-radius: 0 0 18px 18px;
     }
+    .navbar.hide {
+        display: none;
+    }
     .navbar.show {
-        display: flex; /* Show navbar links when toggled */
+        display: flex;
     }
     .navbar a {
         width: 100%;
@@ -120,34 +102,23 @@ body {
         font-size: 1rem;
     }
     .mobile-nav-toggle {
-        display: block;
-        background: #1F2A44;
-        color: #ffd166;
-        font-weight: bold;
-        font-size: 1.5rem;
-        padding: 10px 20px;
-        border-radius: 10px;
-        cursor: pointer;
-        border: none;
-        margin-bottom: 10px;
-        width: 100%;
-        text-align: right;
+        display: block; /* show toggle on mobile */
     }
 }
-
-/* Hide toggle button on desktop */
-@media screen and (min-width: 769px) {
-    .mobile-nav-toggle {
-        display: none;
-    }
-}
-
 </style>
+""", unsafe_allow_html=True)
 
-<!-- Sticky Nav HTML -->
+# Render mobile toggle button (use Streamlit button for event)
+toggle_button = st.button("☰ Menu", key="menu_toggle", on_click=toggle_menu)
+
+# Decide navbar class based on toggle state
+navbar_class = "navbar show" if st.session_state.menu_open else "navbar hide"
+
+# Render navbar HTML
+st.markdown(f"""
 <div class="navbar-container">
-  <button class="mobile-nav-toggle" onclick="toggleMenu()">☰ Menu</button>
-  <div class="navbar" id="navbarLinks">
+  <button class="mobile-nav-toggle">☰ Menu</button>
+  <div class="{navbar_class}">
     <a href="#about">About Me</a>
     <a href="#education">Education</a>
     <a href="#experience">Experience</a>
@@ -160,19 +131,9 @@ body {
 </div>
 
 <!-- Spacer so content isn't overlapped -->
-<div class="sticky-spacer"></div>
-
-<script>
-function toggleMenu() {
-  const navbar = document.getElementById("navbarLinks");
-  if (navbar.classList.contains("show")) {
-    navbar.classList.remove("show");
-  } else {
-    navbar.classList.add("show");
-  }
-}
-</script>
+<div style="height: 100px;"></div>
 """, unsafe_allow_html=True)
+
 
 
 st.markdown("""

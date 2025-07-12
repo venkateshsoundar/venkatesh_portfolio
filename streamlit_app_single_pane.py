@@ -24,6 +24,7 @@ body {
     position: fixed;
     top: 1rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
+    height: 80px;
     width: 100%;
     margin: 0 auto;
     z-index: 1000;

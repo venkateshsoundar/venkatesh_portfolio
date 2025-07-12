@@ -65,38 +65,74 @@ body {
 .sticky-spacer {
     height: 10px;
 }
-.navbar-container {
-  width: 100%;
-  background-color: #22304A;
-  position: sticky;
-  top: 0;
-  z-index: 999;
-}
+
+/* Flex styling for links - desktop default */
 .navbar {
-  display: flex;
-  flex-direction: column;
-  padding: 12px;
-}
-.navbar a {
-  color: white;
-  padding: 10px;
-  text-decoration: none;
-  font-weight: bold;
-  display: block;
-  border-bottom: 1px solid #34495E;
-}
-@media(min-width: 768px) {
-  .navbar {
-    flex-direction: row;
-    justify-content: center;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 28px;
+}
+
+.navbar a {
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 7px 18px;
+    border-radius: 8px;
+    transition: color 0.18s, background 0.18s;
+    white-space: nowrap;
+}
+
+/* Responsive tweaks for smaller screens */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+
+    .navbar a {
+        width: 100%;
+        text-align: center;
+        padding: 10px;
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    display: none; /* Hide default navbar on small screens */
   }
-  .navbar a {
-    border: none;
+  .mobile-nav-toggle {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+    background: #1F2A44;
+    color: #ffd166;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
   }
 }
+@media screen and (min-width: 769px) {
+  .mobile-nav-toggle-container {
+    display: none; /* Hide toggle for desktop */
+  }
+}
+
 </style>
 
+<!-- Sticky Nav HTML -->
 <div class="navbar-container">
   <div class="navbar">
     <a href="#about">About Me</a>
@@ -106,16 +142,22 @@ body {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
-    <a href="#buddybot">Buddy Bot</a>
+    <a href="#skills">Buddy Bot</a>
   </div>
 </div>
+
+<!-- Spacer so content isn't overlapped -->
+<div class="sticky-spacer"></div>
 """, unsafe_allow_html=True)
 
-st.header("Welcome to My Portfolio")
-
-
-
-
+st.markdown("""
+<style>
+/* Prevent sections from being hidden behind the sticky nav */
+.section-anchor {
+  scroll-margin-top: 120px;  /* Adjust based on navbar + Streamlit top padding */
+}
+</style>
+""", unsafe_allow_html=True)
 
 st.markdown("""
 <style>

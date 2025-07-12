@@ -769,15 +769,13 @@ st.markdown("""
   box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
 }
 .hero-left {
-  position: relative; /* needed for absolute overlay */
+  position: relative; /* for absolute overlay */
   flex: 1 1 0px;
   min-width: 260px;
   max-width: 340px;
   height: 100%;
   padding: 0;
-  box-shadow: 2px 0 18px 0 #ffd16609;
   background: none;
-  overflow: hidden;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -791,49 +789,45 @@ st.markdown("""
   display: block;
 }
 
-/* Overlay container - transparent background so text colors stay same */
+/* Overlay text container */
 .hero-text-overlay {
   position: absolute;
-  bottom: 20px;
+  bottom: 30px; /* Adjust vertical position */
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
   text-align: center;
+  width: 90%;
+  color: inherit; /* inherit colors from children */
+  pointer-events: none; /* so image can still be interacted */
   z-index: 10;
-  /* No background so colors stay original */
-  padding: 0;
+  /* no background */
 }
 
-/* Keep original colors and font from your current styles */
+/* Use your existing hero-name, hero-role, hero-location styles exactly */
 .hero-text-overlay .hero-name {
-  color: #fff; /* change to original: white, or #fff is your original? */
+  color: #fff;
   font-size: 2.44rem;
   font-weight: 800;
-  text-align: center;
-  margin: 6px 0 0 0;
+  margin: 0;
   line-height: 1.17;
   letter-spacing: 0.01em;
-  text-shadow: none; /* remove if you want */
+  text-shadow: 0 0 6px rgba(0,0,0,0.7); /* optional for readability */
 }
 
 .hero-text-overlay .hero-role {
-  color: #ADD8E6; /* same as original */
+  color: #ADD8E6;
   font-size: 1.03rem;
-  margin-top: 3px;
-  margin-bottom: 0px;
-  text-align: center;
+  margin-top: 6px;
+  margin-bottom: 0;
   font-weight: normal;
 }
 
 .hero-text-overlay .hero-location {
-  color: #FFFFE0; /* same as original */
+  color: #FFFFE0;
   font-weight: 600;
   margin-top: 8px;
   font-size: 1.01rem;
-  text-align: center;
 }
-
-
 .hero-name {
   color: #fff;
   font-size: 2.44rem;
@@ -929,13 +923,14 @@ st.markdown("""
 <div class="hero-card">
   <div class="hero-left">
     <div class="hero-pic-glow">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg" />
     </div>
     <div class="hero-text-overlay">
       <div class="hero-name">Venkatesh<br>Soundararajan</div>
       <div class="hero-role">Software Development Intern<br>Data Engineering</div>
       <div class="hero-location">Calgary, AB, Canada</div>
     </div>
+  </div>
   </div>
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>

@@ -1435,7 +1435,6 @@ if user_input:
 
 st.markdown("""
 <hr style='border:1px solid #ddd; margin-top: 50px;' />
-
 <div style='text-align: center; font-size: 14px; color: grey;'>
     © 2025 Balu Soundararajan. All rights reserved.
 </div>

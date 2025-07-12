@@ -1437,3 +1437,62 @@ st.markdown("""
     © 2025 Balu Soundararajan. All rights reserved.
 </div>
 """, unsafe_allow_html=True)
+
+
+st.markdown("""
+<style>
+/* your existing navbar css ... */
+
+@media screen and (max-width: 768px) {
+  .navbar {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+  }
+  .mobile-nav-toggle {
+    display: block;
+    font-size: 2rem;
+    cursor: pointer;
+    background: #1F2A44;
+    color: #ffd166;
+    border-radius: 8px;
+    text-align: center;
+    padding: 10px 0;
+    user-select: none;
+    margin-bottom: 10px;
+  }
+}
+@media screen and (min-width: 769px) {
+  .mobile-nav-toggle {
+    display: none;
+  }
+}
+</style>
+
+<div class="navbar-container">
+  <div class="mobile-nav-toggle">&#9776;</div>
+  <div class="navbar">
+    <a href="#about">About Me</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#recognitions">Recognitions</a>
+    <a href="#projects">Projects Gallery</a>
+    <a href="#skills">Skills</a>
+    <a href="#buddybot">Buddy Bot</a>
+  </div>
+</div>
+
+<script>
+const toggle = document.querySelector('.mobile-nav-toggle');
+const navbar = document.querySelector('.navbar');
+
+toggle.addEventListener('click', () => {
+  if(navbar.style.display === 'flex') {
+    navbar.style.display = 'none';
+  } else {
+    navbar.style.display = 'flex';
+  }
+});
+</script>
+""", unsafe_allow_html=True)

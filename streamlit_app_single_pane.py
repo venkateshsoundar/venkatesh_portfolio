@@ -743,25 +743,21 @@ st.markdown("""
   z-index: 1;
 }
 .hero-pic-glow {
-  width: 200px;
-  height: 200px;
-  border-radius: 12%;
-  margin-bottom: 17px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: none;
+  display: flex !important;
+  justify-content: center !important;
+  margin-bottom: 20px !important;
 }
 .hero-pic-glow img {
-  width: 1800px !important;
-  height: 600px !important;
+  width: 220px !important;
+  height: 300px !important;
   border-radius: 12px !important;
   border: none !important;
   background: none !important;
   box-shadow: none !important;
-  object-fit: cover !important;
-  display: block !important;
- }
+  object-fit: contain !important;  /* changed from cover to contain to zoom out */
+  object-position: center !important; /* center the image */
+}
+</style>
 .hero-name {
   color: #fff;
   font-size: 2.44rem;

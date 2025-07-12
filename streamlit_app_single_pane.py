@@ -64,11 +64,6 @@ body {
     color: #fff;
 }
 
-/* Push content down to not be hidden */
-.sticky-spacer {
-    height: 10px;
-}
-
 /* Flex styling for links - desktop default */
 .navbar {
     display: flex;

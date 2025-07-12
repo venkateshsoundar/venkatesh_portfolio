@@ -1,8 +1,10 @@
+
 import streamlit as st
 import requests
 import io
 import PyPDF2
 import openai
+from openai import OpenAI
 import pandas as pd
 
 # ---- PAGE CONFIG & GLOBAL CSS ----

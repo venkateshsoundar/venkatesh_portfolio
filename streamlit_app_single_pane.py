@@ -108,28 +108,6 @@ body {
     }
 }
 
-@media screen and (max-width: 768px) {
-  .navbar {
-    display: none; /* Hide default navbar on small screens */
-  }
-  .mobile-nav-toggle {
-    display: block;
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 10px;
-    background: #1F2A44;
-    color: #ffd166;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
-}
-@media screen and (min-width: 769px) {
-  .mobile-nav-toggle-container {
-    display: none; /* Hide toggle for desktop */
-  }
-}
-
 </style>
 
 <!-- Sticky Nav HTML -->

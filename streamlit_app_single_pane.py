@@ -160,7 +160,7 @@ st.markdown("""
 <style>
 /* Prevent sections from being hidden behind the sticky nav */
 .section-anchor {
-  scroll-margin-top: 120px;  /* Adjust based on navbar + Streamlit top padding */
+  scroll-margin-top: 160px;  /* Adjust based on navbar + Streamlit top padding */
 }
 </style>
 """, unsafe_allow_html=True)
@@ -424,7 +424,7 @@ st.markdown("""
   margin-bottom: 2px;
 }
 .section-anchor {
-  scroll-margin-top: 120px; /* or 100px, depending on your navbar height */
+  scroll-margin-top: 160px; /* or 100px, depending on your navbar height */
 }
 .skill-chip {
   background: rgba(255,255,255,0.12);

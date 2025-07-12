@@ -140,6 +140,9 @@ body {
     .mobile-nav-toggle {
         display: none;
     }
+        .navbar-container {
+        display: none !important;
+    }
 }
 
 </style>

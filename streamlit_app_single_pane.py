@@ -11,74 +11,41 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
+html {
+  scroll-behavior: smooth;
+}
 .block-container {
-    padding-top: 5 !important;
-    margin-top: 5 !important;
+  padding-top: 5px !important;
+  margin-top: 5px !important;
 }
 body {
-    margin-top: 5 !important;
-    padding-top: 5 !important;
+  margin-top: 5px !important;
+  padding-top: 5px !important;
 }
-/* Fix navbar at top */
+
+/* Navbar container */
 .navbar-container {
     position: fixed;
-    top: 0;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000;
+    z-index: 1000 !important;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    padding: 0 0 0 0;
+    padding: 0;
     border-radius: 0 0 18px 18px;
+    pointer-events: auto;
 }
 
-/* Flex styling for links */
-.navbar {
-    display: flex;
-    gap: 28px;
-    justify-content: center;
-    background: #1F2A44;
-    padding: 20px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-/* Nav link styling */
-.navbar a {
-    color: #ffd166;
-    font-weight: bold;
-    font-size: 1.08rem;
-    text-decoration: none;
-    padding: 7px 22px;
-    border-radius: 8px;
-    transition: color 0.18s, background 0.18s;
-}
-.navbar a:hover {
-    background: #ffd16633;
-    color: #fff;
-}
-
-/* Push content down to not be hidden */
-.sticky-spacer {
-    height: 10px;
-}
-
-/* Flex styling for links - desktop default */
+/* Navbar content */
 .navbar {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: #1F2A44;
-    padding: 12px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
     gap: 28px;
+    padding: 14px 0 10px 0;
+    background: #1F2A44;
+    border-radius: 0 0 18px 18px;
 }
 
 .navbar a {
@@ -91,49 +58,36 @@ body {
     transition: color 0.18s, background 0.18s;
     white-space: nowrap;
 }
+.navbar a:hover {
+    background: #ffd16633;
+    color: #fff;
+}
 
-/* Responsive tweaks for smaller screens */
+/* Responsive */
 @media screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
         align-items: center;
         gap: 14px;
     }
-
     .navbar a {
         width: 100%;
         text-align: center;
         padding: 10px;
         font-size: 1rem;
     }
+    .navbar-container {
+        display: none; /* Optional: hide navbar on mobile */
+    }
 }
 
-@media screen and (max-width: 768px) {
-  .navbar-container {
-    display: none; /* Hide full navbar on small screen */
-  }
-  .mobile-nav-toggle {
-    display: block;
-    text-align: center;
-    font-size: 1.5rem;
-    padding: 10px;
-    background: #1F2A44;
-    color: #ffd166;
-    border-radius: 10px;
-    cursor: pointer;
-    margin-bottom: 10px;
-  }
+/* Anchor scroll fix */
+.section-anchor {
+    scroll-margin-top: 120px;
 }
-@media screen and (min-width: 769px) {
-  .mobile-nav-toggle-container {
-    display: none; /* Hide toggle on desktop */
-  }
-}
-
-
 </style>
 
-<!-- Sticky Nav HTML -->
+<!-- Sticky Navbar HTML -->
 <div class="navbar-container">
   <div class="navbar">
     <a href="#about">About Me</a>
@@ -147,9 +101,10 @@ body {
   </div>
 </div>
 
-<!-- Spacer so content isn't overlapped -->
-<div class="sticky-spacer"></div>
+<!-- Spacer to prevent content overlap -->
+<div style='height: 80px;'></div>
 """, unsafe_allow_html=True)
+
 
 st.markdown("""
 <style>

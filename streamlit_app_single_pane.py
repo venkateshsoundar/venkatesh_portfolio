@@ -67,12 +67,7 @@ body {
 }
 </style>
 
-import streamlit as st
-
-st.set_page_config(layout="wide")
-
-st.markdown("""
-<style>
+st.markdown("""<style>
 .navbar-container {
   width: 100%;
   background-color: #22304A;

@@ -67,6 +67,51 @@ body {
 }
 </style>
 
+<style>
+  .navbar-container {
+    width: 100%;
+    background-color: #22304A;
+  }
+
+  .navbar {
+    display: flex;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
+    justify-content: center;
+    padding: 10px;
+  }
+
+  .navbar a {
+    color: white;
+    padding: 10px 15px;
+    text-decoration: none;
+    font-weight: bold;
+    text-align: center;
+    transition: background-color 0.3s;
+  }
+
+  .navbar a:hover {
+    background-color: #444;
+    border-radius: 8px;
+  }
+
+  @media (max-width: 768px) {
+    .navbar {
+      justify-content: space-around;
+    }
+
+    .navbar a {
+      flex: 1 1 45%; /* Two per row */
+      margin: 5px 0;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .navbar a {
+      flex: 1 1 100%; /* One per row */
+    }
+  }
+</style>
+
 <!-- Sticky Nav HTML -->
 <div class="navbar-container">
   <div class="navbar">

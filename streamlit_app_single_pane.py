@@ -11,41 +11,74 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
-html {
-  scroll-behavior: smooth;
-}
 .block-container {
-  padding-top: 5px !important;
-  margin-top: 5px !important;
+    padding-top: 5 !important;
+    margin-top: 5 !important;
 }
 body {
-  margin-top: 5px !important;
-  padding-top: 5px !important;
+    margin-top: 5 !important;
+    padding-top: 5 !important;
 }
-
-/* Navbar container */
+/* Fix navbar at top */
 .navbar-container {
     position: fixed;
-    top: 0;
+    top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;
-    z-index: 1000 !important;
+    z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    padding: 0;
+    padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
-    pointer-events: auto;
 }
 
-/* Navbar content */
+/* Flex styling for links */
+.navbar {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Nav link styling */
+.navbar a {
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 7px 22px;
+    border-radius: 8px;
+    transition: color 0.18s, background 0.18s;
+}
+.navbar a:hover {
+    background: #ffd16633;
+    color: #fff;
+}
+
+/* Push content down to not be hidden */
+.sticky-spacer {
+    height: 10px;
+}
+
+/* Flex styling for links - desktop default */
 .navbar {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 28px;
-    padding: 14px 0 10px 0;
     background: #1F2A44;
+    padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 28px;
 }
 
 .navbar a {
@@ -58,36 +91,49 @@ body {
     transition: color 0.18s, background 0.18s;
     white-space: nowrap;
 }
-.navbar a:hover {
-    background: #ffd16633;
-    color: #fff;
-}
 
-/* Responsive */
+/* Responsive tweaks for smaller screens */
 @media screen and (max-width: 768px) {
     .navbar {
         flex-direction: column;
         align-items: center;
         gap: 14px;
     }
+
     .navbar a {
         width: 100%;
         text-align: center;
         padding: 10px;
         font-size: 1rem;
     }
-    .navbar-container {
-        display: none; /* Optional: hide navbar on mobile */
-    }
 }
 
-/* Anchor scroll fix */
-.section-anchor {
-    scroll-margin-top: 120px;
+@media screen and (max-width: 768px) {
+  .navbar-container {
+    display: none; /* Hide full navbar on small screen */
+  }
+  .mobile-nav-toggle {
+    display: block;
+    text-align: center;
+    font-size: 1.5rem;
+    padding: 10px;
+    background: #1F2A44;
+    color: #ffd166;
+    border-radius: 10px;
+    cursor: pointer;
+    margin-bottom: 10px;
+  }
 }
+@media screen and (min-width: 769px) {
+  .mobile-nav-toggle-container {
+    display: none; /* Hide toggle on desktop */
+  }
+}
+
+
 </style>
 
-<!-- Sticky Navbar HTML -->
+<!-- Sticky Nav HTML -->
 <div class="navbar-container">
   <div class="navbar">
     <a href="#about">About Me</a>
@@ -97,14 +143,13 @@ body {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
-    <a href="#buddybot">Buddy Bot</a>
+    <a href="#skills">Buddy Bot</a>
   </div>
 </div>
 
-<!-- Spacer to prevent content overlap -->
-<div style='height: 80px;'></div>
+<!-- Spacer so content isn't overlapped -->
+<div class="sticky-spacer"></div>
 """, unsafe_allow_html=True)
-
 
 st.markdown("""
 <style>
@@ -625,14 +670,13 @@ st.markdown(
       .welcome-card {{
         background: url("{gif_url}") center/cover no-repeat;
         border-radius: 16px;
-        padding: 1rem;
+        padding: 3rem;
         color: white;
-        min-height: 200px;
+        min-height: 180px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
-        margin-top: -60px;
         margin-bottom:24px;
         box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
         transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
@@ -1285,7 +1329,7 @@ st.markdown("""
 </div>
 """, unsafe_allow_html=True)
 
-st.markdown('<a name="buddybot"></a>', unsafe_allow_html=True)
+st.markdown('<a name="Buddy bot"></a>', unsafe_allow_html=True)
 
 ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
 st.markdown(

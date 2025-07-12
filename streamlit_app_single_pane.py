@@ -29,7 +29,7 @@ body {
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    background: rgba(255, 255, 255, 0.0);
+    background: #ffffff;
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;

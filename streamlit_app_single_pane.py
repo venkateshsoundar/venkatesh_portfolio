@@ -1387,10 +1387,8 @@ st.markdown(
 )
   
 api_key = st.secrets["DEEPSEEK_API_KEY"]
-client = openai.OpenAI(
-      base_url="https://openrouter.ai/api/v1",
-      api_key=api_key,
-  )
+openai.api_key = api_key
+
 st.markdown("""
 <style>
 /* Force assistant message text to black */
@@ -1409,28 +1407,8 @@ div[data-testid="stChatMessageContent"] {
 </style>
 """, unsafe_allow_html=True)
 
-chat_container = st.container()
-with chat_container:
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "            
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat:free",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
 
-api_key = st.secrets["DEEPSEEK_API_KEY"]
-openai.api_key = api_key
+
 
 chat_container = st.container()
 with chat_container:

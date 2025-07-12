@@ -757,7 +757,6 @@ st.markdown("""
   object-fit: contain !important;  /* changed from cover to contain to zoom out */
   object-position: center !important; /* center the image */
 }
-</style>
 .hero-name {
   color: #fff;
   font-size: 2.44rem;

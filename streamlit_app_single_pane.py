@@ -927,12 +927,13 @@ st.markdown("""
     border: none; 
     cursor: pointer;      
     transition: background 0.25s ease;">
-  <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" 
+  <a href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" 
      target="_blank" 
      style="color: #22304A; text-decoration: none;">
     View Resume
   </a>
 </button>
+
 </div>
   </div>
 </div>

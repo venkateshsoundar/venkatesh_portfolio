@@ -918,17 +918,21 @@ st.markdown("""
     </div>
     <div style="text-align: center; margin-top: 20px;">
   <button style="
-      background: #FFFFE0; 
-      color: #FFF9C4; 
-      font-weight: 700; 
-      border-radius: 14px; 
-      padding: 14px 36px; 
-      font-size: 1.1rem; 
-      border: none; 
-      cursor: pointer;      
-      transition: background 0.25s ease;">
-    <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" download style="color: #22304A; text-decoration: none;">Download Resume</a>
-  </button>
+    background: #FFFFE0; 
+    color: #FFF9C4; 
+    font-weight: 700; 
+    border-radius: 14px; 
+    padding: 14px 36px; 
+    font-size: 1.1rem; 
+    border: none; 
+    cursor: pointer;      
+    transition: background 0.25s ease;">
+  <a href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" 
+     target="_blank" 
+     style="color: #22304A; text-decoration: none;">
+    View Resume
+  </a>
+</button>
 </div>
   </div>
 </div>

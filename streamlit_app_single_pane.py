@@ -1465,7 +1465,8 @@ with chat_container:
         prompt = (
             "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
             "\n\nAnswer the question based only on this profile. If you can't, say you don't know.\nQuestion: "+
-            "Don't reveal that you provide based on JSON data and always represent like my buddy and you know me"            
+            "Don't reveal that you provide based on JSON data and always represent like my buddy and you know me"+
+            "you should represent me and this is for chatbot for my profile viewers"            
             + user_input
         )
         with st.spinner("Assistant is typing..."):

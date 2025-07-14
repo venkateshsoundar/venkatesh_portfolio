@@ -551,7 +551,9 @@ resume_url = (
     "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 )
 resume_df = load_resume_df(resume_url)
-resume_json = resume_df.to_json(orient='records')
+#resume_json = resume_df.to_json(orient='records')
+resume_json="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.json"
+
 
 projects = [
     {

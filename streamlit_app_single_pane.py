@@ -1464,7 +1464,8 @@ with chat_container:
         st.chat_message("user").write(user_input)
         prompt = (
             "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "            
+            "\n\nAnswer the question based only on this profile. If you can't, say you don't know.\nQuestion: "+
+            "Don't reveal that you provide based on JSON data and always represent like my buddy and you know me"            
             + user_input
         )
         with st.spinner("Assistant is typing..."):

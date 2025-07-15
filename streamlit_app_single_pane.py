@@ -34,7 +34,7 @@ body {
     margin-top: 5 !important;
     padding-top: 5 !important;
 }
-/* Fix navbar at top */
+
 .navbar-container {
     position: fixed;    
     top: 0;              /* Fix to 0 so it starts at very top */

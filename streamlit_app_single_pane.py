@@ -1480,19 +1480,13 @@ with chat_container:
         st.chat_message("assistant").write(reply)
 
 
-st.markdown("""
-<hr style='border:1px solid #ddd; margin-top: 50px;' />
 
-<div style='text-align: center; font-size: 14px; color: grey;'>
-    © 2025 Balu Soundararajan. All rights reserved.
-</div>
-""", unsafe_allow_html=True)
 
 st.markdown("""
 <hr style='border: 0; border-top: 1px solid #eee; margin-top: 50px;' />
 
 <div style='text-align: center; font-size: 13px; color: #444;'>
-    🚀 Crafted with care by <strong>Balu Soundararajan</strong><br>
-    © 2025 | Powered by Python 🐍 + Streamlit ✨
+    Developed by <strong>Balu Venkatesh</strong><br>
+    © 2025 | Powered by Python & Streamlit 
 </div>
 """, unsafe_allow_html=True)

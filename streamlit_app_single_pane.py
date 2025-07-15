@@ -20,7 +20,7 @@ st.markdown("""
 
   gtag('config', 'G-9TDXL1JB47');
 </script>
-""", unsafe_allow_html=True)c
+""", unsafe_allow_html=True)
 
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----

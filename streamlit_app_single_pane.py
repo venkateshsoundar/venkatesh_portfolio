@@ -25,7 +25,6 @@ st.markdown("""
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
-
 .block-container {
     padding-top: 5 !important;
     margin-top: 5 !important;
@@ -37,7 +36,7 @@ body {
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;    
-    top: 0rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;
     height: 50px;

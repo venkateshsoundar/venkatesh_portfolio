@@ -37,20 +37,18 @@ body {
 /* Fix navbar at top */
 .navbar-container {
     position: fixed;    
-    top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    top: 0;              /* Fix to 0 so it starts at very top */
     left: 0;
     width: 100%;
-    height: 50px;
+    height: 50px;        /* Set your navbar height */
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    background: #ffffff;
-    padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;
-    padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
+    padding-top: 0;      /* Remove this 100px padding */
 }
 
 /* Flex styling for links */

@@ -20,11 +20,15 @@ st.markdown("""
 
   gtag('config', 'G-9TDXL1JB47');
 </script>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True)c
 
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
+<style>
+body, .main-content {
+  padding-top: 50px;  /* height of navbar */
+}
 .block-container {
     padding-top: 5 !important;
     margin-top: 5 !important;
@@ -1487,7 +1491,7 @@ st.markdown("""
 <hr style='border: 0; border-top: 1px solid #eee; margin-top: 50px;' />
 
 <div style='text-align: center; font-size: 13px; color: #444;'>
-    Developed by <strong>Balu Venkatesh</strong><br>
+    Developed by <strong>Venkatesh</strong><br>
     © 2025 | Powered by Python & Streamlit 
 </div>
 """, unsafe_allow_html=True)

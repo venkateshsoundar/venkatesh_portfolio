@@ -25,10 +25,7 @@ st.markdown("""
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
-<style>
-body, .main-content {
-  padding-top: 50px;  /* height of navbar */
-}
+
 .block-container {
     padding-top: 5 !important;
     margin-top: 5 !important;

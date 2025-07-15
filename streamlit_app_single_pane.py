@@ -8,6 +8,8 @@ import pandas as pd
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
+
+
 st.markdown("""
 <!-- Google tag (gtag.js) -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
@@ -18,12 +20,15 @@ st.markdown("""
 
   gtag('config', 'G-9TDXL1JB47');
 </script>
-""", unsafe_allow_html=True)
+""", unsafe_allow_html=True)c
 
 
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
+body, .main-content {
+  padding-top: 50px;  /* height of navbar */
+}
 .block-container {
     padding-top: 5 !important;
     margin-top: 5 !important;

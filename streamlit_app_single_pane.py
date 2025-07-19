@@ -73,7 +73,7 @@ body {
 /* Flex styling for links */
 .navbar {
     display: flex;
-    gap: 28px;
+    gap: 12px;
     justify-content: center;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;

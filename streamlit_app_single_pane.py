@@ -735,7 +735,7 @@ st.markdown(
       .welcome-card {{
         background: url("{gif_url}") center/cover no-repeat;
         border-radius: 16px;
-        padding: 3rem;
+        padding: 2rem;
         color: white;
         min-height: 180px;
         display: flex;

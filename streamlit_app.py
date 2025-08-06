@@ -2,6 +2,7 @@ import streamlit as st
 import requests
 import io
 import PyPDF2
+import openai
 from openai import OpenAI
 import pandas as pd
 from ats_tool import extract_text_from_pdf, calculate_ats_score, tailor_resume

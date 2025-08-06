@@ -2,8 +2,9 @@ import streamlit as st
 import requests
 import io
 import PyPDF2
-import openai
+from openai import OpenAI
 import pandas as pd
+from ats_tool import extract_text_from_pdf, calculate_ats_score, tailor_resume
 
 # --- Page configuration ---
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
@@ -694,7 +695,7 @@ with mid_col:
 
 
     api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = openai.OpenAI(
+    client = OpenAI(
         base_url="https://openrouter.ai/api/v1",
         api_key=api_key,
     )
@@ -719,6 +720,27 @@ with mid_col:
               )
               reply = response.choices[0].message.content
           st.chat_message("assistant").write(reply)
+
+    ats_container = st.container()
+    with ats_container:
+        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">ATS Resume Checker</div></div>', unsafe_allow_html=True)
+        uploaded_file = st.file_uploader("Upload Resume (PDF)", type=["pdf"], key="ats_resume")
+        job_desc = st.text_area("Job Description", key="ats_job_desc")
+        if uploaded_file and job_desc:
+            resume_text = extract_text_from_pdf(uploaded_file)
+            score, matched, missing = calculate_ats_score(resume_text, job_desc)
+            st.metric("ATS Score", f"{score}%")
+            st.write("**Matched Keywords:**", ", ".join(matched) if matched else "None")
+            st.write("**Missing Keywords:**", ", ".join(missing) if missing else "None")
+            if missing and st.button("Tailor Resume", key="tailor_resume"):
+                api_key = st.secrets.get("DEEPSEEK_API_KEY")
+                if not api_key:
+                    st.warning("API key not configured in Streamlit secrets.")
+                else:
+                    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+                    tailored = tailor_resume(resume_text, job_desc, missing, client)
+                    st.text_area("Tailored Resume", value=tailored, height=400)
+
     project_container = st.container()
     # --- Projects Showcase ---
     with project_container:

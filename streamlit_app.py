@@ -2,8 +2,9 @@ import streamlit as st
 import requests
 import io
 import PyPDF2
-import openai
+from openai import OpenAI
 import pandas as pd
+from ats_tool import extract_text_from_pdf, calculate_ats_score, tailor_resume
 
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
@@ -1498,7 +1499,69 @@ with chat_container:
             reply = response.choices[0].message.content
         st.chat_message("assistant").write(reply)
 
+    api_key = st.secrets["DEEPSEEK_API_KEY"]
+    client = OpenAI(
+        base_url="https://openrouter.ai/api/v1",
+        api_key=api_key,
+    )
+    chat_container=st.container()
+    with chat_container:
 
+    # Stateless chat - no history
+      user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+      if user_input:
+          st.chat_message("user").write(user_input)
+          prompt = (
+              "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
+              "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
+              + user_input
+          )
+          with st.spinner("Assistant is typing..."):
+              response = client.chat.completions.create(
+                  model="deepseek/deepseek-chat-v3-0324",
+                  messages=[
+                      {"role": "system", "content": prompt}
+                  ]
+              )
+              reply = response.choices[0].message.content
+          st.chat_message("assistant").write(reply)
+
+    ats_container = st.container()
+    with ats_container:
+        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">ATS Resume Checker</div></div>', unsafe_allow_html=True)
+        uploaded_file = st.file_uploader("Upload Resume (PDF)", type=["pdf"], key="ats_resume")
+        job_desc = st.text_area("Job Description", key="ats_job_desc")
+        if uploaded_file and job_desc:
+            resume_text = extract_text_from_pdf(uploaded_file)
+            score, matched, missing = calculate_ats_score(resume_text, job_desc)
+            st.metric("ATS Score", f"{score}%")
+            st.write("**Matched Keywords:**", ", ".join(matched) if matched else "None")
+            st.write("**Missing Keywords:**", ", ".join(missing) if missing else "None")
+            if missing and st.button("Tailor Resume", key="tailor_resume"):
+                api_key = st.secrets.get("DEEPSEEK_API_KEY")
+                if not api_key:
+                    st.warning("API key not configured in Streamlit secrets.")
+                else:
+                    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+                    tailored = tailor_resume(resume_text, job_desc, missing, client)
+                    st.text_area("Tailored Resume", value=tailored, height=400)
+
+    project_container = st.container()
+    # --- Projects Showcase ---
+    with project_container:
+        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
+        grid_html = '<div class="grid-container">'
+        for proj in projects:
+            grid_html += (
+                f'<div class="project-item hover-zoom">'
+                f'  <a href="{proj["url"]}" target="_blank">'
+                f'    <img src="{proj["image"]}" class="card-img"/>'
+                f'    <div class="overlay">{proj["title"]}</div>'
+                f'  </a>'
+                f'</div>'
+            )
+        grid_html += '</div>'
+        st.markdown(grid_html, unsafe_allow_html=True)
 
 
 st.markdown("""
@@ -1509,3 +1572,4 @@ st.markdown("""
     © 2025 | Powered by Python & Streamlit 
 </div>
 """, unsafe_allow_html=True)
+

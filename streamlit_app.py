@@ -1505,29 +1505,26 @@ with chat_container:
         base_url="https://openrouter.ai/api/v1",
         api_key=api_key,
     )
-    chat_container=st.container()
-    with chat_container:
 
-
-    ats_container = st.container()
-    with ats_container:
-        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">ATS Resume Checker</div></div>', unsafe_allow_html=True)
-        uploaded_file = st.file_uploader("Upload Resume (PDF)", type=["pdf"], key="ats_resume")
-        job_desc = st.text_area("Job Description", key="ats_job_desc")
-        if uploaded_file and job_desc:
-            resume_text = extract_text_from_pdf(uploaded_file)
-            score, matched, missing = calculate_ats_score(resume_text, job_desc)
-            st.metric("ATS Score", f"{score}%")
-            st.write("**Matched Keywords:**", ", ".join(matched) if matched else "None")
-            st.write("**Missing Keywords:**", ", ".join(missing) if missing else "None")
-            if missing and st.button("Tailor Resume", key="tailor_resume"):
-                api_key = st.secrets.get("DEEPSEEK_API_KEY")
-                if not api_key:
-                    st.warning("API key not configured in Streamlit secrets.")
-                else:
-                    client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
-                    tailored = tailor_resume(resume_text, job_desc, missing, client)
-                    st.text_area("Tailored Resume", value=tailored, height=400)
+ats_container = st.container()
+with ats_container:
+    st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">ATS Resume Checker</div></div>', unsafe_allow_html=True)
+    uploaded_file = st.file_uploader("Upload Resume (PDF)", type=["pdf"], key="ats_resume")
+    job_desc = st.text_area("Job Description", key="ats_job_desc")
+    if uploaded_file and job_desc:
+        resume_text = extract_text_from_pdf(uploaded_file)
+        score, matched, missing = calculate_ats_score(resume_text, job_desc)
+        st.metric("ATS Score", f"{score}%")
+        st.write("**Matched Keywords:**", ", ".join(matched) if matched else "None")
+        st.write("**Missing Keywords:**", ", ".join(missing) if missing else "None")
+        if missing and st.button("Tailor Resume", key="tailor_resume"):
+            api_key = st.secrets.get("DEEPSEEK_API_KEY")
+            if not api_key:
+                st.warning("API key not configured in Streamlit secrets.")
+            else:
+                client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
+                tailored = tailor_resume(resume_text, job_desc, missing, client)
+                st.text_area("Tailored Resume", value=tailored, height=400)
 
 
 st.markdown("""

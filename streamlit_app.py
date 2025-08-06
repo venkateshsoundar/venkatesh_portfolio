@@ -1508,24 +1508,6 @@ with chat_container:
     chat_container=st.container()
     with chat_container:
 
-    # Stateless chat - no history
-      user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-      if user_input:
-          st.chat_message("user").write(user_input)
-          prompt = (
-              "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-              "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-              + user_input
-          )
-          with st.spinner("Assistant is typing..."):
-              response = client.chat.completions.create(
-                  model="deepseek/deepseek-chat-v3-0324",
-                  messages=[
-                      {"role": "system", "content": prompt}
-                  ]
-              )
-              reply = response.choices[0].message.content
-          st.chat_message("assistant").write(reply)
 
     ats_container = st.container()
     with ats_container:
@@ -1546,23 +1528,6 @@ with chat_container:
                     client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
                     tailored = tailor_resume(resume_text, job_desc, missing, client)
                     st.text_area("Tailored Resume", value=tailored, height=400)
-
-    project_container = st.container()
-    # --- Projects Showcase ---
-    with project_container:
-        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-        grid_html = '<div class="grid-container">'
-        for proj in projects:
-            grid_html += (
-                f'<div class="project-item hover-zoom">'
-                f'  <a href="{proj["url"]}" target="_blank">'
-                f'    <img src="{proj["image"]}" class="card-img"/>'
-                f'    <div class="overlay">{proj["title"]}</div>'
-                f'  </a>'
-                f'</div>'
-            )
-        grid_html += '</div>'
-        st.markdown(grid_html, unsafe_allow_html=True)
 
 
 st.markdown("""

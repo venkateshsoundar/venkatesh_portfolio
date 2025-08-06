@@ -5,47 +5,226 @@ import PyPDF2
 import openai
 import pandas as pd
 
-# --- Page configuration ---
+# ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
-# --- Load resume bullets ---
-def load_resume_df(url):
-    r = requests.get(url)
-    r.raise_for_status()
-    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    records = []
-    for i, page in enumerate(reader.pages):
-        text = page.extract_text() or ""
-        sentences = [s.strip() for s in text.split('.') if s.strip()]
-        for sent in sentences:
-            records.append({"page": i+1, "sentence": sent})
-    return pd.DataFrame(records)
 
-resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
-)
-resume_df = load_resume_df(resume_url)
-# Serialize DataFrame to JSON for direct prompt
-resume_json = resume_df.to_json(orient='records')
+import streamlit.components.v1 as components
 
-# --- Projects list ---
-projects = [
-    {"title": "Canadian Quality of Life Analysis", "url": "https://github.com/venkateshsoundar/canadian-qol-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg"},
-    {"title": "Alberta Wildfire Analysis", "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg"},
-    {"title": "Toronto Crime Drivers", "url": "https://github.com/venkateshsoundar/toronto-crime-drivers", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg"},
-    {"title": "Weight Change Regression Analysis", "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg"},
-    {"title": "Calgary Childcare Compliance", "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg"},
-    {"title": "Social Media Purchase Influence", "url": "https://github.com/venkateshsoundar/social-media-purchase-influence", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg"},
-    {"title": "Obesity Level Estimation", "url": "https://github.com/venkateshsoundar/obesity-level-estimation", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg"},
-    {"title": "Weather Data Pipeline (AWS)",     "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",     "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg"},
-    {"title": "Gmail Sentimental Analysis", "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg"},
-    {"title": "Penguin Species Prediction Chatbot", "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg"},
-    {"title": "Uber Ride Prediction", "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp", "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg"}
-]
+# Google Analytics script using components.html
+components.html("""
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-9TDXL1JB47');
+</script>
+""", height=0)
 
-# --- Global CSS & Background ---
-st.markdown(
-    '''
+
+st.markdown("""
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-9TDXL1JB47');
+</script>
+""", unsafe_allow_html=True)
+
+
+# ---- FREEZED (FIXED) NAVIGATION BAR ----
+st.markdown("""
+<style>
+body, .main-content {
+  padding-top: 50px;  /* height of navbar */
+}
+.block-container {
+    padding-top: 5 !important;
+    margin-top: 5 !important;
+}
+body {
+    margin-top: 5 !important;
+    padding-top: 5 !important;
+}
+/* Fix navbar at top */
+.navbar-container {
+    position: fixed;    
+    top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    left: 0;
+    width: 100%;
+    height: 50px;
+    z-index: 1000;
+    background: #1F2A44;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    background: #ffffff;
+    padding: 0 0 0 0;
+    border-radius: 0 0 18px 18px;
+    display: flex;
+    padding-top: 100px;
+    flex-direction: column;
+    justify-content: flex-end;
+}
+
+/* Flex styling for links */
+.navbar {
+    display: flex;
+    gap: 28px;
+    justify-content: center;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+/* Nav link styling */
+.navbar a {
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 7px 22px;
+    border-radius: 8px;
+    transition: color 0.18s, background 0.18s;
+}
+.navbar a:hover {
+    background: #ffd16633;
+    color: #fff;
+}
+
+/* Push content down to not be hidden */
+.sticky-spacer {
+    height: 10px;
+}
+
+/* Flex styling for links - desktop default */
+.navbar {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background: #1F2A44;
+    padding: 12px 0 10px 0;
+    border-radius: 0 0 18px 18px;
+    margin-bottom: 20px;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    gap: 28px;
+}
+
+.navbar a {
+    color: #ffd166;
+    font-weight: bold;
+    font-size: 1.08rem;
+    text-decoration: none;
+    padding: 7px 18px;
+    border-radius: 8px;
+    transition: color 0.18s, background 0.18s;
+    white-space: nowrap;
+}
+
+/* Responsive tweaks for smaller screens */
+@media screen and (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        display: none; /* Hide navbar links by default on mobile */
+        width: 100%;
+        background: #1F2A44;
+        padding: 10px 0;
+        margin-bottom: 10px;
+        border-radius: 0 0 18px 18px;
+    }
+    .navbar.show {
+        display: flex; /* Show navbar links when toggled */
+    }
+    .navbar a {
+        width: 100%;
+        text-align: center;
+        padding: 10px 0;
+        font-size: 1rem;
+    }
+    .mobile-nav-toggle {
+        display: block;
+        background: #1F2A44;
+        color: #ffd166;
+        font-weight: bold;
+        font-size: 1.5rem;
+        padding: 10px 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        border: none;
+        margin-bottom: 10px;
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Hide toggle button on desktop */
+@media screen and (min-width: 769px) {
+    .mobile-nav-toggle {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .navbar-container {
+        display: none !important;
+    }
+      .block-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+  }
+  body {
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+  .sticky-spacer {
+    height: 0 !important;
+  }
+}
+
+</style>
+
+<!-- Sticky Nav HTML -->
+<div class="navbar-container">
+  <button class="mobile-nav-toggle" onclick="toggleMenu()">☰ Menu</button>
+  <div class="navbar" id="navbarLinks">
+    <a href="#about">About Me</a>
+    <a href="#education">Education</a>
+    <a href="#experience">Experience</a>
+    <a href="#certifications">Certifications</a>
+    <a href="#recognitions">Recognitions</a>
+    <a href="#projects">Projects Gallery</a>
+    <a href="#skills">Skills</a>
+    <a href="#buddybot">Buddy Bot</a>
+  </div>
+</div>
+
+<!-- Spacer so content isn't overlapped -->
+<div class="sticky-spacer"></div>
+
+<script>
+function toggleMenu() {
+  const navbar = document.getElementById("navbarLinks");
+  if (navbar.classList.contains("show")) {
+    navbar.classList.remove("show");
+  } else {
+    navbar.classList.add("show");
+  }
+}
+</script>
+""", unsafe_allow_html=True)
+
+
+st.markdown("""
 <style>
 .stApp {
   background: url('https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/desk-with-objects.jpg') center/cover no-repeat;
@@ -53,18 +232,43 @@ st.markdown(
   color: #ffffff;
   font-family: 'Poppins', sans-serif;
 }
+.stTabs [data-baseweb="tab-list"] {
+    gap: 10px;
+    border-bottom: 3px solid #22304A;
+}
+.stTabs [data-baseweb="tab"] {
+    background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+    color: #ffd166 !important;
+    border-radius: 12px 12px 0 0 !important;
+    padding: 16px 36px !important;
+    font-size: 1.14rem;
+    font-weight: bold;
+    margin-bottom: -3px !important;
+    transition: all .25s;
+}
+.stTabs [data-baseweb="tab"]:hover {
+    color: #fff !important;
+    background: linear-gradient(135deg, #406496 0%, #22304A 100%);
+}
+.stTabs [aria-selected="true"] {
+    background: linear-gradient(135deg, #22304A 0%, #ffd166 150%) !important;
+    color: #222 !important;
+    border-bottom: 4px solid #ffd166 !important;
+    transform: scale(1.06) translateY(-2px);
+    box-shadow: 0 6px 22px rgba(44,62,80,0.13);
+}
 .card {
   width: 100% !important;
   border-radius: 12px;
   padding: 20px;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
   background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
-  transition: transform .3s ease, box-shadow .3s ease;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
   text-align: center;
 }
-.card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 8px 16px rgba(0,0,0,0.7);
+.card:hover, .card.hover-zoom:hover {
+  transform: translateY(-5px) scale(1.04);
+  box-shadow: 0 8px 16px rgba(0,0,0,0.24);
 }
 .section-title {
   font-size: 1.6rem;
@@ -73,59 +277,24 @@ st.markdown(
   padding: 8px;
   border-radius: 6px;
 }
-.profile-pic-popout {
-  width: 160px;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  top: 20px;
-  z-index: 10;
-}
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  border: 2px solid #406496 !important;     /* <-- blue border */
-  border-radius: 10px !important;           /* rounded corners (optional) */
-  background: #fff !important;              /* or any background */
-  color: #222 !important;
-  font-size: 1.08rem !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.08);
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-}
-.profile-card-container {
-  position: relative;
-  width: 100%;
-  margin-bottom: 20px;
-}
-.profile-card-content {
-  padding-top: 200px;
-}
-
-.contact-icon {
-  width: 30px;
-  height: 30px;
-  filter: invert(100%);
-  color:#ADD8E6;
-  margin: 0 8px;
-  vertical-align: middle;
+.grid-container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+  margin-bottom: 32px;
 }
 .project-item {
   position: relative;
   aspect-ratio: 1/1;
   overflow: hidden;
   border-radius: 12px;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
 }
 .card-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform .3s ease;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1);
 }
 .project-item:hover .card-img {
   transform: scale(1.05);
@@ -145,492 +314,452 @@ input[data-baseweb="input"] {
 .project-item:hover .overlay {
   opacity: 1;
 }
-.typewriter {
-  width: fit-content;
-  margin: 0 auto 20px;
+.profile-pic-popout {
+  width: 160px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0%;
+  border: 2px solid #fff;
+  box-shadow: 0 2px 8px rgba(44, 62, 80, 0.18);
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 20px;
+  z-index: 10;
 }
-.typewriter h1 {
-  display: inline-block;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: .15em solid #5A84B4;
-  animation: typing 3.5s steps(40,end), blink-caret .75s step-end infinite;
-  color: #ffffff;
-}
-@keyframes typing { from { width: 0; } to { width: 100%; } }
-@keyframes blink-caret { from, to { border-color: transparent; } 50% { border-color: #5A84B4; } }
-.details-summary {
-  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%) !important;
-  color: #ffffff !important;
-  font-size: 1.6rem !important;
-  font-weight: bold !important;
-  padding: 20px;
-  border-radius: 12px;
-  margin-bottom: 10px;
-  text-align: center;
-  cursor: pointer;
-}
-.grid-container {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 20px;
+.profile-card-container {
+  position: relative;
+  width: 100%;
   margin-bottom: 20px;
 }
-
-/* --- Make chat_input box dark and bold --- */
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  background: #26334d !important;        /* deep blue-gray */
-  color: #222 !important;                /* white text */
-  border: 2px solid #5A84B4 !important;  /* blue border */
-  border-radius: 12px !important;
-  font-size: 1.08rem !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.14);
-  margin-top: 10px !important;
-  margin-bottom: 10px !important;
-  transition: box-shadow 0.2s, border 0.2s;
+.profile-card-content {
+  padding-top: 200px;
 }
-[data-testid="stChatInput"] input:focus,
-.stChatInput input:focus,
-input[data-baseweb="input"]:focus {
-  border: 2px solid #ffd166 !important;  /* gold highlight on focus */
-  outline: none !important;
-  box-shadow: 0 0 0 2px #ffd16666;
+.contact-icon {
+  width: 32px;
+  height: 32px;
+  filter: invert(100%);
+  color:#ADD8E6;
+  margin: 0 8px;
+  vertical-align: middle;
 }
-
-/* Try to target the chat input's container for border */
-[data-testid="stChatInput"] {
-  border: 2px solid #406496 !important;
-  border-radius: 12px !important;
-  background: #fff !important;
-  box-shadow: 0 2px 10px rgba(30,50,100,0.09);
-  padding: 0 !important;
+.edu-cards-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-top: 20px;
+  margin-bottom: 18px;
 }
-[data-testid="stChatInput"] input,
-.stChatInput input,
-input[data-baseweb="input"] {
-  border: none !important; /* Let the outer border show! */
-  background: transparent !important;
-  box-shadow: none !important;
-  color: #222 !important;
-  font-size: 1.08rem !important;
+.edu-card {
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+  border-radius: 15px;
+  padding: 22px 14px 16px 14px;
+  box-shadow: 0 2px 10px rgba(30,50,80,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 170px;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+  border: 2px solid #40649622;
 }
-[data-testid="stChatInput"]:focus-within {
-  border: 2px solid #FFD166 !important; /* gold on focus */
-  box-shadow: 0 0 0 2px #ffd16633;
+.edu-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(20,40,80,0.19);
+  background: linear-gradient(135deg, #406496 0%, #34495E 100%);
 }
-div[data-testid="stSpinner"] > div {
-    color: #111 !important;    /* black text */
-    font-weight: 600;
+.edu-card-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 11px;
+  background: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 8px rgba(44,62,80,0.09);
+  border: 1.5px solid #eee;
 }
-.project-title {
-  text-align: center;
-  margin-top: 8px;       /* space above the title */
-  font-weight: bold;
-  color: #ffffff;
+.edu-card-degree { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px; color: #ffd166;}
+.edu-card-univ { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
+.edu-card-date { color: #fff; font-size: 0.98rem;}
+/* Awards/Certifications */
+.cert-grid, .awards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+  margin-top: 18px;
+  margin-bottom: 2px;
 }
-.overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(0,0,0,0.6);
+.cert-card, .award-card {
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(60,100,160,0.07);
+  padding: 18px 18px 14px 18px;
+  min-height: 80px;
+  transition: transform .17s, box-shadow .17s;
+  border: 1.5px solid #40649644;
+  text-align: left;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.cert-card:hover, .award-card:hover {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 8px 24px rgba(20,60,120,0.15);
+  background: linear-gradient(135deg, #22304A 0%, #406496 88%);
+}
+.cert-title, .award-title { font-weight: bold; font-size: 1.07rem; color: #ffd166; margin-bottom: 2px; margin-top: 0;}
+.cert-provider, .award-sub { font-size: 0.99rem; color: #ADD8E6; margin-bottom: 2px;}
+.cert-year, .award-year { font-size: 0.97rem; color: #fff; opacity: 0.8;}
+.award-year {margin-bottom: 2px;}
+/* Experience */
+.exp-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+.exp-card {
+  background: linear-gradient(135deg, #34495E 0%, #406496 100%);
+  border-radius: 15px;
+  padding: 22px 14px 16px 14px;
+  box-shadow: 0 2px 10px rgba(30,50,80,0.13);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 215px;
+  transition: transform .3s cubic-bezier(.4,1.6,.6,1), box-shadow .3s;
+  border: 2px solid #40649622;
+}
+.exp-card:hover {
+  transform: translateY(-7px) scale(1.03);
+  box-shadow: 0 8px 18px rgba(20,40,80,0.19);
+  background: linear-gradient(135deg, #406496 0%, #34495E 100%);
+}
+.exp-card-logo {
+  width: 56px;
+  height: 56px;
+  object-fit: contain;
+  border-radius: 11px;
+  background: #fff;
+  margin-bottom: 10px;
+  box-shadow: 0 1px 8px rgba(44,62,80,0.09);
+  border: 1.5px solid #eee;
+}
+.exp-card a.toggle-link {
+      display: block;
+      color: #ffd166;
+      margin-top: 10px;
+      font-weight: 500;
+      cursor: pointer;
+      text-align: right;
+}
+.exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
+.exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
+.exp-card-date { color: #ffd166; font-size: 0.98rem;}
+/* Skills */
+.skills-category {
+  margin-bottom: 14px;
+}
+.skills-header {
+  font-size: 1.04rem;
+  color: #ffd166;
+  font-weight: 600;
+  margin-bottom: 4px;
   display: flex;
   align-items: center;
+  gap: 8px;
+}
+.skill-icon {
+  width: 20px;
+  height: 20px;
+  vertical-align: middle;
+  filter: brightness(0.95) invert(0.09) sepia(1) hue-rotate(165deg) saturate(6);
+}
+.skills-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+.section-anchor {
+  scroll-margin-top: 160px; /* or 100px, depending on your navbar height */
+}
+.skill-chip {
+  background: rgba(255,255,255,0.12);
+  padding: 6px 14px;
+  border-radius: 16px;
+  font-size: 0.97rem;
+  color: #fff;
+  font-weight: 500;
+  border: 1.5px solid #40649633;
+}
+.profile-row {
+  display: flex;
+  gap: 32px;
   justify-content: center;
-  text-align: center;       /* ← ensure multi-line is centered */
-  opacity: 0;
-  transition: opacity .3s ease;
-  font-size: 1.2rem;
-  color: #ffffff;
-  padding: 0 8px;           /* optional: add horizontal padding */
-}
-
-</style>
-    ''', unsafe_allow_html=True
-)
-
-# --- Layout ---
-left_col, mid_col, right_col = st.columns([1,2,1], gap="small")
-
-# --- Left Pane (profile pic pops out of card) ---
-with left_col:
-    st.markdown('''
-    <div class="profile-card-container">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"
-           class="profile-pic-popout" />
-      <div class="card profile-card-content hover-zoom">
-        <h2>Venkatesh Soundararajan</h2>
-        <p><span style="color:#ADD8E6;"><strong>Software Development Intern</strong><br>Data Engineering</span></p>
-        <span style="color:#ffd166;"><strong>🍁 Calgary, AB, Canada</strong></span>
-      </div>
-    </div>
-    ''', unsafe_allow_html=True)
-
-    st.markdown(
-        '<div class="card hover-zoom"><div class="section-title" style="background:#34495E;">Contact</div>' +
-        '<div style="display:flex; justify-content:center; gap:16px; margin-top:10px;color:#ADD8E6">' +
-        '<a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" class="contact-icon"/></a>' +
-        '<a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" class="contact-icon"/></a>' +
-        '<a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" class="contact-icon"/></a>' +
-        '<a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" class="contact-icon"/></a>' +
-        '</div></div>',
-        unsafe_allow_html=True
-    )
-
-    st.markdown(
-    """
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Education</div>
-      <div style="text-align:left; margin-left:10px;">
-        <p>
-          <b>Masters in Data Science and Analytics</b><br>  
-          <span style="color:#ADD8E6;">University of Calgary, Alberta, Canada</span><br> 
-          <span style="color:#ffd166;">September 2024 – Present</span>
-        </p>
-        <p>
-          <b>Bachelor of Engineering</b><br>  
-          <span style="color:#ADD8E6;">Anna University, Chennai, India</span><br> 
-          <span style="color:#ffd166;">August 2009 – May 2013</span>                
-        </p>
-      </div>
-    </div>
-    """, unsafe_allow_html=True
-)
-
-
-    # Certifications & Courses as simple list
-    st.markdown(
-    """
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
-      <div style="text-align:left; margin-left:10px;">
-        <p>
-          <b>Insurance &amp; Guidewire Suite Analyst 10.0</b><br>
-          <span style="color:#ADD8E6;">Jasper – Guidewire Education</span><br>
-          <span style="color:#ffd166;">2024</span>
-        </p>
-        <p>
-          <b>Karate DSL</b><br>
-          <span style="color:#ADD8E6;">Udemy</span><br>
-          <span style="color:#ffd166;">2023</span>
-        </p>
-        <p>
-          <b>Rest API Automation</b><br>
-          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
-          <span style="color:#ffd166;">2023</span>
-        </p>
-        <p>
-          <b>Selenium WebDriver</b><br>
-          <span style="color:#ADD8E6;">TestLeaf Software Solutions Pvt. Ltd.</span><br>
-          <span style="color:#ffd166;">2022</span>
-        </p>
-        <p>
-          <b>SQL for Data Science</b><br>
-          <span style="color:#ADD8E6;">Coursera</span><br>
-          <span style="color:#ffd166;">2020</span>
-        </p>
-        <p>
-          <b>SDET</b><br>
-          <span style="color:#ADD8E6;">Capgemini</span><br>
-          <span style="color:#ffd166;">2020</span>
-        </p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-
-
-    st.markdown(
-    '''
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
-      <div class="awards-grid">
-        <div class="award-badge">
-          <div class="award-year">2022 & 2023</div>
-          <div class="award-title">Spot Award</div>
-          <div class="award-sub">InsurCloud – Deloitte, Canada</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">2018</div>
-          <div class="award-title">Best Contributor</div>
-          <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">2017</div>
-          <div class="award-title">QE & A Maestro</div>
-          <div class="award-sub">Centene by Cognizant QE&A, USA</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">Q1 2017</div>
-          <div class="award-title">Pride of the Quarter</div>
-          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-        </div>
-        <div class="award-badge">
-          <div class="award-year">May 2014 & Aug 2015</div>
-          <div class="award-title">Pillar of the Month</div>
-          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
-        </div>
-      </div>
-    </div>
-
-    <style>
-      .awards-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
-        gap: 12px;
-        margin-top: 12px;
-      }
-      .award-badge {
-        background: rgba(255,255,255,0.1);
-        padding: 12px;
-        border-radius: 8px;
-        text-align: center;
-      }
-      .award-year {
-        font-size: 0.85rem;
-        color: #ffd166;
-        margin-bottom: 4px;
-      }
-      .award-title {
-        font-weight: bold;
-        font-size: 1rem;
-        margin-bottom: 4px;
-      }
-      .award-sub {
-        font-size: 0.9rem;
-        opacity: 0.8;
-      }
-    </style>
-    ''',
-    unsafe_allow_html=True
-)
-
-
-# --- Right Pane ---
-with right_col:
-    st.markdown("""
-<style>
-.exp-timeline {
-  position: relative;
-  margin-left: 25px;
-  margin-top: 20px;
-}
-.exp-item {
-  position: relative;
+  align-items: stretch;
   margin-bottom: 30px;
 }
-.exp-dot {
-  position: absolute;
-  left: -30px;
-  top: 7px;
-  width: 16px;
-  height: 16px;
-  background: #406496;
-  border-radius: 50%;
-  border: 2px solid #fff;
-  box-shadow: 0 0 0 3px #b3c6e2;
+.profile-card, .about-card {
+  flex: 1 1 0px;
+  min-width: 250px;
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 16px;
+  padding: 32px 18px 24px 18px;
+  box-shadow: 0 3px 16px rgba(44,62,80,0.16);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  animation: fadeUpCard .85s cubic-bezier(.5,1.6,.4,1) both;
 }
-.exp-item:not(:last-child)::after {
-  content: '';
-  position: absolute;
-  left: -22px;
-  top: 24px;
-  width: 2px;
-  height: 35px;
-  background: #b3c6e2;
-  z-index: 0;
+.profile-card {
+  max-width: 340px;
+  justify-content: flex-start;
 }
-.exp-title { font-weight: bold; font-size: 1.1rem; }
-.exp-company { color: #ADD8E6; font-size: 1rem; }
-.exp-date { color: #ffd166; font-size: 0.97rem; }
+.profile-pic-square {
+  width: 130px;
+  height: 130px;
+  object-fit: cover;
+  border-radius: 24px;
+  border: 2.5px solid #fff;
+  margin-bottom: 18px;
+  box-shadow: 0 2px 10px rgba(44,62,80,0.17);
+}
+.about-card {
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+@media (max-width: 900px) {
+  .profile-row {
+    flex-direction: column;
+    gap: 18px;
+  }
+  .about-card, .profile-card {
+    min-width: 0;
+    width: 100%;
+  }
+}
+.exp-responsibilities-box {    
+    padding: 12px 16px;
+    border-radius: 10px;
+    margin-top: 14px;    
+    font-size: 13px;
+    font-style: italic;
+    line-height: 1.6;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
+}
+
 </style>
-<div class="card hover-zoom">
-  <div class="section-title" style="background:#34495E;">Professional Experience</div>
-  <div class="exp-timeline">
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Software Developer Intern</div>
-      <div class="exp-company">Tech Insights Inc, Canada</div>
-      <div class="exp-date">May 2025 – Present</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Senior Consultant</div>
-      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-date">June 2024 – August 2024</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Consultant</div>
-      <div class="exp-company">Deloitte Consulting India Private Limited, India</div>
-      <div class="exp-date">October 2021 – June 2024</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Consultant</div>
-      <div class="exp-company">Capgemini Technology Services India Private Limited, India</div>
-      <div class="exp-date">May 2018 – October 2021</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Associate</div>
-      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-date">May 2016 – May 2018</div>
-    </div>
-    <div class="exp-item">
-      <div class="exp-dot"></div>
-      <div class="exp-title">Programmer Analyst</div>
-      <div class="exp-company">Cognizant Technology Solutions India Private Limited, India</div>
-      <div class="exp-date">Sep 2013 – May 2018</div>
-    </div>
-  </div>
-</div>
 """, unsafe_allow_html=True)
 
-    st.markdown(
-    '''
-    <div class="card hover-zoom">
-      <div class="section-title" style="background:#34495E;">Core Skills & Tools</div>
-      
-      <!-- Programming Languages -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Programming Languages</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Python</div>
-          <div class="skill-card">R</div>
-          <div class="skill-card">SQL</div>
-          <div class="skill-card">Java</div>
-          <div class="skill-card">VBA Macro</div>
-        </div>
-      </details>
+# ---- DATA LOADING ----
+def load_resume_df(url):
+    r = requests.get(url)
+    r.raise_for_status()
+    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
+    records = []
+    for i, page in enumerate(reader.pages):
+        text = page.extract_text() or ""
+        sentences = [s.strip() for s in text.split('.') if s.strip()]
+        for sent in sentences:
+            records.append({"page": i+1, "sentence": sent})
+    return pd.DataFrame(records)
 
-      <!-- Data Analysis Tools -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Data Analysis Tools</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Pandas</div>
-          <div class="skill-card">NumPy</div>
-          <div class="skill-card">Matplotlib</div>
-        </div>
-      </details>
-
-      <!-- Visualization Tools -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Data Visualization</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Power BI</div>
-          <div class="skill-card">Excel</div>
-        </div>
-      </details>
-
-      <!-- Statistical Analysis -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Statistical Analysis</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Hypothesis Tests</div>
-          <div class="skill-card">Regression</div>
-        </div>
-      </details>
-
-      <!-- Database Management Tools -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Database Management</summary>
-        <div class="skills-grid">
-          <div class="skill-card">MySQL</div>
-          <div class="skill-card">Oracle</div>
-          <div class="skill-card">NoSQL</div>
-        </div>
-      </details>
-
-      <!-- Version Control -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Version Control</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Git</div>
-        </div>
-      </details>
-
-      <!-- Project Management Tools-->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Project Management Tools</summary>
-        <div class="skills-grid">
-          <div class="skill-card">JIRA</div>
-          <div class="skill-card">ALM</div>
-          <div class="skill-card">Rally</div>
-        </div>
-      </details>
-
-      <!-- QA Automation & Insurance -->
-      <details open>
-        <summary style="font-weight:bold; cursor:pointer;">Automation & Insurance Suite</summary>
-        <div class="skills-grid">
-          <div class="skill-card">Selenium WebDriver</div>
-          <div class="skill-card">Guidewire</div>
-        </div>
-      </details>
-    </div>
-
-    <style>
-      .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-        gap: 8px;
-        margin: 8px 0 12px;
-      }
-      .skill-card {
-        background: rgba(255,255,255,0.15);
-        padding: 6px;
-        border-radius: 6px;
-        font-size: 0.9rem;
-        text-align: center;
-      }
-      details summary {
-        list-style: none;
-      }
-      details summary::-webkit-details-marker {
-        display: none;
-      }
-    </style>
-    ''',
-    unsafe_allow_html=True
+resume_url = (
+    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
 )
-
-    
-# --- Center Pane ---
-with mid_col:
-    gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+resume_df = load_resume_df(resume_url)
+resume_json = resume_df.to_json(orient='records')
+#resume_json="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.json"
 
 
-    # Inject CSS for a .welcome-card class
-    st.markdown(
+projects = [
+    {
+        "title": "Canadian Quality of Life Analysis",
+        "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
+        "tools": ["Python", "Pandas", "Seaborn", "Tableau"],
+        "desc": "Analyzed Canadian provinces' quality of life using demographic data and advanced data visualization."
+    },
+    {
+        "title": "Alberta Wildfire Analysis",
+        "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
+        "tools": ["Python", "GeoPandas", "Power BI"],
+        "desc": "Mapped and predicted wildfire trends in Alberta with geospatial analysis and interactive dashboards."
+    },
+    {
+        "title": "Toronto Crime Drivers",
+        "url": "https://github.com/venkateshsoundar/toronto-crime-drivers",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg",
+        "tools": ["Python", "Pandas", "Matplotlib"],
+        "desc": "Investigated drivers of crime across Toronto neighborhoods to reveal actionable urban insights."
+    },
+    {
+        "title": "Weight Change Regression Analysis",
+        "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg",
+        "tools": ["Python", "Scikit-learn", "Seaborn"],
+        "desc": "Built regression models to predict weight changes based on lifestyle and demographic data."
+    },
+    {
+        "title": "Calgary Childcare Compliance",
+        "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg",
+        "tools": ["Python", "Pandas", "Plotly"],
+        "desc": "Assessed childcare center compliance in Calgary through data-driven dashboards."
+    },
+    {
+        "title": "Social Media Purchase Influence",
+        "url": "https://github.com/venkateshsoundar/social-media-purchase-influence",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg",
+        "tools": ["Python", "Scikit-learn", "Power BI"],
+        "desc": "Modeled and visualized the impact of social media on consumer purchase behavior."
+    },
+    {
+        "title": "Obesity Level Estimation",
+        "url": "https://github.com/venkateshsoundar/obesity-level-estimation",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg",
+        "tools": ["Python", "Logistic Regression", "Pandas"],
+        "desc": "Predicted obesity levels from health and lifestyle features using classification algorithms."
+    },
+    {
+        "title": "Weather Data Pipeline (AWS)",
+        "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg",
+        "tools": ["AWS", "Python", "Streamlit"],
+        "desc": "Automated weather data ingestion, storage, and visualization on AWS cloud with Streamlit dashboard."
+    },
+    {
+        "title": "Gmail Sentimental Analysis",
+        "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg",
+        "tools": ["Python", "NLTK", "Gmail API"],
+        "desc": "Classified and visualized sentiment of Gmail emails using NLP techniques."
+    },
+    {
+        "title": "Penguin Species Prediction Chatbot",
+        "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg",
+        "tools": ["Python", "Scikit-learn", "Streamlit"],
+        "desc": "Developed an interactive chatbot to predict penguin species from morphological features."
+    },
+    {
+        "title": "Uber Ride Prediction",
+        "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg",
+        "tools": ["Python", "XGBoost", "Matplotlib"],
+        "desc": "Predicted Uber ride durations using machine learning and explained predictions with visualizations."
+    }
+]
+
+
+# --- Custom Styling ---
+st.markdown("""
+<style>
+/* Square profile pic with animation */
+.profile-pic-square {
+    width: 180px;
+    height: 200px;
+    border-radius: 0px;
+    object-fit: cover;
+    border: 4px solid #ffd166;
+    box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
+    margin: 0 auto 20px auto;
+    display: block;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-pic-square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
+}
+
+/* Card styling */
+
+.hover-zoom:hover {
+    transform: scale(1.02);
+}
+
+/* Title style */
+.section-title {
+    font-size: 1.3rem;
+    font-weight: bold;
+    margin-bottom: 12px;
+    padding: 8px 16px;
+    border-radius: 10px;
+    color: #fff;
+    background:#22304A;
+}
+</style>
+""", unsafe_allow_html=True)
+
+# --- 2-Column Layout: Left Profile / Right About ---
+st.markdown("""
+<style>
+.profile-pic-square {
+    width: 160px;
+    height: 160px;
+    border-radius: 20px;
+    object-fit: cover;
+    border: 4px solid #ffd166;
+    box-shadow: 0 0 14px rgba(255, 209, 102, 0.6);
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+.profile-pic-square:hover {
+    transform: scale(1.05);
+    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
+}
+.profile-card-wrapper {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
+.profile-left {
+    flex: 0 0 180px;
+    text-align: center;
+}
+.profile-right {
+    flex: 1;
+}
+</style>
+""", unsafe_allow_html=True)
+
+gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
+st.markdown(
     f"""
     <style>
       .welcome-card {{
         background: url("{gif_url}") center/cover no-repeat;
         border-radius: 16px;
         padding: 3rem;
-        color: white;              /* or pick a contrasting color */
-        min-height: 180px;         /* adjust height as needed */
+        color: white;
+        min-height: 180px;
         display: flex;
         align-items: center;
         justify-content: center;
         text-align: center;
+        margin-bottom:24px;
+        box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
+        transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
+        position: relative;
+        cursor: pointer;
       }}
-      /* If you need to override Streamlit container padding: */
-      .stApp .welcome-card {{
-        margin: 0 auto 1rem auto;
+      .welcome-card:hover {{
+        transform: scale(1.035) translateY(-7px);
+        box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.17);
+        z-index: 4;
       }}
     </style>
     """,
     unsafe_allow_html=True,
 )
-
-# Now render your content inside that div
-    st.markdown(
+st.markdown(
     """
     <div class="welcome-card">
-      <div class="typewriter">
       <div>
         <h1>Hello and Welcome...</h1>
         <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
@@ -640,32 +769,665 @@ with mid_col:
     unsafe_allow_html=True,
 )
 
-    
-  #  st.markdown(
-  #      '<div class="card hover-zoom"><div class="typewriter"><h1>Hello....👋👋👋</h1></div>',
-  #      unsafe_allow_html=True
-  #  )
 
-    ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+st.markdown('<a name="about" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown("""
+<style>
+.hero-card {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 0;
+  background: linear-gradient(135deg, #253451 0%, #324665 100%);
+  border-radius: 24px;
+  box-shadow: 0 6px 26px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.08);
+  margin-bottom: 32px;
+  min-height: 330px;
+  position: relative;
+  overflow: hidden;
+  transition: transform .33s cubic-bezier(.37,1.7,.7,1), box-shadow .33s;
+}
+.hero-card:hover {
+  transform: translateY(-7px) scale(1.02);
+  box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
+}
+.hero-left {
+  flex: 1 1 0px;
+  min-width: 500px;
+  max-width: 600px;
+  background: linear-gradient(135deg, #253451 70%, #ffd16610 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 38px 0 26px 0;
+  box-shadow: 2px 0 18px 0 #ffd16609;
+  z-index: 1;
+}
+.hero-pic-glow {
+  display: flex !important;
+  justify-content: center !important;
+  margin-bottom: 20px !important;
+}
+.hero-pic-glow img {
+  width: 400px !important;         /* increased from 250px */
+  height: 250px !important;        /* increased from 250px */
+  border-radius: 24px !important;  /* more rounded corners */
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
+.hero-name {
+  color: #fff;
+  font-size: 2.44rem;
+  font-weight: 800;
+  text-align: center;
+  margin: 6px 0 0 0;
+  line-height: 1.17;
+  letter-spacing: 0.01em;
+}
+.hero-role {
+  color: #ADD8E6;
+  font-size: 1.03rem;
+  margin-top: 3px;
+  margin-bottom: 0px;
+  text-align: center;
+}
+.hero-location {
+  color: #FFFFE0;
+  font-weight: 600;
+  margin-top: 8px;
+  font-size: 1.01rem;
+  text-align: center;
+}
 
-    st.markdown(
+.hero-right {
+  flex: 2 1 0px;
+  padding: 38px 38px 16px 38px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: none;
+}
+.hero-about-title {
+  font-size: 1.13rem;
+  color: #ffd166;
+  font-weight: 700;
+  margin-bottom: 12px;
+  letter-spacing: .01em;
+}
+.hero-about-body {
+  font-size: 1.09rem;
+  color: #fff;
+  line-height: 1.7;
+  margin-bottom: 26px;
+}
+.hero-contact-bar {
+  width: 100%;
+  margin-top: 6px;
+  background: rgba(90, 130, 160, 0.12);
+  border-radius: 13px;
+  padding: 12px 0 6px 0;
+  text-align: center;
+  box-shadow: 0 2px 14px rgba(255,209,102,0.04);
+}
+.hero-contact-bar-title {
+  color: #fff;
+  font-weight: 600;
+  font-size: 1.10rem;
+  margin-bottom: 5px;
+  letter-spacing: 0.01em;
+}
+.hero-contact-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  margin-top: 7px;
+  margin-bottom: 3px;
+}
+.hero-contact-icons a {
+  display: inline-block;
+  border-radius: 8px;
+  padding: 3px;
+  transition: background 0.15s, transform 0.15s;
+}
+.hero-contact-icons a:hover {
+  background: #ffd16633;
+  transform: translateY(-2px) scale(1.11);
+}
+.hero-contact-icons img {
+  width: 30px;
+  height: 30px;
+  filter: invert(100%);
+}
+
+
+@media (max-width: 900px) {
+  .hero-card {flex-direction: column;align-items: center;}
+  .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
+}
+</style>
+
+<div class="hero-card">
+  <div class="hero-left">
+    <div class="hero-pic-glow">
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
+    </div>
+    <div class="hero-name">Venkatesh<br>Soundararajan</div>
+    <div class="hero-role">Software Development Intern<br>Data Engineering</div>
+    <div class="hero-location">Calgary, AB, Canada</div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-about-title">About Me</div>
+    <div class="hero-about-body">
+      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.
+      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.
+      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.
+      My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+    </div>
+    <div class="hero-contact-bar">
+      <div class="hero-contact-bar-title">Contact</div>
+      <div class="hero-contact-icons">
+        <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg"/></a>
+        <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg"/></a>
+        <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"/></a>
+        <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg"/></a>
+      </div>
+    </div>
+    <div style="text-align: center; margin-top: 20px;">
+  <button style="
+    background: #FFFFE0; 
+    color: #FFF9C4; 
+    font-weight: 700; 
+    border-radius: 14px; 
+    padding: 14px 36px; 
+    font-size: 1.1rem; 
+    border: none; 
+    cursor: pointer;      
+    transition: background 0.25s ease;">
+  <a href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" 
+     target="_blank" 
+     style="color: #22304A; text-decoration: none;">
+    View Resume
+  </a>
+</button>
+
+</div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<a name="education" class="section-anchor"></a>', unsafe_allow_html=True)
+# --- Spacer before next section ---
+st.markdown(
+    """
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Education</div>
+      <div class="edu-cards-grid">
+        <div class="edu-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo"/>
+          <div class="edu-card-degree">Masters in Data Science and Analytics</div>
+          <div class="edu-card-univ">University of Calgary, Alberta, Canada</div>
+          <div class="edu-card-date">September 2024 – Present</div>
+        </div>
+        <div class="edu-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-card-logo"/>
+          <div class="edu-card-degree">Bachelor of Engineering</div>
+          <div class="edu-card-univ">Anna University, Chennai, India</div>
+          <div class="edu-card-date">August 2009 – May 2013</div>
+        </div>
+      </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown(
+    """  
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Professional Experience</div>
+      <div class="exp-cards-grid">
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
+          <div class="exp-card-company">Tech Insights Inc, Canada</div>
+          <div class="exp-card-date">May 2025 – Present</div>
+          <div class="exp-responsibilities-box">
+            Developing a scalable Data Lineage framework using AWS (Glue, Lambda, S3, Athena), automating ETL workflows to support compliance and audit readiness. Built interactive dashboards with Power BI and AWS QuickSight, and implemented validation checkpoints to ensure data integrity.
+          </div>          
+        </div>
+      <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Senior Consultant</div>
+          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
+          <div class="exp-card-date">October 2021 – August 2024</div>
+           <div class="exp-responsibilities-box">
+            Functioned as a Business Analyst in Personal Lines insurance projects, actively engaging in 3 Amigos discussions to clarify requirements and define acceptance criteria. Developed an automated dashboard to reduce manual reporting effort and applied AWS cloud services including EC2, DynamoDB, and S3 for cloud-based components.
+          </div>
+      </div>
+      <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Consultant</div>
+          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+          <div class="exp-card-date">May 2018 – October 2021</div>
+          <div class="exp-responsibilities-box">
+            Led end-to-end testing for Guidewire-based Workers’ Compensation policies, ensuring comprehensive coverage across business scenarios and system workflows. Developed custom automation tools to enable real-time failure alerts and issue tracking, significantly improving test efficiency. Acted as a mentor to QA team members and drove agile ceremonies, consistently meeting sprint goals and delivery timelines.          
+            </div>
+      </div>
+      <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
+          <div class="exp-card-title">Associate</div>
+          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
+          <div class="exp-card-date">Sep 2013 – May 2018</div>
+          <div class="exp-responsibilities-box">
+            Demonstrated expertise in DB2 database and batch processing validation for enterprise-scale healthcare IT projects. Managed end-to-end test environment setup and execution, monitored critical KPIs for initiatives exceeding $2M in scope, and led structured knowledge transfer sessions to ensure continuity and operational readiness across project teams.          </div>
+      </div>
+    </div>
+    </div>
+    """, unsafe_allow_html=True)
+
+
+st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
+      <div class="cert-grid">
+        <div class="cert-card">
+          <div class="cert-title">Guidewire Insurance Suite Analyst 10.0</div>
+          <div class="cert-provider">Jasper – Guidewire Education</div>
+          <div class="cert-year">2024</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Karate DSL</div>
+          <div class="cert-provider">Udemy</div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Rest API Automation</div>
+          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+          <div class="cert-year">2023</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">Selenium WebDriver</div>
+          <div class="cert-provider">TestLeaf Software Solutions Pvt. Ltd.</div>
+          <div class="cert-year">2022</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">SQL for Data Science</div>
+          <div class="cert-provider">Coursera</div>
+          <div class="cert-year">2020</div>
+        </div>
+        <div class="cert-card">
+          <div class="cert-title">SDET</div>
+          <div class="cert-provider">Capgemini</div>
+          <div class="cert-year">2020</div>
+        </div>
+      </div>
+    </div>""", unsafe_allow_html=True)
+st.markdown('<a name="recognitions" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown(
+    """
+    <div class="card hover-zoom">
+      <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
+      <div class="awards-grid">
+        <div class="award-card">
+          <div class="award-title">Spot Award</div>
+          <div class="award-year">2022 & 2023</div>
+          <div class="award-sub">InsurCloud – Deloitte, Canada</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">Best Contributor</div>
+          <div class="award-year">2018</div>
+          <div class="award-sub">COMPASS Program – Hartford Insurance, USA</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">QE & A Maestro</div>
+          <div class="award-year">2017</div>
+          <div class="award-sub">Centene by Cognizant QE&A, USA</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">Pride of the Quarter</div>
+          <div class="award-year">Q1 2017</div>
+          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+        </div>
+        <div class="award-card">
+          <div class="award-title">Pillar of the Month</div>
+          <div class="award-year">May 2014 & Aug 2015</div>
+          <div class="award-sub">Health Net by Cognizant QE&A, USA</div>
+        </div>
+      </div>
+    </div>    
+    """,
+    unsafe_allow_html=True
+)
+
+
+# --- Your projects list goes here (use the same list as above) ---
+st.markdown('<a name="projects" class="section-anchor"></a>', unsafe_allow_html=True)
+st.markdown("""
+<style>
+.card.projects-gallery-pane {
+  background: linear-gradient(135deg, #1F2A44 0%, #324665 100%);
+  border-radius: 18px;
+  box-shadow: 0 4px 28px rgba(44,62,80,0.14);
+  padding: 22px 18px 28px 18px;
+  margin-bottom: 22px;
+  /* Remove max-width and margin auto for full width like other sections */
+}
+.section-title {
+  font-size: 1.35rem;
+  font-weight: bold;
+  margin-bottom: 22px;
+  color: #ffd166;
+  background:#2C3E50;
+  padding: 12px 0 12px 0;
+  border-radius: 10px;
+  text-align: center;
+  box-shadow: 0 1px 8px #22304A22;
+}
+.projects-4col-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: stretch;
+}
+.project-main-card {
+  background: linear-gradient(135deg, #202C41 0%, #324665 100%);
+  border-radius: 14px;
+  box-shadow: 0 2px 12px rgba(44,62,80,0.10);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 0;
+  transition: transform 0.18s, box-shadow 0.18s;
+  border: 1.5px solid #22304A2A;
+  height: 100%;
+  overflow: hidden;
+}
+.project-main-card:hover {
+  transform: translateY(-4px) scale(1.024);
+  box-shadow: 0 12px 32px #ffd1661c, 0 2px 8px #22304A19;
+  z-index: 2;
+}
+.project-img-holder {
+  width: 100%;
+  background: #222E40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-top: 20px;
+  padding-bottom: 10px;
+}
+.project-img-inner {
+  width: 90px;
+  height: 90px;
+  background: #fff;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 10px #22304A11;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.project-img-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform .18s cubic-bezier(.4,1.6,.6,1);
+  border-radius: 12px;
+}
+.project-main-card:hover .project-img-inner img {
+  transform: scale(1.07);
+}
+.project-card-info {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  padding: 8px 16px 16px 16px;
+}
+.project-title {
+  font-size: 1.07rem;
+  font-weight: bold;
+  color: #ffd166;
+  margin-bottom: 6px;
+  margin-top: 2px;
+  text-align: center;
+  min-height: 38px;
+}
+.project-desc {
+  color: #fff;
+  font-size: 0.98rem;
+  margin-bottom: 10px;
+  text-align: center;
+  flex: 1 1 0;
+}
+.project-tools-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-bottom: 7px;
+  justify-content: center;
+}
+.project-tool-badge {
+  background: linear-gradient(135deg,#e2e2e2 0%,#ffd166 88%);
+  color: #22304A;
+  font-size: 0.88rem;
+  border-radius: 9px;
+  padding: 2px 9px 1.5px 9px;
+  font-weight: 500;
+  margin-bottom: 2px;
+  box-shadow: 0 1px 3px #22304A13;
+}
+.project-card-link {
+  text-align: center;
+  margin-top: 6px;
+}
+.project-card-link a {
+  color: #ADD8E6;
+  font-size: 0.97rem;
+  text-decoration: underline;
+  font-weight: 600;
+  transition: color 0.13s;
+}
+.project-card-link a:hover {
+  color: #ffd166;
+}
+@media (max-width: 1200px) {
+  .projects-4col-grid {grid-template-columns: repeat(3, 1fr);}
+}
+@media (max-width: 900px) {
+  .projects-4col-grid {grid-template-columns: repeat(2, 1fr);}
+}
+@media (max-width: 600px) {
+  .projects-4col-grid {grid-template-columns: 1fr;}
+}
+</style>
+""", unsafe_allow_html=True)
+
+projects_html = '''
+<div class="card projects-gallery-pane hover-zoom">
+  <div class="section-title">Projects Gallery</div>
+  <div class="projects-4col-grid">
+'''
+
+for proj in projects:
+    tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
+    projects_html += (
+        f'<div class="project-main-card hover-zoom">'
+        f'<div class="project-img-holder">'
+        f'<div class="project-img-inner">'
+        f'<img src="{proj["image"]}" alt="{proj["title"]}"/>'
+        f'</div></div>'
+        f'<div class="project-card-info">'
+        f'<div class="project-title">{proj["title"]}</div>'
+        f'<div class="project-desc">{proj["desc"]}</div>'
+        f'<div class="project-tools-list">{tools_html}</div>'
+        f'<div class="project-card-link"><a href="{proj["url"]}" target="_blank">View on GitHub &rarr;</a></div>'
+        f'</div></div>'
+    )
+
+projects_html += '</div></div>'
+
+st.markdown(projects_html, unsafe_allow_html=True)
+
+
+st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
+
+st.markdown("""
+<style>
+.skills-section {
+  background: linear-gradient(120deg, #22304A 0%, #324665 100%);
+  border-radius: 28px;
+  padding: 36px 18px 32px 18px;
+  margin-bottom: 22px;
+  box-shadow: 0 8px 34px rgba(20,30,55,0.11), 0 2px 14px rgba(44,62,80,0.09);
+}
+.skills-header-title {
+  font-size: 1.35rem;
+  font-weight: bold;
+  color: #ffd166;
+  background: #2C3E50;
+  border-radius: 10px;
+  padding: 12px 0;
+  margin-bottom: 22px;
+  text-align: center;
+  box-shadow: 0 1px 8px #22304A22;
+}
+.skill-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+}
+.skill-card {
+  background: #1F2A44;
+  color: white;
+  width: 250px;
+  padding: 20px 16px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+  transition: transform 0.25s ease, box-shadow 0.25s;
+}
+.skill-card:hover {
+  transform: translateY(-6px) scale(1.04);
+  box-shadow: 0 12px 28px rgba(255,209,102,0.15), 0 6px 16px rgba(44,62,80,0.12);
+}
+.skill-title {
+  font-size: 1.1rem;
+  color: #ffd166;
+  margin-bottom: 12px;
+  font-weight: bold;
+}
+.skill-list {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-top: 8px;
+}
+.skill-list p {
+  margin: 0;
+  padding: 2px 0;
+}
+.hover-zoom {
+  transition: transform 0.25s ease, box-shadow 0.25s;
+}
+.hover-zoom:hover {
+  transform: scale(1.02);
+  box-shadow: 0 14px 32px rgba(255,209,102,0.12), 0 8px 22px rgba(44,62,80,0.1);
+}
+</style>
+
+
+<div class="skills-section hover-zoom">
+  <div class="skills-header-title">Core Skills and Tools</div>
+  <div class="skill-grid">
+<div class="skill-card">
+  <div class="skill-title">Programming Languages</div>
+  <div class="skill-list">
+    <p>Python</p>
+    <p>R</p>
+    <p>Java</p>
+    <p>Excel VBA</p>
+  </div>
+</div>
+<div class="skill-card">
+  <div class="skill-title">Cloud & Data</div>
+  <div class="skill-list">
+    <p>AWS</p>
+    <p>MySQL</p>
+    <p>Oracle</p>
+  </div>
+</div>
+<div class="skill-card">
+  <div class="skill-title">Data Viz & BI</div>
+  <div class="skill-list">
+    <p>Power BI</p>
+    <p>Tableau</p>
+    <p>Excel Dashboards</p>
+  </div>
+</div>
+<div class="skill-card">
+  <div class="skill-title">Dev Tools</div>
+  <div class="skill-list">
+    <p>Git</p>
+  </div>
+</div>
+<div class="skill-card">
+  <div class="skill-title">Project Management</div>
+  <div class="skill-list">
+    <p>JIRA</p>
+    <p>HP ALM</p>
+    <p>Rally</p>
+  </div>
+</div>
+<div class="skill-card">
+  <div class="skill-title">Insurance & QA</div>
+  <div class="skill-list">
+    <p>Guidewire Insurance Suite</p>
+    <p>Functional Testing</p>
+    <p>Selenium Automation</p>
+  </div>
+</div>
+  </div>
+</div>
+""", unsafe_allow_html=True)
+
+st.markdown('<a name="buddybot"></a>', unsafe_allow_html=True)
+
+ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
+st.markdown(
     f"""
     <style>
       .welcome-card2 {{
         background: url("{ai_url}") center/cover no-repeat;
         border-radius: 16px;
-        padding: 0;                   /* remove internal padding */
+        padding: 0;
         color: white;
-        height: 200px;                /* fixed banner height */
+        height: 200px;
         position: relative;
         overflow: hidden;
-        margin-bottom: 24px;
+        margin-bottom: 32px;
+        box-shadow: 0 6px 24px 0 rgba(60,100,180,0.09), 0 1.5px 8px 0 rgba(60,60,90,0.08);
+        transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
+        cursor: pointer;
+      }}
+      .welcome-card2:hover {{
+        transform: scale(1.035) translateY(-7px);
+        box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.16);
+        z-index: 4;
       }}
       .welcome-card2 .text-container {{
         position: absolute;
-        top: 70%;                     /* drop text lower */
-        right: 2rem;                  /* align text to the right edge */
-        transform: translateY(-50%);  /* center vertically at 60% point */
+        top: 70%;
+        right: 2rem;
+        transform: translateY(-50%);
         text-align: right;
       }}
       .welcome-card2 h2 {{
@@ -679,59 +1441,71 @@ with mid_col:
     unsafe_allow_html=True,
 )
 
-    st.markdown(
+st.markdown(
     """
     <div class="welcome-card2">
       <div class="text-container">
-        <h2>Ask Buddy Bot!</h2>
+        <h2>Ask Buddy Bot! </h2>
+        Powered by <strong>DeepSeek AI</strong> 
       </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
+  
+api_key = st.secrets["DEEPSEEK_API_KEY"]
+client = openai.OpenAI(
+      base_url="https://openrouter.ai/api/v1",
+      api_key=api_key,
+  )
+st.markdown("""
+<style>
+/* Force assistant message text to black */
+div[data-testid="stChatMessageContent"] {
+  background-color: #fff8dc !important;
+  color: #000000 !important;
+  border-radius: 16px;
+  padding: 14px 18px;
+  margin: 10px 0;
+  font-size: 1rem;
+  line-height: 1.6;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border-left: 6px solid #ffd166;
+  font-family: 'Segoe UI', sans-serif;
+}
+</style>
+""", unsafe_allow_html=True)
 
-
-
-
-    api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = openai.OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-    )
-    chat_container=st.container()
-    with chat_container:
-
-    # Stateless chat - no history
-      user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-      if user_input:
-          st.chat_message("user").write(user_input)
-          prompt = (
-              "You are Venkatesh's professional assistant. Here is his resume data as JSON:\n" + resume_json +
-              "\n\nAnswer the question based only on this DataFrame JSON. If you can't, say you don't know.\nQuestion: "
-              + user_input
-          )
-          with st.spinner("Assistant is typing..."):
-              response = client.chat.completions.create(
-                  model="deepseek/deepseek-chat-v3-0324",
-                  messages=[
-                      {"role": "system", "content": prompt}
-                  ]
-              )
-              reply = response.choices[0].message.content
-          st.chat_message("assistant").write(reply)
-    project_container = st.container()
-    # --- Projects Showcase ---
-    with project_container:
-        st.markdown('<div class="card hover-zoom"><div class="section-title" style="background:#2C3E50;">Projects Gallery</div></div>', unsafe_allow_html=True)
-        grid_html = '<div class="grid-container">'
-        for proj in projects:
-            grid_html += (
-                f'<div class="project-item hover-zoom">'
-                f'  <a href="{proj["url"]}" target="_blank">'
-                f'    <img src="{proj["image"]}" class="card-img"/>'
-                f'    <div class="overlay">{proj["title"]}</div>'
-                f'  </a>'
-                f'</div>'
+chat_container = st.container()
+with chat_container:
+    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
+    if user_input:
+        st.chat_message("user").write(user_input)
+        prompt = (
+            "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
+            "\n\nAnswer the question based only on this profile. If you can't, say you don't know.\nQuestion: "+
+            "Don't reveal that you provide based on JSON data and always represent like my buddy and you know me"+
+            "you should represent me and this is for chatbot for my profile viewers"            
+            + user_input
+        )
+        with st.spinner("Assistant is typing..."):
+            response = client.chat.completions.create(
+                model="deepseek/deepseek-chat:free",
+                messages=[
+                    {"role": "system", "content": prompt}
+                ]
             )
-        grid_html += '</div>'
-        st.markdown(grid_html, unsafe_allow_html=True)
+            reply = response.choices[0].message.content
+        st.chat_message("assistant").write(reply)
+
+
+
+
+st.markdown("""
+<hr style='border: 0; border-top: 1px solid #eee; margin-top: 50px;' />
+
+<div style='text-align: center; font-size: 13px; color: #444;'>
+    Developed by <strong>Venkatesh</strong><br>
+    © 2025 | Powered by Python & Streamlit 
+</div>
+""", unsafe_allow_html=True)

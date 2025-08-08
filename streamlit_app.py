@@ -2,10 +2,17 @@ import streamlit as st
 import requests
 import io
 import PyPDF2
-import openai
 from openai import OpenAI
 import pandas as pd
 from ats_tool import extract_text_from_pdf, calculate_ats_score, tailor_resume
+
+# Initialize OpenAI client lazily to speed up app start
+@st.cache_resource
+def get_openai_client():
+    api_key = st.secrets.get("DEEPSEEK_API_KEY")
+    if not api_key:
+        return None
+    return OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
 
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
@@ -1454,12 +1461,6 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
-  
-api_key = st.secrets["DEEPSEEK_API_KEY"]
-client = openai.OpenAI(
-      base_url="https://openrouter.ai/api/v1",
-      api_key=api_key,
-  )
 st.markdown("""
 <style>
 /* Force assistant message text to black */
@@ -1491,20 +1492,18 @@ with chat_container:
             + user_input
         )
         with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat:free",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
-
-    api_key = st.secrets["DEEPSEEK_API_KEY"]
-    client = OpenAI(
-        base_url="https://openrouter.ai/api/v1",
-        api_key=api_key,
-    )
+            client = get_openai_client()
+            if client is None:
+                st.warning("API key not configured.")
+            else:
+                response = client.chat.completions.create(
+                    model="deepseek/deepseek-chat:free",
+                    messages=[
+                        {"role": "system", "content": prompt}
+                    ]
+                )
+                reply = response.choices[0].message.content
+                st.chat_message("assistant").write(reply)
 
 ats_container = st.container()
 with ats_container:
@@ -1518,11 +1517,10 @@ with ats_container:
         st.write("**Matched Keywords:**", ", ".join(matched) if matched else "None")
         st.write("**Missing Keywords:**", ", ".join(missing) if missing else "None")
         if missing and st.button("Tailor Resume", key="tailor_resume"):
-            api_key = st.secrets.get("DEEPSEEK_API_KEY")
-            if not api_key:
+            client = get_openai_client()
+            if client is None:
                 st.warning("API key not configured in Streamlit secrets.")
             else:
-                client = OpenAI(base_url="https://openrouter.ai/api/v1", api_key=api_key)
                 tailored = tailor_resume(resume_text, job_desc, missing, client)
                 st.text_area("Tailored Resume", value=tailored, height=400)
 

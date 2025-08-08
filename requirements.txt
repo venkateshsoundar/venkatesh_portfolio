@@ -10,3 +10,4 @@ openai
 tabulate
 rich
 PyPDF2
+sentence-transformers

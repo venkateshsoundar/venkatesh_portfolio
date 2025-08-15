@@ -53,19 +53,19 @@ body {
 }
 /* Fix navbar at top */
 .navbar-container {
-    position: fixed;
+    position: fixed;    
     top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
     left: 0;
     width: 100%;
     height: 50px;
-    z-index: 100;
+    z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     background: #ffffff;
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;
-    padding-top: 0;
+    padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
 }
@@ -77,7 +77,7 @@ body {
     justify-content: center;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     position: sticky;
     top: 0;
     z-index: 100;
@@ -100,7 +100,7 @@ body {
 
 /* Push content down to not be hidden */
 .sticky-spacer {
-    height: 0px;
+    height: 10px;
 }
 
 /* Flex styling for links - desktop default */
@@ -111,7 +111,7 @@ body {
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 5px;
+    margin-bottom: 20px;
     position: sticky;
     top: 0;
     z-index: 100;

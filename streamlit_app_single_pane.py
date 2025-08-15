@@ -58,14 +58,14 @@ body {
     left: 0;
     width: 100%;
     height: 50px;
-    z-index: 1000;
+    z-index: 100;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     background: #ffffff;
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;
-    padding-top: 50px;
+    padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
 }

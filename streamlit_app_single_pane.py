@@ -915,7 +915,7 @@ st.markdown("""
 <div class="hero-card">
   <div class="hero-left">
     <div class="hero-pic-glow">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.png"/>
     </div>
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
     <div class="hero-role">Software Development Intern<br>Data Engineering</div>

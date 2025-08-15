@@ -65,7 +65,7 @@ body {
     padding: 0 0 0 0;
     border-radius: 0 0 18px 18px;
     display: flex;
-    padding-top: 100px;
+    padding-top: 50px;
     flex-direction: column;
     justify-content: flex-end;
 }

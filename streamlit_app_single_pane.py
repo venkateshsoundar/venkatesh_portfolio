@@ -743,7 +743,7 @@ st.markdown(
         justify-content: center;
         text-align: center;
         margin-bottom:24px;
-        margin-top:24px;
+        margin-top:0px;
         box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
         transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
         position: relative;

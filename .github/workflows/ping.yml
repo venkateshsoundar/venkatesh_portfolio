@@ -1,24 +1,32 @@
+# .github/workflows/ping.yml
 name: Keep Streamlit Awake
 
 on:
   schedule:
     - cron: "*/5 * * * *"   # every 5 minutes (UTC)
-  workflow_dispatch:         # allow manual run
+  workflow_dispatch:
 
 jobs:
   ping:
     runs-on: ubuntu-latest
     timeout-minutes: 2
     steps:
-      - name: Ping Streamlit app
+      - name: Ping Streamlit app (accept 2xx/3xx)
         run: |
           URLS=(
-            "https://venkateshbalu.streamlit.app/"   # ✅ your live app
+            "https://venkateshbalu.streamlit.app/"
           )
           for URL in "${URLS[@]}"; do
-            echo "Pinging $URL..."
-            curl -fLsS --max-time 20 \
+            TS=$(date +%s)
+            STATUS=$(curl -sS --max-time 20 \
               -A "streamlit-keepalive/1.0" \
-              "${URL}?keepalive=$(date +%s)" \
-              >/dev/null
+              -o /dev/null -w "%{http_code}" \
+              "${URL}?keepalive=${TS}")
+            echo "HTTP ${STATUS} for ${URL}"
+            if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+              echo "OK"
+            else
+              echo "Unexpected status ${STATUS}" 1>&2
+              exit 1
+            fi
           done

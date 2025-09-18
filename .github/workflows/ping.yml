@@ -67,7 +67,7 @@ jobs:
             // 4) If we clicked a wake button, wait briefly for render; else exit (no wake needed)
             if (clicked) {
               // give it up to ~30s to come up
-              const deadline = Date.now() + 30000;
+              const deadline = Date.now() + 120000;
               while (Date.now() < deadline && !(await isAwake())) {
                 await page.waitForTimeout(1500);
               }

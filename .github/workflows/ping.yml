@@ -2,7 +2,7 @@ name: Keep Streamlit Awake
 
 on:
   schedule:
-    - cron: "*/5 * * * *"   # every 5 minutes (UTC)
+    - cron: "*/5 * * * *"   # every 5 minutes UTC
   workflow_dispatch:
 
 jobs:
@@ -20,48 +20,70 @@ jobs:
           npm i playwright
           npx playwright install --with-deps chromium
 
-      - name: Visit app and click Wake Up if needed
+      - name: Wake only if sleeping
         env:
           APP_URL: "https://venkateshbalu.streamlit.app/?keepalive=${{ github.run_id }}"
         run: |
           node - <<'NODE'
           const { chromium } = require('playwright');
+
           (async () => {
             const browser = await chromium.launch();
             const page = await browser.newPage();
+
+            // 1) Open app
             await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-            // If the sleep screen shows a wake button, click it.
-            // Try a few common variants Streamlit uses.
-            const selectors = [
-              'button:has-text("Wake up")',
-              'button:has-text("Wake")',
-              'button:has-text("Start app")',
-              'role=button[name=/wake|start|resume/i]'
+            // Helper: quick check if Streamlit is already rendered
+            async function isAwake() {
+              const hasSt =
+                (await page.locator('div[data-testid="stAppViewContainer"]').count()) > 0 ||
+                (await page.locator('div.stApp').count()) > 0;
+              return hasSt;
+            }
+
+            // 2) If already awake → done
+            if (await isAwake()) {
+              console.log('App already awake. Nothing to do.');
+              await browser.close();
+              process.exit(0);
+            }
+
+            // 3) Look for a wake/start button (short, non-blocking check)
+            const candidates = [
+              /wake up/i, /wake/i, /start app/i, /start/i, /resume/i, /launch/i, /run app/i
             ];
-            for (const sel of selectors) {
-              const btn = page.locator(sel).first();
+            let clicked = false;
+            for (const re of candidates) {
+              const btn = page.getByRole('button', { name: re }).first();
               if (await btn.count()) {
-                console.log('Found wake button via selector:', sel);
-                await btn.click();
+                console.log('Sleeping screen detected. Clicking:', re);
+                await btn.click().catch(()=>{});
+                clicked = true;
                 break;
               }
             }
 
-            // Give it a moment to spin up, then ensure the app rendered
-            await page.waitForLoadState('domcontentloaded');
-            await page.waitForTimeout(30000);
-
-            // Minimal sanity check: look for Streamlit app container
-            const ok =
-              (await page.locator('div[data-testid="stAppViewContainer"]').count()) > 0 ||
-              (await page.locator('div.stApp').count()) > 0 ||
-              (await page.locator('main').count()) > 0;
-
-            console.log('Final URL:', page.url());
-            if (!ok) {
-              throw new Error('App did not render yet (still waking?).');
+            // 4) If we clicked a wake button, wait briefly for render; else exit (no wake needed)
+            if (clicked) {
+              // give it up to ~30s to come up
+              const deadline = Date.now() + 30000;
+              while (Date.now() < deadline && !(await isAwake())) {
+                await page.waitForTimeout(1500);
+              }
+              if (await isAwake()) {
+                console.log('App woke successfully.');
+                await browser.close();
+                process.exit(0);
+              } else {
+                console.log('Wake button clicked but app not ready yet (will try next run).');
+                await browser.close();
+                process.exit(0); // don’t fail the job
+              }
+            } else {
+              console.log('No wake button found and app not rendered yet—likely starting up or transient. No action.');
+              await browser.close();
+              process.exit(0);
             }
-            await browser.close();
           })().catch(e => { console.error(e.message || e); process.exit(1); });
           NODE

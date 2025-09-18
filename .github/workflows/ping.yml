@@ -1,53 +1,90 @@
-name: Keep Streamlit Awake
+- name: Open Streamlit and verify render (Playwright, robust)
+  env:
+    APP_URL: "https://venkateshbalu.streamlit.app/?keepalive=${{ github.run_id }}_${{ github.run_attempt }}"
+  run: |
+    node - <<'NODE'
+    const { chromium } = require('playwright');
 
-on:
-  schedule:
-    - cron: "*/5 * * * *"   # every 5 minutes (UTC)
-  workflow_dispatch:
+    (async () => {
+      const targetUrl = process.env.APP_URL;
+      const browser = await chromium.launch();
+      const ctx = await browser.newContext({
+        userAgent: "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118 Safari/537.36",
+        viewport: { width: 1366, height: 900 }
+      });
+      const page = await ctx.newPage();
 
-permissions:
-  contents: read
+      // Useful diagnostics
+      page.on('console', msg => console.log('[console]', msg.type(), msg.text()));
+      page.on('pageerror', err => console.log('[pageerror]', err));
+      page.on('requestfailed', req => console.log('[requestfailed]', req.url(), req.failure()?.errorText));
 
-jobs:
-  wake:
-    runs-on: ubuntu-latest
-    timeout-minutes: 4
-    steps:
-      - name: Print timestamp
-        run: echo "UTC $(date -u +'%Y-%m-%dT%H:%M:%SZ')  Run $GITHUB_RUN_NUMBER"
-
-      - name: Set up Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Install Playwright (Chromium)
-        run: |
-          npm init -y >/dev/null 2>&1
-          npm i -D playwright@1
-          npx playwright install --with-deps chromium
-
-      - name: Open Streamlit and verify render
-        env:
-          APP_URL: "https://venkateshbalu.streamlit.app/?embed=true&keepalive=${{ github.run_id }}_${{ github.run_attempt }}"
-        run: |
-          node - <<'NODE'
-          const { chromium } = require('playwright');
-          (async () => {
-            const browser = await chromium.launch();
-            const ctx = await browser.newContext({ userAgent: "Mozilla/5.0" });
-            const page = await ctx.newPage();
-            await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
-            try {
-              await page.waitForSelector('div[data-testid="stAppViewContainer"], main', { timeout: 20000 });
-            } catch {
-              await page.waitForTimeout(5000);
-              await page.reload({ waitUntil: 'domcontentloaded' });
-              await page.waitForSelector('div[data-testid="stAppViewContainer"], main', { timeout: 15000 });
+      // Helper: wait for app container or enough HTML bytes
+      async function waitForRender(timeoutMs) {
+        const deadline = Date.now() + timeoutMs;
+        const selectors = [
+          'div[data-testid="stAppViewContainer"]',
+          'div.stApp',        // older builds sometimes expose stApp class
+          'main'              // last resort
+        ];
+        let attempt = 0;
+        while (Date.now() < deadline) {
+          attempt++;
+          try {
+            // Try the canonical Streamlit container first
+            for (const sel of selectors) {
+              const el = await page.locator(sel).first();
+              if (await el.isVisible({ timeout: 250 })) {
+                return { ok: true, how: `selector:${sel}` };
+              }
             }
-            const html = await page.content();
-            if (html.length < 5000) throw new Error(`HTML too small (${html.length}) – app may still be asleep`);
-            console.log('Loaded OK:', page.url());
-            await browser.close();
-          })().catch(e => { console.error(e.message || e); process.exit(1); });
-          NODE
+          } catch { /* ignore transient timeouts */ }
+
+          // Heuristic: ensure the document isn't just a tiny placeholder
+          const htmlLen = (await page.content()).length;
+          if (htmlLen > 8000) return { ok: true, how: `html>${htmlLen}` };
+
+          // If the app might be waking up, gently reload every ~5s
+          await page.waitForTimeout(1500);
+          if (attempt % 4 === 0) {
+            try {
+              await page.reload({ waitUntil: 'domcontentloaded', timeout: 30000 });
+            } catch { /* ignore */ }
+          }
+        }
+        return { ok: false };
+      }
+
+      // First navigation (allow time for cold start)
+      console.log('Navigating to:', targetUrl);
+      await page.goto(targetUrl, { waitUntil: 'domcontentloaded', timeout: 60000 });
+      console.log('Landed on:', page.url());
+
+      // Try up to 3 cycles with growing waits (total ~90s)
+      const waits = [20000, 30000, 40000];
+      for (let i = 0; i < waits.length; i++) {
+        const res = await waitForRender(waits[i]);
+        if (res.ok) {
+          console.log('Rendered OK via', res.how, 'Final URL:', page.url());
+          // Final sanity: HTML size
+          const html = await page.content();
+          if (html.length < 8000) throw new Error(`HTML too small (${html.length} bytes) – app may still be dormant.`);
+          await browser.close();
+          process.exit(0);
+        }
+        // Nudge and try again
+        console.log(`Render not confirmed yet (pass ${i+1}). Reloading…`);
+        try { await page.reload({ waitUntil: 'domcontentloaded', timeout: 60000 }); } catch {}
+      }
+
+      // If we reach here, save artifacts then fail
+      const pathPrefix = '/home/runner/work/_temp/streamlit_awake_debug';
+      await page.screenshot({ path: `${pathPrefix}.png`, fullPage: true }).catch(()=>{});
+      const html = await page.content().catch(()=> '');
+      const fs = require('fs');
+      try { fs.writeFileSync(`${pathPrefix}.html`, html); } catch {}
+      console.log('Saved debug artifacts:', `${pathPrefix}.png`, `${pathPrefix}.html`);
+      await browser.close();
+      throw new Error('Timed out waiting for Streamlit to render (cold start/redirect/DOM mismatch).');
+    })().catch(e => { console.error(e.stack || e.message || e); process.exit(1); });
+    NODE

@@ -1,72 +1,32 @@
+# .github/workflows/ping.yml
 name: Keep Streamlit Awake
 
 on:
   schedule:
-    - cron: "*/5 * * * *"   # every 5 minutes (UTC)
+    - cron: "*/1 * * * *"   # every 5 minutes (UTC)
   workflow_dispatch:
 
-permissions:
-  contents: read
-
 jobs:
-  wake:
+  ping:
     runs-on: ubuntu-latest
-    timeout-minutes: 4
+    timeout-minutes: 2
     steps:
-      - name: Print timestamp
+      - name: Ping Streamlit app (accept 2xx/3xx)
         run: |
-          echo "UTC $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
-          echo "Repo $GITHUB_REPOSITORY  Run $GITHUB_RUN_NUMBER"
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: "3.11"
-
-      - name: Install Playwright (Python)
-        run: |
-          python -m pip install --upgrade pip
-          pip install playwright
-          python -m playwright install --with-deps chromium
-
-      - name: Open Streamlit in headless Chromium and verify render
-        env:
-          APP_URL: "https://venkateshbalu.streamlit.app/?embed=true&keepalive=${{ github.run_id }}_${{ github.run_attempt }}"
-        run: |
-          python - <<'PY'
-          import os, time
-          from playwright.sync_api import sync_playwright
-
-          url = os.environ["APP_URL"]
-
-          with sync_playwright() as p:
-              browser = p.chromium.launch()
-              ctx = browser.new_context(
-                  user_agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome Safari"
-              )
-              page = ctx.new_page()
-              page.goto(url, wait_until="domcontentloaded")
-              # Wait for Streamlit app container (or main) to prove JS executed
-              try:
-                  page.wait_for_selector('div[data-testid="stAppViewContainer"], main', timeout=20000)
-              except:
-                  # If it was sleeping, a quick reload sometimes helps
-                  time.sleep(5)
-                  page.reload(wait_until="domcontentloaded")
-                  page.wait_for_selector('div[data-testid="stAppViewContainer"], main', timeout=15000)
-
-              html = page.content()
-              # Heuristic: a rendered Streamlit page is large (>5 KB of HTML)
-              if len(html) < 5000:
-                  raise SystemExit(f"HTML too small ({len(html)} bytes) – app might still be asleep.")
-              print("Loaded OK:", page.url)
-              browser.close()
-          PY
-
-      - name: Curl fallback (follow redirects; informational)
-        run: |
-          OUT=$(curl -sS -L --max-time 20 -A "Mozilla/5.0" \
-            -o /dev/null \
-            -w "code=%{http_code} redirects=%{num_redirects} final=%{url_effective}" \
-            "https://venkateshbalu.streamlit.app/?keepalive=$(date +%s)")
-          echo "$OUT"
+          URLS=(
+            "https://venkateshbalu.streamlit.app"
+          )
+          for URL in "${URLS[@]}"; do
+            TS=$(date +%s)
+            STATUS=$(curl -sS --max-time 20 \
+              -A "streamlit-keepalive/1.0" \
+              -o /dev/null -w "%{http_code}" \
+              "${URL}?keepalive=${TS}")
+            echo "HTTP ${STATUS} for ${URL}"
+            if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
+              echo "OK"
+            else
+              echo "Unexpected status ${STATUS}" 1>&2
+              exit 1
+            fi
+          done

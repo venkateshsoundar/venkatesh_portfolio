@@ -1,32 +1,53 @@
-# .github/workflows/ping.yml
 name: Keep Streamlit Awake
 
 on:
   schedule:
-    - cron: "*/1 * * * *"   # every 5 minutes (UTC)
+    - cron: "*/5 * * * *"   # every 5 minutes (UTC)
   workflow_dispatch:
 
+permissions:
+  contents: read
+
 jobs:
-  ping:
+  wake:
     runs-on: ubuntu-latest
-    timeout-minutes: 2
+    timeout-minutes: 4
     steps:
-      - name: Ping Streamlit app (accept 2xx/3xx)
+      - name: Print timestamp
+        run: echo "UTC $(date -u +'%Y-%m-%dT%H:%M:%SZ')  Run $GITHUB_RUN_NUMBER"
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install Playwright (Chromium)
         run: |
-          URLS=(
-            "https://venkateshbalu.streamlit.app"
-          )
-          for URL in "${URLS[@]}"; do
-            TS=$(date +%s)
-            STATUS=$(curl -sS --max-time 20 \
-              -A "streamlit-keepalive/1.0" \
-              -o /dev/null -w "%{http_code}" \
-              "${URL}?keepalive=${TS}")
-            echo "HTTP ${STATUS} for ${URL}"
-            if [ "$STATUS" -ge 200 ] && [ "$STATUS" -lt 400 ]; then
-              echo "OK"
-            else
-              echo "Unexpected status ${STATUS}" 1>&2
-              exit 1
-            fi
-          done
+          npm init -y >/dev/null 2>&1
+          npm i -D playwright@1
+          npx playwright install --with-deps chromium
+
+      - name: Open Streamlit and verify render
+        env:
+          APP_URL: "https://venkateshbalu.streamlit.app/?embed=true&keepalive=${{ github.run_id }}_${{ github.run_attempt }}"
+        run: |
+          node - <<'NODE'
+          const { chromium } = require('playwright');
+          (async () => {
+            const browser = await chromium.launch();
+            const ctx = await browser.newContext({ userAgent: "Mozilla/5.0" });
+            const page = await ctx.newPage();
+            await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 30000 });
+            try {
+              await page.waitForSelector('div[data-testid="stAppViewContainer"], main', { timeout: 20000 });
+            } catch {
+              await page.waitForTimeout(5000);
+              await page.reload({ waitUntil: 'domcontentloaded' });
+              await page.waitForSelector('div[data-testid="stAppViewContainer"], main', { timeout: 15000 });
+            }
+            const html = await page.content();
+            if (html.length < 5000) throw new Error(`HTML too small (${html.length}) – app may still be asleep`);
+            console.log('Loaded OK:', page.url());
+            await browser.close();
+          })().catch(e => { console.error(e.message || e); process.exit(1); });
+          NODE

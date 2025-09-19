@@ -19,14 +19,11 @@ jobs:
         with:
           node-version: '20'
 
-      # Faster browser install & system deps
-      - name: Setup Playwright
-        uses: microsoft/playwright-github-action@v1
-        with:
-          version: 1.47.2
-          # Browsers default to all; limit to chromium for speed
-          with-deps: true
-      - run: npm init -y && npm i playwright@1.47.2
+      - name: Install Playwright
+        run: |
+          npm init -y
+          npm install playwright
+          npx playwright install --with-deps chromium
 
       - name: Wake only if sleeping
         env:
@@ -36,17 +33,14 @@ jobs:
           const { chromium } = require('playwright');
 
           (async () => {
-            const browser = await chromium.launch(); // headless by default
+            const browser = await chromium.launch();
             const page = await browser.newPage();
-            page.setDefaultTimeout(30000);
-
             await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
             async function isAwake() {
               return (await page.locator('div[data-testid="stAppViewContainer"], div.stApp').count()) > 0;
             }
 
-            // Already up?
             if (await isAwake()) {
               console.log('App already awake. Nothing to do.');
               await browser.close();
@@ -57,17 +51,17 @@ jobs:
             let clicked = false;
             const exact = page.locator('button:has-text("Yes, get this app back up!")').first();
             if (await exact.count()) {
-              console.log('Sleeping screen detected. Clicking exact wake button.');
-              await exact.click().catch(()=>{});
+              console.log('Sleeping screen detected. Clicking wake button.');
+              await exact.click();
               clicked = true;
             } else {
               // Fallback regex options
-              const patterns = [/wake up/i, /wake/i, /start app/i, /start/i, /resume/i, /launch/i, /run app/i];
+              const patterns = [/wake up/i, /wake/i, /start app/i, /resume/i, /launch/i];
               for (const re of patterns) {
                 const btn = page.getByRole('button', { name: re }).first();
                 if (await btn.count()) {
                   console.log('Sleeping screen detected. Clicking:', re);
-                  await btn.click().catch(()=>{});
+                  await btn.click();
                   clicked = true;
                   break;
                 }
@@ -75,12 +69,12 @@ jobs:
             }
 
             if (!clicked) {
-              console.log('No wake button found; app may be starting or in transient state.');
+              console.log('No wake button found. Maybe already starting.');
               await browser.close();
               process.exit(0);
             }
 
-            // Wait for Streamlit to come up (max ~2 minutes)
+            // Wait up to 2 mins for app to load
             const deadline = Date.now() + 120000;
             while (Date.now() < deadline && !(await isAwake())) {
               await page.waitForTimeout(1500);
@@ -89,10 +83,10 @@ jobs:
             if (await isAwake()) {
               console.log('App woke successfully.');
             } else {
-              console.log('Wake clicked, but app not ready yet—will try next run.');
+              console.log('Wake clicked, but app not ready yet (will retry next run).');
             }
 
             await browser.close();
-            process.exit(0); // soft-success either way
-          })().catch(e => { console.error(e?.stack || e); process.exit(1); });
+            process.exit(0);
+          })().catch(err => { console.error(err); process.exit(1); });
           NODE

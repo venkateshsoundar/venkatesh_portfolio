@@ -37,34 +37,39 @@ jobs:
               args: ['--no-sandbox', '--disable-dev-shm-usage']
             });
             const page = await browser.newPage();
-            page.setDefaultTimeout(30000);
 
-            // Open the app
-            await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 90000 });
+            // "Implicit-like" global waits
+            page.setDefaultTimeout(30000);            // all actions
+            page.setDefaultNavigationTimeout(90000);  // navigations
 
-            // State helpers
+            // 1) Open app
+            await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded' });
+
+            // 2) Helpers (strict: only true when real app is rendered)
             const isAwake = async () =>
-              (await page.locator('div[data-testid="stAppViewContainer"]').count()) > 0;
+              (await page.locator('div[data-testid="stAppViewContainer"], div.stApp').count()) > 0;
 
-            const isSleeping = async () =>
-              (await page.locator('button[data-testid="wakeup-button-viewer"]').count()) > 0;
-
-            // Already awake?
+            // 3) Already awake?
             if (await isAwake()) {
               console.log('✅ App already awake. Nothing to do.');
               await browser.close(); process.exit(0);
             }
 
-            // If sleeping, click the wake button
-            if (await isSleeping()) {
-              console.log('💤 Sleeping screen detected. Clicking wakeup button…');
-              const wakeBtn = page.locator('button[data-testid="wakeup-button-viewer"]').first();
+            // 4) Selenium-like "implicit wait" for the wake button
+            const wakeBtn = page.locator('button[data-testid="wakeup-button-viewer"]');
+
+            // Wait up to 60s for the button to be visible; if not, just exit softly
+            try {
+              await wakeBtn.waitFor({ state: 'visible', timeout: 60000 });
+              console.log('💤 Wake button visible. Clicking…');
+              // Locator click already auto-waits for stability; force just in case
               await wakeBtn.click({ force: true, timeout: 20000 });
-            } else {
-              console.log('ℹ️ No wakeup button visible; app may be starting. Will just wait.');
+            } catch {
+              console.log('ℹ️ Wake button not found/visible within timeout; app may be booting already.');
+              await browser.close(); process.exit(0);
             }
 
-            // Give the app time to boot: wait for network to settle and poll for the container
+            // 5) Give the app time to boot, then poll for Streamlit container
             try { await page.waitForLoadState('networkidle', { timeout: 60000 }); } catch {}
             const deadline = Date.now() + 120000; // up to 2 minutes total
             while (Date.now() < deadline && !(await isAwake())) {
@@ -74,7 +79,7 @@ jobs:
             if (await isAwake()) {
               console.log('🚀 App woke successfully.');
             } else {
-              console.log('⚠️ App not fully ready yet; will retry on next scheduled run.');
+              console.log('⚠️ Clicked but app not fully ready yet; will retry next run.');
             }
 
             await browser.close(); process.exit(0);

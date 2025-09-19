@@ -44,7 +44,7 @@ jobs:
 
             // Helper: detect Streamlit app container
             const isAwake = async () =>
-              (await page.locator('div[data-testid="stAppViewContainer"], div.stApp').count()) > 0;
+              (await page.locator('button[data-testid="wakeup-button-viewer"], div.stApp').count()) > 0;
 
             // If it's already up, we're done
             if (await isAwake()) {

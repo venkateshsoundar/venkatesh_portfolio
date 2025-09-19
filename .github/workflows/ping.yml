@@ -33,35 +33,39 @@ jobs:
           const { chromium } = require('playwright');
 
           (async () => {
-            const browser = await chromium.launch();
+            const browser = await chromium.launch({
+              args: ['--no-sandbox', '--disable-dev-shm-usage']
+            });
             const page = await browser.newPage();
-            await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 60000 });
 
-            async function isAwake() {
-              return (await page.locator('div[data-testid="stAppViewContainer"], div.stApp').count()) > 0;
-            }
+            // Be a bit patient on first paint
+            await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 90000 });
+
+            const isAwake = async () =>
+              (await page.locator('div[data-testid="stAppViewContainer"], div.stApp').count()) > 0;
 
             if (await isAwake()) {
-              console.log('App already awake. Nothing to do.');
+              console.log('✅ App already awake. Nothing to do.');
               await browser.close();
               process.exit(0);
             }
 
-            // Try exact wake button first
+            // Exact button from your screenshot
+            const exactBtn = page.locator('button:has-text("Yes, get this app back up!")').first();
             let clicked = false;
-            const exact = page.locator('button:has-text("Yes, get this app back up!")').first();
-            if (await exact.count()) {
-              console.log('Sleeping screen detected. Clicking wake button.');
-              await exact.click();
+
+            if (await exactBtn.count()) {
+              console.log('💤 Sleeping screen detected. Clicking exact wake button…');
+              await exactBtn.click({ timeout: 30000 });
               clicked = true;
             } else {
-              // Fallback regex options
+              // Fallbacks just in case Streamlit wording changes
               const patterns = [/wake up/i, /wake/i, /start app/i, /resume/i, /launch/i];
               for (const re of patterns) {
                 const btn = page.getByRole('button', { name: re }).first();
                 if (await btn.count()) {
-                  console.log('Sleeping screen detected. Clicking:', re);
-                  await btn.click();
+                  console.log('💤 Sleeping screen detected. Clicking:', re);
+                  await btn.click({ timeout: 30000 });
                   clicked = true;
                   break;
                 }
@@ -69,24 +73,25 @@ jobs:
             }
 
             if (!clicked) {
-              console.log('No wake button found. Maybe already starting.');
+              console.log('ℹ️ No wake button found. Maybe already starting.');
               await browser.close();
               process.exit(0);
             }
 
-            // Wait up to 2 mins for app to load
-            const deadline = Date.now() + 120000;
+            // Let the app boot: wait for network idle and poll for Streamlit root
+            try { await page.waitForLoadState('networkidle', { timeout: 60000 }); } catch (_) {}
+            const deadline = Date.now() + 120000; // up to 2 minutes total
             while (Date.now() < deadline && !(await isAwake())) {
               await page.waitForTimeout(1500);
             }
 
             if (await isAwake()) {
-              console.log('App woke successfully.');
+              console.log('🚀 App woke successfully.');
             } else {
-              console.log('Wake clicked, but app not ready yet (will retry next run).');
+              console.log('⚠️ Wake clicked but app not fully ready yet; will retry next run.');
             }
 
             await browser.close();
             process.exit(0);
-          })().catch(err => { console.error(err); process.exit(1); });
+          })().catch(err => { console.error(err?.stack || err); process.exit(1); });
           NODE

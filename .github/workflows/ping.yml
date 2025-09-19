@@ -42,32 +42,29 @@ jobs:
             // Open the app
             await page.goto(process.env.APP_URL, { waitUntil: 'domcontentloaded', timeout: 90000 });
 
-            // Helper: detect Streamlit app container
+            // State helpers
             const isAwake = async () =>
-              (await page.locator('button[data-testid="wakeup-button-viewer"], div.stApp').count()) > 0;
+              (await page.locator('div[data-testid="stAppViewContainer"]').count()) > 0;
 
-            // If it's already up, we're done
+            const isSleeping = async () =>
+              (await page.locator('button[data-testid="wakeup-button-viewer"]').count()) > 0;
+
+            // Already awake?
             if (await isAwake()) {
               console.log('✅ App already awake. Nothing to do.');
               await browser.close(); process.exit(0);
             }
 
-            // Click the stable wakeup button by data-testid
-            let clicked = false;
-            const wakeBtn = page.locator('[data-testid="wakeup-button-viewer"]');
-            if (await wakeBtn.count()) {
+            // If sleeping, click the wake button
+            if (await isSleeping()) {
               console.log('💤 Sleeping screen detected. Clicking wakeup button…');
-              await wakeBtn.first().click({ force: true, timeout: 20000 });
-              clicked = true;
+              const wakeBtn = page.locator('button[data-testid="wakeup-button-viewer"]').first();
+              await wakeBtn.click({ force: true, timeout: 20000 });
             } else {
-              console.log('ℹ️ Wakeup button not found; app may already be starting.');
+              console.log('ℹ️ No wakeup button visible; app may be starting. Will just wait.');
             }
 
-            if (!clicked) {
-              await browser.close(); process.exit(0);
-            }
-
-            // Let the app boot: wait for network idle and poll for the Streamlit root
+            // Give the app time to boot: wait for network to settle and poll for the container
             try { await page.waitForLoadState('networkidle', { timeout: 60000 }); } catch {}
             const deadline = Date.now() + 120000; // up to 2 minutes total
             while (Date.now() < deadline && !(await isAwake())) {
@@ -77,7 +74,7 @@ jobs:
             if (await isAwake()) {
               console.log('🚀 App woke successfully.');
             } else {
-              console.log('⚠️ Clicked wakeup but app not fully ready; will retry next run.');
+              console.log('⚠️ App not fully ready yet; will retry on next scheduled run.');
             }
 
             await browser.close(); process.exit(0);

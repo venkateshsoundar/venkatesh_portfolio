@@ -73,7 +73,7 @@ div[data-testid="stToolbar"] {
     background: #ffffff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border-radius: 0 0 18px 18px;
-    padding: 0;
+    padding: 100;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;

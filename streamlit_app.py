@@ -61,7 +61,7 @@ div[data-testid="stToolbar"] {
     display: none !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container {
-    padding-top: calc(var(--navbar-total-height) + 24px) !important;
+    padding-top: calc(var(--navbar-total-height) + 100px) !important;
     margin-top: 0 !important;
 }
 .navbar-container {

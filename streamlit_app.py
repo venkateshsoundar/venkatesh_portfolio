@@ -49,84 +49,48 @@ st.markdown("""
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
-body, .main-content {
-  padding-top: 50px;  /* height of navbar */
-}
-.block-container {
-    padding-top: 5 !important;
-    margin-top: 5 !important;
+:root {
+    --navbar-total-height: 0px;
 }
 body {
-    margin-top: 5 !important;
-    padding-top: 5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
 }
-/* Fix navbar at top */
+header[data-testid="stHeader"],
+div[data-testid="stToolbar"] {
+    display: none !important;
+}
+.main .block-container {
+    padding-top: var(--navbar-total-height) !important;
+    margin-top: 0 !important;
+}
 .navbar-container {
-    position: fixed;    
-    top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
     z-index: 1000;
-    background: #1F2A44;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     background: #ffffff;
-    padding: 0 0 0 0;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border-radius: 0 0 18px 18px;
+    padding: 0;
     display: flex;
-    padding-top: 100px;
     flex-direction: column;
     justify-content: flex-end;
 }
-
-/* Flex styling for links */
-.navbar {
-    display: flex;
-    gap: 28px;
-    justify-content: center;
-    padding: 12px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-}
-
-/* Nav link styling */
-.navbar a {
-    color: #ffd166;
-    font-weight: bold;
-    font-size: 1.08rem;
-    text-decoration: none;
-    padding: 7px 22px;
-    border-radius: 8px;
-    transition: color 0.18s, background 0.18s;
-}
-.navbar a:hover {
-    background: #ffd16633;
-    color: #fff;
-}
-
-/* Push content down to not be hidden */
 .sticky-spacer {
-    height: 10px;
+    height: var(--navbar-total-height);
 }
-
-/* Flex styling for links - desktop default */
 .navbar {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background: #1F2A44;
-    padding: 12px 0 10px 0;
-    border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
     gap: 28px;
+    padding: 12px 0 10px 0;
+    margin: 0;
+    border-radius: 0 0 18px 18px;
+    background: #1F2A44;
 }
-
 .navbar a {
     color: #ffd166;
     font-weight: bold;
@@ -137,27 +101,40 @@ body {
     transition: color 0.18s, background 0.18s;
     white-space: nowrap;
 }
-
-/* Responsive tweaks for smaller screens */
+.navbar a:hover {
+    background: #ffd16633;
+    color: #fff;
+}
+.mobile-nav-toggle {
+    display: none;
+}
 @media screen and (max-width: 768px) {
+    .navbar-container {
+        position: sticky;
+        top: 0;
+        border-radius: 0;
+    }
+    .sticky-spacer {
+        height: 0 !important;
+    }
+    .main .block-container {
+        padding-top: 0 !important;
+    }
     .navbar {
+        display: none;
         flex-direction: column;
-        align-items: center;
+        align-items: stretch;
         gap: 14px;
-        display: none; /* Hide navbar links by default on mobile */
         width: 100%;
-        background: #1F2A44;
         padding: 10px 0;
-        margin-bottom: 10px;
-        border-radius: 0 0 18px 18px;
     }
     .navbar.show {
-        display: flex; /* Show navbar links when toggled */
+        display: flex;
     }
     .navbar a {
         width: 100%;
         text-align: center;
-        padding: 10px 0;
+        padding: 10px 20px;
         font-size: 1rem;
     }
     .mobile-nav-toggle {
@@ -174,30 +151,6 @@ body {
         width: 100%;
         text-align: center;
     }
-}
-
-/* Hide toggle button on desktop */
-@media screen and (min-width: 769px) {
-    .mobile-nav-toggle {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    .navbar-container {
-        display: none !important;
-    }
-      .block-container {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-  }
-  body {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  .sticky-spacer {
-    height: 0 !important;
-  }
 }
 
 </style>
@@ -221,13 +174,62 @@ body {
 <div class="sticky-spacer"></div>
 
 <script>
-function toggleMenu() {
-  const navbar = document.getElementById("navbarLinks");
-  if (navbar.classList.contains("show")) {
-    navbar.classList.remove("show");
-  } else {
-    navbar.classList.add("show");
+const root = document.documentElement;
+const navbarContainer = document.querySelector('.navbar-container');
+const spacer = document.querySelector('.sticky-spacer');
+const navbarLinks = document.getElementById('navbarLinks');
+
+function updateNavbarOffset() {
+  if (!navbarContainer) {
+    return;
   }
+
+  const computedStyle = window.getComputedStyle(navbarContainer);
+  const position = computedStyle.position;
+  let totalHeight = 0;
+
+  if (position === 'fixed') {
+    const computedTop = parseFloat(computedStyle.top) || 0;
+    totalHeight = Math.max(0, navbarContainer.getBoundingClientRect().height + computedTop);
+  }
+
+  root.style.setProperty('--navbar-total-height', `${totalHeight}px`);
+
+  if (spacer) {
+    spacer.style.height = `${totalHeight}px`;
+  }
+}
+
+function toggleMenu() {
+  if (!navbarLinks) {
+    return;
+  }
+  navbarLinks.classList.toggle('show');
+  requestAnimationFrame(updateNavbarOffset);
+}
+
+function handleResize() {
+  if (navbarLinks && window.innerWidth > 768) {
+    navbarLinks.classList.remove('show');
+  }
+  updateNavbarOffset();
+}
+
+window.addEventListener('load', () => {
+  updateNavbarOffset();
+  requestAnimationFrame(updateNavbarOffset);
+});
+window.addEventListener('resize', handleResize);
+window.addEventListener('orientationchange', () => requestAnimationFrame(updateNavbarOffset));
+
+if (window.ResizeObserver && navbarContainer) {
+  const resizeObserver = new ResizeObserver(() => updateNavbarOffset());
+  resizeObserver.observe(navbarContainer);
+}
+
+if (window.MutationObserver && navbarLinks) {
+  const mutationObserver = new MutationObserver(() => updateNavbarOffset());
+  mutationObserver.observe(navbarLinks, { attributes: true, childList: true, subtree: true });
 }
 </script>
 """, unsafe_allow_html=True)

@@ -60,8 +60,8 @@ header[data-testid="stHeader"],
 div[data-testid="stToolbar"] {
     display: none !important;
 }
-.main .block-container {
-    padding-top: var(--navbar-total-height) !important;
+[data-testid="stAppViewContainer"] .main .block-container {
+    padding-top: calc(var(--navbar-total-height) + 8px) !important;
     margin-top: 0 !important;
 }
 .navbar-container {

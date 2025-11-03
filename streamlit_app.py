@@ -118,8 +118,9 @@ div[data-testid="stToolbar"] {
         height: 0 !important;
     }
     .main .block-container {
-        padding-top: 0 !important;
-    }
+    padding-top: var(--navbar-total-height) !important;
+    margin-top: 0 !important;
+}
     .navbar {
         display: none;
         flex-direction: column;

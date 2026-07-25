@@ -40,47 +40,47 @@ st.markdown("""
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
-body, .main-content {
-  padding-top: 50px;  /* height of navbar */
-}
-.block-container {
-    padding-top: 5 !important;
-    margin-top: 5 !important;
-}
 body {
-    margin-top: 5 !important;
-    padding-top: 5 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+header[data-testid="stHeader"],
+div[data-testid="stToolbar"] {
+    display: none !important;
+}
+[data-testid="stAppViewContainer"] .main .block-container {
+    padding-top: 5.5rem !important;
+    margin-top: 0 !important;
 }
 /* Fix navbar at top */
 .navbar-container {
-    position: fixed;    
-    top: 3rem;  /* Try 2.5rem, 3rem, or 56px until it fits perfectly under the toolbar */
+    position: fixed;
+    top: 0;
     left: 0;
     width: 100%;
-    height: 50px;
+    height: auto;
     z-index: 1000;
     background: #1F2A44;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-    background: #ffffff;
-    padding: 0 0 0 0;
+    padding: 0;
     border-radius: 0 0 18px 18px;
     display: flex;
-    padding-top: 100px;
     flex-direction: column;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 /* Flex styling for links */
 .navbar {
     display: flex;
-    gap: 28px;
+    flex-wrap: nowrap;
+    gap: 10px;
     justify-content: center;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
+    margin: 0;
+    position: static;
     z-index: 100;
+    overflow-x: auto;
 }
 
 /* Nav link styling */
@@ -100,22 +100,22 @@ body {
 
 /* Push content down to not be hidden */
 .sticky-spacer {
-    height: 10px;
+    display: none !important;
 }
 
 /* Flex styling for links - desktop default */
 .navbar {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
     background: #1F2A44;
     padding: 12px 0 10px 0;
     border-radius: 0 0 18px 18px;
-    margin-bottom: 20px;
-    position: sticky;
-    top: 0;
+    margin: 0;
+    position: static;
     z-index: 100;
-    gap: 28px;
+    gap: 10px;
+    overflow-x: auto;
 }
 
 .navbar a {
@@ -178,17 +178,10 @@ body {
     .navbar-container {
         display: none !important;
     }
-      .block-container {
-    padding-top: 0 !important;
-    margin-top: 0 !important;
-  }
-  body {
-    margin-top: 0 !important;
-    padding-top: 0 !important;
-  }
-  .sticky-spacer {
-    height: 0 !important;
-  }
+    [data-testid="stAppViewContainer"] .main .block-container {
+        padding-top: 1rem !important;
+        margin-top: 0 !important;
+    }
 }
 
 </style>
@@ -743,7 +736,7 @@ st.markdown(
         justify-content: center;
         text-align: center;
         margin-bottom:24px;
-        margin-top:-168px;
+        margin-top: 0;
         box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
         transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
         position: relative;
@@ -915,7 +908,7 @@ st.markdown("""
 <div class="hero-card">
   <div class="hero-left">
     <div class="hero-pic-glow">
-      <img src="https://avatars.githubusercontent.com/u/114813214?v=4" alt="Venkatesh Soundararajan"/>
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh_Profile_2026.jpg" alt="Venkatesh Soundararajan"/>
     </div>
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
     <div class="hero-role">Senior Data Quality Engineer<br>RBC</div>
@@ -1023,15 +1016,6 @@ st.markdown(
           <div class="exp-card-date">June 2024 – August 2024</div>
           <div class="exp-responsibilities-box">
             Led business analysis and quality engineering for Guidewire PolicyCenter, BillingCenter, and ClaimCenter initiatives. Translated requirements into testable outcomes, coordinated stakeholders, and supported SQL, API, ETL, and release-quality validation.
-          </div>
-        </div>
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo" alt="Deloitte logo"/>
-          <div class="exp-card-title">Consultant</div>
-          <div class="exp-card-company">Deloitte Consulting India Private Limited</div>
-          <div class="exp-card-date">October 2021 – June 2024</div>
-          <div class="exp-responsibilities-box">
-            Delivered data-quality, ETL, API, and automation testing across Guidewire insurance applications. Built SQL-based reconciliation checks and CI/CD-enabled automation that expanded regression coverage and reduced post-release defects.
           </div>
         </div>
         <div class="exp-card">

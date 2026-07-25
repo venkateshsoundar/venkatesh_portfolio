@@ -1,9 +1,4 @@
 import streamlit as st
-import requests
-import io
-import PyPDF2
-import openai
-import pandas as pd
 
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
@@ -24,19 +19,6 @@ components.html("""
 """, height=0)
 
 
-st.markdown("""
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9TDXL1JB47');
-</script>
-""", unsafe_allow_html=True)
-
-
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
@@ -49,8 +31,11 @@ div[data-testid="stToolbar"] {
     display: none !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container {
-    padding-top: 4.25rem !important;
+    padding-top: 1rem !important;
     margin-top: 0 !important;
+}
+[data-testid="stAppViewContainer"] .main .block-container > [data-testid="stVerticalBlock"] {
+    gap: 0.25rem !important;
 }
 /* Fix navbar at top */
 .navbar-container {
@@ -197,7 +182,6 @@ div[data-testid="stToolbar"] {
     <a href="#recognitions">Recognitions</a>
     <a href="#projects">Projects Gallery</a>
     <a href="#skills">Skills</a>
-    <a href="#buddybot">Buddy Bot</a>
   </div>
 </div>
 
@@ -373,6 +357,42 @@ st.markdown("""
 .edu-card-degree { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px; color: #ffd166;}
 .edu-card-univ { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 4px;}
 .edu-card-date { color: #fff; font-size: 0.98rem;}
+.edu-research-row {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: 72px 1fr;
+  align-items: center;
+  gap: 18px;
+  min-height: 0;
+  padding: 18px 22px;
+  text-align: left;
+}
+.edu-research-row .edu-card-logo {
+  margin: 0;
+}
+.edu-research-content {
+  text-align: left;
+}
+.edu-research-summary {
+  color: #fff;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  margin-top: 8px;
+  opacity: 0.92;
+}
+@media (max-width: 700px) {
+  .edu-cards-grid {
+    grid-template-columns: 1fr;
+  }
+  .edu-research-row {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+  .edu-research-content {
+    text-align: center;
+  }
+}
 /* Awards/Certifications */
 .cert-grid, .awards-grid {
   display: grid;
@@ -546,27 +566,6 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# ---- DATA LOADING ----
-def load_resume_df(url):
-    r = requests.get(url)
-    r.raise_for_status()
-    reader = PyPDF2.PdfReader(io.BytesIO(r.content))
-    records = []
-    for i, page in enumerate(reader.pages):
-        text = page.extract_text() or ""
-        sentences = [s.strip() for s in text.split('.') if s.strip()]
-        for sent in sentences:
-            records.append({"page": i+1, "sentence": sent})
-    return pd.DataFrame(records)
-
-resume_url = (
-    "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf"
-)
-resume_df = load_resume_df(resume_url)
-resume_json = resume_df.to_json(orient='records')
-#resume_json="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.json"
-
-
 projects = [
     {
         "title": "Canadian Quality of Life Analysis",
@@ -648,85 +647,11 @@ projects = [
 ]
 
 
-# --- Custom Styling ---
-st.markdown("""
-<style>
-/* Square profile pic with animation */
-.profile-pic-square {
-    width: 180px;
-    height: 200px;
-    border-radius: 0px;
-    object-fit: cover;
-    border: 4px solid #ffd166;
-    box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
-    margin: 0 auto 20px auto;
-    display: block;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.profile-pic-square:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
-}
-
-/* Card styling */
-
-.hover-zoom:hover {
-    transform: scale(1.02);
-}
-
-/* Title style */
-.section-title {
-    font-size: 1.3rem;
-    font-weight: bold;
-    margin-bottom: 12px;
-    padding: 8px 16px;
-    border-radius: 10px;
-    color: #fff;
-    background:#22304A;
-}
-</style>
-""", unsafe_allow_html=True)
-
-# --- 2-Column Layout: Left Profile / Right About ---
-st.markdown("""
-<style>
-.profile-pic-square {
-    width: 160px;
-    height: 160px;
-    border-radius: 20px;
-    object-fit: cover;
-    border: 4px solid #ffd166;
-    box-shadow: 0 0 14px rgba(255, 209, 102, 0.6);
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-}
-.profile-pic-square:hover {
-    transform: scale(1.05);
-    box-shadow: 0 0 24px rgba(255, 209, 102, 0.9);
-}
-.profile-card-wrapper {
-    display: flex;
-    flex-direction: row;
-    gap: 30px;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-wrap: wrap;
-}
-.profile-left {
-    flex: 0 0 180px;
-    text-align: center;
-}
-.profile-right {
-    flex: 1;
-}
-</style>
-""", unsafe_allow_html=True)
-
-gif_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif"
 st.markdown(
-    f"""
+    """
     <style>
-      .welcome-card {{
-        background: url("{gif_url}") center/cover no-repeat;
+      .welcome-card {
+        background: url("https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif") center/cover no-repeat;
         border-radius: 16px;
         padding: 3rem;
         color: white;
@@ -735,24 +660,18 @@ st.markdown(
         align-items: center;
         justify-content: center;
         text-align: center;
-        margin-bottom:24px;
-        margin-top: 0;
+        margin: 0 0 24px;
         box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
         transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
         position: relative;
         cursor: pointer;
-      }}
-      .welcome-card:hover {{
-        transform: scale(1.035) translateY(-7px);
+      }
+      .welcome-card:hover {
+        transform: scale(1.02) translateY(-4px);
         box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.17);
         z-index: 4;
-      }}
+      }
     </style>
-    """,
-    unsafe_allow_html=True,
-)
-st.markdown(
-    """
     <div class="welcome-card">
       <div>
         <h1>Data quality. Reliable systems. Business impact.</h1>
@@ -807,7 +726,7 @@ st.markdown("""
   width: 230px !important;
   height: 230px !important;
   border-radius: 50% !important;
-  border: 4px solid #ffd166 !important;
+  border: none !important;
   background: none !important;
   box-shadow: 0 12px 32px rgba(0,0,0,0.28) !important;
   object-fit: cover !important;
@@ -972,6 +891,15 @@ st.markdown(
           <div class="edu-card-univ">Anna University, Chennai, India</div>
           <div class="edu-card-date">August 2009 – May 2013</div>
         </div>
+        <div class="edu-card edu-research-row">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo" alt="University of Calgary logo"/>
+          <div class="edu-research-content">
+            <div class="edu-card-degree">Research Assistant Intern</div>
+            <div class="edu-card-univ">University of Calgary, Canada</div>
+            <div class="edu-card-date">April 2025 – December 2025</div>
+            <div class="edu-research-summary">Researched an on-device eye-gaze and blink-based communication system for non-verbal ICU patients, evaluating computer-vision and machine-learning approaches with a focus on privacy, accessibility, and reliable real-time interaction.</div>
+          </div>
+        </div>
       </div>
     </div>
     """, unsafe_allow_html=True)
@@ -989,15 +917,6 @@ st.markdown(
           <div class="exp-card-date">April 2026 – Present</div>
           <div class="exp-responsibilities-box">
             Supporting enterprise data quality through SQL- and Python-based validation, ETL control checks, defect investigation, and cross-functional collaboration to improve data accuracy, traceability, and production reliability.
-          </div>
-        </div>
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="exp-card-logo" alt="University of Calgary logo"/>
-          <div class="exp-card-title">Research Assistant Intern</div>
-          <div class="exp-card-company">University of Calgary, Canada</div>
-          <div class="exp-card-date">April 2025 – December 2025</div>
-          <div class="exp-responsibilities-box">
-            Researched an on-device eye-gaze and blink-based communication system for non-verbal ICU patients. Evaluated computer-vision and machine-learning approaches while prioritizing privacy, accessibility, and reliable real-time interaction.
           </div>
         </div>
         <div class="exp-card">
@@ -1410,108 +1329,6 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
-
-st.markdown('<a name="buddybot"></a>', unsafe_allow_html=True)
-
-ai_url = "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/DeepSeekAI.gif"
-st.markdown(
-    f"""
-    <style>
-      .welcome-card2 {{
-        background: url("{ai_url}") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 0;
-        color: white;
-        height: 200px;
-        position: relative;
-        overflow: hidden;
-        margin-bottom: 32px;
-        box-shadow: 0 6px 24px 0 rgba(60,100,180,0.09), 0 1.5px 8px 0 rgba(60,60,90,0.08);
-        transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
-        cursor: pointer;
-      }}
-      .welcome-card2:hover {{
-        transform: scale(1.035) translateY(-7px);
-        box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.16);
-        z-index: 4;
-      }}
-      .welcome-card2 .text-container {{
-        position: absolute;
-        top: 70%;
-        right: 2rem;
-        transform: translateY(-50%);
-        text-align: right;
-      }}
-      .welcome-card2 h2 {{
-        margin: 0;
-        font-family: 'Poppins', sans-serif;
-        font-weight: 700;
-        font-size: 1.8rem;
-      }}
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
-
-st.markdown(
-    """
-    <div class="welcome-card2">
-      <div class="text-container">
-        <h2>Ask Buddy Bot! </h2>
-        Powered by <strong>DeepSeek AI</strong> 
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-  
-api_key = st.secrets["DEEPSEEK_API_KEY"]
-client = openai.OpenAI(
-      base_url="https://openrouter.ai/api/v1",
-      api_key=api_key,
-  )
-st.markdown("""
-<style>
-/* Force assistant message text to black */
-div[data-testid="stChatMessageContent"] {
-  background-color: #fff8dc !important;
-  color: #000000 !important;
-  border-radius: 16px;
-  padding: 14px 18px;
-  margin: 10px 0;
-  font-size: 1rem;
-  line-height: 1.6;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
-  border-left: 6px solid #ffd166;
-  font-family: 'Segoe UI', sans-serif;
-}
-</style>
-""", unsafe_allow_html=True)
-
-chat_container = st.container()
-with chat_container:
-    user_input = st.chat_input("Ask something about Venkatesh's Professional Projects and Skills...")
-    if user_input:
-        st.chat_message("user").write(user_input)
-        prompt = (
-            "You are Venkatesh's professional assistant. Here is his profile data as JSON:\n" + resume_json +
-            "\n\nAnswer the question based only on this profile. If you can't, say you don't know.\nQuestion: "+
-            "Don't reveal that you provide based on JSON data and always represent like my buddy and you know me"+
-            "you should represent me and this is for chatbot for my profile viewers"            
-            + user_input
-        )
-        with st.spinner("Assistant is typing..."):
-            response = client.chat.completions.create(
-                model="deepseek/deepseek-chat-v3-0324:free",
-                messages=[
-                    {"role": "system", "content": prompt}
-                ]
-            )
-            reply = response.choices[0].message.content
-        st.chat_message("assistant").write(reply)
-
-
-
 
 st.markdown("""
 <hr style='border: 0; border-top: 1px solid #eee; margin-top: 50px;' />

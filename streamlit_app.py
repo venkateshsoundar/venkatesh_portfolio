@@ -773,8 +773,8 @@ st.markdown(
     """
     <div class="welcome-card">
       <div>
-        <h1>Hello and Welcome...</h1>
-        <p>Explore my portfolio to learn more about my work in data science, analytics, and technology. Let’s connect and create something impactful together.</p>
+        <h1>Data quality. Reliable systems. Business impact.</h1>
+        <p>Explore my work across data engineering, quality engineering, insurance technology, analytics, and cloud platforms.</p>
       </div>
     </div>
     """,
@@ -805,8 +805,8 @@ st.markdown("""
 }
 .hero-left {
   flex: 1 1 0px;
-  min-width: 500px;
-  max-width: 600px;
+  min-width: 320px;
+  max-width: 430px;
   background: linear-gradient(135deg, #253451 70%, #ffd16610 100%);
   display: flex;
   flex-direction: column;
@@ -822,13 +822,13 @@ st.markdown("""
   margin-bottom: 20px !important;
 }
 .hero-pic-glow img {
-  width: 400px !important;         /* increased from 250px */
-  height: 250px !important;        /* increased from 250px */
-  border-radius: 24px !important;  /* more rounded corners */
-  border: none !important;
+  width: 230px !important;
+  height: 230px !important;
+  border-radius: 50% !important;
+  border: 4px solid #ffd166 !important;
   background: none !important;
-  box-shadow: none !important;
-  object-fit: contain !important;
+  box-shadow: 0 12px 32px rgba(0,0,0,0.28) !important;
+  object-fit: cover !important;
   object-position: center !important;
 }
 .hero-name {
@@ -926,19 +926,18 @@ st.markdown("""
 <div class="hero-card">
   <div class="hero-left">
     <div class="hero-pic-glow">
-      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh.jpg"/>
+      <img src="https://avatars.githubusercontent.com/u/114813214?v=4" alt="Venkatesh Soundararajan"/>
     </div>
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
-    <div class="hero-role">Software Development Intern<br>Data Engineering</div>
-    <div class="hero-location">Calgary, AB, Canada</div>
+    <div class="hero-role">Senior Data Quality Engineer<br>RBC</div>
+    <div class="hero-location">Halifax Metropolitan Area, Canada</div>
   </div>
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">
-      I’m Venkatesh, a Data Scientist and Software Developer with <b>8+ years of experience</b> in quality engineering, business intelligence, and analytics.
-      I specialize in building <b>scalable ETL pipelines</b>, predictive models, and interactive dashboards using cloud platforms like <b>AWS and Azure</b>.
-      I'm currently pursuing my Master's in Data Science and Analytics at the <b>University of Calgary</b>.
-      My passion lies in solving complex business problems with clean, actionable insights and AI-powered solutions.
+      I’m a <b>Senior Data Quality Engineer</b> with 8+ years of experience across data quality, ETL validation, quality engineering, and business systems analysis.
+      My background combines <b>SQL and Python</b>, Guidewire P&amp;C insurance platforms, test automation, and cloud engineering with <b>AWS and Azure</b>.
+      I hold a Master’s in Data Science and Analytics from the <b>University of Calgary</b> and enjoy turning complex data and system challenges into dependable, business-ready solutions.
     </div>
     <div class="hero-contact-bar">
       <div class="hero-contact-bar-title">Contact</div>
@@ -983,7 +982,7 @@ st.markdown(
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="edu-card-logo"/>
           <div class="edu-card-degree">Masters in Data Science and Analytics</div>
           <div class="edu-card-univ">University of Calgary, Alberta, Canada</div>
-          <div class="edu-card-date">September 2024 – Present</div>
+          <div class="edu-card-date">September 2024 – 2025</div>
         </div>
         <div class="edu-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/AnnaUniversity.png" class="edu-card-logo"/>
@@ -1002,41 +1001,69 @@ st.markdown(
       <div class="section-title" style="background:#34495E;">Professional Experience</div>
       <div class="exp-cards-grid">
         <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Software Developer Intern - Data Engineering</div>
-          <div class="exp-card-company">Tech Insights Inc, Canada</div>
-          <div class="exp-card-date">May 2025 – Present</div>
+          <div class="exp-card-logo" style="display:flex;align-items:center;justify-content:center;background:#0051A5;color:#fff;font-weight:800;font-size:0.95rem;">RBC</div>
+          <div class="exp-card-title">Senior Data Quality Engineer</div>
+          <div class="exp-card-company">RBC, Canada</div>
+          <div class="exp-card-date">April 2026 – Present</div>
           <div class="exp-responsibilities-box">
-            Developing a scalable Data Lineage framework using AWS (Glue, Lambda, S3, Athena), automating ETL workflows to support compliance and audit readiness. Built interactive dashboards with Power BI and AWS QuickSight, and implemented validation checkpoints to ensure data integrity.
-          </div>          
-        </div>
-      <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Senior Consultant</div>
-          <div class="exp-card-company">Deloitte Consulting India Private Limited, India</div>
-          <div class="exp-card-date">October 2021 – August 2024</div>
-           <div class="exp-responsibilities-box">
-            Functioned as a Business Analyst in Personal Lines insurance projects, actively engaging in 3 Amigos discussions to clarify requirements and define acceptance criteria. Developed an automated dashboard to reduce manual reporting effort and applied AWS cloud services including EC2, DynamoDB, and S3 for cloud-based components.
+            Supporting enterprise data quality through SQL- and Python-based validation, ETL control checks, defect investigation, and cross-functional collaboration to improve data accuracy, traceability, and production reliability.
           </div>
-      </div>
-      <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo"/>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Uoc.png" class="exp-card-logo" alt="University of Calgary logo"/>
+          <div class="exp-card-title">Research Assistant Intern</div>
+          <div class="exp-card-company">University of Calgary, Canada</div>
+          <div class="exp-card-date">April 2025 – December 2025</div>
+          <div class="exp-responsibilities-box">
+            Researched an on-device eye-gaze and blink-based communication system for non-verbal ICU patients. Evaluated computer-vision and machine-learning approaches while prioritizing privacy, accessibility, and reliable real-time interaction.
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo" alt="TechInsights logo"/>
+          <div class="exp-card-title">Software Development Intern – Data Engineering</div>
+          <div class="exp-card-company">TechInsights Inc · Riipen / RBC Future Launch</div>
+          <div class="exp-card-date">May 2025 – August 2025</div>
+          <div class="exp-responsibilities-box">
+            Built data-lineage and ETL-governance workflows for Salesforce-to-PostgreSQL pipelines using AWS DataZone, OpenLineage, Great Expectations, and MuleSoft. Standardized lineage events and validation checkpoints to strengthen data integrity, audit readiness, and operational visibility.
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo" alt="Deloitte logo"/>
+          <div class="exp-card-title">Senior Consultant – Guidewire BSA &amp; Quality Engineer</div>
+          <div class="exp-card-company">Deloitte Consulting India Private Limited</div>
+          <div class="exp-card-date">June 2024 – August 2024</div>
+          <div class="exp-responsibilities-box">
+            Led business analysis and quality engineering for Guidewire PolicyCenter, BillingCenter, and ClaimCenter initiatives. Translated requirements into testable outcomes, coordinated stakeholders, and supported SQL, API, ETL, and release-quality validation.
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo" alt="Deloitte logo"/>
           <div class="exp-card-title">Consultant</div>
-          <div class="exp-card-company">Capgemini Technology Services India Private Limited, India</div>
+          <div class="exp-card-company">Deloitte Consulting India Private Limited</div>
+          <div class="exp-card-date">October 2021 – June 2024</div>
+          <div class="exp-responsibilities-box">
+            Delivered data-quality, ETL, API, and automation testing across Guidewire insurance applications. Built SQL-based reconciliation checks and CI/CD-enabled automation that expanded regression coverage and reduced post-release defects.
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo" alt="Capgemini logo"/>
+          <div class="exp-card-title">Consultant – Quality Engineering</div>
+          <div class="exp-card-company">Capgemini Technology Services India Private Limited</div>
           <div class="exp-card-date">May 2018 – October 2021</div>
           <div class="exp-responsibilities-box">
-            Led end-to-end testing for Guidewire-based Workers’ Compensation policies, ensuring comprehensive coverage across business scenarios and system workflows. Developed custom automation tools to enable real-time failure alerts and issue tracking, significantly improving test efficiency. Acted as a mentor to QA team members and drove agile ceremonies, consistently meeting sprint goals and delivery timelines.          
-            </div>
-      </div>
-      <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo"/>
-          <div class="exp-card-title">Associate</div>
-          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited, India</div>
-          <div class="exp-card-date">Sep 2013 – May 2018</div>
+            Led end-to-end testing for Guidewire Workers’ Compensation workflows and developed automation for regression execution, real-time failure alerts, and issue tracking. Mentored QA team members and supported Agile delivery and CI/CD practices.
+          </div>
+        </div>
+        <div class="exp-card">
+          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo" alt="Cognizant logo"/>
+          <div class="exp-card-title">Associate – Application &amp; Quality Engineering</div>
+          <div class="exp-card-company">Cognizant Technology Solutions India Private Limited</div>
+          <div class="exp-card-date">September 2013 – May 2018</div>
           <div class="exp-responsibilities-box">
-            Demonstrated expertise in DB2 database and batch processing validation for enterprise-scale healthcare IT projects. Managed end-to-end test environment setup and execution, monitored critical KPIs for initiatives exceeding $2M in scope, and led structured knowledge transfer sessions to ensure continuity and operational readiness across project teams.          </div>
+            Supported enterprise healthcare applications through DB2 validation, COBOL/JCL batch testing, production-incident analysis, and test-environment coordination. Monitored critical batch workflows and led knowledge-transfer activities to strengthen operational readiness.
+          </div>
+        </div>
       </div>
-    </div>
     </div>
     """, unsafe_allow_html=True)
 
@@ -1533,7 +1560,6 @@ st.markdown("""
 
 <div style='text-align: center; font-size: 13px; color: #444;'>
     Developed by <strong>Venkatesh</strong><br>
-    © 2025 | Powered by Python & Streamlit 
+    © 2026 | Powered by Python & Streamlit
 </div>
 """, unsafe_allow_html=True)
-

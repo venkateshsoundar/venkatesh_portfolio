@@ -61,7 +61,7 @@ div[data-testid="stToolbar"] {
     display: none !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container {
-    padding-top: calc(var(--navbar-total-height) + 100px) !important;
+    padding-top: 5.5rem !important;
     margin-top: 0 !important;
 }
 .navbar-container {
@@ -73,23 +73,24 @@ div[data-testid="stToolbar"] {
     background: #ffffff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border-radius: 0 0 18px 18px;
-    padding: 100;
+    padding: 0;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
 }
 .sticky-spacer {
-    height: var(--navbar-total-height);
+    display: none !important;
 }
 .navbar {
     display: flex;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     justify-content: center;
-    gap: 28px;
+    gap: 10px;
     padding: 12px 0 10px 0;
     margin: 0;
     border-radius: 0 0 18px 18px;
     background: #1F2A44;
+    overflow-x: auto;
 }
 .navbar a {
     color: #ffd166;
@@ -110,7 +111,7 @@ div[data-testid="stToolbar"] {
 }
 @media screen and (max-width: 768px) {
     .navbar-container {
-        position: sticky;
+        position: fixed;
         top: 0;
         border-radius: 0;
     }
@@ -118,7 +119,7 @@ div[data-testid="stToolbar"] {
         height: 0 !important;
     }
     .main .block-container {
-    padding-top: var(--navbar-total-height) !important;
+    padding-top: 4.75rem !important;
     margin-top: 0 !important;
 }
     .navbar {
@@ -926,7 +927,7 @@ st.markdown("""
 <div class="hero-card">
   <div class="hero-left">
     <div class="hero-pic-glow">
-      <img src="https://avatars.githubusercontent.com/u/114813214?v=4" alt="Venkatesh Soundararajan"/>
+      <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh_Profile_2026.jpg" alt="Venkatesh Soundararajan"/>
     </div>
     <div class="hero-name">Venkatesh<br>Soundararajan</div>
     <div class="hero-role">Senior Data Quality Engineer<br>RBC</div>
@@ -1034,15 +1035,6 @@ st.markdown(
           <div class="exp-card-date">June 2024 – August 2024</div>
           <div class="exp-responsibilities-box">
             Led business analysis and quality engineering for Guidewire PolicyCenter, BillingCenter, and ClaimCenter initiatives. Translated requirements into testable outcomes, coordinated stakeholders, and supported SQL, API, ETL, and release-quality validation.
-          </div>
-        </div>
-        <div class="exp-card">
-          <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo" alt="Deloitte logo"/>
-          <div class="exp-card-title">Consultant</div>
-          <div class="exp-card-company">Deloitte Consulting India Private Limited</div>
-          <div class="exp-card-date">October 2021 – June 2024</div>
-          <div class="exp-responsibilities-box">
-            Delivered data-quality, ETL, API, and automation testing across Guidewire insurance applications. Built SQL-based reconciliation checks and CI/CD-enabled automation that expanded regression coverage and reduced post-release defects.
           </div>
         </div>
         <div class="exp-card">

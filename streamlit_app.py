@@ -61,7 +61,7 @@ div[data-testid="stToolbar"] {
     display: none !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container {
-    padding-top: 5.5rem !important;
+    padding-top: 4.25rem !important;
     margin-top: 0 !important;
 }
 .navbar-container {
@@ -936,9 +936,9 @@ st.markdown("""
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">
-      I’m a <b>Senior Data Quality Engineer</b> with 8+ years of experience across data quality, ETL validation, quality engineering, and business systems analysis.
-      My background combines <b>SQL and Python</b>, Guidewire P&amp;C insurance platforms, test automation, and cloud engineering with <b>AWS and Azure</b>.
-      I hold a Master’s in Data Science and Analytics from the <b>University of Calgary</b> and enjoy turning complex data and system challenges into dependable, business-ready solutions.
+      I’m Venkatesh, a <b>Senior Data Quality Engineer at RBC</b> with 8+ years of experience across data quality, ETL validation, quality engineering, and business systems analysis.
+      I specialize in <b>SQL and Python-based data validation</b>, test automation, API and backend testing, and Guidewire P&amp;C insurance platforms.
+      With a Master’s in Data Science and Analytics from the <b>University of Calgary</b> and hands-on experience with <b>AWS and Azure</b>, I focus on delivering accurate, traceable, and dependable data solutions that support confident business decisions.
     </div>
     <div class="hero-contact-bar">
       <div class="hero-contact-bar-title">Contact</div>
@@ -1002,7 +1002,7 @@ st.markdown(
       <div class="section-title" style="background:#34495E;">Professional Experience</div>
       <div class="exp-cards-grid">
         <div class="exp-card">
-          <div class="exp-card-logo" style="display:flex;align-items:center;justify-content:center;background:#0051A5;color:#fff;font-weight:800;font-size:0.95rem;">RBC</div>
+          <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/RBC.png" class="exp-card-logo" alt="RBC logo"/>
           <div class="exp-card-title">Senior Data Quality Engineer</div>
           <div class="exp-card-company">RBC, Canada</div>
           <div class="exp-card-date">April 2026 – Present</div>

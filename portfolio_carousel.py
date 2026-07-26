@@ -44,7 +44,7 @@ def render_section_carousel():
     }
     div[data-testid="stElementContainer"].portfolio-page-container-active {
       box-sizing: border-box;
-      padding-top: 20px !important;
+      padding-top: 30px !important;
     }
     [data-portfolio-section].portfolio-page-active {
       animation: portfolio-page-pop 0.52s cubic-bezier(0.22, 0.82, 0.32, 1);
@@ -140,7 +140,7 @@ def render_section_carousel():
     }
     @media (max-width: 700px) {
       div[data-testid="stElementContainer"].portfolio-page-container-active {
-        padding-top: 14px !important;
+        padding-top: 20px !important;
       }
       .navbar a::before {
         display: none;
@@ -308,28 +308,14 @@ def render_section_carousel():
       });
     }
 
-    function updateFooter() {
-      const footerContainer = closestElementContainer(
-        pageDocument.querySelector("footer.portfolio-footer")
-      );
-      if (!footerContainer) {
-        return;
-      }
-      rememberSource(footerContainer);
-      footerContainer.style.display =
-        activeIndex === sectionIds.length - 1
-          ? footerContainer.dataset.portfolioPagerDisplay || ""
-          : "none";
-    }
-
     function activate(index, options = {}) {
       const {
         scroll = true,
         updateHash = true,
         direction = index >= activeIndex ? 1 : -1
       } = options;
-      const boundedIndex = Math.max(0, Math.min(index, sectionIds.length - 1));
-      activeIndex = boundedIndex;
+      activeIndex =
+        ((index % sectionIds.length) + sectionIds.length) % sectionIds.length;
 
       sourceContainers.forEach((container, sourceIndex) => {
         const isActive = sourceIndex === activeIndex;
@@ -356,7 +342,6 @@ def render_section_carousel():
 
       updateNavbar();
       updateDots();
-      updateFooter();
 
       if (updateHash) {
         window.history.replaceState(null, "", `#${sectionIds[activeIndex]}`);
@@ -421,9 +406,9 @@ def render_section_carousel():
       ) {
         return;
       }
-      if (deltaX < 0 && activeIndex < sectionIds.length - 1) {
+      if (deltaX > 0) {
         activate(activeIndex + 1, { direction: 1 });
-      } else if (deltaX > 0 && activeIndex > 0) {
+      } else if (deltaX < 0) {
         activate(activeIndex - 1, { direction: -1 });
       }
     }

@@ -82,6 +82,43 @@ def render_section_carousel():
       background: rgba(255, 209, 102, 0.16);
       box-shadow: inset 0 -3px 0 #ffd166;
     }
+    .portfolio-pager-dots {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 0 16px 9px;
+    }
+    .portfolio-pager-dot {
+      width: 8px;
+      height: 8px;
+      padding: 0;
+      border: 1px solid rgba(255, 209, 102, 0.68);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.34);
+      cursor: pointer;
+      transition:
+        width 0.22s ease,
+        background 0.22s ease,
+        box-shadow 0.22s ease,
+        transform 0.22s ease;
+    }
+    .portfolio-pager-dot:hover {
+      background: rgba(255, 209, 102, 0.72);
+      transform: scale(1.2);
+    }
+    .portfolio-pager-dot.is-complete {
+      background: rgba(255, 209, 102, 0.62);
+    }
+    .portfolio-pager-dot.is-active {
+      width: 26px;
+      background: #ffd166;
+      box-shadow: 0 0 9px rgba(255, 209, 102, 0.72);
+    }
+    .portfolio-pager-dot:focus-visible {
+      outline: 2px solid #ffffff;
+      outline-offset: 3px;
+    }
     @media (hover: hover) and (pointer: fine) {
       [data-portfolio-section].portfolio-page-active {
         cursor: grab;
@@ -108,12 +145,16 @@ def render_section_carousel():
       .navbar a::before {
         display: none;
       }
+      .portfolio-pager-dots {
+        padding-bottom: 8px;
+      }
     }
     @media (prefers-reduced-motion: reduce) {
       [data-portfolio-section].portfolio-page-active {
         animation: none;
       }
-      .navbar a::before {
+      .navbar a::before,
+      .portfolio-pager-dot {
         transition: none;
       }
     }
@@ -185,10 +226,12 @@ def render_section_carousel():
 
     const anchorContainers = anchors.map(closestElementContainer);
     const sourceContainers = sectionRoots.map(closestElementContainer);
+    const navbarContainer = pageDocument.querySelector(".navbar-container");
 
     if (
       anchorContainers.some((container) => !container) ||
       sourceContainers.some((container) => !container) ||
+      !navbarContainer ||
       new Set(sourceContainers).size !== sectionIds.length
     ) {
       if (attempt < 80) {
@@ -206,6 +249,27 @@ def render_section_carousel():
         container.style.display = "none";
       }
     });
+
+    const dotNavigation = pageDocument.createElement("div");
+    dotNavigation.className = "portfolio-pager-dots";
+    dotNavigation.setAttribute("aria-label", "Portfolio pages");
+
+    const navbarLinks = Array.from(
+      pageDocument.querySelectorAll(".navbar a[href^='#']")
+    );
+    const dotButtons = sectionIds.map((id, index) => {
+      const dot = pageDocument.createElement("button");
+      const sectionName =
+        navbarLinks.find((link) => link.getAttribute("href") === `#${id}`)
+          ?.textContent?.trim() || id;
+      dot.className = "portfolio-pager-dot";
+      dot.type = "button";
+      dot.title = sectionName;
+      dot.setAttribute("aria-label", `View ${sectionName} section`);
+      dotNavigation.appendChild(dot);
+      return dot;
+    });
+    navbarContainer.appendChild(dotNavigation);
 
     let activeIndex = 0;
     let touchStartX = null;
@@ -227,6 +291,19 @@ def render_section_carousel():
           link.setAttribute("aria-current", "page");
         } else {
           link.removeAttribute("aria-current");
+        }
+      });
+    }
+
+    function updateDots() {
+      dotButtons.forEach((dot, dotIndex) => {
+        const isActive = dotIndex === activeIndex;
+        dot.classList.toggle("is-active", isActive);
+        dot.classList.toggle("is-complete", dotIndex < activeIndex);
+        if (isActive) {
+          dot.setAttribute("aria-current", "page");
+        } else {
+          dot.removeAttribute("aria-current");
         }
       });
     }
@@ -278,6 +355,7 @@ def render_section_carousel():
       });
 
       updateNavbar();
+      updateDots();
       updateFooter();
 
       if (updateHash) {
@@ -412,6 +490,12 @@ def render_section_carousel():
       }
     }
 
+    dotButtons.forEach((dot, index) => {
+      dot.addEventListener("click", () =>
+        activate(index, { direction: index >= activeIndex ? 1 : -1 })
+      );
+    });
+
     pageDocument.addEventListener("click", handleNavigationClick);
     pageDocument.addEventListener("keydown", handleKeydown);
     pageDocument.addEventListener("touchstart", handleTouchStart, {
@@ -434,6 +518,7 @@ def render_section_carousel():
       pageDocument.removeEventListener("pointerup", handlePointerUp);
       pageDocument.removeEventListener("pointercancel", handlePointerCancel);
       window.removeEventListener("hashchange", handleHashChange);
+      dotNavigation.remove();
       restoreSources();
     };
 

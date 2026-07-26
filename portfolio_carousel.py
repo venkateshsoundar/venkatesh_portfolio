@@ -314,6 +314,47 @@ def render_section_carousel():
       });
     }
 
+    function resetPageScroll() {
+      const scrollTargets = new Set([
+        pageDocument.scrollingElement,
+        pageDocument.documentElement,
+        pageDocument.body,
+        pageDocument.querySelector('[data-testid="stAppViewContainer"]'),
+        pageDocument.querySelector('[data-testid="stMain"]'),
+        pageDocument.querySelector(".stAppViewContainer"),
+        pageDocument.querySelector(".main")
+      ]);
+
+      let ancestor = sourceContainers[activeIndex]?.parentElement;
+      while (ancestor && ancestor !== pageDocument.body) {
+        const overflowY = window.getComputedStyle(ancestor).overflowY;
+        if (
+          ["auto", "scroll", "overlay"].includes(overflowY) ||
+          ancestor.scrollHeight > ancestor.clientHeight
+        ) {
+          scrollTargets.add(ancestor);
+        }
+        ancestor = ancestor.parentElement;
+      }
+
+      const moveToTop = () => {
+        scrollTargets.forEach((target) => {
+          if (!target) {
+            return;
+          }
+          if (typeof target.scrollTo === "function") {
+            target.scrollTo({ top: 0, left: 0, behavior: "auto" });
+          }
+          target.scrollTop = 0;
+          target.scrollLeft = 0;
+        });
+        window.scrollTo({ top: 0, left: 0, behavior: "auto" });
+      };
+
+      moveToTop();
+      window.requestAnimationFrame(moveToTop);
+    }
+
     function activate(index, options = {}) {
       const {
         scroll = true,
@@ -353,12 +394,7 @@ def render_section_carousel():
         window.history.replaceState(null, "", `#${sectionIds[activeIndex]}`);
       }
       if (scroll) {
-        sectionRoots[activeIndex].scrollIntoView({
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "auto"
-            : "smooth",
-          block: "start"
-        });
+        resetPageScroll();
       }
     }
 

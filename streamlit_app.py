@@ -14,21 +14,6 @@ def get_openai_client():
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
 
-import streamlit.components.v1 as components
-
-# Google Analytics script using components.html
-components.html("""
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-9TDXL1JB47');
-</script>
-""", height=0)
-
-
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
@@ -691,6 +676,11 @@ st.markdown(
         transform: scale(1.02) translateY(-4px);
         box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.17);
         z-index: 4;
+      }
+      @media (min-width: 769px) {
+        .welcome-card {
+          margin-top: -4rem;
+        }
       }
     </style>
     <div class="welcome-card">

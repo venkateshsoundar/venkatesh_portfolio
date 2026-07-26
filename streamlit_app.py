@@ -14,21 +14,6 @@ def get_openai_client():
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 
 
-import streamlit.components.v1 as components
-
-# Google Analytics script using components.html
-components.html("""
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9TDXL1JB47"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('config', 'G-9TDXL1JB47');
-</script>
-""", height=0)
-
-
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
@@ -44,17 +29,21 @@ div[data-testid="stToolbar"] {
     display: none !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container {
-    padding-top: 1rem !important;
+    padding-top: 0 !important;
     margin-top: 0 !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container > [data-testid="stVerticalBlock"] {
-    gap: 0.25rem !important;
+    gap: 0 !important;
+}
+div[data-testid="stElementContainer"]:has(.navbar-container) {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 .navbar-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     z-index: 1000;
     background: #ffffff;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
@@ -97,15 +86,14 @@ div[data-testid="stToolbar"] {
 }
 @media screen and (max-width: 768px) {
     .navbar-container {
-        position: fixed;
-        top: 0;
+        position: relative;
         border-radius: 0;
     }
     .sticky-spacer {
         height: 0 !important;
     }
     .main .block-container {
-    padding-top: 4.75rem !important;
+    padding-top: 0 !important;
     margin-top: 0 !important;
 }
     .navbar {

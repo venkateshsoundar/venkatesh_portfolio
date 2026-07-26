@@ -54,7 +54,9 @@ div[data-testid="stElementContainer"]:has(.navbar-container) {
     width: 100vw;
     margin-left: calc(50% - 50vw);
     z-index: 1000;
-    background: #ffffff;
+    background:
+        linear-gradient(rgba(18, 32, 61, 0.72), rgba(31, 42, 68, 0.86)),
+        url("https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif") center/cover no-repeat;
     box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     border-radius: 0 0 18px 18px;
     padding: 0;
@@ -73,7 +75,8 @@ div[data-testid="stElementContainer"]:has(.navbar-container) {
     padding: 12px 0 10px 0;
     margin: 0;
     border-radius: 0 0 18px 18px;
-    background: #1F2A44;
+    background: rgba(31, 42, 68, 0.38);
+    backdrop-filter: brightness(0.86);
     overflow-x: auto;
 }
 .navbar a {
@@ -124,7 +127,7 @@ div[data-testid="stElementContainer"]:has(.navbar-container) {
     }
     .mobile-nav-toggle {
         display: block;
-        background: #1F2A44;
+        background: rgba(31, 42, 68, 0.68);
         color: #ffd166;
         font-weight: bold;
         font-size: 1.5rem;
@@ -665,42 +668,6 @@ projects = [
 ]
 
 
-st.markdown(
-    """
-    <style>
-      .welcome-card {
-        background: url("https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif") center/cover no-repeat;
-        border-radius: 16px;
-        padding: 3rem;
-        color: white;
-        min-height: 180px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        text-align: center;
-        margin: 16px 0;
-        box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
-        transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
-        position: relative;
-        cursor: pointer;
-      }
-      .welcome-card:hover {
-        transform: scale(1.02) translateY(-4px);
-        box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.17);
-        z-index: 4;
-      }
-    </style>
-    <div class="welcome-card">
-      <div>
-        <h1>Data quality. Reliable systems. Business impact.</h1>
-        <p>Explore my work across data engineering, quality engineering, insurance technology, analytics, and cloud platforms.</p>
-      </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-
 st.markdown('<a name="about" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown("""
 <style>
@@ -712,7 +679,7 @@ st.markdown("""
   background: linear-gradient(135deg, #253451 0%, #324665 100%);
   border-radius: 24px;
   box-shadow: 0 6px 26px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.08);
-  margin-bottom: 16px;
+  margin: 16px 0;
   min-height: 330px;
   position: relative;
   overflow: hidden;

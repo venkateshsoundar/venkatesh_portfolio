@@ -8,7 +8,7 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 st.markdown("""
 <style>
 :root {
-    --section-gap: 16px;
+    --section-gap: 32px;
 }
 body {
     margin: 0 !important;

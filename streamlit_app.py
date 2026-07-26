@@ -19,7 +19,7 @@ st.markdown("""
 <style>
 :root {
     --navbar-total-height: 0px;
-    --section-gap: 16px;
+    --section-gap: 32px;
 }
 body {
     margin: 0 !important;

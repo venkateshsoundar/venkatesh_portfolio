@@ -1,6 +1,7 @@
 import streamlit as st
 from openai import OpenAI
 from ats_tool import extract_text_from_pdf, calculate_ats_score, tailor_resume
+from portfolio_carousel import render_section_carousel
 
 # Initialize OpenAI client lazily to speed up app start
 @st.cache_resource
@@ -1409,6 +1410,12 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+st.markdown(
+    '<span class="portfolio-carousel-end-marker" aria-hidden="true"></span>',
+    unsafe_allow_html=True,
+)
+render_section_carousel()
 
 ats_container = st.container()
 with ats_container:

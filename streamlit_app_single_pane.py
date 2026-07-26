@@ -1,4 +1,5 @@
 import streamlit as st
+from portfolio_carousel import render_section_carousel
 
 # ---- PAGE CONFIG & GLOBAL CSS ----
 st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
@@ -1392,6 +1393,12 @@ st.markdown("""
   </div>
 </div>
 """, unsafe_allow_html=True)
+
+st.markdown(
+    '<span class="portfolio-carousel-end-marker" aria-hidden="true"></span>',
+    unsafe_allow_html=True,
+)
+render_section_carousel()
 
 st.markdown("""
 <style>

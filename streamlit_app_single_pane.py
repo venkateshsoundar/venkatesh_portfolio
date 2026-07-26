@@ -255,7 +255,7 @@ st.markdown("""
   text-align: center;
 }
 .card:hover, .card.hover-zoom:hover {
-  transform: translateY(-5px) scale(1.04);
+  transform: translateY(-3px) scale(1.01);
   box-shadow: 0 8px 16px rgba(0,0,0,0.24);
 }
 .section-title {
@@ -351,7 +351,7 @@ st.markdown("""
   border: 2px solid #40649622;
 }
 .edu-card:hover {
-  transform: translateY(-7px) scale(1.03);
+  transform: translateY(-4px) scale(1.015);
   box-shadow: 0 8px 18px rgba(20,40,80,0.19);
   background: linear-gradient(135deg, #406496 0%, #34495E 100%);
 }
@@ -427,7 +427,7 @@ st.markdown("""
   justify-content: flex-start;
 }
 .cert-card:hover, .award-card:hover {
-  transform: translateY(-4px) scale(1.03);
+  transform: translateY(-3px) scale(1.015);
   box-shadow: 0 8px 24px rgba(20,60,120,0.15);
   background: linear-gradient(135deg, #22304A 0%, #406496 88%);
 }
@@ -456,7 +456,7 @@ st.markdown("""
   border: 2px solid #40649622;
 }
 .exp-card:hover {
-  transform: translateY(-7px) scale(1.03);
+  transform: translateY(-4px) scale(1.015);
   box-shadow: 0 8px 18px rgba(20,40,80,0.19);
   background: linear-gradient(135deg, #406496 0%, #34495E 100%);
 }
@@ -481,6 +481,34 @@ st.markdown("""
 .exp-card-title { font-weight: 700; font-size: 1.12rem; margin-bottom: 3px;}
 .exp-card-company { color: #ADD8E6; font-size: 1.01rem; margin-bottom: 6px;}
 .exp-card-date { color: #ffd166; font-size: 0.98rem;}
+.current-badge {
+  display: inline-flex;
+  align-items: center;
+  margin-bottom: 8px;
+  padding: 4px 10px;
+  border-radius: 999px;
+  background: #dff7e6;
+  color: #14532d;
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.exp-impact {
+  width: 100%;
+  margin-top: 12px;
+  padding: 9px 11px;
+  border-left: 3px solid #ffd166;
+  border-radius: 8px;
+  background: rgba(31, 42, 68, 0.48);
+  color: #fff;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  text-align: left;
+}
+.exp-impact strong {
+  color: #ffd166;
+}
 /* Skills */
 .skills-category {
   margin-bottom: 14px;
@@ -571,8 +599,9 @@ st.markdown("""
     border-radius: 10px;
     margin-top: 14px;    
     font-size: 13px;
-    font-style: italic;
+    font-style: normal;
     line-height: 1.6;
+    background: rgba(31, 42, 68, 0.24);
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
 }
 
@@ -581,81 +610,46 @@ st.markdown("""
 
 projects = [
     {
+        "title": "Weather Data Pipeline (AWS)",
+        "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg",
+        "tools": ["AWS", "Python", "Streamlit"],
+        "desc": "Built an automated AWS pipeline for weather-data ingestion, storage, processing, and dashboard reporting."
+    },
+    {
         "title": "Canadian Quality of Life Analysis",
         "url": "https://github.com/venkateshsoundar/canadian-qol-analysis",
         "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/QualityofLife.jpeg",
-        "tools": ["Python", "Pandas", "Seaborn", "Tableau"],
-        "desc": "Analyzed Canadian provinces' quality of life using demographic data and advanced data visualization."
-    },
-    {
-        "title": "Alberta Wildfire Analysis",
-        "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
-        "tools": ["Python", "GeoPandas", "Power BI"],
-        "desc": "Mapped and predicted wildfire trends in Alberta with geospatial analysis and interactive dashboards."
+        "tools": ["Python", "Pandas", "Tableau"],
+        "desc": "Compared quality-of-life indicators across Canadian provinces through reproducible analysis and visualization."
     },
     {
         "title": "Toronto Crime Drivers",
         "url": "https://github.com/venkateshsoundar/toronto-crime-drivers",
         "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Toronto_Crimes.jpeg",
         "tools": ["Python", "Pandas", "Matplotlib"],
-        "desc": "Investigated drivers of crime across Toronto neighborhoods to reveal actionable urban insights."
+        "desc": "Analyzed neighborhood-level crime patterns to identify key drivers and communicate actionable urban insights."
     },
     {
-        "title": "Weight Change Regression Analysis",
-        "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg",
-        "tools": ["Python", "Scikit-learn", "Seaborn"],
-        "desc": "Built regression models to predict weight changes based on lifestyle and demographic data."
+        "title": "Alberta Wildfire Analysis",
+        "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
+        "tools": ["Python", "GeoPandas", "Power BI"],
+        "desc": "Combined geospatial analysis and dashboards to examine wildfire patterns and risk trends across Alberta."
     },
     {
-        "title": "Calgary Childcare Compliance",
-        "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg",
-        "tools": ["Python", "Pandas", "Plotly"],
-        "desc": "Assessed childcare center compliance in Calgary through data-driven dashboards."
-    },
-    {
-        "title": "Social Media Purchase Influence",
-        "url": "https://github.com/venkateshsoundar/social-media-purchase-influence",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg",
-        "tools": ["Python", "Scikit-learn", "Power BI"],
-        "desc": "Modeled and visualized the impact of social media on consumer purchase behavior."
-    },
-    {
-        "title": "Obesity Level Estimation",
-        "url": "https://github.com/venkateshsoundar/obesity-level-estimation",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg",
-        "tools": ["Python", "Logistic Regression", "Pandas"],
-        "desc": "Predicted obesity levels from health and lifestyle features using classification algorithms."
-    },
-    {
-        "title": "Weather Data Pipeline (AWS)",
-        "url": "https://github.com/venkateshsoundar/weather-data-pipeline-aws",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/weatherprediction.jpeg",
-        "tools": ["AWS", "Python", "Streamlit"],
-        "desc": "Automated weather data ingestion, storage, and visualization on AWS cloud with Streamlit dashboard."
-    },
-    {
-        "title": "Gmail Sentimental Analysis",
+        "title": "Gmail Sentiment Analysis",
         "url": "https://github.com/venkateshsoundar/gmail-sentiment-analysis",
         "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/email_sentiment_Analysis.jpeg",
         "tools": ["Python", "NLTK", "Gmail API"],
-        "desc": "Classified and visualized sentiment of Gmail emails using NLP techniques."
+        "desc": "Created an NLP workflow to classify email sentiment and summarize communication patterns from Gmail data."
     },
     {
         "title": "Penguin Species Prediction Chatbot",
         "url": "https://github.com/venkateshsoundar/penguin-dataset-chatbot",
         "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg",
         "tools": ["Python", "Scikit-learn", "Streamlit"],
-        "desc": "Developed an interactive chatbot to predict penguin species from morphological features."
-    },
-    {
-        "title": "Uber Ride Prediction",
-        "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp",
-        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg",
-        "tools": ["Python", "XGBoost", "Matplotlib"],
-        "desc": "Predicted Uber ride durations using machine learning and explained predictions with visualizations."
+        "desc": "Developed an interactive machine-learning application that predicts penguin species from user inputs."
     }
 ]
 
@@ -678,7 +672,7 @@ st.markdown("""
   transition: transform .33s cubic-bezier(.37,1.7,.7,1), box-shadow .33s;
 }
 .hero-card:hover {
-  transform: translateY(-7px) scale(1.02);
+  transform: translateY(-3px) scale(1.005);
   box-shadow: 0 14px 38px 0 #ffd16630, 0 2px 18px rgba(44,62,80,0.12);
 }
 .hero-left {
@@ -752,7 +746,34 @@ st.markdown("""
   font-size: 1.09rem;
   color: #fff;
   line-height: 1.7;
-  margin-bottom: 26px;
+  margin-bottom: 18px;
+}
+.achievement-strip {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin-bottom: 18px;
+}
+.achievement-item {
+  padding: 12px 8px;
+  border: 1px solid rgba(255, 209, 102, 0.24);
+  border-radius: 12px;
+  background: rgba(31, 42, 68, 0.46);
+  text-align: center;
+}
+.achievement-value {
+  display: block;
+  color: #ffd166;
+  font-size: 1.18rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+.achievement-label {
+  display: block;
+  margin-top: 5px;
+  color: #fff;
+  font-size: 0.76rem;
+  line-height: 1.3;
 }
 .hero-contact-bar {
   width: 100%;
@@ -786,18 +807,58 @@ st.markdown("""
 }
 .hero-contact-icons a:hover {
   background: #ffd16633;
-  transform: translateY(-2px) scale(1.11);
+  transform: translateY(-2px) scale(1.05);
 }
 .hero-contact-icons img {
   width: 30px;
   height: 30px;
   filter: invert(100%);
 }
+.hero-cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 16px;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 145px;
+  padding: 11px 16px;
+  border: 1px solid rgba(255, 209, 102, 0.55);
+  border-radius: 12px;
+  background: transparent;
+  color: #ffd166 !important;
+  font-size: 0.95rem;
+  font-weight: 700;
+  text-decoration: none !important;
+  transition: transform 0.18s ease, background 0.18s ease, color 0.18s ease;
+}
+.hero-cta.primary {
+  background: #ffd166;
+  color: #22304A !important;
+}
+.hero-cta:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 209, 102, 0.16);
+  color: #fff !important;
+}
+.hero-cta.primary:hover {
+  background: #ffe29a;
+  color: #22304A !important;
+}
 
 
 @media (max-width: 900px) {
   .hero-card {flex-direction: column;align-items: center;}
   .hero-right, .hero-left {max-width:100%;padding:28px 8vw 12px;}
+  .achievement-strip {grid-template-columns: repeat(2, minmax(0, 1fr));}
+}
+@media (max-width: 520px) {
+  .achievement-strip {grid-template-columns: 1fr;}
+  .hero-cta {width: 100%;}
 }
 </style>
 
@@ -813,38 +874,30 @@ st.markdown("""
   <div class="hero-right">
     <div class="hero-about-title">About Me</div>
     <div class="hero-about-body">
-      I’m Venkatesh, a <b>Senior Data Quality Engineer at RBC</b> with 8+ years of experience across data quality, ETL validation, quality engineering, and business systems analysis.
-      I specialize in <b>SQL and Python-based data validation</b>, test automation, API and backend testing, and Guidewire P&amp;C insurance platforms.
-      With a Master’s in Data Science and Analytics from the <b>University of Calgary</b> and hands-on experience with <b>AWS and Azure</b>, I focus on delivering accurate, traceable, and dependable data solutions that support confident business decisions.
+      I’m Venkatesh, a <b>Senior Data Quality Engineer at RBC</b> with 8+ years of experience in data quality, ETL validation, quality engineering, and Guidewire P&amp;C insurance.
+      I use <b>SQL, Python, automation, API testing, and cloud platforms</b> to build accurate, traceable, production-ready data solutions.
+      With a Master’s in Data Science and Analytics from the <b>University of Calgary</b>, I connect technical quality with dependable business outcomes.
+    </div>
+    <div class="achievement-strip" aria-label="Career highlights">
+      <div class="achievement-item"><span class="achievement-value">8+ Years</span><span class="achievement-label">Data &amp; Quality Engineering</span></div>
+      <div class="achievement-item"><span class="achievement-value">95%</span><span class="achievement-label">Defect Removal Efficiency</span></div>
+      <div class="achievement-item"><span class="achievement-value">40%</span><span class="achievement-label">Fewer Post-Release Issues</span></div>
+      <div class="achievement-item"><span class="achievement-value">15</span><span class="achievement-label">QA Professionals Led</span></div>
     </div>
     <div class="hero-contact-bar">
       <div class="hero-contact-bar-title">Contact</div>
       <div class="hero-contact-icons">
-        <a href="mailto:venkatesh.balusoundar@gmail.com" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg"/></a>
-        <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg"/></a>
-        <a href="https://github.com/venkateshsoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg"/></a>
-        <a href="https://medium.com/@venkatesh.balusoundar" target="_blank"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg"/></a>
+        <a href="mailto:venkatesh.balusoundar@gmail.com" aria-label="Email Venkatesh"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/gmail.svg" alt="Email"/></a>
+        <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank" rel="noopener noreferrer" aria-label="Venkatesh on LinkedIn"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/linkedin.svg" alt="LinkedIn"/></a>
+        <a href="https://github.com/venkateshsoundar" target="_blank" rel="noopener noreferrer" aria-label="Venkatesh on GitHub"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/github.svg" alt="GitHub"/></a>
+        <a href="https://medium.com/@venkatesh.balusoundar" target="_blank" rel="noopener noreferrer" aria-label="Venkatesh on Medium"><img src="https://cdn.jsdelivr.net/npm/simple-icons@v9/icons/medium.svg" alt="Medium"/></a>
       </div>
     </div>
-    <div style="text-align: center; margin-top: 20px;">
-  <button style="
-    background: #FFFFE0; 
-    color: #FFF9C4; 
-    font-weight: 700; 
-    border-radius: 14px; 
-    padding: 14px 36px; 
-    font-size: 1.1rem; 
-    border: none; 
-    cursor: pointer;      
-    transition: background 0.25s ease;">
-  <a href="https://docs.google.com/viewer?url=https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" 
-     target="_blank" 
-     style="color: #22304A; text-decoration: none;">
-    View Resume
-  </a>
-</button>
-
-</div>
+    <div class="hero-cta-row">
+      <a class="hero-cta primary" href="mailto:venkatesh.balusoundar@gmail.com">Contact Me</a>
+      <a class="hero-cta" href="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkateshwaran_Resume.pdf" target="_blank" rel="noopener noreferrer">Download Resume</a>
+      <a class="hero-cta" href="https://www.linkedin.com/in/venkateshbalus/" target="_blank" rel="noopener noreferrer">View LinkedIn</a>
+    </div>
   </div>
 </div>
 """, unsafe_allow_html=True)
@@ -889,12 +942,14 @@ st.markdown(
       <div class="exp-cards-grid">
         <div class="exp-card">
           <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/RBC.png" class="exp-card-logo" alt="RBC logo"/>
+          <div class="current-badge">Current</div>
           <div class="exp-card-title">Senior Data Quality Engineer</div>
           <div class="exp-card-company">RBC, Canada</div>
           <div class="exp-card-date">April 2026 – Present</div>
           <div class="exp-responsibilities-box">
             Supporting enterprise data quality through SQL- and Python-based validation, ETL control checks, defect investigation, and cross-functional collaboration to improve data accuracy, traceability, and production reliability.
           </div>
+          <div class="exp-impact"><strong>Focus:</strong> Enterprise ETL controls, traceability, and reliable production data.</div>
         </div>
         <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo" alt="TechInsights logo"/>
@@ -904,6 +959,7 @@ st.markdown(
           <div class="exp-responsibilities-box">
             Built data-lineage and ETL-governance workflows for Salesforce-to-PostgreSQL pipelines using AWS DataZone, OpenLineage, Great Expectations, and MuleSoft. Standardized lineage events and validation checkpoints to strengthen data integrity, audit readiness, and operational visibility.
           </div>
+          <div class="exp-impact"><strong>Scope:</strong> Standardized governance patterns across 7 key Salesforce data flows.</div>
         </div>
         <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Deloitte.png" class="exp-card-logo" alt="Deloitte logo"/>
@@ -913,6 +969,7 @@ st.markdown(
           <div class="exp-responsibilities-box">
             Led business analysis and quality engineering for Guidewire PolicyCenter, BillingCenter, and ClaimCenter initiatives. Translated requirements into testable outcomes, coordinated stakeholders, and supported SQL, API, ETL, and release-quality validation.
           </div>
+          <div class="exp-impact"><strong>Impact:</strong> Increased regression coverage by 40% and reduced post-release issues by 40%.</div>
         </div>
         <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Capgemini.png" class="exp-card-logo" alt="Capgemini logo"/>
@@ -922,6 +979,7 @@ st.markdown(
           <div class="exp-responsibilities-box">
             Led end-to-end testing for Guidewire Workers’ Compensation workflows and developed automation for regression execution, real-time failure alerts, and issue tracking. Mentored QA team members and supported Agile delivery and CI/CD practices.
           </div>
+          <div class="exp-impact"><strong>Delivery:</strong> End-to-end Guidewire QA with automation, alerts, Agile, and CI/CD support.</div>
         </div>
         <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/Cognizant.png" class="exp-card-logo" alt="Cognizant logo"/>
@@ -931,6 +989,7 @@ st.markdown(
           <div class="exp-responsibilities-box">
             Supported enterprise healthcare applications through DB2 validation, COBOL/JCL batch testing, production-incident analysis, and test-environment coordination. Monitored critical batch workflows and led knowledge-transfer activities to strengthen operational readiness.
           </div>
+          <div class="exp-impact"><strong>Technology scope:</strong> DB2, COBOL, and JCL across batch validation and production support.</div>
         </div>
       </div>
     </div>
@@ -1038,7 +1097,7 @@ st.markdown("""
 }
 .projects-4col-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(3, 1fr);
   gap: 24px;
   margin: 0 auto;
   justify-content: center;
@@ -1058,7 +1117,7 @@ st.markdown("""
   overflow: hidden;
 }
 .project-main-card:hover {
-  transform: translateY(-4px) scale(1.024);
+  transform: translateY(-3px) scale(1.01);
   box-shadow: 0 12px 32px #ffd1661c, 0 2px 8px #22304A19;
   z-index: 2;
 }
@@ -1133,19 +1192,36 @@ st.markdown("""
   margin-bottom: 2px;
   box-shadow: 0 1px 3px #22304A13;
 }
-.project-card-link {
-  text-align: center;
-  margin-top: 6px;
+.project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 8px;
 }
-.project-card-link a {
-  color: #ADD8E6;
-  font-size: 0.97rem;
-  text-decoration: underline;
-  font-weight: 600;
-  transition: color 0.13s;
+.project-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 7px 12px;
+  border: 1px solid rgba(255, 209, 102, 0.55);
+  border-radius: 9px;
+  color: #ffd166 !important;
+  font-size: 0.9rem;
+  text-decoration: none !important;
+  font-weight: 700;
+  transition: background 0.15s ease, transform 0.15s ease;
 }
-.project-card-link a:hover {
-  color: #ffd166;
+.project-action.primary {
+  background: #ffd166;
+  color: #22304A !important;
+}
+.project-action:hover {
+  transform: translateY(-2px);
+  background: rgba(255, 209, 102, 0.16);
+}
+.project-action.primary:hover {
+  background: #ffe29a;
 }
 @media (max-width: 1200px) {
   .projects-4col-grid {grid-template-columns: repeat(3, 1fr);}
@@ -1161,12 +1237,22 @@ st.markdown("""
 
 projects_html = '''
 <div class="card projects-gallery-pane hover-zoom">
-  <div class="section-title">Projects Gallery</div>
+  <div class="section-title">Featured Projects</div>
   <div class="projects-4col-grid">
 '''
 
 for proj in projects:
     tools_html = ''.join(f'<span class="project-tool-badge">{tool}</span>' for tool in proj["tools"])
+    actions_html = (
+        f'<a class="project-action primary" href="{proj["url"]}" target="_blank" '
+        f'rel="noopener noreferrer">GitHub</a>'
+    )
+    if proj.get("demo_url"):
+        actions_html = (
+            f'<a class="project-action" href="{proj["demo_url"]}" target="_blank" '
+            f'rel="noopener noreferrer">Live Demo</a>'
+            + actions_html
+        )
     projects_html += (
         f'<div class="project-main-card hover-zoom">'
         f'<div class="project-img-holder">'
@@ -1177,7 +1263,7 @@ for proj in projects:
         f'<div class="project-title">{proj["title"]}</div>'
         f'<div class="project-desc">{proj["desc"]}</div>'
         f'<div class="project-tools-list">{tools_html}</div>'
-        f'<div class="project-card-link"><a href="{proj["url"]}" target="_blank">View on GitHub &rarr;</a></div>'
+        f'<div class="project-card-actions">{actions_html}</div>'
         f'</div></div>'
     )
 
@@ -1225,7 +1311,7 @@ st.markdown("""
   transition: transform 0.25s ease, box-shadow 0.25s;
 }
 .skill-card:hover {
-  transform: translateY(-6px) scale(1.04);
+  transform: translateY(-3px) scale(1.015);
   box-shadow: 0 12px 28px rgba(255,209,102,0.15), 0 6px 16px rgba(44,62,80,0.12);
 }
 .skill-title {
@@ -1247,7 +1333,7 @@ st.markdown("""
   transition: transform 0.25s ease, box-shadow 0.25s;
 }
 .hover-zoom:hover {
-  transform: scale(1.02);
+  transform: translateY(-2px) scale(1.008);
   box-shadow: 0 14px 32px rgba(255,209,102,0.12), 0 8px 22px rgba(44,62,80,0.1);
 }
 </style>
@@ -1308,10 +1394,49 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 st.markdown("""
-<hr style='border: 0; border-top: 1px solid #eee; margin-top: 50px;' />
-
-<div style='text-align: center; font-size: 13px; color: #444;'>
-    Developed by <strong>Venkatesh</strong><br>
-    © 2026 | Powered by Python & Streamlit
-</div>
+<style>
+.portfolio-footer {
+  margin-top: 40px;
+  padding: 24px 18px;
+  border-top: 1px solid rgba(255, 209, 102, 0.35);
+  border-radius: 18px 18px 0 0;
+  background: rgba(31, 42, 68, 0.92);
+  color: #fff;
+  text-align: center;
+}
+.footer-name {
+  color: #ffd166;
+  font-size: 1.08rem;
+  font-weight: 800;
+}
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin: 10px 0;
+}
+.footer-links a {
+  color: #ADD8E6 !important;
+  font-weight: 600;
+  text-decoration: none !important;
+}
+.footer-links a:hover {
+  color: #ffd166 !important;
+}
+.footer-meta {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 0.82rem;
+}
+</style>
+<footer class="portfolio-footer">
+  <div class="footer-name">Venkatesh Soundararajan</div>
+  <div class="footer-links">
+    <a href="mailto:venkatesh.balusoundar@gmail.com">Email</a>
+    <a href="https://www.linkedin.com/in/venkateshbalus/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/venkateshsoundar" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="https://medium.com/@venkatesh.balusoundar" target="_blank" rel="noopener noreferrer">Medium</a>
+  </div>
+  <div class="footer-meta">Last updated July 2026 · Built with Python &amp; Streamlit</div>
+</footer>
 """, unsafe_allow_html=True)

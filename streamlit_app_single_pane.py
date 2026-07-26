@@ -16,18 +16,22 @@ div[data-testid="stToolbar"] {
     display: none !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container {
-    padding-top: 1rem !important;
+    padding-top: 0 !important;
     margin-top: 0 !important;
 }
 [data-testid="stAppViewContainer"] .main .block-container > [data-testid="stVerticalBlock"] {
-    gap: 0.25rem !important;
+    gap: 0 !important;
+}
+div[data-testid="stElementContainer"]:has(.navbar-container) {
+    position: sticky;
+    top: 0;
+    z-index: 1000;
 }
 /* Fix navbar at top */
 .navbar-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    position: relative;
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
     height: auto;
     z-index: 1000;
     background: #1F2A44;
@@ -149,7 +153,7 @@ div[data-testid="stToolbar"] {
         display: none !important;
     }
     [data-testid="stAppViewContainer"] .main .block-container {
-        padding-top: 1rem !important;
+        padding-top: 0 !important;
         margin-top: 0 !important;
     }
 }
@@ -655,11 +659,6 @@ st.markdown(
         transform: scale(1.02) translateY(-4px);
         box-shadow: 0 14px 44px 0 #ffd16638, 0 2px 18px rgba(44,62,80,0.17);
         z-index: 4;
-      }
-      @media (min-width: 769px) {
-        .welcome-card {
-          margin-top: -4rem;
-        }
       }
     </style>
     <div class="welcome-card">

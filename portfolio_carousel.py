@@ -18,15 +18,6 @@ def render_section_carousel():
     "projects",
     "skills"
   ];
-  const sectionLabels = [
-    "About Me",
-    "Education",
-    "Experience",
-    "Certifications",
-    "Recognitions",
-    "Featured Projects",
-    "Skills"
-  ];
   const styleId = "portfolio-pager-styles";
   const sourceAttribute = "data-portfolio-pager-source";
 
@@ -49,11 +40,42 @@ def render_section_carousel():
 
   const pagerStyles = `
     [data-portfolio-section] {
-      scroll-margin-top: 112px;
+      scroll-margin-top: 96px;
+    }
+    div[data-testid="stElementContainer"].portfolio-page-container-active {
+      box-sizing: border-box;
+      padding-top: 20px !important;
     }
     [data-portfolio-section].portfolio-page-active {
       animation: portfolio-page-pop 0.52s cubic-bezier(0.22, 0.82, 0.32, 1);
       transform-origin: center top;
+    }
+    .navbar a {
+      position: relative;
+      overflow: visible;
+    }
+    .navbar a::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: -15px;
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-50%);
+      transition: background 0.24s ease, box-shadow 0.24s ease;
+    }
+    .navbar a:first-child::before {
+      display: none;
+    }
+    .navbar a.portfolio-nav-complete {
+      color: #ffe29a !important;
+    }
+    .navbar a.portfolio-nav-complete::before,
+    .navbar a.portfolio-nav-active::before {
+      background: #ffd166;
+      box-shadow: 0 0 8px rgba(255, 209, 102, 0.72);
     }
     .navbar a.portfolio-nav-active {
       color: #ffffff !important;
@@ -94,61 +116,6 @@ def render_section_carousel():
     .portfolio-pager-next {
       right: 14px;
     }
-    .portfolio-pager-status {
-      position: fixed;
-      left: 50%;
-      bottom: 18px;
-      z-index: 999;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      max-width: calc(100vw - 32px);
-      padding: 9px 16px;
-      border: 1px solid rgba(255, 209, 102, 0.42);
-      border-radius: 999px;
-      background: rgba(31, 42, 68, 0.94);
-      color: #ffffff;
-      box-shadow: 0 8px 26px rgba(17, 28, 52, 0.28);
-      backdrop-filter: blur(12px);
-      transform: translateX(-50%);
-    }
-    .portfolio-pager-copy {
-      min-width: 108px;
-      text-align: center;
-      white-space: nowrap;
-    }
-    .portfolio-pager-title {
-      display: block;
-      color: #ffd166;
-      font-size: 0.88rem;
-      font-weight: 800;
-      line-height: 1.15;
-    }
-    .portfolio-pager-count {
-      display: block;
-      margin-top: 2px;
-      color: rgba(255, 255, 255, 0.72);
-      font-size: 0.68rem;
-    }
-    .portfolio-pager-dots {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-    .portfolio-pager-dot {
-      width: 8px;
-      height: 8px;
-      padding: 0;
-      border: 0;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.38);
-      cursor: pointer;
-      transition: width 0.18s ease, background 0.18s ease;
-    }
-    .portfolio-pager-dot.is-active {
-      width: 24px;
-      background: #ffd166;
-    }
     @keyframes portfolio-page-pop {
       0% {
         opacity: 0.12;
@@ -180,26 +147,11 @@ def render_section_carousel():
       .portfolio-pager-next {
         right: 10px;
       }
-      .portfolio-pager-status {
-        bottom: 12px;
-        gap: 9px;
-        padding: 7px 11px;
+      div[data-testid="stElementContainer"].portfolio-page-container-active {
+        padding-top: 14px !important;
       }
-      .portfolio-pager-copy {
-        min-width: 88px;
-      }
-      .portfolio-pager-title {
-        font-size: 0.78rem;
-      }
-      .portfolio-pager-dots {
-        gap: 5px;
-      }
-      .portfolio-pager-dot {
-        width: 7px;
-        height: 7px;
-      }
-      .portfolio-pager-dot.is-active {
-        width: 18px;
+      .navbar a::before {
+        display: none;
       }
     }
     @media (prefers-reduced-motion: reduce) {
@@ -207,7 +159,7 @@ def render_section_carousel():
         animation: none;
       }
       .portfolio-pager-side,
-      .portfolio-pager-dot {
+      .navbar a::before {
         transition: none;
       }
     }
@@ -246,8 +198,13 @@ def render_section_carousel():
       root.style.removeProperty("--portfolio-entry-x");
       root.removeAttribute("aria-hidden");
     });
-    pageDocument.querySelectorAll(".navbar a.portfolio-nav-active").forEach((link) => {
-      link.classList.remove("portfolio-nav-active");
+    pageDocument.querySelectorAll(".portfolio-page-container-active").forEach((node) => {
+      node.classList.remove("portfolio-page-container-active");
+    });
+    pageDocument.querySelectorAll(
+      ".navbar a.portfolio-nav-active, .navbar a.portfolio-nav-complete"
+    ).forEach((link) => {
+      link.classList.remove("portfolio-nav-active", "portfolio-nav-complete");
       link.removeAttribute("aria-current");
     });
   }
@@ -310,35 +267,8 @@ def render_section_carousel():
     nextButton.setAttribute("aria-label", "Next portfolio section");
     nextButton.title = "Next section";
 
-    const status = pageDocument.createElement("div");
-    status.className = "portfolio-pager-status";
-    status.setAttribute("aria-label", "Portfolio section navigation");
-
-    const copy = pageDocument.createElement("div");
-    copy.className = "portfolio-pager-copy";
-    copy.setAttribute("aria-live", "polite");
-    const title = pageDocument.createElement("span");
-    title.className = "portfolio-pager-title";
-    const count = pageDocument.createElement("span");
-    count.className = "portfolio-pager-count";
-    copy.append(title, count);
-
-    const dots = pageDocument.createElement("div");
-    dots.className = "portfolio-pager-dots";
-    const dotButtons = sectionIds.map((id, index) => {
-      const dot = pageDocument.createElement("button");
-      dot.className = "portfolio-pager-dot";
-      dot.type = "button";
-      dot.setAttribute("aria-label", `Show ${sectionLabels[index]}`);
-      dot.title = sectionLabels[index];
-      dots.appendChild(dot);
-      return dot;
-    });
-
-    status.append(copy, dots);
     pagerHost.insertBefore(previousButton, scriptElement);
     pagerHost.insertBefore(nextButton, scriptElement);
-    pagerHost.insertBefore(status, scriptElement);
 
     let activeIndex = 0;
     let touchStartX = null;
@@ -346,15 +276,33 @@ def render_section_carousel():
 
     function updateNavbar() {
       pageDocument.querySelectorAll(".navbar a[href^='#']").forEach((link) => {
-        const isActive =
-          link.getAttribute("href") === `#${sectionIds[activeIndex]}`;
+        const targetIndex = sectionIds.indexOf(
+          link.getAttribute("href")?.slice(1)
+        );
+        const isActive = targetIndex === activeIndex;
+        const isComplete = targetIndex >= 0 && targetIndex < activeIndex;
         link.classList.toggle("portfolio-nav-active", isActive);
+        link.classList.toggle("portfolio-nav-complete", isComplete);
         if (isActive) {
           link.setAttribute("aria-current", "page");
         } else {
           link.removeAttribute("aria-current");
         }
       });
+    }
+
+    function updateFooter() {
+      const footerContainer = closestElementContainer(
+        pageDocument.querySelector("footer.portfolio-footer")
+      );
+      if (!footerContainer) {
+        return;
+      }
+      rememberSource(footerContainer);
+      footerContainer.style.display =
+        activeIndex === sectionIds.length - 1
+          ? footerContainer.dataset.portfolioPagerDisplay || ""
+          : "none";
     }
 
     function activate(index, options = {}) {
@@ -367,10 +315,12 @@ def render_section_carousel():
       activeIndex = boundedIndex;
 
       sourceContainers.forEach((container, sourceIndex) => {
+        const isActive = sourceIndex === activeIndex;
         container.style.display =
-          sourceIndex === activeIndex
+          isActive
             ? container.dataset.portfolioPagerDisplay || ""
             : "none";
+        container.classList.toggle("portfolio-page-container-active", isActive);
       });
 
       sectionRoots.forEach((root, rootIndex) => {
@@ -387,17 +337,10 @@ def render_section_carousel():
         }
       });
 
-      dotButtons.forEach((dot, dotIndex) => {
-        const isActive = dotIndex === activeIndex;
-        dot.classList.toggle("is-active", isActive);
-        dot.setAttribute("aria-current", isActive ? "true" : "false");
-      });
-
-      title.textContent = sectionLabels[activeIndex];
-      count.textContent = `${activeIndex + 1} of ${sectionIds.length}`;
       previousButton.disabled = activeIndex === 0;
       nextButton.disabled = activeIndex === sectionIds.length - 1;
       updateNavbar();
+      updateFooter();
 
       if (updateHash) {
         window.history.replaceState(null, "", `#${sectionIds[activeIndex]}`);
@@ -494,11 +437,6 @@ def render_section_carousel():
     nextButton.addEventListener("click", () =>
       activate(activeIndex + 1, { direction: 1 })
     );
-    dotButtons.forEach((dot, index) => {
-      dot.addEventListener("click", () =>
-        activate(index, { direction: index >= activeIndex ? 1 : -1 })
-      );
-    });
 
     pageDocument.addEventListener("click", handleNavigationClick);
     pageDocument.addEventListener("keydown", handleKeydown);
@@ -518,7 +456,6 @@ def render_section_carousel():
       window.removeEventListener("hashchange", handleHashChange);
       previousButton.remove();
       nextButton.remove();
-      status.remove();
       restoreSources();
     };
 

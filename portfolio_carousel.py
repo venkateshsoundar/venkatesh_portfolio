@@ -274,10 +274,11 @@ def render_section_carousel():
         display: none !important;
       }
       div[data-testid="stElementContainer"].portfolio-page-container-active {
+        padding-top: calc(60px + env(safe-area-inset-top)) !important;
         padding-bottom: 20px !important;
       }
       [data-portfolio-section].portfolio-page-active {
-        top: 20px;
+        top: 0;
       }
       .navbar a::before {
         display: none;

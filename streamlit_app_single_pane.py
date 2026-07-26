@@ -863,7 +863,7 @@ st.markdown("""
 }
 </style>
 
-<div class="hero-card">
+<div class="hero-card" data-portfolio-section="about">
   <div class="hero-left">
     <div class="hero-pic-glow">
       <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Venkatesh_Profile_2026.jpg" alt="Venkatesh Soundararajan"/>
@@ -907,7 +907,7 @@ st.markdown('<a name="education" class="section-anchor"></a>', unsafe_allow_html
 # --- Spacer before next section ---
 st.markdown(
     """
-    <div class="card hover-zoom">
+    <div class="card hover-zoom" data-portfolio-section="education">
       <div class="section-title" style="background:#34495E;">Education</div>
       <div class="edu-cards-grid">
         <div class="edu-card">
@@ -938,7 +938,7 @@ st.markdown(
 st.markdown('<a name="experience" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """  
-    <div class="card hover-zoom">
+    <div class="card hover-zoom" data-portfolio-section="experience">
       <div class="section-title" style="background:#34495E;">Professional Experience</div>
       <div class="exp-cards-grid">
         <div class="exp-card">
@@ -1000,7 +1000,7 @@ st.markdown(
 st.markdown('<a name="certifications" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """
-    <div class="card hover-zoom">
+    <div class="card hover-zoom" data-portfolio-section="certifications">
       <div class="section-title" style="background:#34495E;">Certifications & Courses</div>
       <div class="cert-grid">
         <div class="cert-card">
@@ -1038,7 +1038,7 @@ st.markdown(
 st.markdown('<a name="recognitions" class="section-anchor"></a>', unsafe_allow_html=True)
 st.markdown(
     """
-    <div class="card hover-zoom">
+    <div class="card hover-zoom" data-portfolio-section="recognitions">
       <div class="section-title" style="background:#34495E;">Awards & Recognitions</div>
       <div class="awards-grid">
         <div class="award-card">
@@ -1237,7 +1237,7 @@ st.markdown("""
 """, unsafe_allow_html=True)
 
 projects_html = '''
-<div class="card projects-gallery-pane hover-zoom">
+<div class="card projects-gallery-pane hover-zoom" data-portfolio-section="projects">
   <div class="section-title">Featured Projects</div>
   <div class="projects-4col-grid">
 '''
@@ -1340,7 +1340,7 @@ st.markdown("""
 </style>
 
 
-<div class="skills-section hover-zoom">
+<div class="skills-section hover-zoom" data-portfolio-section="skills">
   <div class="skills-header-title">Core Skills and Tools</div>
   <div class="skill-grid">
 <div class="skill-card">

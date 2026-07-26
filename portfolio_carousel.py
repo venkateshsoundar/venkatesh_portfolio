@@ -225,6 +225,15 @@ def render_section_carousel():
     return element?.closest('div[data-testid="stElementContainer"]') || null;
   }
 
+  function hideSource(node) {
+    if (!node || node.getAttribute(sourceAttribute) === "true") {
+      return;
+    }
+    node.dataset.portfolioCarouselDisplay = node.style.display || "";
+    node.setAttribute(sourceAttribute, "true");
+    node.style.display = "none";
+  }
+
   function buildCarousel(attempt = 0) {
     restoreSources();
     parentDocument.getElementById(shellId)?.remove();
@@ -232,24 +241,30 @@ def render_section_carousel():
     const anchors = sectionIds.map((id) =>
       parentDocument.querySelector(`a.section-anchor[name="${id}"]`)
     );
-    const endMarker = parentDocument.querySelector(".portfolio-carousel-end-marker");
+    const sectionRoots = sectionIds.map((id) =>
+      parentDocument.querySelector(`[data-portfolio-section="${id}"]`)
+    );
 
-    if (anchors.some((anchor) => !anchor) || !endMarker) {
+    if (
+      anchors.some((anchor) => !anchor) ||
+      sectionRoots.some((sectionRoot) => !sectionRoot)
+    ) {
       if (attempt < 80) {
         window.setTimeout(() => buildCarousel(attempt + 1), 75);
       }
       return;
     }
 
-    const starts = anchors.map(closestElementContainer);
-    const endContainer = closestElementContainer(endMarker);
-    const sectionParent = starts[0]?.parentElement;
+    const anchorContainers = anchors.map(closestElementContainer);
+    const sourceContainers = sectionRoots.map(closestElementContainer);
+    const firstSource = sourceContainers[0];
+    const sectionParent = firstSource?.parentElement;
 
     if (
       !sectionParent ||
-      !endContainer ||
-      starts.some((start) => !start || start.parentElement !== sectionParent) ||
-      endContainer.parentElement !== sectionParent
+      anchorContainers.some((anchorContainer) => !anchorContainer) ||
+      sourceContainers.some((sourceContainer) => !sourceContainer) ||
+      new Set(sourceContainers).size !== sectionIds.length
     ) {
       if (attempt < 80) {
         window.setTimeout(() => buildCarousel(attempt + 1), 75);
@@ -303,22 +318,15 @@ def render_section_carousel():
     const slides = [];
     const dotButtons = [];
 
-    starts.forEach((start, index) => {
-      const stop = index + 1 < starts.length ? starts[index + 1] : endContainer;
+    sourceContainers.forEach((sourceContainer, index) => {
       const slide = parentDocument.createElement("section");
       slide.className = "portfolio-carousel-slide";
       slide.dataset.sectionId = sectionIds[index];
       slide.setAttribute("aria-label", sectionLabels[index]);
 
-      let node = start;
-      while (node && node !== stop) {
-        const clone = node.cloneNode(true);
-        slide.appendChild(clone);
-        node.dataset.portfolioCarouselDisplay = node.style.display || "";
-        node.setAttribute(sourceAttribute, "true");
-        node.style.display = "none";
-        node = node.nextSibling;
-      }
+      slide.appendChild(sourceContainer.cloneNode(true));
+      hideSource(sourceContainer);
+      hideSource(anchorContainers[index]);
 
       const dot = parentDocument.createElement("button");
       dot.className = "portfolio-carousel-dot";
@@ -333,7 +341,7 @@ def render_section_carousel():
     });
 
     shell.append(controls, track, dots);
-    sectionParent.insertBefore(shell, starts[0]);
+    sectionParent.insertBefore(shell, firstSource);
 
     let activeIndex = 0;
     let scrollTimer;

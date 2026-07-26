@@ -48,10 +48,11 @@ def render_section_carousel():
       padding-bottom: 30px !important;
     }
     [data-portfolio-section].portfolio-page-active {
-      animation: portfolio-page-pop 0.52s cubic-bezier(0.22, 0.82, 0.32, 1);
+      animation: portfolio-page-slide-in 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) both;
       position: relative;
       top: 30px;
       transform-origin: center top;
+      will-change: opacity, transform;
     }
     .navbar a {
       position: relative;
@@ -115,6 +116,7 @@ def render_section_carousel():
     }
     .portfolio-pager-dot.is-active {
       width: 26px;
+      animation: portfolio-dot-pulse 0.38s ease-out;
       background: #ffd166;
       box-shadow: 0 0 9px rgba(255, 209, 102, 0.72);
     }
@@ -127,18 +129,25 @@ def render_section_carousel():
         cursor: grab;
       }
     }
-    @keyframes portfolio-page-pop {
+    @keyframes portfolio-page-slide-in {
       0% {
-        opacity: 0.12;
-        transform: translateX(var(--portfolio-entry-x, 28px)) translateY(16px) scale(0.95);
-      }
-      68% {
-        opacity: 1;
-        transform: translateX(0) translateY(-3px) scale(1.01);
+        opacity: 0;
+        transform: translateX(var(--portfolio-entry-x, 28px));
       }
       100% {
         opacity: 1;
-        transform: translateX(0) translateY(0) scale(1);
+        transform: translateX(0);
+      }
+    }
+    @keyframes portfolio-dot-pulse {
+      0% {
+        transform: scale(0.86);
+      }
+      58% {
+        transform: scale(1.18);
+      }
+      100% {
+        transform: scale(1);
       }
     }
     @media (max-width: 700px) {
@@ -157,6 +166,9 @@ def render_section_carousel():
     }
     @media (prefers-reduced-motion: reduce) {
       [data-portfolio-section].portfolio-page-active {
+        animation: none;
+      }
+      .portfolio-pager-dot.is-active {
         animation: none;
       }
       .navbar a::before,
@@ -363,6 +375,7 @@ def render_section_carousel():
       } = options;
       activeIndex =
         ((index % sectionIds.length) + sectionIds.length) % sectionIds.length;
+      let activeRoot = null;
 
       sourceContainers.forEach((container, sourceIndex) => {
         const isActive = sourceIndex === activeIndex;
@@ -378,12 +391,11 @@ def render_section_carousel():
         root.classList.remove("portfolio-page-active");
         root.setAttribute("aria-hidden", isActive ? "false" : "true");
         if (isActive) {
+          activeRoot = root;
           root.style.setProperty(
             "--portfolio-entry-x",
             direction >= 0 ? "30px" : "-30px"
           );
-          void root.offsetWidth;
-          root.classList.add("portfolio-page-active");
         }
       });
 
@@ -395,6 +407,10 @@ def render_section_carousel():
       }
       if (scroll) {
         resetPageScroll();
+      }
+      if (activeRoot) {
+        void activeRoot.offsetWidth;
+        activeRoot.classList.add("portfolio-page-active");
       }
     }
 

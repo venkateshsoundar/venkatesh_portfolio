@@ -258,9 +258,12 @@ def render_section_carousel():
     }
     @media (max-width: 768px) {
       .navbar-container {
-        min-height: 0 !important;
+        height: calc(44px + env(safe-area-inset-top)) !important;
+        min-height: calc(44px + env(safe-area-inset-top)) !important;
         padding: 0 !important;
         border-radius: 0 0 14px 14px !important;
+        background: transparent !important;
+        box-shadow: none !important;
         justify-content: center !important;
       }
       .navbar,
@@ -277,12 +280,26 @@ def render_section_carousel():
         display: none;
       }
       .portfolio-pager-dots {
+        position: fixed !important;
+        top: 0 !important;
+        right: 0 !important;
+        left: 0 !important;
+        z-index: 1100 !important;
         display: flex !important;
-        min-height: 38px;
+        box-sizing: border-box;
+        width: 100vw !important;
+        min-height: calc(44px + env(safe-area-inset-top));
         margin: 0;
-        padding: 10px 14px 11px;
-        background: rgba(15, 31, 61, 0.72);
+        padding:
+          calc(10px + env(safe-area-inset-top))
+          14px
+          11px;
+        visibility: visible !important;
+        opacity: 1 !important;
+        background: rgba(15, 31, 61, 0.96);
+        box-shadow: 0 4px 14px rgba(6, 18, 38, 0.28);
         backdrop-filter: blur(10px);
+        pointer-events: auto !important;
       }
       .portfolio-pager-dot {
         width: 9px;

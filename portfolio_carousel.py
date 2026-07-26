@@ -39,6 +39,16 @@ def render_section_carousel():
   pageDocument.getElementById("portfolio-section-carousel")?.remove();
 
   const pagerStyles = `
+    :root {
+      --portfolio-navy: #0f1f3d;
+      --portfolio-card: #243a5a;
+      --portfolio-card-deep: #1b2e4b;
+      --portfolio-blue: #006ac3;
+      --portfolio-blue-soft: #4da3ff;
+      --portfolio-gold: #ffcc33;
+      --portfolio-text: #f8fafc;
+      --portfolio-text-muted: #c7d2e1;
+    }
     [data-portfolio-section] {
       scroll-margin-top: 96px;
     }
@@ -56,7 +66,21 @@ def render_section_carousel():
     }
     .navbar a {
       position: relative;
+      color: var(--portfolio-text) !important;
       overflow: visible;
+    }
+    .navbar-container {
+      background:
+        linear-gradient(rgba(9, 25, 53, 0.8), rgba(15, 31, 61, 0.92)),
+        url("https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Welcome.gif")
+          center/cover no-repeat !important;
+    }
+    .navbar {
+      background: rgba(15, 31, 61, 0.72) !important;
+    }
+    .navbar a:hover {
+      color: var(--portfolio-text) !important;
+      background: rgba(0, 106, 195, 0.28) !important;
     }
     .navbar a::before {
       content: "";
@@ -66,7 +90,7 @@ def render_section_carousel():
       width: 20px;
       height: 2px;
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.3);
+      background: rgba(77, 163, 255, 0.42);
       transform: translateY(-50%);
       transition: background 0.24s ease, box-shadow 0.24s ease;
     }
@@ -74,17 +98,20 @@ def render_section_carousel():
       display: none;
     }
     .navbar a.portfolio-nav-complete {
-      color: #ffe29a !important;
+      color: #9dcbff !important;
     }
-    .navbar a.portfolio-nav-complete::before,
+    .navbar a.portfolio-nav-complete::before {
+      background: var(--portfolio-blue-soft);
+      box-shadow: 0 0 8px rgba(77, 163, 255, 0.62);
+    }
     .navbar a.portfolio-nav-active::before {
-      background: #ffd166;
-      box-shadow: 0 0 8px rgba(255, 209, 102, 0.72);
+      background: var(--portfolio-gold);
+      box-shadow: 0 0 8px rgba(255, 204, 51, 0.7);
     }
     .navbar a.portfolio-nav-active {
-      color: #ffffff !important;
-      background: rgba(255, 209, 102, 0.16);
-      box-shadow: inset 0 -3px 0 #ffd166;
+      color: var(--portfolio-gold) !important;
+      background: rgba(0, 106, 195, 0.34);
+      box-shadow: inset 0 -3px 0 var(--portfolio-gold);
     }
     .portfolio-pager-dots {
       display: flex;
@@ -97,9 +124,9 @@ def render_section_carousel():
       width: 8px;
       height: 8px;
       padding: 0;
-      border: 1px solid rgba(255, 209, 102, 0.68);
+      border: 1px solid rgba(77, 163, 255, 0.76);
       border-radius: 999px;
-      background: rgba(255, 255, 255, 0.34);
+      background: rgba(199, 210, 225, 0.38);
       cursor: pointer;
       transition:
         width 0.22s ease,
@@ -108,21 +135,100 @@ def render_section_carousel():
         transform 0.22s ease;
     }
     .portfolio-pager-dot:hover {
-      background: rgba(255, 209, 102, 0.72);
+      background: var(--portfolio-blue-soft);
       transform: scale(1.2);
     }
     .portfolio-pager-dot.is-complete {
-      background: rgba(255, 209, 102, 0.62);
+      background: var(--portfolio-blue-soft);
     }
     .portfolio-pager-dot.is-active {
       width: 26px;
       animation: portfolio-dot-pulse 0.38s ease-out;
-      background: #ffd166;
-      box-shadow: 0 0 9px rgba(255, 209, 102, 0.72);
+      border-color: var(--portfolio-gold);
+      background: var(--portfolio-gold);
+      box-shadow: 0 0 9px rgba(255, 204, 51, 0.7);
     }
     .portfolio-pager-dot:focus-visible {
       outline: 2px solid #ffffff;
       outline-offset: 3px;
+    }
+    .mobile-nav-toggle {
+      color: var(--portfolio-gold) !important;
+      background: rgba(15, 31, 61, 0.92) !important;
+    }
+    .hero-card,
+    .card,
+    .skills-section {
+      border: 1px solid rgba(77, 163, 255, 0.2) !important;
+      background:
+        linear-gradient(135deg, var(--portfolio-navy), var(--portfolio-card)) !important;
+      box-shadow: 0 10px 30px rgba(6, 18, 38, 0.28) !important;
+    }
+    .hero-left {
+      background:
+        linear-gradient(145deg, var(--portfolio-card-deep), var(--portfolio-navy)) !important;
+    }
+    .hero-contact-bar,
+    .achievement-item,
+    .exp-responsibilities-box {
+      border: 1px solid rgba(77, 163, 255, 0.18) !important;
+      background: rgba(27, 46, 75, 0.88) !important;
+    }
+    .edu-card,
+    .exp-card,
+    .cert-card,
+    .award-card,
+    .project-main-card,
+    .skill-card {
+      border: 1px solid rgba(77, 163, 255, 0.22) !important;
+      background:
+        linear-gradient(145deg, var(--portfolio-card-deep), var(--portfolio-card)) !important;
+      box-shadow: 0 6px 18px rgba(6, 18, 38, 0.18) !important;
+    }
+    .section-title,
+    .skills-header-title {
+      color: var(--portfolio-gold) !important;
+      background: var(--portfolio-card-deep) !important;
+    }
+    .hero-about-body,
+    .edu-card-univ,
+    .edu-research-summary,
+    .exp-card-company,
+    .exp-responsibilities-box,
+    .cert-provider,
+    .award-sub,
+    .project-desc,
+    .skill-list {
+      color: var(--portfolio-text-muted) !important;
+    }
+    .project-img-holder {
+      background: var(--portfolio-navy) !important;
+    }
+    .project-tool-badge,
+    .skill-chip {
+      border: 1px solid rgba(77, 163, 255, 0.45) !important;
+      background: rgba(0, 106, 195, 0.32) !important;
+      color: var(--portfolio-text) !important;
+    }
+    .hero-cta,
+    .project-action {
+      border-color: rgba(77, 163, 255, 0.72) !important;
+      background: rgba(0, 106, 195, 0.2) !important;
+      color: var(--portfolio-text) !important;
+    }
+    .hero-cta:hover,
+    .project-action:hover {
+      background: rgba(0, 106, 195, 0.42) !important;
+    }
+    .hero-cta.primary,
+    .project-action.primary {
+      border-color: var(--portfolio-gold) !important;
+      background: var(--portfolio-gold) !important;
+      color: var(--portfolio-navy) !important;
+    }
+    .hero-cta.primary:hover,
+    .project-action.primary:hover {
+      background: #ffe17a !important;
     }
     @media (hover: hover) and (pointer: fine) {
       [data-portfolio-section].portfolio-page-active {

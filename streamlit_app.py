@@ -649,6 +649,34 @@ projects = [
         "desc": "Analyzed neighborhood-level crime patterns to identify key drivers and communicate actionable urban insights."
     },
     {
+        "title": "Weight Change Regression Analysis",
+        "url": "https://github.com/venkateshsoundar/weight-change-regression-analysis",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Weight_Change.jpeg",
+        "tools": ["Python", "Scikit-learn", "Seaborn"],
+        "desc": "Built regression models to predict weight changes based on lifestyle and demographic data."
+    },
+    {
+        "title": "Calgary Childcare Compliance",
+        "url": "https://github.com/venkateshsoundar/calgary-childcare-compliance",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/CalgaryChildcare.jpeg",
+        "tools": ["Python", "Pandas", "Plotly"],
+        "desc": "Assessed childcare center compliance in Calgary through data-driven dashboards."
+    },
+    {
+        "title": "Social Media Purchase Influence",
+        "url": "https://github.com/venkateshsoundar/social-media-purchase-influence",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ConsumerPurchaseDecision.jpeg",
+        "tools": ["Python", "Scikit-learn", "Power BI"],
+        "desc": "Modeled and visualized the impact of social media on consumer purchase behavior."
+    },
+    {
+        "title": "Obesity Level Estimation",
+        "url": "https://github.com/venkateshsoundar/obesity-level-estimation",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/ObeseLevels.jpeg",
+        "tools": ["Python", "Logistic Regression", "Pandas"],
+        "desc": "Predicted obesity levels from health and lifestyle features using classification algorithms."
+    },
+    {
         "title": "Alberta Wildfire Analysis",
         "url": "https://github.com/venkateshsoundar/alberta-wildfire-analysis",
         "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Alberta_forestfire.jpeg",
@@ -668,6 +696,13 @@ projects = [
         "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Penguin_Analysis.jpeg",
         "tools": ["Python", "Scikit-learn", "Streamlit"],
         "desc": "Developed an interactive machine-learning application that predicts penguin species from user inputs."
+    },
+    {
+        "title": "Uber Ride Prediction",
+        "url": "https://github.com/venkateshsoundar/uber-ride-duration-predictorapp",
+        "image": "https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/Uberride_Prediction.jpeg",
+        "tools": ["Python", "XGBoost", "Matplotlib"],
+        "desc": "Predicted Uber ride durations using machine learning and explained predictions with visualizations."
     }
 ]
 

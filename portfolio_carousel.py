@@ -256,7 +256,17 @@ def render_section_carousel():
         transform: scale(1);
       }
     }
-    @media (max-width: 700px) {
+    @media (max-width: 768px) {
+      .navbar-container {
+        min-height: 0 !important;
+        padding: 0 !important;
+        border-radius: 0 0 14px 14px !important;
+        justify-content: center !important;
+      }
+      .navbar,
+      .mobile-nav-toggle {
+        display: none !important;
+      }
       div[data-testid="stElementContainer"].portfolio-page-container-active {
         padding-bottom: 20px !important;
       }
@@ -267,7 +277,19 @@ def render_section_carousel():
         display: none;
       }
       .portfolio-pager-dots {
-        padding-bottom: 8px;
+        display: flex !important;
+        min-height: 38px;
+        margin: 0;
+        padding: 10px 14px 11px;
+        background: rgba(15, 31, 61, 0.72);
+        backdrop-filter: blur(10px);
+      }
+      .portfolio-pager-dot {
+        width: 9px;
+        height: 9px;
+      }
+      .portfolio-pager-dot.is-active {
+        width: 28px;
       }
     }
     @media (prefers-reduced-motion: reduce) {

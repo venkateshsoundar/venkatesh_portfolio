@@ -44,10 +44,13 @@ def render_section_carousel():
     }
     div[data-testid="stElementContainer"].portfolio-page-container-active {
       box-sizing: border-box;
-      padding-top: 30px !important;
+      padding-top: 0 !important;
+      padding-bottom: 30px !important;
     }
     [data-portfolio-section].portfolio-page-active {
       animation: portfolio-page-pop 0.52s cubic-bezier(0.22, 0.82, 0.32, 1);
+      position: relative;
+      top: 30px;
       transform-origin: center top;
     }
     .navbar a {
@@ -140,7 +143,10 @@ def render_section_carousel():
     }
     @media (max-width: 700px) {
       div[data-testid="stElementContainer"].portfolio-page-container-active {
-        padding-top: 20px !important;
+        padding-bottom: 20px !important;
+      }
+      [data-portfolio-section].portfolio-page-active {
+        top: 20px;
       }
       .navbar a::before {
         display: none;

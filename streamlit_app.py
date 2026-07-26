@@ -45,14 +45,6 @@ div[data-testid="stToolbar"] {
 [data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] {
     gap: 0 !important;
 }
-[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.hero-card),
-[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.card),
-[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.skills-section) {
-    padding-bottom: var(--section-gap) !important;
-}
-[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.hero-card) {
-    padding-top: var(--section-gap) !important;
-}
 .hero-card,
 .card,
 .skills-section {
@@ -532,6 +524,8 @@ st.markdown("""
   margin-bottom: 2px;
 }
 .section-anchor {
+  display: block;
+  height: var(--section-gap);
   scroll-margin-top: 160px; /* or 100px, depending on your navbar height */
 }
 .skill-chip {
@@ -1209,7 +1203,7 @@ projects_html += '</div></div>'
 st.markdown(projects_html, unsafe_allow_html=True)
 
 
-st.markdown('<a name="skills"></a>', unsafe_allow_html=True)
+st.markdown('<a name="skills" class="section-anchor"></a>', unsafe_allow_html=True)
 
 st.markdown("""
 <style>

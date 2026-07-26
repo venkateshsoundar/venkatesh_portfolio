@@ -120,6 +120,9 @@ def render_section_carousel():
       gap: 8px;
       padding: 0 16px 9px;
     }
+    .portfolio-pager-mobile-label {
+      display: none;
+    }
     .portfolio-pager-dot {
       width: 8px;
       height: 8px;
@@ -289,6 +292,7 @@ def render_section_carousel():
         box-sizing: border-box;
         width: 100vw !important;
         min-height: calc(44px + env(safe-area-inset-top));
+        gap: 6px;
         margin: 0;
         padding:
           calc(10px + env(safe-area-inset-top))
@@ -300,6 +304,21 @@ def render_section_carousel():
         box-shadow: 0 4px 14px rgba(6, 18, 38, 0.28);
         backdrop-filter: blur(10px);
         pointer-events: auto !important;
+      }
+      .portfolio-pager-mobile-label {
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+        width: 120px;
+        max-width: 120px;
+        margin-right: 2px;
+        overflow: hidden;
+        color: var(--portfolio-gold);
+        font-size: 0.8rem;
+        font-weight: 800;
+        line-height: 1;
+        text-overflow: ellipsis;
+        white-space: nowrap;
       }
       .portfolio-pager-dot {
         width: 9px;
@@ -420,11 +439,18 @@ def render_section_carousel():
     const navbarLinks = Array.from(
       pageDocument.querySelectorAll(".navbar a[href^='#']")
     );
+    const sectionNames = sectionIds.map((id) =>
+      navbarLinks.find((link) => link.getAttribute("href") === `#${id}`)
+        ?.textContent?.trim() || id
+    );
+    const mobilePageLabel = pageDocument.createElement("span");
+    mobilePageLabel.className = "portfolio-pager-mobile-label";
+    mobilePageLabel.setAttribute("aria-live", "polite");
+    dotNavigation.appendChild(mobilePageLabel);
+
     const dotButtons = sectionIds.map((id, index) => {
       const dot = pageDocument.createElement("button");
-      const sectionName =
-        navbarLinks.find((link) => link.getAttribute("href") === `#${id}`)
-          ?.textContent?.trim() || id;
+      const sectionName = sectionNames[index];
       dot.className = "portfolio-pager-dot";
       dot.type = "button";
       dot.title = sectionName;
@@ -474,6 +500,7 @@ def render_section_carousel():
     }
 
     function updateDots() {
+      mobilePageLabel.textContent = sectionNames[activeIndex];
       dotButtons.forEach((dot, dotIndex) => {
         const isActive = dotIndex === activeIndex;
         dot.classList.toggle("is-active", isActive);

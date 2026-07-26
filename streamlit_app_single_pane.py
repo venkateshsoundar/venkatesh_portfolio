@@ -7,6 +7,9 @@ st.set_page_config(page_title="Venkatesh Portfolio", layout="wide")
 # ---- FREEZED (FIXED) NAVIGATION BAR ----
 st.markdown("""
 <style>
+:root {
+    --section-gap: 16px;
+}
 body {
     margin: 0 !important;
     padding: 0 !important;
@@ -30,6 +33,20 @@ div[data-testid="stToolbar"] {
 }
 [data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] {
     gap: 0 !important;
+}
+[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.hero-card),
+[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.card),
+[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.skills-section) {
+    padding-bottom: var(--section-gap) !important;
+}
+[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] > div[data-testid="stElementContainer"]:has(.hero-card) {
+    padding-top: var(--section-gap) !important;
+}
+.hero-card,
+.card,
+.skills-section {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
 }
 div[data-testid="stElementContainer"]:has(.navbar-container) {
     position: sticky;

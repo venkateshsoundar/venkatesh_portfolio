@@ -432,7 +432,22 @@ def render_section_carousel():
       dotNavigation.appendChild(dot);
       return dot;
     });
-    navbarContainer.appendChild(dotNavigation);
+
+    const mobileNavigationQuery = window.matchMedia("(max-width: 768px)");
+    function placeDotNavigation() {
+      const target = mobileNavigationQuery.matches
+        ? pageDocument.body
+        : navbarContainer;
+      if (target && dotNavigation.parentElement !== target) {
+        target.appendChild(dotNavigation);
+      }
+    }
+    placeDotNavigation();
+    if (typeof mobileNavigationQuery.addEventListener === "function") {
+      mobileNavigationQuery.addEventListener("change", placeDotNavigation);
+    } else if (typeof mobileNavigationQuery.addListener === "function") {
+      mobileNavigationQuery.addListener(placeDotNavigation);
+    }
 
     let activeIndex = 0;
     let touchStartX = null;
@@ -609,6 +624,11 @@ def render_section_carousel():
       ) {
         return;
       }
+      const gestureTime = Date.now();
+      if (gestureTime - (window.__portfolioPagerLastGestureAt || 0) < 450) {
+        return;
+      }
+      window.__portfolioPagerLastGestureAt = gestureTime;
       if (deltaX > 0) {
         activate(activeIndex + 1, { direction: 1 });
       } else if (deltaX < 0) {
@@ -635,8 +655,8 @@ def render_section_carousel():
 
     function handlePointerDown(event) {
       if (
-        event.pointerType === "touch" ||
-        event.button !== 0 ||
+        event.isPrimary === false ||
+        (event.pointerType === "mouse" && event.button !== 0) ||
         !sectionRoots[activeIndex].contains(event.target) ||
         event.target.closest("a, button, input, textarea, select")
       ) {
@@ -706,6 +726,11 @@ def render_section_carousel():
       pageDocument.removeEventListener("pointerup", handlePointerUp);
       pageDocument.removeEventListener("pointercancel", handlePointerCancel);
       window.removeEventListener("hashchange", handleHashChange);
+      if (typeof mobileNavigationQuery.removeEventListener === "function") {
+        mobileNavigationQuery.removeEventListener("change", placeDotNavigation);
+      } else if (typeof mobileNavigationQuery.removeListener === "function") {
+        mobileNavigationQuery.removeListener(placeDotNavigation);
+      }
       dotNavigation.remove();
       restoreSources();
     };

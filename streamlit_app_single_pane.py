@@ -22,6 +22,15 @@ div[data-testid="stToolbar"] {
 [data-testid="stAppViewContainer"] .main .block-container > [data-testid="stVerticalBlock"] {
     gap: 0 !important;
 }
+[data-testid="stMainBlockContainer"],
+.stMainBlockContainer,
+.block-container {
+    padding-top: 0 !important;
+    margin-top: 0 !important;
+}
+[data-testid="stMainBlockContainer"] > [data-testid="stVerticalBlock"] {
+    gap: 0 !important;
+}
 div[data-testid="stElementContainer"]:has(.navbar-container) {
     position: sticky;
     top: 0;
@@ -649,7 +658,7 @@ st.markdown(
         align-items: center;
         justify-content: center;
         text-align: center;
-        margin: 0 0 24px;
+        margin: 16px 0;
         box-shadow: 0 6px 30px 0 rgba(60,100,180,0.11), 0 1.5px 8px 0 rgba(60,60,90,0.08);
         transition: transform .35s cubic-bezier(.33,1.6,.66,1), box-shadow .33s;
         position: relative;
@@ -683,7 +692,7 @@ st.markdown("""
   background: linear-gradient(135deg, #253451 0%, #324665 100%);
   border-radius: 24px;
   box-shadow: 0 6px 26px rgba(20,30,55,0.18), 0 2px 14px rgba(44,62,80,0.08);
-  margin-bottom: 32px;
+  margin-bottom: 16px;
   min-height: 330px;
   position: relative;
   overflow: hidden;

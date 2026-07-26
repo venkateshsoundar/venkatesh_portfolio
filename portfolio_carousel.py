@@ -1,10 +1,10 @@
-"""Horizontal section carousel for the Streamlit portfolio."""
+"""Production-safe section pager for the Streamlit portfolio."""
 
 import streamlit as st
 
 
 def render_section_carousel():
-    """Turn the static portfolio sections into a swipeable horizontal carousel."""
+    """Show the seven portfolio sections one at a time with swipe navigation."""
     st.html(
         r"""
 <script>
@@ -27,222 +27,239 @@ def render_section_carousel():
     "Featured Projects",
     "Skills"
   ];
-  const styleId = "portfolio-carousel-styles";
-  const shellId = "portfolio-section-carousel";
-  const sourceAttribute = "data-portfolio-carousel-source";
+  const styleId = "portfolio-pager-styles";
+  const sourceAttribute = "data-portfolio-pager-source";
 
-  let parentDocument;
-  try {
-    parentDocument = window.parent.document;
-  } catch (error) {
+  const pageDocument = document;
+  const scriptElement = document.currentScript;
+  const pagerHost = scriptElement?.closest(".stHtml");
+
+  if (!pagerHost) {
     return;
   }
 
-  if (typeof window.parent.__portfolioCarouselCleanup === "function") {
-    window.parent.__portfolioCarouselCleanup();
+  if (typeof window.__portfolioCarouselCleanup === "function") {
+    window.__portfolioCarouselCleanup();
+    delete window.__portfolioCarouselCleanup;
   }
+  if (typeof window.__portfolioPagerCleanup === "function") {
+    window.__portfolioPagerCleanup();
+  }
+  pageDocument.getElementById("portfolio-section-carousel")?.remove();
 
-  const carouselStyles = `
-    #${shellId} {
-      position: relative;
-      width: 100%;
-      margin: 0;
-      scroll-margin-top: 86px;
+  const pagerStyles = `
+    [data-portfolio-section] {
+      scroll-margin-top: 112px;
     }
-    #${shellId} .portfolio-carousel-controls {
-      position: sticky;
-      top: 76px;
-      z-index: 35;
-      display: grid;
-      grid-template-columns: 48px minmax(0, 1fr) 48px;
-      align-items: center;
-      gap: 12px;
-      margin: 0 4px 10px;
-      padding: 8px 10px;
-      border: 1px solid rgba(255, 209, 102, 0.28);
-      border-radius: 14px;
-      background: rgba(31, 42, 68, 0.92);
-      box-shadow: 0 8px 24px rgba(17, 28, 52, 0.22);
-      backdrop-filter: blur(12px);
+    [data-portfolio-section].portfolio-page-active {
+      animation: portfolio-page-pop 0.52s cubic-bezier(0.22, 0.82, 0.32, 1);
+      transform-origin: center top;
     }
-    #${shellId} .portfolio-carousel-arrow {
-      width: 42px;
-      height: 42px;
-      border: 1px solid rgba(255, 209, 102, 0.55);
+    .navbar a.portfolio-nav-active {
+      color: #ffffff !important;
+      background: rgba(255, 209, 102, 0.16);
+      box-shadow: inset 0 -3px 0 #ffd166;
+    }
+    .portfolio-pager-side {
+      position: fixed;
+      top: 50%;
+      z-index: 999;
+      width: 48px;
+      height: 48px;
+      border: 1px solid rgba(255, 209, 102, 0.72);
       border-radius: 50%;
-      background: rgba(255, 209, 102, 0.10);
+      background: rgba(31, 42, 68, 0.94);
       color: #ffd166;
-      font-size: 1.35rem;
-      font-weight: 800;
+      box-shadow: 0 8px 26px rgba(17, 28, 52, 0.32);
+      backdrop-filter: blur(12px);
+      font-size: 1.45rem;
+      font-weight: 900;
+      line-height: 1;
       cursor: pointer;
+      transform: translateY(-50%);
       transition: transform 0.18s ease, background 0.18s ease, opacity 0.18s ease;
     }
-    #${shellId} .portfolio-carousel-arrow:hover:not(:disabled) {
-      transform: translateY(-2px) scale(1.04);
-      background: rgba(255, 209, 102, 0.22);
+    .portfolio-pager-side:hover:not(:disabled) {
+      background: #ffd166;
+      color: #22304a;
+      transform: translateY(-50%) scale(1.07);
     }
-    #${shellId} .portfolio-carousel-arrow:disabled {
+    .portfolio-pager-side:disabled {
       cursor: default;
-      opacity: 0.32;
+      opacity: 0.28;
     }
-    #${shellId} .portfolio-carousel-status {
-      min-width: 0;
+    .portfolio-pager-previous {
+      left: 14px;
+    }
+    .portfolio-pager-next {
+      right: 14px;
+    }
+    .portfolio-pager-status {
+      position: fixed;
+      left: 50%;
+      bottom: 18px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      max-width: calc(100vw - 32px);
+      padding: 9px 16px;
+      border: 1px solid rgba(255, 209, 102, 0.42);
+      border-radius: 999px;
+      background: rgba(31, 42, 68, 0.94);
+      color: #ffffff;
+      box-shadow: 0 8px 26px rgba(17, 28, 52, 0.28);
+      backdrop-filter: blur(12px);
+      transform: translateX(-50%);
+    }
+    .portfolio-pager-copy {
+      min-width: 108px;
       text-align: center;
+      white-space: nowrap;
     }
-    #${shellId} .portfolio-carousel-title {
+    .portfolio-pager-title {
       display: block;
       color: #ffd166;
-      font-size: 1rem;
+      font-size: 0.88rem;
       font-weight: 800;
-      line-height: 1.25;
+      line-height: 1.15;
     }
-    #${shellId} .portfolio-carousel-count {
+    .portfolio-pager-count {
       display: block;
       margin-top: 2px;
       color: rgba(255, 255, 255, 0.72);
-      font-size: 0.76rem;
+      font-size: 0.68rem;
     }
-    #${shellId} .portfolio-carousel-track {
+    .portfolio-pager-dots {
       display: flex;
-      width: 100%;
-      gap: 0;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-behavior: smooth;
-      scroll-snap-type: x mandatory;
-      overscroll-behavior-x: contain;
-      scrollbar-width: none;
-      transition: height 0.36s ease;
-      touch-action: pan-x pan-y;
+      align-items: center;
+      gap: 7px;
     }
-    #${shellId} .portfolio-carousel-track::-webkit-scrollbar {
-      display: none;
-    }
-    #${shellId} .portfolio-carousel-slide {
-      flex: 0 0 100%;
-      width: 100%;
-      min-width: 100%;
-      padding: 0 4px 6px;
-      box-sizing: border-box;
-      scroll-snap-align: start;
-      scroll-snap-stop: always;
-      transform-origin: center top;
-    }
-    #${shellId} .portfolio-carousel-slide.is-active {
-      animation: portfolio-page-pop 0.52s cubic-bezier(0.22, 0.82, 0.32, 1);
-    }
-    #${shellId} .portfolio-carousel-dots {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 8px;
-      padding: 12px 8px 2px;
-    }
-    #${shellId} .portfolio-carousel-dot {
-      width: 9px;
-      height: 9px;
+    .portfolio-pager-dot {
+      width: 8px;
+      height: 8px;
       padding: 0;
       border: 0;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.38);
       cursor: pointer;
-      transition: width 0.2s ease, background 0.2s ease, transform 0.2s ease;
+      transition: width 0.18s ease, background 0.18s ease;
     }
-    #${shellId} .portfolio-carousel-dot.is-active {
-      width: 28px;
+    .portfolio-pager-dot.is-active {
+      width: 24px;
       background: #ffd166;
-    }
-    #${shellId}:focus-visible {
-      outline: 2px solid #ffd166;
-      outline-offset: 4px;
     }
     @keyframes portfolio-page-pop {
       0% {
         opacity: 0.12;
-        transform: translateY(20px) scale(0.94);
+        transform: translateX(var(--portfolio-entry-x, 28px)) translateY(16px) scale(0.95);
       }
-      65% {
+      68% {
         opacity: 1;
-        transform: translateY(-3px) scale(1.012);
+        transform: translateX(0) translateY(-3px) scale(1.01);
       }
       100% {
         opacity: 1;
-        transform: translateY(0) scale(1);
+        transform: translateX(0) translateY(0) scale(1);
       }
     }
     @media (max-width: 700px) {
-      #${shellId} .portfolio-carousel-controls {
-        top: 68px;
-        grid-template-columns: 42px minmax(0, 1fr) 42px;
-        gap: 7px;
-        margin-inline: 0;
+      .portfolio-pager-side {
+        top: auto;
+        bottom: 17px;
+        width: 42px;
+        height: 42px;
+        transform: none;
       }
-      #${shellId} .portfolio-carousel-arrow {
-        width: 38px;
-        height: 38px;
+      .portfolio-pager-side:hover:not(:disabled) {
+        transform: scale(1.05);
       }
-      #${shellId} .portfolio-carousel-title {
-        font-size: 0.92rem;
+      .portfolio-pager-previous {
+        left: 10px;
       }
-      #${shellId} .portfolio-carousel-slide {
-        padding-inline: 0;
+      .portfolio-pager-next {
+        right: 10px;
+      }
+      .portfolio-pager-status {
+        bottom: 12px;
+        gap: 9px;
+        padding: 7px 11px;
+      }
+      .portfolio-pager-copy {
+        min-width: 88px;
+      }
+      .portfolio-pager-title {
+        font-size: 0.78rem;
+      }
+      .portfolio-pager-dots {
+        gap: 5px;
+      }
+      .portfolio-pager-dot {
+        width: 7px;
+        height: 7px;
+      }
+      .portfolio-pager-dot.is-active {
+        width: 18px;
       }
     }
     @media (prefers-reduced-motion: reduce) {
-      #${shellId} .portfolio-carousel-track {
-        scroll-behavior: auto;
-        transition: none;
-      }
-      #${shellId} .portfolio-carousel-slide.is-active {
+      [data-portfolio-section].portfolio-page-active {
         animation: none;
       }
-      #${shellId} .portfolio-carousel-arrow,
-      #${shellId} .portfolio-carousel-dot {
+      .portfolio-pager-side,
+      .portfolio-pager-dot {
         transition: none;
       }
     }
   `;
 
   function installStyles() {
-    let style = parentDocument.getElementById(styleId);
+    let style = pageDocument.getElementById(styleId);
     if (!style) {
-      style = parentDocument.createElement("style");
+      style = pageDocument.createElement("style");
       style.id = styleId;
-      parentDocument.head.appendChild(style);
+      pageDocument.head.appendChild(style);
     }
-    style.textContent = carouselStyles;
-  }
-
-  function restoreSources() {
-    parentDocument.querySelectorAll(`[${sourceAttribute}="true"]`).forEach((node) => {
-      node.style.display = node.dataset.portfolioCarouselDisplay || "";
-      node.removeAttribute(sourceAttribute);
-      delete node.dataset.portfolioCarouselDisplay;
-    });
+    style.textContent = pagerStyles;
   }
 
   function closestElementContainer(element) {
     return element?.closest('div[data-testid="stElementContainer"]') || null;
   }
 
-  function hideSource(node) {
+  function rememberSource(node) {
     if (!node || node.getAttribute(sourceAttribute) === "true") {
       return;
     }
-    node.dataset.portfolioCarouselDisplay = node.style.display || "";
+    node.dataset.portfolioPagerDisplay = node.style.display || "";
     node.setAttribute(sourceAttribute, "true");
-    node.style.display = "none";
   }
 
-  function buildCarousel(attempt = 0) {
+  function restoreSources() {
+    pageDocument.querySelectorAll(`[${sourceAttribute}="true"]`).forEach((node) => {
+      node.style.display = node.dataset.portfolioPagerDisplay || "";
+      node.removeAttribute(sourceAttribute);
+      delete node.dataset.portfolioPagerDisplay;
+    });
+    pageDocument.querySelectorAll("[data-portfolio-section]").forEach((root) => {
+      root.classList.remove("portfolio-page-active");
+      root.style.removeProperty("--portfolio-entry-x");
+      root.removeAttribute("aria-hidden");
+    });
+    pageDocument.querySelectorAll(".navbar a.portfolio-nav-active").forEach((link) => {
+      link.classList.remove("portfolio-nav-active");
+      link.removeAttribute("aria-current");
+    });
+  }
+
+  function buildPager(attempt = 0) {
     restoreSources();
-    parentDocument.getElementById(shellId)?.remove();
 
     const anchors = sectionIds.map((id) =>
-      parentDocument.querySelector(`a.section-anchor[name="${id}"]`)
+      pageDocument.querySelector(`a.section-anchor[name="${id}"]`)
     );
     const sectionRoots = sectionIds.map((id) =>
-      parentDocument.querySelector(`[data-portfolio-section="${id}"]`)
+      pageDocument.querySelector(`[data-portfolio-section="${id}"]`)
     );
 
     if (
@@ -250,122 +267,123 @@ def render_section_carousel():
       sectionRoots.some((sectionRoot) => !sectionRoot)
     ) {
       if (attempt < 80) {
-        window.setTimeout(() => buildCarousel(attempt + 1), 75);
+        window.setTimeout(() => buildPager(attempt + 1), 75);
       }
       return;
     }
 
     const anchorContainers = anchors.map(closestElementContainer);
     const sourceContainers = sectionRoots.map(closestElementContainer);
-    const firstSource = sourceContainers[0];
-    const sectionParent = firstSource?.parentElement;
 
     if (
-      !sectionParent ||
-      anchorContainers.some((anchorContainer) => !anchorContainer) ||
-      sourceContainers.some((sourceContainer) => !sourceContainer) ||
+      anchorContainers.some((container) => !container) ||
+      sourceContainers.some((container) => !container) ||
       new Set(sourceContainers).size !== sectionIds.length
     ) {
       if (attempt < 80) {
-        window.setTimeout(() => buildCarousel(attempt + 1), 75);
+        window.setTimeout(() => buildPager(attempt + 1), 75);
       }
       return;
     }
 
     installStyles();
 
-    const shell = parentDocument.createElement("section");
-    shell.id = shellId;
-    shell.tabIndex = 0;
-    shell.setAttribute("aria-label", "Portfolio section carousel");
+    sourceContainers.forEach(rememberSource);
+    anchorContainers.forEach((container) => {
+      if (!sourceContainers.includes(container)) {
+        rememberSource(container);
+        container.style.display = "none";
+      }
+    });
 
-    const controls = parentDocument.createElement("div");
-    controls.className = "portfolio-carousel-controls";
-
-    const previousButton = parentDocument.createElement("button");
-    previousButton.className = "portfolio-carousel-arrow";
+    const previousButton = pageDocument.createElement("button");
+    previousButton.className = "portfolio-pager-side portfolio-pager-previous";
     previousButton.type = "button";
     previousButton.innerHTML = "&#8592;";
     previousButton.setAttribute("aria-label", "Previous portfolio section");
     previousButton.title = "Previous section";
 
-    const status = parentDocument.createElement("div");
-    status.className = "portfolio-carousel-status";
-    status.setAttribute("aria-live", "polite");
-    const title = parentDocument.createElement("span");
-    title.className = "portfolio-carousel-title";
-    const count = parentDocument.createElement("span");
-    count.className = "portfolio-carousel-count";
-    status.append(title, count);
-
-    const nextButton = parentDocument.createElement("button");
-    nextButton.className = "portfolio-carousel-arrow";
+    const nextButton = pageDocument.createElement("button");
+    nextButton.className = "portfolio-pager-side portfolio-pager-next";
     nextButton.type = "button";
     nextButton.innerHTML = "&#8594;";
     nextButton.setAttribute("aria-label", "Next portfolio section");
     nextButton.title = "Next section";
 
-    controls.append(previousButton, status, nextButton);
+    const status = pageDocument.createElement("div");
+    status.className = "portfolio-pager-status";
+    status.setAttribute("aria-label", "Portfolio section navigation");
 
-    const track = parentDocument.createElement("div");
-    track.className = "portfolio-carousel-track";
-    track.setAttribute("aria-label", "Swipe or use the arrows to view portfolio sections");
+    const copy = pageDocument.createElement("div");
+    copy.className = "portfolio-pager-copy";
+    copy.setAttribute("aria-live", "polite");
+    const title = pageDocument.createElement("span");
+    title.className = "portfolio-pager-title";
+    const count = pageDocument.createElement("span");
+    count.className = "portfolio-pager-count";
+    copy.append(title, count);
 
-    const dots = parentDocument.createElement("div");
-    dots.className = "portfolio-carousel-dots";
-    dots.setAttribute("aria-label", "Choose a portfolio section");
-
-    const slides = [];
-    const dotButtons = [];
-
-    sourceContainers.forEach((sourceContainer, index) => {
-      const slide = parentDocument.createElement("section");
-      slide.className = "portfolio-carousel-slide";
-      slide.dataset.sectionId = sectionIds[index];
-      slide.setAttribute("aria-label", sectionLabels[index]);
-
-      slide.appendChild(sourceContainer.cloneNode(true));
-      hideSource(sourceContainer);
-      hideSource(anchorContainers[index]);
-
-      const dot = parentDocument.createElement("button");
-      dot.className = "portfolio-carousel-dot";
+    const dots = pageDocument.createElement("div");
+    dots.className = "portfolio-pager-dots";
+    const dotButtons = sectionIds.map((id, index) => {
+      const dot = pageDocument.createElement("button");
+      dot.className = "portfolio-pager-dot";
       dot.type = "button";
       dot.setAttribute("aria-label", `Show ${sectionLabels[index]}`);
       dot.title = sectionLabels[index];
-
-      slides.push(slide);
-      dotButtons.push(dot);
-      track.appendChild(slide);
       dots.appendChild(dot);
+      return dot;
     });
 
-    shell.append(controls, track, dots);
-    sectionParent.insertBefore(shell, firstSource);
+    status.append(copy, dots);
+    pagerHost.insertBefore(previousButton, scriptElement);
+    pagerHost.insertBefore(nextButton, scriptElement);
+    pagerHost.insertBefore(status, scriptElement);
 
     let activeIndex = 0;
-    let scrollTimer;
+    let touchStartX = null;
+    let touchStartY = null;
 
-    function updateHeight() {
-      window.requestAnimationFrame(() => {
-        const activeSlide = slides[activeIndex];
-        if (activeSlide) {
-          track.style.height = `${Math.max(activeSlide.scrollHeight, 120)}px`;
+    function updateNavbar() {
+      pageDocument.querySelectorAll(".navbar a[href^='#']").forEach((link) => {
+        const isActive =
+          link.getAttribute("href") === `#${sectionIds[activeIndex]}`;
+        link.classList.toggle("portfolio-nav-active", isActive);
+        if (isActive) {
+          link.setAttribute("aria-current", "page");
+        } else {
+          link.removeAttribute("aria-current");
         }
       });
     }
 
-    function activate(index, shouldScroll = true, updateHash = true) {
-      const boundedIndex = Math.max(0, Math.min(index, slides.length - 1));
+    function activate(index, options = {}) {
+      const {
+        scroll = true,
+        updateHash = true,
+        direction = index >= activeIndex ? 1 : -1
+      } = options;
+      const boundedIndex = Math.max(0, Math.min(index, sectionIds.length - 1));
       activeIndex = boundedIndex;
 
-      slides.forEach((slide, slideIndex) => {
-        const isActive = slideIndex === activeIndex;
-        slide.classList.remove("is-active");
-        slide.setAttribute("aria-hidden", isActive ? "false" : "true");
+      sourceContainers.forEach((container, sourceIndex) => {
+        container.style.display =
+          sourceIndex === activeIndex
+            ? container.dataset.portfolioPagerDisplay || ""
+            : "none";
+      });
+
+      sectionRoots.forEach((root, rootIndex) => {
+        const isActive = rootIndex === activeIndex;
+        root.classList.remove("portfolio-page-active");
+        root.setAttribute("aria-hidden", isActive ? "false" : "true");
         if (isActive) {
-          void slide.offsetWidth;
-          slide.classList.add("is-active");
+          root.style.setProperty(
+            "--portfolio-entry-x",
+            direction >= 0 ? "30px" : "-30px"
+          );
+          void root.offsetWidth;
+          root.classList.add("portfolio-page-active");
         }
       });
 
@@ -376,62 +394,23 @@ def render_section_carousel():
       });
 
       title.textContent = sectionLabels[activeIndex];
-      count.textContent = `${activeIndex + 1} of ${slides.length}`;
+      count.textContent = `${activeIndex + 1} of ${sectionIds.length}`;
       previousButton.disabled = activeIndex === 0;
-      nextButton.disabled = activeIndex === slides.length - 1;
-
-      if (shouldScroll) {
-        track.scrollTo({
-          left: slides[activeIndex].offsetLeft,
-          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-            ? "auto"
-            : "smooth"
-        });
-      }
+      nextButton.disabled = activeIndex === sectionIds.length - 1;
+      updateNavbar();
 
       if (updateHash) {
-        window.parent.history.replaceState(null, "", `#${sectionIds[activeIndex]}`);
+        window.history.replaceState(null, "", `#${sectionIds[activeIndex]}`);
       }
-
-      updateHeight();
-    }
-
-    function showFromNavigation(index) {
-      shell.scrollIntoView({
-        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
-          ? "auto"
-          : "smooth",
-        block: "start"
-      });
-      activate(index);
-    }
-
-    previousButton.addEventListener("click", () => activate(activeIndex - 1));
-    nextButton.addEventListener("click", () => activate(activeIndex + 1));
-
-    dotButtons.forEach((dot, index) => {
-      dot.addEventListener("click", () => activate(index));
-    });
-
-    shell.addEventListener("keydown", (event) => {
-      if (event.key === "ArrowLeft") {
-        event.preventDefault();
-        activate(activeIndex - 1);
-      } else if (event.key === "ArrowRight") {
-        event.preventDefault();
-        activate(activeIndex + 1);
+      if (scroll) {
+        sectionRoots[activeIndex].scrollIntoView({
+          behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+            ? "auto"
+            : "smooth",
+          block: "start"
+        });
       }
-    });
-
-    track.addEventListener("scroll", () => {
-      window.clearTimeout(scrollTimer);
-      scrollTimer = window.setTimeout(() => {
-        const nearestIndex = Math.round(track.scrollLeft / Math.max(track.clientWidth, 1));
-        if (nearestIndex !== activeIndex) {
-          activate(nearestIndex, false);
-        }
-      }, 90);
-    });
+    }
 
     function handleNavigationClick(event) {
       const link = event.target.closest(".navbar a[href^='#']");
@@ -444,44 +423,116 @@ def render_section_carousel():
         return;
       }
       event.preventDefault();
-      showFromNavigation(targetIndex);
+      activate(targetIndex);
     }
 
-    parentDocument.addEventListener("click", handleNavigationClick);
+    function handleKeydown(event) {
+      const tagName = event.target?.tagName?.toLowerCase();
+      if (
+        ["input", "textarea", "select", "button"].includes(tagName) ||
+        event.target?.isContentEditable
+      ) {
+        return;
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        activate(activeIndex - 1, { direction: -1 });
+      } else if (event.key === "ArrowRight") {
+        event.preventDefault();
+        activate(activeIndex + 1, { direction: 1 });
+      }
+    }
 
-    const resizeObserver = new ResizeObserver(updateHeight);
-    slides.forEach((slide) => resizeObserver.observe(slide));
-    slides.forEach((slide) => {
-      slide.querySelectorAll("img").forEach((image) => {
-        if (!image.complete) {
-          image.addEventListener("load", updateHeight, { once: true });
-        }
-      });
+    function handleTouchStart(event) {
+      if (
+        event.touches.length !== 1 ||
+        !sectionRoots[activeIndex].contains(event.target) ||
+        event.target.closest("a, button, input, textarea, select")
+      ) {
+        return;
+      }
+      touchStartX = event.touches[0].clientX;
+      touchStartY = event.touches[0].clientY;
+    }
+
+    function handleTouchEnd(event) {
+      if (
+        touchStartX === null ||
+        touchStartY === null ||
+        event.changedTouches.length !== 1
+      ) {
+        touchStartX = null;
+        touchStartY = null;
+        return;
+      }
+      const deltaX = event.changedTouches[0].clientX - touchStartX;
+      const deltaY = event.changedTouches[0].clientY - touchStartY;
+      touchStartX = null;
+      touchStartY = null;
+      if (Math.abs(deltaX) < 55 || Math.abs(deltaX) <= Math.abs(deltaY) * 1.2) {
+        return;
+      }
+      if (deltaX < 0) {
+        activate(activeIndex + 1, { direction: 1 });
+      } else {
+        activate(activeIndex - 1, { direction: -1 });
+      }
+    }
+
+    function handleHashChange() {
+      const targetIndex = sectionIds.indexOf(
+        window.location.hash.replace("#", "")
+      );
+      if (targetIndex >= 0 && targetIndex !== activeIndex) {
+        activate(targetIndex, { updateHash: false });
+      }
+    }
+
+    previousButton.addEventListener("click", () =>
+      activate(activeIndex - 1, { direction: -1 })
+    );
+    nextButton.addEventListener("click", () =>
+      activate(activeIndex + 1, { direction: 1 })
+    );
+    dotButtons.forEach((dot, index) => {
+      dot.addEventListener("click", () =>
+        activate(index, { direction: index >= activeIndex ? 1 : -1 })
+      );
     });
 
-    function handleParentResize() {
-      track.scrollTo({ left: slides[activeIndex].offsetLeft, behavior: "auto" });
-      updateHeight();
-    }
+    pageDocument.addEventListener("click", handleNavigationClick);
+    pageDocument.addEventListener("keydown", handleKeydown);
+    pageDocument.addEventListener("touchstart", handleTouchStart, {
+      passive: true
+    });
+    pageDocument.addEventListener("touchend", handleTouchEnd, {
+      passive: true
+    });
+    window.addEventListener("hashchange", handleHashChange);
 
-    window.parent.addEventListener("resize", handleParentResize);
-    window.parent.__portfolioCarouselCleanup = () => {
-      parentDocument.removeEventListener("click", handleNavigationClick);
-      window.parent.removeEventListener("resize", handleParentResize);
-      resizeObserver.disconnect();
+    window.__portfolioPagerCleanup = () => {
+      pageDocument.removeEventListener("click", handleNavigationClick);
+      pageDocument.removeEventListener("keydown", handleKeydown);
+      pageDocument.removeEventListener("touchstart", handleTouchStart);
+      pageDocument.removeEventListener("touchend", handleTouchEnd);
+      window.removeEventListener("hashchange", handleHashChange);
+      previousButton.remove();
+      nextButton.remove();
+      status.remove();
       restoreSources();
-      shell.remove();
     };
 
     const requestedIndex = sectionIds.indexOf(
-      window.parent.location.hash.replace("#", "")
+      window.location.hash.replace("#", "")
     );
-    activate(requestedIndex >= 0 ? requestedIndex : 0, false, false);
-    window.setTimeout(updateHeight, 120);
-    window.setTimeout(updateHeight, 500);
+    activate(requestedIndex >= 0 ? requestedIndex : 0, {
+      scroll: false,
+      updateHash: false,
+      direction: 1
+    });
   }
 
-  buildCarousel();
+  buildPager();
 })();
 </script>
         """,

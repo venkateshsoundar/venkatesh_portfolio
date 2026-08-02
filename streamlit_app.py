@@ -622,6 +622,14 @@ st.markdown("""
     background: rgba(31, 42, 68, 0.24);
     box-shadow: inset 0 1px 3px rgba(0,0,0,0.3);
 }
+.exp-responsibilities-list {
+    margin: 0;
+    padding-left: 18px;
+    text-align: left;
+}
+.exp-responsibilities-list li + li {
+    margin-top: 7px;
+}
 
 </style>
 """, unsafe_allow_html=True)
@@ -997,12 +1005,17 @@ st.markdown(
           <img src="https://raw.githubusercontent.com/venkateshsoundar/venkatesh_portfolio/main/RBC.png" class="exp-card-logo" alt="RBC logo"/>
           <div class="current-badge">Current</div>
           <div class="exp-card-title">Senior Data Quality Engineer</div>
-          <div class="exp-card-company">RBC, Canada</div>
+          <div class="exp-card-company">Royal Bank of Canada (RBC)</div>
           <div class="exp-card-date">April 2026 – Present</div>
           <div class="exp-responsibilities-box">
-            Supporting enterprise data quality through SQL- and Python-based validation, ETL control checks, defect investigation, and cross-functional collaboration to improve data accuracy, traceability, and production reliability.
+            <ul class="exp-responsibilities-list">
+              <li>Own end-to-end test strategy and delivery for an enterprise database migration from Microsoft SQL Server to PostgreSQL, covering schema, data, ETL, integration, regression, and cutover validation.</li>
+              <li>Build SQL- and Python-based source-to-target reconciliation controls for row counts, data types, transformations, nulls, duplicates, constraints, and business-rule accuracy.</li>
+              <li>Coordinate with data engineering, database, development, business, and release teams to manage defect triage, root-cause analysis, traceability, and migration readiness.</li>
+              <li>Develop reusable automated validation and reporting within CI/CD pipelines to accelerate migration test cycles and produce auditable test evidence.</li>
+            </ul>
           </div>
-          <div class="exp-impact"><strong>Focus:</strong> Enterprise ETL controls, traceability, and reliable production data.</div>
+          <div class="exp-impact"><strong>Ownership:</strong> End-to-end quality assurance for SQL Server-to-PostgreSQL migration, data reconciliation, automation, and release readiness.</div>
         </div>
         <div class="exp-card">
           <img src="https://github.com/venkateshsoundar/venkatesh_portfolio/raw/main/TI.png" class="exp-card-logo" alt="TechInsights logo"/>
